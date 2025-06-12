@@ -7,6 +7,7 @@ const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["300", "400", "700", "800"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" className={almarai.className}>
-      <body>{children}</body>
+      <body className={almarai.className}>{children}</body>
     </html>
   );
 }

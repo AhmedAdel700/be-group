@@ -9,17 +9,20 @@ export default function Packages() {
   const packages = [
     {
       name: "Gas-Tech Core",
-      stations: "3 محطات",
-      licenses: "6 رخص",
-      users: "5 مستخدم",
+      // stations: "3 محطات",
+      // licenses: "6 رخص",
+      // users: "5 مستخدم",
       features: [
-        "رخصة نظام جازتك لإدارة المحطات",
         "إدارة مبيعات المحطات",
         "إدارة مخزون المحطات",
         "إدارة خزانات المحطات",
         "إدارة المضخات والشاشات الخارجية",
+        "إدارة المشتريات",
         "إدارة أسعار منتجات الطاقة",
-        "عقد الصيانة السنوية - أول سنة",
+        "إدارة الورديات",
+        "إدارة إيجارات المرافق والأقساط",
+        "تطبيق نقاط البيع لماكينات الدفع",
+        "التقارير",
       ],
       notIncluded: [
         "نظام الحسابات العامة",
@@ -30,9 +33,9 @@ export default function Packages() {
     },
     {
       name: "Gas-Tech Plus",
-      stations: "5 محطات",
-      licenses: "10 رخص",
-      users: "15 مستخدم",
+      // stations: "5 محطات",
+      // licenses: "10 رخص",
+      // users: "15 مستخدم",
       popular: true,
       features: [
         "جميع مميزات الباقة الأساسية",
@@ -48,9 +51,9 @@ export default function Packages() {
     },
     {
       name: "Gas-Tech Extra",
-      stations: "7 محطات",
-      licenses: "12 رخصة",
-      users: "50 مستخدم",
+      // stations: "7 محطات",
+      // licenses: "12 رخصة",
+      // users: "50 مستخدم",
       features: [
         "جميع مميزات الباقات السابقة",
         "نظام النقليات",
@@ -85,7 +88,7 @@ export default function Packages() {
               )}
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold">{pkg.name}</CardTitle>
-                <div className="space-y-2 mt-4">
+                {/* <div className="space-y-2 mt-4">
                   <div className="flex justify-between">
                     <span>عدد المحطات:</span>
                     <span className="font-bold">{pkg.stations}</span>
@@ -98,7 +101,7 @@ export default function Packages() {
                     <span>عدد المستخدمين:</span>
                     <span className="font-bold">{pkg.users}</span>
                   </div>
-                </div>
+                </div> */}
               </CardHeader>
               <CardContent className="flex-grow flex flex-col">
                 <div className="space-y-3 flex-grow">

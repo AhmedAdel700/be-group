@@ -2,11 +2,25 @@
 
 import { Phone, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
+
 export default function Footer() {
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const headerOffset = 80;
+      const elementPosition = section.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <Image
               src="/white-logo.svg"
@@ -23,33 +37,56 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4">روابط سريعة</h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#about" className="hover:text-white">
+                <a href="#about" className="hover:text-white" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("about");
+                }}>
                   عن جازتك
                 </a>
               </li>
               <li>
-                <a href="#standards" className="hover:text-white">
+                <a href="#standards" className="hover:text-white" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("standards");
+                }}>
                   معايير وزارة الطاقة
                 </a>
               </li>
               <li>
-                <a href="#why-us" className="hover:text-white">
+                <a href="#why-us" className="hover:text-white" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("why-us");
+                }}>
                   لماذا جازتك
                 </a>
               </li>
               <li>
-                <a href="#why-company" className="hover:text-white">
+                <a href="#why-company" className="hover:text-white" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("why-company");
+                }}>
                   لماذا نحن
                 </a>
               </li>
               <li>
-                <a href="#packages" className="hover:text-white">
+                <a href="#packages" className="hover:text-white" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("packages");
+                }}>
                   الباقات
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white">
+                <a href="#contact" className="hover:text-white" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("contact");
+                }}>
                   تواصل معنا
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white">
+                  شركاء النجاح
                 </a>
               </li>
             </ul>
@@ -57,10 +94,11 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4">الخدمات</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>إدارة المحطات</li>
-              <li>إدارة المضخات</li>
-              <li>إدارة الخزانات</li>
-              <li>نظام ERP متكامل</li>
+              <li>توريد وربط الأجهزة</li>
+              <li>التدريب والدعم الفني</li>
+              <li>إنشاء الأنظمة</li>
+              <li>تطوير البرمجيات</li>
+              <li>استشارات تقنية</li>
             </ul>
           </div>
           <div>

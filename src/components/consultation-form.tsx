@@ -253,14 +253,14 @@ export default function ConsultationForm() {
                   name="nozzlesPerPump"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>عدد الخراطيم في كل طرمبة *</FormLabel>
+                      <FormLabel>العدد في كل طرمبة *</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="اختر عدد الخراطيم" />
+                            <SelectValue placeholder="أختر عدد اللي" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
