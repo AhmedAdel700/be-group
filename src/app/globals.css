@@ -105,3 +105,14 @@ html {
     @apply bg-background text-foreground;
   }
 }
+/* features.module.css */
+.category-hidden {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s ease-out;
+}
+
+.category-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
