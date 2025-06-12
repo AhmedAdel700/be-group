@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "جازتك - نظام إدارة محطات الوقود",
   description:
     "نظام جازتك لإدارة وأتمتة إجراءات محطات الوقود وتخطيط موارد المنشأة",
+  icons: {
+    icon: '/gastech-logo.svg',
+  },
 };
 
 export default function RootLayout({
