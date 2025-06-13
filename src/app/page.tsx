@@ -1,7 +1,6 @@
 "use client";
 import MinistryStandards from "@/components/ministry-standards";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
@@ -9,6 +8,8 @@ import WhyUs from "@/components/WhyUs";
 import ContactUs from "@/components/ContactUs";
 import Packages from "@/components/Packages";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import Hero from "@/components/Hero";
+import Partners from "@/components/Partners";
 
 export default function LandingPage() {
   return (
@@ -23,6 +24,7 @@ export default function LandingPage() {
       <WhyChooseUs />
       <Packages />
       <WhyUs />
+      <Partners />
       <ContactUs />
       <Footer />
     </div>

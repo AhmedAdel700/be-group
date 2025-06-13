@@ -1,119 +1,166 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "lucide-react";
+import Image from "next/image";
 
-// Split Arabic safely by visible letters
-const splitArabicLetters = (text: string) => {
-  return Array.from(text);
-};
-
-export default function Hero() {
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const headerOffset = 80;
-      const elementPosition = section.getBoundingClientRect().top;
-      const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const line1 = "نظام جازتك";
-  const line2Part1 = "لإدارة وأتمتة إجراءات محطات";
-  const line2Part2 = "الوقود";
-
-  const line1Chars = splitArabicLetters(line1);
-  const line2Part1Chars = splitArabicLetters(line2Part1);
-  const line2Part2Chars = splitArabicLetters(line2Part2);
-
-  const [index, setIndex] = useState(0);
-  const [text1, setText1] = useState("");
-  const [text2_1, setText2_1] = useState("");
-  const [text2_2, setText2_2] = useState("");
-  const [fade, setFade] = useState(true);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const totalLength =
-      line1Chars.length + line2Part1Chars.length + line2Part2Chars.length;
-
-    if (index < totalLength) {
-      timeout = setTimeout(() => {
-        if (index < line1Chars.length) {
-          setText1((prev) => prev + line1Chars[index]);
-        } else if (index < line1Chars.length + line2Part1Chars.length) {
-          const i = index - line1Chars.length;
-          setText2_1((prev) => prev + line2Part1Chars[i]);
-        } else {
-          const i = index - line1Chars.length - line2Part1Chars.length;
-          setText2_2((prev) => prev + line2Part2Chars[i]);
-        }
-        setIndex((prev) => prev + 1);
-      }, 100);
-    } else {
-      timeout = setTimeout(() => {
-        setFade(false);
-        setTimeout(() => {
-          setText1("");
-          setText2_1("");
-          setText2_2("");
-          setIndex(0);
-          setFade(true);
-        }, 100);
-      }, 3000);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [index]);
-
+export default function HeroWithFloatingImage() {
   return (
-    <section id="hero" className="gradient-bg text-white py-20">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <Badge className="bg-white/20 text-white mb-4">
-              معايير واشتراطات وزارة الطاقة لتأهيل محطات الوقود
-            </Badge>
-            <h1
-              className={`h-[160px] text-5xl font-bold mb-6 leading-tight transition-opacity duration-700 ${
-                fade ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <span className="block">{text1}</span>
-              <span className="block text-yellow-300">{text2_1}</span>
-              <span className="block text-yellow-300">{text2_2}</span>
-            </h1>
-            <p className="text-xl mb-8 opacity-90">
-              نظام مدعوم بالذكاء الاصطناعي وانترنت الأشياء يحقق التحول الرقمي
-              والأتمتة الشاملة لجميع الإجراءات
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold transition-all duration-300"
-                onClick={() => scrollToSection("contact")}
-              >
-                اطلب استشارتك المجانية
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent transition-all duration-300"
-                onClick={() => scrollToSection("about")}
-              >
-                تعرف على المزيد
-              </Button>
+    <section
+      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(45deg, hsla(33, 74%, 69%, 1) 0%, hsla(220, 60%, 33%, 1) 100%)",
+      }}
+      id="hero"
+    >
+      {/* Animated Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Curved Lines */}
+        <svg
+          className="absolute h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="grad1" x1="1" y1="0" x2="0" y2="0">
+              <stop offset="0%" stopColor="#38BDF8" stopOpacity="0" />{" "}
+              {/* sky-400 */}
+              <stop offset="50%" stopColor="#EAB308" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#EAB308" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+              <stop offset="0%" stopColor="#1E40AF" stopOpacity="0" />{" "}
+              {/* blue-800 */}
+              <stop offset="50%" stopColor="#064E3B" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#064E3B" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {/* Top Curves */}
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+              repeatDelay: 1,
+            }}
+            d="M 100 100 Q 300 0 500 100 T 900 100"
+            fill="none"
+            stroke="url(#grad1)"
+            strokeWidth="1"
+          />
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+              repeatDelay: 1,
+              delay: 0.5,
+            }}
+            d="M 0 200 Q 200 100 400 200 T 800 200"
+            fill="none"
+            stroke="url(#grad2)"
+            strokeWidth="1"
+          />
+          {/* Bottom Curves */}
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+              repeatDelay: 1,
+              delay: 1,
+            }}
+            d="M 100 600 Q 300 500 500 600 T 900 600"
+            fill="none"
+            stroke="url(#grad1)"
+            strokeWidth="1"
+          />
+        </svg>
+
+        {/* Straight Lines */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        >
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{
+                x: "-100%",
+                opacity: [0, 0.7, 0.7, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                delay: i * 0.2,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "loop",
+                ease: "linear",
+              }}
+              className="absolute right-0"
+              style={{
+                top: `${15 + i * 10}%`,
+                height: "1px",
+                width: "100%",
+                background: `linear-gradient(90deg, transparent, ${
+                  i % 2 === 0 ? "#FDE68A" : "#064E3B"
+                }60, transparent)`,
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Animated Background */}
+      <div className="absolute inset-0 z-[1]">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+          className="absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-red-100 blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          className="absolute -right-1/4 top-1/2 h-96 w-96 rounded-full bg-red-100 blur-3xl"
+        />
+      </div>
+
+      {/* Content with floating image */}
+      <div className="container relative z-[3] px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="flex w-full items-center justify-between gap-8"
+        >
+          {/* Text content right */}
+          <div className="text-white py-6 xl:py-0">
+            <div className="flex flex-col gap-6">
+              <h1 className="text-4xl md:text-5xl font-bold">نظام جازتك</h1>
+              <h2 className="text-yellow-300 text-4xl md:text-5xl font-bold">
+                لإدارة وأتمتة إجراءات محطات الوقود
+              </h2>
+              <p className="text-lg md:text-xl mb-8 opacity-90">
+                نظام مدعوم بالذكاء الاصطناعي وانترنت الأشياء يحقق التحول الرقمي
+                والأتمتة الشاملة لجميع الإجراءات
+              </p>
             </div>
-          </div>
-          <div className="relative">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-xl">
+
+            <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-500 mb-8">
               <h3 className="text-2xl font-bold mb-6">
                 مميزات النظام الرئيسية
               </h3>
@@ -123,10 +170,10 @@ export default function Hero() {
                   "مترابط مع مضخات وخزانات المحطات بشكل مباشر",
                   "نظام مدعوم بالذكاء الاصطناعي وانترنت الأشياء",
                   "يحقق التحول الرقمي والأتمتة الشاملة",
-                ].map((feature, i) => (
+                ].map((feature, index) => (
                   <div
-                    key={i}
-                    className="flex items-center space-x-3 space-x-reverse hover:text-yellow-300 transition-all duration-300"
+                    key={index}
+                    className="flex items-center space-x-3 space-x-reverse"
                   >
                     <CheckCircle className="text-yellow-300 w-6 h-6" />
                     <span>{feature}</span>
@@ -134,8 +181,47 @@ export default function Hero() {
                 ))}
               </div>
             </div>
+
+            <div className="grid grid-cols-2 sm:flex-row gap-4 items-center justify-start">
+              <Button
+                size="lg"
+                className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold"
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                اطلب استشارتك المجانية
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-yellow-300 text-white hover:bg-yellow-300/10 bg-transparent hover:text-white"
+                onClick={() =>
+                  document
+                    .getElementById("about")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                تعرف على المزيد
+              </Button>
+            </div>
           </div>
-        </div>
+
+          {/* Floating image left */}
+          <div className="hidden lg:flex relative w-full lg:w-[70%] xl:w-[45%] xl:-ml-[135px]">
+            <div className="relative w-full">
+              <Image
+                src="/hero1.png"
+                alt="نظام جازتك"
+                width={900}
+                height={900}
+                className="w-full h-auto object-contain drop-shadow-2xl motion-safe:animate-float"
+              />
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

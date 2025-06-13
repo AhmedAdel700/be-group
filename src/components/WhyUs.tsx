@@ -10,7 +10,7 @@ export default function WhyUs() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">لماذا نحن</h2>
         </div>
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid gap-12 items-center">
           <div>
             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
               نحن <span className="font-semibold">GasTech</span>، رواد الابتكار في مجال تكنولوجيا محطات
@@ -28,7 +28,7 @@ export default function WhyUs() {
               الخدمات لعملائنا وضمان أقصى قدر من الرضا.
             </p>
           </div>
-          <div className="grid gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <Card className="card-hover">
               <CardContent className="p-6">
                 <Star className="w-12 h-12 text-yellow-500 mb-4" />

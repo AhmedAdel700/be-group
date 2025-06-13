@@ -3,16 +3,13 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState("");
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
-  const [showPartnersDropdownDesktop, setShowPartnersDropdownDesktop] =
-    useState(false);
-  const [showPartnersDropdownMobile, setShowPartnersDropdownMobile] =
-    useState(false);
+  const [open, setOpen] = useState(false); // control sheet open state
   const partnersRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -21,7 +18,6 @@ export default function Header() {
         partnersRef.current &&
         !partnersRef.current.contains(event.target as Node)
       ) {
-        setShowPartnersDropdownDesktop(false);
       }
     };
 
@@ -93,15 +89,7 @@ export default function Header() {
     { id: "packages", label: "الباقات" },
     { id: "why-company", label: "لماذا نحن" },
     { id: "partners", label: "شركاء النجاح" },
-    { id: "contact", label: "تواصل معنا" },
-  ];
-
-  const partners = [
-    { src: "/gastech-logo.svg", alt: "GasTech Partner 1" },
-    { src: "/gastech-logo.svg", alt: "GasTech Partner 2" },
-    { src: "/gastech-logo.svg", alt: "GasTech Partner 3" },
-    { src: "/gastech-logo.svg", alt: "GasTech Partner 4" },
-    { src: "/gastech-logo.svg", alt: "GasTech Partner 5" },
+    { id: "footer", label: "تواصل معنا" },
   ];
 
   return (
@@ -123,66 +111,23 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 space-x-reverse justify-end flex-1 relative">
-            {navItems.map(({ id, label }) =>
-              id === "partners" ? (
-                <div key={id} className="relative" ref={partnersRef}>
-                  <button
-                    onClick={() =>
-                      setShowPartnersDropdownDesktop(
-                        !showPartnersDropdownDesktop
-                      )
-                    }
-                    className={`flex items-center gap-1 font-medium transition-colors duration-200 ${
-                      activeSection === id || showPartnersDropdownDesktop
-                        ? "text-blue-600"
-                        : "text-gray-700 hover:text-blue-600"
-                    }`}
-                  >
-                    {label}
-                    <ChevronDown
-                      className={`transition-transform duration-300 ${
-                        showPartnersDropdownDesktop ? "rotate-180" : "rotate-0"
-                      }`}
-                      size={16}
-                    />
-                  </button>
-
-                  <div
-                    className={`absolute top-full -left-full mt-6 bg-white shadow-lg border p-4 grid grid-cols-5 gap-4 z-50 w-[600px] place-items-center transition-all duration-300 ease-in-out transform ${
-                      showPartnersDropdownDesktop
-                        ? "opacity-100 scale-100 visible"
-                        : "opacity-0 scale-95 invisible pointer-events-none"
-                    }`}
-                  >
-                    {partners.map((partner, index) => (
-                      <Image
-                        key={index}
-                        src={partner.src}
-                        alt={partner.alt}
-                        width={60}
-                        height={60}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className={`font-medium transition-colors duration-200 ${
-                    activeSection === id
-                      ? "text-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(id);
-                  }}
-                >
-                  {label}
-                </a>
-              )
-            )}
+            {navItems.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`font-medium transition-colors duration-200 ${
+                  activeSection === id
+                    ? "text-blue-600"
+                    : "text-gray-700 hover:text-blue-600"
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(id);
+                }}
+              >
+                {label}
+              </a>
+            ))}
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium"
               onClick={() => window.open("/company-profile.pdf", "_blank")}
@@ -193,7 +138,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden">
-            <Sheet>
+            <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Menu
                   size={24}
@@ -201,76 +146,32 @@ export default function Header() {
                   className="cursor-pointer"
                 />
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col mt-8 gap-2">
-                  {navItems.map(({ id, label }) =>
-                    id === "partners" ? (
-                      <div key={id} className="relative">
-                        <button
-                          onClick={() =>
-                            setShowPartnersDropdownMobile(
-                              !showPartnersDropdownMobile
-                            )
-                          }
-                          className={`h-12 flex items-center justify-between px-4 rounded-md w-full font-medium text-lg transition-colors duration-200 ${
-                            activeSection === id || showPartnersDropdownMobile
-                              ? "text-blue-600 bg-blue-50"
-                              : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
-                          }`}
-                        >
-                          {label}
-                          <ChevronDown
-                            className={`transition-transform duration-300 ${
-                              showPartnersDropdownMobile
-                                ? "rotate-180"
-                                : "rotate-0"
-                            }`}
-                            size={20}
-                          />
-                        </button>
-
-                        <div
-                          className={`overflow-hidden transition-all duration-300 ease-in-out transform ${
-                            showPartnersDropdownMobile
-                              ? "max-h-64 opacity-100 scale-100 p-2"
-                              : "max-h-0 opacity-0 scale-95 p-0"
-                          } bg-white grid grid-cols-3 gap-4 place-items-center`}
-                        >
-                          {partners.map((partner, index) => (
-                            <Image
-                              key={index}
-                              src={partner.src}
-                              alt={partner.alt}
-                              width={60}
-                              height={60}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <a
-                        key={id}
-                        href={`#${id}`}
-                        className={`h-12 flex items-center px-4 rounded-md font-medium text-lg transition-colors duration-200 ${
-                          activeSection === id
-                            ? "text-blue-600 bg-blue-50"
-                            : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          scrollToSection(id);
-                          setShowPartnersDropdownMobile(false);
-                        }}
-                      >
-                        {label}
-                      </a>
-                    )
-                  )}
+                  {navItems.map(({ id, label }) => (
+                    <a
+                      key={id}
+                      href={`#${id}`}
+                      className={`h-12 flex items-center px-4 rounded-md font-medium text-lg transition-colors duration-200 ${
+                        activeSection === id
+                          ? "text-blue-600 bg-blue-50"
+                          : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(id);
+                        setOpen(false);
+                      }}
+                    >
+                      {label}
+                    </a>
+                  ))}
                   <Button
                     className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium mt-4"
-                    onClick={() =>
-                      window.open("/company-profile.pdf", "_blank")
-                    }
+                    onClick={() => {
+                      window.open("/company-profile.pdf", "_blank");
+                      setOpen(false);
+                    }}
                   >
                     تحميل ملف الشركة
                   </Button>

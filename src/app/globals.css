@@ -4,7 +4,6 @@
 
 html {
   scroll-behavior: smooth;
-  user-select: none;
   font-family: 'Almarai', system-ui, sans-serif;
 }
 
@@ -17,22 +16,18 @@ body {
   width: 8px;
   height: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: hsl(var(--secondary));
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--primary));
   border-radius: 4px;
   transition: all 0.2s ease;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--ring));
 }
-
 * {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--primary)) hsl(var(--secondary));
@@ -41,6 +36,43 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Scrolling logos wrapper */
+  .wrapper {
+    @apply w-[100%] max-w-[90%] mx-auto h-[150px] relative overflow-hidden;
+  }
+
+  .reduced-mask {
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1) 10%,
+      rgba(0, 0, 0, 1) 90%,
+      rgba(0, 0, 0, 0)
+    );
+  }
+
+  .itemLeft,
+  .itemRight {
+    width: 140px;
+    height: 80px;
+    @apply w-[200px] h-[100px] rounded-md absolute bg-transparent flex items-center justify-center;
+    animation-timing-function: linear;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .itemLeft {
+    animation-name: scrollLeft;
+    left: max(calc(200px * 8), 100%);
+  }
+
+  .itemRight {
+    animation-name: scrollRight;
+    right: max(calc(200px * 8), calc(100% + 200px));
   }
 }
 
@@ -80,6 +112,7 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -114,37 +147,47 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
+/* Extra UI Styles */
 .gradient-bg {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
-
 .card-hover {
   transition: all 0.3s ease;
 }
-
 .card-hover:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-/* features.module.css */
+/* Features section animation */
 .category-hidden {
   opacity: 0;
   transform: translateX(-50px);
   transition: all 0.6s ease-out;
 }
-
 .category-visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Animation Keyframes */
+@keyframes scrollLeft {
+  to {
+    left: -200px;
+  }
+}
+@keyframes scrollRight {
+  to {
+    right: -200px;
+  }
 }

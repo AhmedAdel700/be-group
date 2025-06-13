@@ -1,6 +1,6 @@
 "use client";
 import ConsultationForm from "@/components/consultation-form";
-import ContactForm from "@/components/contact-form";
+
 export default function ContactUs() {
   return (
     <section id="contact" className="py-16 bg-gray-50">
@@ -13,13 +13,9 @@ export default function ContactUs() {
             تواصل معنا للحصول على استشارة مجانية وعرض مخصص لمحطتك
           </p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="h-full">
-            <ConsultationForm />
-          </div>
-          <div className="h-full">
-            <ContactForm />
-          </div>
+
+        <div className="md:w-[80%] mx-auto">
+          <ConsultationForm />
         </div>
       </div>
     </section>
