@@ -18,7 +18,7 @@ export default function ScrollingItems() {
     `calc(30s / ${items.length} * (${items.length} - ${i}) * -1)`;
 
   return (
-    <section className="flex flex-col gap-8 text-center mt-4" id="partners">
+    <section className="flex flex-col gap-8 text-center pt-8" id="partners">
       <h2 className="text-2xl md:text-4xl font-semibold">شركاء النجاح</h2>
       <div className="bg-slate-100 py-10">
         <div className="wrapper reduced-mask">

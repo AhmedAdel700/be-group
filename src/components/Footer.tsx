@@ -9,10 +9,11 @@ export default function Footer() {
     if (section) {
       const headerOffset = 80;
       const elementPosition = section.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };
@@ -20,7 +21,8 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-12" id="footer">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Logo + Description */}
           <div>
             <Image
               src="/white-logo.svg"
@@ -33,76 +35,36 @@ export default function Footer() {
               نظام جازتك لإدارة وأتمتة إجراءات محطات الوقود وتخطيط موارد المنشأة
             </p>
           </div>
+
+          {/* Quick Links */}
           <div>
             <h4 className="font-bold text-lg mb-4">روابط سريعة</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>
-                <a
-                  href="#about"
-                  className="hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection("about");
-                  }}
-                >
-                  عن جازتك
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#standards"
-                  className="hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection("standards");
-                  }}
-                >
-                  معايير وزارة الطاقة
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#why-us"
-                  className="hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection("why-us");
-                  }}
-                >
-                  لماذا جازتك
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#why-company"
-                  className="hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection("why-company");
-                  }}
-                >
-                  لماذا نحن
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#packages"
-                  className="hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection("packages");
-                  }}
-                >
-                  الباقات
-                </a>
-              </li>
-              <li>
-                <a href="#partners" className="hover:text-white">
-                  شركاء النجاح
-                </a>
-              </li>
+              {[
+                { id: "about", label: "عن جازتك" },
+                { id: "standards", label: "معايير وزارة الطاقة" },
+                { id: "why-us", label: "لماذا جازتك" },
+                { id: "why-company", label: "لماذا نحن" },
+                { id: "packages", label: "الباقات" },
+                { id: "partners", label: "شركاء النجاح" },
+              ].map(({ id, label }) => (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    className="hover:text-white"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(id);
+                    }}
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Services */}
           <div>
             <h4 className="font-bold text-lg mb-4">الخدمات</h4>
             <ul className="space-y-2 text-gray-400">
@@ -113,24 +75,91 @@ export default function Footer() {
               <li>استشارات تقنية</li>
             </ul>
           </div>
+
+          {/* Contact Info */}
           <div>
             <h4 className="font-bold text-lg mb-4">تواصل معنا</h4>
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Phone className="w-5 h-5" />
-                <span>+966 XX XXX XXXX</span>
+                <span>+966 55 555 5555</span>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Mail className="w-5 h-5" />
-                <span>info@gastech.sa</span>
+                <span>info@gastech.com.sa</span>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
-                <MapPin className="w-5 h-5" />
-                <span>الرياض، المملكة العربية السعودية</span>
+                <MapPin className="w-5 h-5 shrink-0" />
+                <span className="text-sm leading-relaxed">
+                  فرع السعودية: مجمع النور، طريق المدينة، حي الرويس، جدة 23215
+                </span>
+              </div>
+            </div>
+
+            <div className="flex items-center xl:items-end flex-col xl:flex-row justify-between gap-4">
+              {/* WhatsApp CTA */}
+              <a
+                href="https://wa.me/966XXXXXXXXX"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 bg-[#2A4D8A] hover:bg-blue-900 transition-all text-white px-4 py-2 rounded-md font-medium"
+              >
+                <div className="flex items-center gap-2">
+                  <Image
+                    src="/whatsapp.svg"
+                    alt="WhatsApp"
+                    width={20}
+                    height={20}
+                  />
+                  <h5 className="text-xs">تواصل عبر واتساب</h5>
+                </div>
+              </a>
+              {/* Social Media Icons */}
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded bg-gray-400 hover:bg-slate-400 transition-all"
+                >
+                  <Image
+                    src="/x.svg"
+                    alt="X (Twitter)"
+                    width={15}
+                    height={15}
+                  />
+                </a>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
+                >
+                  <Image
+                    src="/facebook.svg"
+                    alt="Facebook"
+                    width={22}
+                    height={22}
+                  />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
+                >
+                  <Image
+                    src="/instagram.svg"
+                    alt="Instagram"
+                      width={21}
+                    height={21}
+                  />
+                </a>
               </div>
             </div>
           </div>
         </div>
+
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>&copy; 2024 جازتك. جميع الحقوق محفوظة.</p>
         </div>

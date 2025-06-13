@@ -9,7 +9,7 @@ export default function HeroWithFloatingImage() {
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
-      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 80;
+      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 30;
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth",
@@ -215,13 +215,23 @@ export default function HeroWithFloatingImage() {
           {/* Floating image left */}
           <div className="hidden lg:flex relative w-full lg:w-[70%] xl:w-[45%] xl:-ml-[135px]">
             <div className="relative w-full">
-              <Image
-                src="/hero1.png"
-                alt="نظام جازتك"
-                width={900}
-                height={900}
-                className="w-full h-auto object-contain drop-shadow-2xl motion-safe:animate-float"
-              />
+              <motion.div
+                initial={{ y: 0 }}
+                animate={{ y: [0, -20, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src="/hero1.png"
+                  alt="نظام جازتك"
+                  width={900}
+                  height={900}
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                />
+              </motion.div>
             </div>
           </div>
         </motion.div>
