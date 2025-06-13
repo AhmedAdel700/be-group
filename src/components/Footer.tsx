@@ -18,7 +18,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-gray-900 text-white py-12" id="footer">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
@@ -37,55 +37,67 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4">روابط سريعة</h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#about" className="hover:text-white" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("about");
-                }}>
+                <a
+                  href="#about"
+                  className="hover:text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("about");
+                  }}
+                >
                   عن جازتك
                 </a>
               </li>
               <li>
-                <a href="#standards" className="hover:text-white" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("standards");
-                }}>
+                <a
+                  href="#standards"
+                  className="hover:text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("standards");
+                  }}
+                >
                   معايير وزارة الطاقة
                 </a>
               </li>
               <li>
-                <a href="#why-us" className="hover:text-white" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("why-us");
-                }}>
+                <a
+                  href="#why-us"
+                  className="hover:text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("why-us");
+                  }}
+                >
                   لماذا جازتك
                 </a>
               </li>
               <li>
-                <a href="#why-company" className="hover:text-white" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("why-company");
-                }}>
+                <a
+                  href="#why-company"
+                  className="hover:text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("why-company");
+                  }}
+                >
                   لماذا نحن
                 </a>
               </li>
               <li>
-                <a href="#packages" className="hover:text-white" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("packages");
-                }}>
+                <a
+                  href="#packages"
+                  className="hover:text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("packages");
+                  }}
+                >
                   الباقات
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("contact");
-                }}>
-                  تواصل معنا
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
+                <a href="#partners" className="hover:text-white">
                   شركاء النجاح
                 </a>
               </li>

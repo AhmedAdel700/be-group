@@ -4,21 +4,21 @@ import { Badge } from "@/components/ui/badge";
 
 export default function MinistryStandards() {
   return (
-    <div className="container mx-auto px-4 py-16 max-w-7xl">
+    <div className="container mx-auto px-4 max-w-7xl">
       <div className="text-center mb-16">
-        <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-1 text-sm">
-          وزارة الطاقة
-        </Badge>
         <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
           معايير واشتراطات وزارة الطاقة
         </h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           لتأهيل محطات الوقود وضمان الجودة والكفاءة التشغيلية
         </p>
+        <Badge className="mt-4 bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-1 text-sm">
+          وزارة الطاقة
+        </Badge>
       </div>
 
       <div className="grid lg:grid-cols-1 gap-16 items-start">
-        <div className="order-2 lg:order-1">
+        <div>
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-blue-100 p-2 rounded-lg">
@@ -95,7 +95,7 @@ export default function MinistryStandards() {
           </div>
         </div>
 
-        <div className="order-1 lg:order-2">
+        <div>
           <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 shadow-lg text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=800')] opacity-5 bg-repeat"></div>
             <div className="absolute top-0 left-0 w-64 h-64 bg-blue-400 rounded-full opacity-20 -ml-32 -mt-32"></div>
