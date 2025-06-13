@@ -20,7 +20,7 @@ export default function ScrollingItems() {
   return (
     <section className="flex flex-col gap-8 text-center mt-4" id="partners">
       <h2 className="text-2xl md:text-4xl font-semibold">شركاء النجاح</h2>
-      <div className="bg-slate-100 py-8">
+      <div className="bg-slate-100 py-10">
         <div className="wrapper reduced-mask">
           {items.map((item, i) => (
             <div

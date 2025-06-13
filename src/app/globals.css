@@ -62,7 +62,7 @@ body {
 
   .itemLeft,
   .itemRight {
-    @apply w-[200px] h-[100px] absolute rounded-md flex items-center justify-center;
+    @apply w-[250px] h-[120px] absolute rounded-md flex items-center justify-center;
     animation-timing-function: linear;
     animation-duration: 30s;
     animation-iteration-count: infinite;
@@ -72,12 +72,12 @@ body {
 
   .itemLeft {
     animation-name: scrollLeft;
-    left: max(calc(200px * 11), 100%); /*increase or decrease 11 */
+    left: max(calc(250px * 11), 100%); /*increase or decrease 11 */
   }
 
   .itemRight {
     animation-name: scrollRight;
-    right: max(calc(200px * 11), 100%);
+    right: max(calc(250px * 11), 100%);
   }
 
   .card-inner {
