@@ -6,6 +6,17 @@ import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 
 export default function HeroWithFloatingImage() {
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
@@ -185,24 +196,16 @@ export default function HeroWithFloatingImage() {
             <div className="grid grid-cols-2 sm:flex-row gap-4 items-center justify-start">
               <Button
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold"
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold text-sm sm:text-base"
+                onClick={() => scrollToSection("contact")}
               >
                 اطلب استشارتك المجانية
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-yellow-300 text-white hover:bg-yellow-300/10 bg-transparent hover:text-white"
-                onClick={() =>
-                  document
-                    .getElementById("about")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                className="border-yellow-300 text-black hover:bg-yellow-300/10 bg-transparent font-semibold text-sm sm:text-base"
+                onClick={() => scrollToSection("about")}
               >
                 تعرف على المزيد
               </Button>

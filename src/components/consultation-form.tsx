@@ -278,7 +278,7 @@ export default function MergedConsultationForm() {
             </div>
             <Button
               type="submit"
-              className="w-full mt-auto bg-blue-600 hover:bg-blue-700"
+              className="w-full mt-auto bg-[#2A4D8A] hover:bg-blue-900"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
