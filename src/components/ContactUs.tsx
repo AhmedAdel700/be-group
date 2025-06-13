@@ -1,5 +1,5 @@
 "use client";
-import ConsultationForm from "@/components/consultation-form";
+import ConsultationForm from "@/components/ConsultationForm";
 
 export default function ContactUs() {
   return (

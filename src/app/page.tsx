@@ -1,5 +1,5 @@
 "use client";
-import MinistryStandards from "@/components/ministry-standards";
+import MinistryStandards from "@/components/MinistryStandards";
 import Header from "@/components/Header";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import About from "@/components/About";

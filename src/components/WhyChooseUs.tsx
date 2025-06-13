@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import {
   Shield,
   Wifi,
@@ -18,9 +19,17 @@ import {
   Link2,
   Fuel,
   Truck,
+  ChevronsDown,
+  ChevronsUp,
 } from "lucide-react";
 
-const features = [
+type Feature = {
+  title: string;
+  desc: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
+
+const features: Feature[] = [
   {
     title: "متكامل مع هيئة الزكاة والضريبة والجمارك (ZATCA)",
     desc: "توافق كامل مع متطلبات الفوترة الإلكترونية",
@@ -114,6 +123,19 @@ const features = [
 ];
 
 export default function WhyChooseUs() {
+  const [showAll, setShowAll] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  const firstSix = features.slice(0, 6);
+  const rest = features.slice(6);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(showAll ? contentRef.current.scrollHeight : 0);
+    }
+  }, [showAll]);
+
   return (
     <section id="why-us" className="py-16">
       <div className="container mx-auto px-4">
@@ -123,27 +145,67 @@ export default function WhyChooseUs() {
             المميزات التي تجعلنا الخيار الأمثل لمحطات الوقود
           </p>
         </div>
+
+        {/* First 6 features */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((item, index) => (
-            <div
-              key={index}
-              className="p-6 border-b-2 border-gray-200 bg-gray-100 hover:bg-gray-200 transition-all duration-200 h-[135px] lg:h-[100px] hover:scale-[1.02]"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <item.icon className="w-6 h-6 text-blue-600 mt-1" />
-                </div>
-                <div className="text-right">
-                  <h3 className="font-bold text-lg mb-1 text-gray-800">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
-                </div>
-              </div>
-            </div>
+          {firstSix.map((item, index) => (
+            <FeatureCard item={item} key={index} />
           ))}
+        </div>
+
+        {/* Transitioned wrapper */}
+        <div
+          className="transition-all duration-700 ease-in-out overflow-hidden"
+          style={{ maxHeight: `${height}px`, opacity: showAll ? 1 : 0 }}
+        >
+          <div
+            ref={contentRef}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4"
+          >
+            {rest.map((item, index) => (
+              <FeatureCard item={item} key={index + 6} />
+            ))}
+          </div>
+        </div>
+
+        {/* Always stays last */}
+        <div className="text-center mt-8">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="flex items-center justify-center mx-auto text-base font-semibold"
+            style={{ color: "#2A4D8A" }}
+          >
+            {showAll ? "إخفاء التفاصيل" : "عرض المزيد"}
+            {showAll ? (
+              <ChevronsUp
+                className="w-5 h-5 mr-2 rtl:ml-2"
+                style={{ color: "#2A4D8A" }}
+              />
+            ) : (
+              <ChevronsDown
+                className="w-5 h-5 mr-2 rtl:ml-2"
+                style={{ color: "#2A4D8A" }}
+              />
+            )}
+          </button>
         </div>
       </div>
     </section>
+  );
+}
+
+function FeatureCard({ item }: { item: Feature }) {
+  return (
+    <div className="p-6 border-b-2 border-gray-200 bg-gray-100 hover:bg-gray-200 transition-all duration-200 h-[135px] lg:h-[100px] hover:scale-[1.02]">
+      <div className="flex items-start gap-4">
+        <div className="flex-shrink-0">
+          <item.icon className="w-6 h-6 text-blue-600 mt-1" />
+        </div>
+        <div className="text-right">
+          <h3 className="font-bold text-lg mb-1 text-gray-800">{item.title}</h3>
+          <p className="text-gray-600 text-sm">{item.desc}</p>
+        </div>
+      </div>
+    </div>
   );
 }
