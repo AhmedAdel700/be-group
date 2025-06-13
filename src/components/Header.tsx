@@ -129,7 +129,7 @@ export default function Header() {
               </a>
             ))}
             <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium"
+              className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium"
               onClick={() => window.open("/company-profile.pdf", "_blank")}
             >
               تحميل ملف الشركة

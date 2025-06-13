@@ -64,6 +64,18 @@ export default function Packages() {
       notIncluded: [],
     },
   ];
+
+  const scrollToContact = () => {
+    const section = document.getElementById("contact");
+    if (section) {
+      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section id="packages" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -129,6 +141,7 @@ export default function Packages() {
                 <Button
                   className="w-full mt-6"
                   variant={pkg.popular ? "default" : "outline"}
+                  onClick={scrollToContact}
                 >
                   اطلب هذه الباقة
                 </Button>
