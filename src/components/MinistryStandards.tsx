@@ -1,8 +1,34 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, CheckCircle, ChevronLeft } from "lucide-react";
+import { Shield, CheckCircle, ChevronLeft, ChevronsDown, ChevronsUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useState, useRef, useEffect } from "react";
 
 export default function MinistryStandards() {
+  const [showAll, setShowAll] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  const standards = [
+    "إعـداد نظـام للربط الإلكتروني المركزي مســــــؤول عن أخـذ قراءات المضــــــخــات، ومعرفــة الكميات المباعة من الوقود من كل مضـــــخة، والتحكم للتغيير اللحظي وعن بُعد لأســـــعار منتجات الطاقة في المضـــــخات والشـــــاشـــــات الخارجية الخاصـــــة بعرض أســـــعار منتجات الطاقة في محطات الوقود التابعة للمنشأة (Forecourt Controller).",
+    "الالتزام بــالربط المركزي الموحــد لجميع الأنظمــة التي تتطلــب الجهــات المعنيــة ربطهــا، كتعديل الأسعار على المضخات وشاشة الأسعار في لحظتها عن بعد، وغيره من الأنظمة.",
+    "إعـــداد نظـــام آلي لمراقبـــة الوقود في الخزانـــات عن طريق اســــــتخـــدام مقيـــاس الخزان الأوتوماتيكي (ATG) يسمح برصد المخزون في الوقت الفعلي عن بعد.",
+    "إعداد نظام إدارة النقل (System Management Transportation) يدير طلبات الوقود من وقت الطلب إلى تفريغ المنتج في خزانات المحطة.",
+    "توفير نظام تخطيط موارد المؤســـــســـــة (ERP) للموارد البشـــــرية ومبيعات التجزئة، يغطي ت ً جميع الأنظمة تلقائيا بالنظام بما في ُ أعمال الوقود وغير الوقود بصــورة عامة، حيث ربط ذلك نقاط البيع، وأنظمة الدفع المختلفة، والنقد، ونظام الدفع الإلكتروني، والمضـــــخات، والنظام الآلي لأخذ قراءات الخزانات، وغيرها.",
+    "أن تكون جميع الاتصــالات بين أنظمة التشــغيل الآلي والبرامج والأجهزة الأخرى قائمة على السحابة.(cloud based)",
+    "تطبيقات للجوال (أبل وأندوريد) تتضمن معلومات حول المنشأة مثل المنتجات المعروضة وأسعارها ومواقع المحطات وساعات العمل والعروض وشكاوى العملاء.",
+  ];
+
+  const firstTwo = standards.slice(0, 2);
+  const rest = standards.slice(2);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(showAll ? contentRef.current.scrollHeight : 0);
+    }
+  }, [showAll]);
+
   return (
     <div className="container mx-auto px-4 max-w-7xl">
       <div className="text-center mb-16">
@@ -36,16 +62,8 @@ export default function MinistryStandards() {
               تكون المنشأة مؤهلة لإدارة محطات الوقود:
             </p>
 
-            <div className="space-y-6 text-gray-700 my-8">
-              {[
-                "إعـداد نظـام للربط الإلكتروني المركزي مســــــؤول عن أخـذ قراءات المضــــــخــات، ومعرفــة الكميات المباعة من الوقود من كل مضـــــخة، والتحكم للتغيير اللحظي وعن بُعد لأســـــعار منتجات الطاقة في المضـــــخات والشـــــاشـــــات الخارجية الخاصـــــة بعرض أســـــعار منتجات الطاقة في محطات الوقود التابعة للمنشأة (Forecourt Controller).",
-                "الالتزام بــالربط المركزي الموحــد لجميع الأنظمــة التي تتطلــب الجهــات المعنيــة ربطهــا، كتعديل الأسعار على المضخات وشاشة الأسعار في لحظتها عن بعد، وغيره من الأنظمة.",
-                "إعـــداد نظـــام آلي لمراقبـــة الوقود في الخزانـــات عن طريق اســــــتخـــدام مقيـــاس الخزان الأوتوماتيكي (ATG) يسمح برصد المخزون في الوقت الفعلي عن بعد.",
-                "إعداد نظام إدارة النقل (System Management Transportation) يدير طلبات الوقود من وقت الطلب إلى تفريغ المنتج في خزانات المحطة.",
-                "توفير نظام تخطيط موارد المؤســـــســـــة (ERP) للموارد البشـــــرية ومبيعات التجزئة، يغطي ت ً جميع الأنظمة تلقائيا بالنظام بما في ُ أعمال الوقود وغير الوقود بصــورة عامة، حيث ربط ذلك نقاط البيع، وأنظمة الدفع المختلفة، والنقد، ونظام الدفع الإلكتروني، والمضـــــخات، والنظام الآلي لأخذ قراءات الخزانات، وغيرها.",
-                "أن تكون جميع الاتصــالات بين أنظمة التشــغيل الآلي والبرامج والأجهزة الأخرى قائمة على السحابة.(cloud based)",
-                "تطبيقات للجوال (أبل وأندوريد) تتضمن معلومات حول المنشأة مثل المنتجات المعروضة وأسعارها ومواقع المحطات وساعات العمل والعروض وشكاوى العملاء.",
-              ].map((standard, index) => (
+            <div className="space-y-6 text-gray-700 my-4">
+              {firstTwo.map((standard, index) => (
                 <div key={index} className="flex gap-4 items-start">
                   <div className="bg-blue-50 rounded-full p-1 mt-1 flex-shrink-0">
                     <ChevronLeft className="w-4 h-4 text-blue-600" />
@@ -53,6 +71,45 @@ export default function MinistryStandards() {
                   <p className="text-base leading-relaxed">{standard}</p>
                 </div>
               ))}
+
+              {/* Transitioned wrapper */}
+              <div
+                className="transition-all duration-700 ease-in-out overflow-hidden"
+                style={{ maxHeight: `${height}px`, opacity: showAll ? 1 : 0 }}
+              >
+                <div ref={contentRef} className="space-y-6">
+                  {rest.map((standard, index) => (
+                    <div key={index + 2} className="flex gap-4 items-start">
+                      <div className="bg-blue-50 rounded-full p-1 mt-1 flex-shrink-0">
+                        <ChevronLeft className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <p className="text-base leading-relaxed">{standard}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Show/Hide button */}
+            <div className="text-center">
+              <button
+                onClick={() => setShowAll(!showAll)}
+                className="flex items-center justify-center mx-auto text-base font-semibold"
+                style={{ color: "#2A4D8A" }}
+              >
+                {showAll ? "إخفاء التفاصيل" : "عرض المزيد"}
+                {showAll ? (
+                  <ChevronsUp
+                    className="w-5 h-5 mr-2 rtl:ml-2"
+                    style={{ color: "#2A4D8A" }}
+                  />
+                ) : (
+                  <ChevronsDown
+                    className="w-5 h-5 mr-2 rtl:ml-2"
+                    style={{ color: "#2A4D8A" }}
+                  />
+                )}
+              </button>
             </div>
           </div>
 

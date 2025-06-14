@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Shield,
@@ -13,6 +13,14 @@ import {
 
 export default function About() {
   const [showMore, setShowMore] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(showMore ? contentRef.current.scrollHeight : 0);
+    }
+  }, [showMore]);
 
   return (
     <section id="about" className="py-16">
@@ -38,30 +46,31 @@ export default function About() {
               الكامل عن بعد.
             </p>
 
-            {/* Conditionally rendered extra paragraphs */}
+            {/* Transitioned wrapper */}
             <div
-              className={`overflow-hidden transition-all duration-700 ${
-                showMore ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-              }`}
+              className="transition-all duration-700 ease-in-out overflow-hidden"
+              style={{ maxHeight: `${height}px`, opacity: showMore ? 1 : 0 }}
             >
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                صمم <span className="font-semibold">(جازتك GasTech)</span>{" "}
-                موافقاً لمعايير واشتراطات وزارة الطاقة ومهيأ لأية تطويرات إضافية
-                ومواكباً كذلك لأحدث التقنيات، مما أسهم ذلك في الاعتماد عليه من
-                قبل العديد من منشآت محطات الوقود وذلك في إدارة عملياتهم
-                واجراءاتهم اليومية.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                <span className="font-semibold">(جازتك GasTech)</span> هو أحد
-                منتجات شركة بي تك الرائدة والمتخصصة في حلول التحول الرقمي وتقديم
-                خدمات تكنولوجيا المعلومات ذات الصلة.
-              </p>
+              <div ref={contentRef} className="space-y-6">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  صمم <span className="font-semibold">(جازتك GasTech)</span>{" "}
+                  موافقاً لمعايير واشتراطات وزارة الطاقة ومهيأ لأية تطويرات إضافية
+                  ومواكباً كذلك لأحدث التقنيات، مما أسهم ذلك في الاعتماد عليه من
+                  قبل العديد من منشآت محطات الوقود وذلك في إدارة عملياتهم
+                  واجراءاتهم اليومية.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  <span className="font-semibold">(جازتك GasTech)</span> هو أحد
+                  منتجات شركة بي تك الرائدة والمتخصصة في حلول التحول الرقمي وتقديم
+                  خدمات تكنولوجيا المعلومات ذات الصلة.
+                </p>
+              </div>
             </div>
 
             {/* Show More/Less Toggle */}
             <button
               onClick={() => setShowMore(!showMore)}
-              className="flex items-center text-base font-semibold"
+              className={`flex items-center text-base font-semibold ${showMore && "mt-4"}`}
               style={{ color: "#2A4D8A" }}
             >
               {showMore ? "إخفاء التفاصيل" : "عرض المزيد"}

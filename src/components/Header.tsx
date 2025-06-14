@@ -95,24 +95,17 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 w-full">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto p-4">
         <div className="flex items-center justify-between">
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 space-x-reverse justify-start flex-1 relative">
-            <Button
-              className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium"
-              onClick={() => window.open("/company-profile.pdf", "_blank")}
-            >
-              <Download className="w-4 h-4" />
-              تحميل ملف الشركة
-            </Button>
             {navItems.map(({ id, label }) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className={`font-medium transition-colors duration-200 ${
+                className={`font-semibold transition-colors duration-200 ${
                   activeSection === id
-                    ? "text-[#2A4D8A] font-semibold"
+                    ? "text-[#2A4D8A]"
                     : "text-gray-700 hover:text-[#2A4D8A]"
                 }`}
                 onClick={(e) => {
@@ -123,6 +116,12 @@ export default function Header() {
                 {label}
               </a>
             ))}
+            <Button
+              className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium"
+              onClick={() => scrollToSection("contact")}
+            >
+              اطلب استشارتك المجانية
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}

@@ -82,7 +82,7 @@ export default function Footer() {
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Phone className="w-5 h-5" />
-                <span>+966 55 555 5555</span>
+                <span>+966 566 765 222</span>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Mail className="w-5 h-5" />
@@ -91,7 +91,7 @@ export default function Footer() {
               <div className="flex items-center space-x-3 space-x-reverse">
                 <MapPin className="w-5 h-5 shrink-0" />
                 <span className="text-sm leading-relaxed">
-                  فرع السعودية: مجمع النور، طريق المدينة، حي الرويس، جدة 23215
+                  الرياض - شارع وادي هجر – حي الملقا - 13524
                 </span>
               </div>
             </div>
@@ -116,6 +116,19 @@ export default function Footer() {
               </a>
               {/* Social Media Icons */}
               <div className="flex items-center gap-4">
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
+                >
+                  <Image
+                    src="/linkedin.svg"
+                    alt="Linkedin"
+                    width={21}
+                    height={21}
+                  />
+                </a>
                 <a
                   href="https://twitter.com"
                   target="_blank"
@@ -151,7 +164,7 @@ export default function Footer() {
                   <Image
                     src="/instagram.svg"
                     alt="Instagram"
-                      width={21}
+                    width={21}
                     height={21}
                   />
                 </a>
