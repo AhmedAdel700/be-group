@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Download } from "lucide-react";
 import Image from "next/image";
 
 export default function HeroWithFloatingImage() {
@@ -19,7 +19,7 @@ export default function HeroWithFloatingImage() {
 
   return (
     <section
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative flex h-[calc(100vh-72px)] items-center justify-center overflow-hidden"
       style={{
         background:
           "linear-gradient(45deg, hsla(33, 74%, 69%, 1) 0%, hsla(220, 60%, 33%, 1) 100%)",
@@ -179,8 +179,8 @@ export default function HeroWithFloatingImage() {
                 {[
                   "تحكم كامل في إدارة المحطات عن بعد",
                   "مترابط مع مضخات وخزانات المحطات بشكل مباشر",
-                  "نظام مدعوم بالذكاء الاصطناعي وانترنت الأشياء",
-                  "يحقق التحول الرقمي والأتمتة الشاملة",
+                  "متوافق مع معايير واشتراطات وزارة الطاقة",
+                  "ممتثل لاشتراطات هيئة الزكاة والضريبة والجمارك",
                 ].map((feature, index) => (
                   <div
                     key={index}
@@ -203,11 +203,11 @@ export default function HeroWithFloatingImage() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-yellow-300 text-black hover:bg-yellow-300/10 bg-transparent font-semibold text-sm sm:text-base"
-                onClick={() => scrollToSection("about")}
+                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium"
+                onClick={() => window.open("/company-profile.pdf", "_blank")}
               >
-                تعرف على المزيد
+                <Download className="w-4 h-4" />
+                تحميل ملف الشركة
               </Button>
             </div>
           </div>
