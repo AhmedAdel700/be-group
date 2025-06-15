@@ -231,10 +231,7 @@ export default function MergedConsultationForm() {
                   <FormItem>
                     <FormLabel>عدد اللي</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="عدد الخراطيم في كل طرمبة"
-                        {...field}
-                      />
+                      <Input placeholder="عدد اللي" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -303,8 +300,7 @@ export default function MergedConsultationForm() {
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> جاري
-                  الإرسال...
+                  <Loader2 className="h-4 w-4 animate-spin" /> جاري الإرسال...
                 </>
               ) : (
                 "اطلب استشارتك المجانية"

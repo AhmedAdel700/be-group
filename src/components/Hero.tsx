@@ -52,7 +52,7 @@ export default function HeroWithFloatingImage() {
 
   return (
     <section
-      className="relative flex h-[calc(100vh-72px)] items-center justify-center overflow-hidden"
+      className="relative flex min-h-[calc(100vh-72px)] items-center justify-center overflow-hidden"
       style={{
         background:
           "linear-gradient(45deg, hsla(33, 74%, 69%, 1) 0%, hsla(220, 60%, 33%, 1) 100%)",
