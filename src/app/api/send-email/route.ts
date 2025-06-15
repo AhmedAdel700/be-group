@@ -8,9 +8,9 @@ export async function POST(req: Request) {
 
   try {
     const result = await resend.emails.send({
-      from: "GasTech Website <onboarding@resend.dev>",
-      to: ["info@gastech.com.sa"],
-      subject: "New Consultation Request",
+      from: "GasTech <onboarding@resend.dev>",
+      to: ["ahmedadel.engineer1@gmail.com"],
+      subject: `New Consultation Request - ${data.name}`,
       html: generateEmailTemplate(data),
     });
 
@@ -35,7 +35,7 @@ interface ConsultationRequestData {
 }
 
 function generateEmailTemplate(data: ConsultationRequestData) {
-  return `
+    return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -43,6 +43,8 @@ function generateEmailTemplate(data: ConsultationRequestData) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>New Consultation Request</title>
       <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
         * {
           margin: 0;
           padding: 0;
@@ -50,14 +52,14 @@ function generateEmailTemplate(data: ConsultationRequestData) {
         }
         
         body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
           line-height: 1.6;
           color: #333333;
           background-color: #f8fafc;
         }
         
         .email-container {
-          max-width: 600px;
+          max-width: 800px;
           margin: 0 auto;
           background-color: #ffffff;
           border-radius: 12px;
@@ -88,16 +90,56 @@ function generateEmailTemplate(data: ConsultationRequestData) {
         }
         
         .section {
-          margin-bottom: 32px;
+          margin-bottom: 40px;
+          border-radius: 8px;
+          border: 1px solid #e5e7eb;
+          overflow: hidden;
+        }
+        
+        .section-header {
+          background-color: #f8fafc;
+          padding: 16px 24px;
+          border-bottom: 1px solid #e5e7eb;
         }
         
         .section-title {
           font-size: 18px;
           font-weight: 600;
           color: #1e40af;
-          margin-bottom: 16px;
+          text-align: center;
+        }
+        
+        .bilingual-content {
+          display: flex;
+          width: 100%;
+          min-height: 200px;
+        }
+        
+        .language-column {
+          width: 50%;
+          padding: 24px;
+          box-sizing: border-box;
+        }
+        
+        .language-column.english {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          border-right: 2px solid #e5e7eb;
+        }
+        
+        .language-column.arabic {
+          direction: rtl;
+          text-align: right;
+          font-size: 16px;
+        }
+        
+        .language-header {
+          font-size: 16px;
+          font-weight: 600;
+          color: #6b7280;
+          margin-bottom: 20px;
+          text-align: center;
           padding-bottom: 8px;
-          border-bottom: 2px solid #e5e7eb;
+          border-bottom: 1px solid #e5e7eb;
         }
         
         .info-grid {
@@ -110,21 +152,36 @@ function generateEmailTemplate(data: ConsultationRequestData) {
           padding: 16px;
           border-radius: 8px;
           border-left: 4px solid #3b82f6;
+          margin-bottom: 12px;
+        }
+        
+        .arabic .info-item {
+          border-left: none;
+          border-right: 4px solid #3b82f6;
         }
         
         .info-label {
           font-size: 14px;
           font-weight: 600;
           color: #6b7280;
-          text-transform: uppercase;
+          text-transform: capitalize;
           letter-spacing: 0.5px;
           margin-bottom: 4px;
+        }
+        
+        .arabic .info-label {
+          text-transform: none;
+          font-size: 13px;
         }
         
         .info-value {
           font-size: 16px;
           color: #111827;
           font-weight: 500;
+        }
+        
+        .arabic .info-value {
+          font-size: 15px;
         }
         
         .message-box {
@@ -144,15 +201,17 @@ function generateEmailTemplate(data: ConsultationRequestData) {
         
         .highlight {
           background-color: #fef3c7;
-          padding: 12px 16px;
-          border-radius: 6px;
+          padding: 16px 20px;
+          border-radius: 8px;
           border-left: 4px solid #f59e0b;
-          margin: 16px 0;
+          margin: 24px 0;
+          text-align: center;
         }
         
         .highlight-text {
           font-weight: 600;
           color: #92400e;
+          font-size: 16px;
         }
         
         .footer {
@@ -160,6 +219,7 @@ function generateEmailTemplate(data: ConsultationRequestData) {
           padding: 24px;
           text-align: center;
           border-top: 1px solid #e5e7eb;
+          margin-top: 20px;
         }
         
         .footer p {
@@ -173,10 +233,31 @@ function generateEmailTemplate(data: ConsultationRequestData) {
           margin-top: 8px;
         }
         
-        @media (max-width: 600px) {
+        /* Outlook specific styles */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+          .language-column.arabic {
+            font-family: 'Segoe UI Arabic', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
           .email-container {
             margin: 0;
             border-radius: 0;
+            max-width: 100%;
+          }
+          
+          .bilingual-content {
+            flex-direction: column;
+          }
+          
+          .language-column {
+            width: 100%;
+          }
+          
+          .language-column.english {
+            border-right: none;
+            border-bottom: 2px solid #e5e7eb;
           }
           
           .header, .content, .footer {
@@ -188,61 +269,133 @@ function generateEmailTemplate(data: ConsultationRequestData) {
     <body>
       <div class="email-container">
         <div class="header">
-          <h1>🏢 GasTech</h1>
-          <p>New Consultation Request Received</p>
+          <h1>🏢 GasTech | جاس تك</h1>
+          <p>New Consultation Request Received | طلب استشارة جديد</p>
         </div>
         
         <div class="content">
           <div class="section">
-            <h2 class="section-title">👤 Contact Information</h2>
-            <div class="info-grid">
-              <div class="info-item">
-                <div class="info-label">Full Name</div>
-                <div class="info-value">${data.name || "Not provided"}</div>
+            <div class="section-header">
+              <h2 class="section-title">👤 Contact Information | معلومات الاتصال</h2>
+            </div>
+            <div class="bilingual-content">
+              <div class="language-column english">
+                <div class="language-header">🇺🇸 English</div>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value">${data.name || "Not provided"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Email Address</div>
+                    <div class="info-value">${data.email || "Not provided"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Phone Number</div>
+                    <div class="info-value">${data.phone || "Not provided"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Position</div>
+                    <div class="info-value">${data.position || "Not provided"}</div>
+                  </div>
+                </div>
               </div>
-              <div class="info-item">
-                <div class="info-label">Email Address</div>
-                <div class="info-value">${data.email || "Not provided"}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Phone Number</div>
-                <div class="info-value">${data.phone || "Not provided"}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Position</div>
-                <div class="info-value">${data.position || "Not provided"}</div>
+              <div class="language-column arabic">
+                <div class="language-header">🇸🇦 العربية</div>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">الاسم الكامل</div>
+                    <div class="info-value">${data.name || "غير محدد"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">البريد الإلكتروني</div>
+                    <div class="info-value">${data.email || "غير محدد"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">رقم الهاتف</div>
+                    <div class="info-value">${data.phone || "غير محدد"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">المنصب</div>
+                    <div class="info-value">${data.position || "غير محدد"}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
           <div class="section">
-            <h2 class="section-title">🏭 Company Details</h2>
-            <div class="info-grid">
-              <div class="info-item">
-                <div class="info-label">Company Name</div>
-                <div class="info-value">${data.companyName || "Not provided"}</div>
+            <div class="section-header">
+              <h2 class="section-title">🏭 Company Details | تفاصيل الشركة</h2>
+            </div>
+            <div class="bilingual-content">
+              <div class="language-column english">
+                <div class="language-header">🇺🇸 English</div>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">Company Name</div>
+                    <div class="info-value">${data.companyName || "Not provided"}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="language-column arabic">
+                <div class="language-header">🇸🇦 العربية</div>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">اسم الشركة</div>
+                    <div class="info-value">${data.companyName || "غير محدد"}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
           <div class="section">
-            <h2 class="section-title">⛽ Station Requirements</h2>
-            <div class="info-grid">
-              <div class="info-item">
-                <div class="info-label">Number of Stations</div>
-                <div class="info-value">${data.stationsCount || "Not specified"}</div>
+            <div class="section-header">
+              <h2 class="section-title">⛽ Station Requirements | متطلبات المحطة</h2>
+            </div>
+            <div class="bilingual-content">
+              <div class="language-column english">
+                <div class="language-header">🇺🇸 English</div>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">Number of Stations</div>
+                    <div class="info-value">${data.stationsCount || "Not specified"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Pumps per Station</div>
+                    <div class="info-value">${data.pumpsPerStation || "Not specified"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Nozzles per Pump</div>
+                    <div class="info-value">${data.nozzlesPerPump || "Not specified"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Number of Tanks</div>
+                    <div class="info-value">${data.tanksCount || "Not specified"}</div>
+                  </div>
+                </div>
               </div>
-              <div class="info-item">
-                <div class="info-label">Pumps per Station</div>
-                <div class="info-value">${data.pumpsPerStation || "Not specified"}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Nozzles per Pump</div>
-                <div class="info-value">${data.nozzlesPerPump || "Not specified"}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Number of Tanks</div>
-                <div class="info-value">${data.tanksCount || "Not specified"}</div>
+              <div class="language-column arabic">
+                <div class="language-header">🇸🇦 العربية</div>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">عدد المحطات</div>
+                    <div class="info-value">${data.stationsCount || "غير محدد"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">المضخات لكل محطة</div>
+                    <div class="info-value">${data.pumpsPerStation || "غير محدد"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">الفوهات لكل مضخة</div>
+                    <div class="info-value">${data.nozzlesPerPump || "غير محدد"}</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">عدد الخزانات</div>
+                    <div class="info-value">${data.tanksCount || "غير محدد"}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -251,7 +404,10 @@ function generateEmailTemplate(data: ConsultationRequestData) {
             data.wantDemo
               ? `
           <div class="highlight">
-            <div class="highlight-text">🎯 Demo Requested: This client is interested in a product demonstration</div>
+            <div class="highlight-text">
+              🎯 Demo Requested | طلب عرض توضيحي<br>
+              <span style="font-size: 14px; font-weight: normal;">This client is interested in a product demonstration | هذا العميل مهتم بعرض توضيحي للمنتج</span>
+            </div>
           </div>
           `
               : ""
@@ -261,9 +417,22 @@ function generateEmailTemplate(data: ConsultationRequestData) {
             data.message
               ? `
           <div class="section">
-            <h2 class="section-title">💬 Additional Message</h2>
-            <div class="message-box">
-              <div class="message-text">${data.message}</div>
+            <div class="section-header">
+              <h2 class="section-title">💬 Additional Message | رسالة إضافية</h2>
+            </div>
+            <div class="bilingual-content">
+              <div class="language-column english">
+                <div class="language-header">🇺🇸 English</div>
+                <div class="message-box">
+                  <div class="message-text">${data.message}</div>
+                </div>
+              </div>
+              <div class="language-column arabic">
+                <div class="language-header">🇸🇦 العربية</div>
+                <div class="message-box">
+                  <div class="message-text">${data.message}</div>
+                </div>
+              </div>
             </div>
           </div>
           `
@@ -272,23 +441,25 @@ function generateEmailTemplate(data: ConsultationRequestData) {
         </div>
         
         <div class="footer">
-          <p><strong>GasTech Consultation System</strong></p>
-          <p>This email was automatically generated from your website contact form.</p>
-          <div class="timestamp">Received on ${new Date().toLocaleString(
-            "en-US",
-            {
-              timeZone: "Asia/Riyadh",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              timeZoneName: "short",
-            }
-          )}</div>
+          <p><strong>GasTech Consultation System | نظام استشارات جاس تك</strong></p>
+          <p>This email was automatically generated from your website contact form | تم إنشاء هذا البريد الإلكتروني تلقائياً من نموذج الاتصال في موقعكم</p>
+          <div class="timestamp">Received on ${new Date().toLocaleString("en-US", {
+            timeZone: "Asia/Riyadh",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZoneName: "short",
+          })} | تم الاستلام في ${new Date().toLocaleDateString("ar-SA", {
+            timeZone: "Asia/Riyadh",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}</div>
         </div>
       </div>
     </body>
     </html>
-  `;
+  `
 }
