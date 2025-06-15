@@ -70,13 +70,33 @@ export default function MergedConsultationForm() {
 
   async function onSubmit(data: MergedFormValues) {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Merged form submitted:", data);
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    form.reset();
-    setTimeout(() => setIsSubmitted(false), 5000);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setIsSubmitted(true);
+        form.reset();
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        console.error(result.error);
+        alert("حدث خطأ أثناء إرسال النموذج");
+      }
+    } catch (error) {
+      console.error("Failed to send:", error);
+      alert("تعذر إرسال الطلب. حاول مرة أخرى.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
+  
 
   if (isSubmitted) {
     return (

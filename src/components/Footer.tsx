@@ -82,7 +82,11 @@ export default function Footer() {
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Phone className="w-5 h-5" />
-                <span>+966 566 765 222</span>
+                <div className="flex gap-2" dir="rtl">
+                  <span dir="ltr">966 566 765 222</span>
+                  <span>-</span>
+                  <span dir="ltr">966 569 765 744</span>
+                </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Mail className="w-5 h-5" />
@@ -117,7 +121,7 @@ export default function Footer() {
               {/* Social Media Icons */}
               <div className="flex items-center gap-4">
                 <a
-                  href="https://www.linkedin.com/company/be-tech-ksa/"
+                  href="https://www.linkedin.com/company/gastechai/?viewAsMember=true"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
@@ -130,7 +134,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://x.com/beTechksa"
+                  href="https://x.com/GastechAj"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded bg-gray-400 hover:bg-slate-400 transition-all"
@@ -143,7 +147,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://www.facebook.com/share/19jocxHLug/"
+                  href="https://www.facebook.com/profile.php?id=61572542068792"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
@@ -156,7 +160,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://www.instagram.com/betech.sa?igsh=enQyN3VrbGZ1YTQ0"
+                  href="https://www.instagram.com/qastechai/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"

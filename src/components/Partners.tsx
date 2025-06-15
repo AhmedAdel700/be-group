@@ -3,15 +3,16 @@
 import Image from "next/image";
 
 const partners = [
-  { src: "/gastech-logo.svg", alt: "GasTech Partner 1" },
-  { src: "/gastech-logo.svg", alt: "GasTech Partner 2" },
-  { src: "/gastech-logo.svg", alt: "GasTech Partner 3" },
-  { src: "/gastech-logo.svg", alt: "GasTech Partner 4" },
-  { src: "/gastech-logo.svg", alt: "GasTech Partner 5" },
-  { src: "/gastech-logo.svg", alt: "GasTech Partner 6" },
+  { src: "/logo1.png", alt: "GasTech Partner 1" },
+  { src: "/logo2.png", alt: "GasTech Partner 2" },
+  { src: "/logo3.png", alt: "GasTech Partner 3" },
+  { src: "/logo4.png", alt: "GasTech Partner 4" },
+  { src: "/logo5.png", alt: "GasTech Partner 5" },
+  { src: "/logo6.png", alt: "GasTech Partner 6" },
+  { src: "/logo7.png", alt: "GasTech Partner 7" },
 ];
 
-const items = [...partners, ...partners]; // Duplicate for smoother loop
+const items = [...partners, ...partners];
 
 export default function ScrollingItems() {
   const getDelay = (i: number) =>
@@ -34,7 +35,7 @@ export default function ScrollingItems() {
                   alt={item.alt}
                   width={100}
                   height={40}
-                  className="object-contain max-w-[85%] max-h-[65%]"
+                  className="object-contain max-w-[100%] max-h-[100%]"
                 />
               </div>
             </div>
@@ -54,7 +55,7 @@ export default function ScrollingItems() {
                   alt={item.alt}
                   width={100}
                   height={40}
-                  className="object-contain max-w-[85%] max-h-[65%]"
+                  className="object-contain max-w-[100%] max-h-[100%]"
                 />
               </div>
             </div>

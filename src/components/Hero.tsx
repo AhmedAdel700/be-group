@@ -2,10 +2,28 @@
 
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Download } from "lucide-react";
+import { CheckCircle, Download, Loader2 } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function HeroWithFloatingImage() {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = () => {
+    setIsDownloading(true);
+    const link = document.createElement('a');
+    link.href = "/Gas Tech Company Profile AR.pdf";
+    link.download = "Gas Tech Company Profile AR.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Reset downloading state after a short delay
+    setTimeout(() => {
+      setIsDownloading(false);
+    }, 2000);
+  };
+
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
@@ -203,11 +221,16 @@ export default function HeroWithFloatingImage() {
               </Button>
               <Button
                 size="lg"
-                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium"
-                onClick={() => window.open("/company-profile.pdf", "_blank")}
+                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium relative"
+                onClick={handleDownload}
+                disabled={isDownloading}
               >
-                <Download className="w-4 h-4" />
-                تحميل ملف الشركة
+                {isDownloading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Download className="w-4 h-4" />
+                )}
+                {isDownloading ? "جاري التحميل..." : "تحميل ملف الشركة"}
               </Button>
             </div>
           </div>

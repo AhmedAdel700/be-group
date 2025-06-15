@@ -72,12 +72,12 @@ body {
 
   .itemLeft {
     animation-name: scrollLeft;
-    left: max(calc(250px * 11), 100%); /*increase or decrease 11 */
+    left: max(calc(250px * 13), 100%); /*increase or decrease 13 */
   }
 
   .itemRight {
     animation-name: scrollRight;
-    right: max(calc(250px * 11), 100%);
+    right: max(calc(250px * 13), 100%); /*increase or decrease 13 */
   }
 
   .card-inner {
