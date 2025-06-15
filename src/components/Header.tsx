@@ -97,8 +97,21 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50 w-full">
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between">
+          <div
+            onClick={() => scrollToSection("hero")}
+            className="cursor-pointer"
+          >
+            <Image
+              src="/gastech-logo.svg"
+              alt="جازتك"
+              width={120}
+              height={40}
+              className="h-10 w-auto"
+            />
+          </div>
+
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 space-x-reverse justify-start flex-1 relative">
+          <nav className="hidden lg:flex items-center space-x-8 space-x-reverse justify-end flex-1 relative">
             {navItems.map(({ id, label }) => (
               <a
                 key={id}
@@ -163,18 +176,6 @@ export default function Header() {
                 </nav>
               </SheetContent>
             </Sheet>
-          </div>
-          <div
-            onClick={() => scrollToSection("hero")}
-            className="cursor-pointer"
-          >
-            <Image
-              src="/gastech-logo.svg"
-              alt="جازتك"
-              width={120}
-              height={40}
-              className="h-10 w-auto"
-            />
           </div>
         </div>
       </div>
