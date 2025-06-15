@@ -66,7 +66,7 @@ export default function Header() {
     const section = document.getElementById(id);
     if (section) {
       const offsetTop =
-        section.getBoundingClientRect().top + window.scrollY - 72;
+        section.getBoundingClientRect().top + window.scrollY - 40;
 
       setIsAutoScrolling(true);
       setActiveSection(id);

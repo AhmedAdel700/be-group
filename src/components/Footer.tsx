@@ -99,7 +99,7 @@ export default function Footer() {
             <div className="flex items-center xl:items-end flex-col xl:flex-row justify-between gap-4">
               {/* WhatsApp CTA */}
               <a
-                href="https://wa.me/966XXXXXXXXX"
+                href="https://wa.me/966566765222"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block mt-4 bg-[#2A4D8A] hover:bg-blue-900 transition-all text-white px-4 py-2 rounded-md font-medium"
@@ -117,7 +117,7 @@ export default function Footer() {
               {/* Social Media Icons */}
               <div className="flex items-center gap-4">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/company/be-tech-ksa/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
@@ -130,7 +130,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/beTechksa"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded bg-gray-400 hover:bg-slate-400 transition-all"
@@ -143,7 +143,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/19jocxHLug/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
@@ -156,7 +156,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/betech.sa?igsh=enQyN3VrbGZ1YTQ0"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"

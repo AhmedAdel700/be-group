@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gas-Tech
 
-## Getting Started
+A modern web application built with Next.js, React, and TypeScript, featuring a beautiful UI powered by Tailwind CSS and ShadCN UI components.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Modern and responsive user interface
+- Type-safe development with TypeScript
+- Component-based architecture
+- Form handling with React Hook Form and Zod validation
+- Beautiful animations and transitions
+- Carousel functionality with Embla Carousel
+- Accessible UI components with ShadCN UI
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: 
+  - ShadCN UI (Dialog, Label, Select, Slot)
+  - Custom components with class-variance-authority
+- **Form Handling**: 
+  - React Hook Form
+  - Zod for validation
+- **Animations**: 
+  - Motion
+  - Tailwind CSS Animate
+- **Icons**: Lucide React
+- **Carousel**: Embla Carousel
+
+## 📁 Project Structure
+
+```
+gas-tech/
+├── src/
+│   ├── app/           # Next.js app directory (pages and layouts)
+│   ├── components/    # Reusable React components
+│   └── lib/          # Utility functions and shared logic
+├── public/           # Static assets
+├── .next/           # Next.js build output
+└── configuration files
+    ├── tailwind.config.ts    # Tailwind CSS configuration
+    ├── tsconfig.json         # TypeScript configuration
+    ├── next.config.mjs       # Next.js configuration
+    └── postcss.config.mjs    # PostCSS configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (Latest LTS version recommended)
+- npm or yarn package manager
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   cd gas-tech
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-## Deploy on Vercel
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Available Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint for code linting
+
+## 🎨 UI Components
+
+The project uses a combination of ShadCN UI primitives and custom components:
+
+- Dialog components for modal windows
+- Label components for form inputs
+- Select components for dropdown menus
+- Slot components for component composition
+
+## 🔧 Configuration
+
+### Tailwind CSS
+The project uses Tailwind CSS for styling with custom configuration in `tailwind.config.ts`. It includes:
+- Custom color schemes
+- Animation utilities
+- Responsive design utilities
+
+### TypeScript
+TypeScript configuration is set up in `tsconfig.json` with strict type checking and modern JavaScript features enabled.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
