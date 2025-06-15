@@ -8,20 +8,35 @@ import { useState } from "react";
 
 export default function HeroWithFloatingImage() {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
 
-  const handleDownload = () => {
-    setIsDownloading(true);
-    const link = document.createElement('a');
-    link.href = "/Gas Tech Company Profile AR.pdf";
-    link.download = "Gas Tech Company Profile AR.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // Reset downloading state after a short delay
-    setTimeout(() => {
-      setIsDownloading(false);
-    }, 2000);
+  const handleDownload = async () => {
+    try {
+      setIsDownloading(true);
+      setDownloadError(null);
+      
+      const response = await fetch("/Gas Tech Company Profile AR.pdf");
+      if (!response.ok) {
+        throw new Error("Failed to download the file");
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = "Gas Tech Company Profile AR.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      setDownloadError("حدث خطأ أثناء تحميل الملف. يرجى المحاولة مرة أخرى.");
+      console.error("Download error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsDownloading(false);
+      }, 2000);
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -232,6 +247,9 @@ export default function HeroWithFloatingImage() {
                 )}
                 {isDownloading ? "جاري التحميل..." : "تحميل ملف الشركة"}
               </Button>
+              {downloadError && (
+                <p className="text-red-500 text-sm mt-2">{downloadError}</p>
+              )}
             </div>
           </div>
 
