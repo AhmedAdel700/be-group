@@ -52,7 +52,7 @@ export default function HeroWithFloatingImage() {
 
   return (
     <section
-      className="relative flex min-h-[calc(100vh-72px)] items-center justify-center overflow-hidden"
+      className="relative flex min-h-[calc(100svh-72px)] items-center justify-center overflow-hidden py-4 sm:py-0"
       style={{
         background:
           "linear-gradient(45deg, hsla(33, 74%, 69%, 1) 0%, hsla(220, 60%, 33%, 1) 100%)",
@@ -226,17 +226,17 @@ export default function HeroWithFloatingImage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:flex-row gap-4 items-center justify-start">
+            <div className="grid grid-cols-2 sm:flex-row gap-2 sm:gap-4 items-center justify-start">
               <Button
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold text-sm sm:text-base"
+                className="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-xs sm:text-base"
                 onClick={() => scrollToSection("contact")}
               >
                 اطلب استشارتك المجانية
               </Button>
               <Button
                 size="lg"
-                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium relative"
+                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-semibold relative text-xs sm:text-base"
                 onClick={handleDownload}
                 disabled={isDownloading}
               >
