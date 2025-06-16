@@ -111,7 +111,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-3 xl:space-x-8 space-x-reverse justify-end flex-1 relative">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-8 justify-end flex-1 relative">
             {navItems.map(({ id, label }) => (
               <a
                 key={id}
