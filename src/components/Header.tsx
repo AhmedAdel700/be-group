@@ -164,14 +164,10 @@ export default function Header() {
                     </a>
                   ))}
                   <Button
-                    className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium text-sm xl:text-base"
-                    onClick={() => {
-                      window.open("/company-profile.pdf", "_blank");
-                      setOpen(false);
-                    }}
+                    className="bg-[#2A4D8A] hover:bg-blue-900 text-sm xl:text-base text-white px-6 py-2 rounded-md font-medium"
+                    onClick={() => scrollToSection("contact")}
                   >
-                    <Download className="w-4 h-4" />
-                    تحميل ملف الشركة
+                    اطلب استشارتك المجانية
                   </Button>
                 </nav>
               </SheetContent>

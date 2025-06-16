@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 const mergedSchema = z.object({
   name: z.string().min(2, "الاسم مطلوب"),
@@ -84,19 +85,22 @@ export default function MergedConsultationForm() {
       if (result.success) {
         setIsSubmitted(true);
         form.reset();
-        setTimeout(() => setIsSubmitted(false), 5000);
+        setTimeout(() => setIsSubmitted(false), 10000);
       } else {
         console.error(result.error);
-        alert("حدث خطأ أثناء إرسال النموذج");
+        toast.error("خطأ في الإرسال", {
+          description: "حدث خطأ أثناء إرسال النموذج. حاول مرة أخرى.",
+        });
       }
     } catch (error) {
       console.error("Failed to send:", error);
-      alert("تعذر إرسال الطلب. حاول مرة أخرى.");
+      toast.error("فشل في الإرسال", {
+        description: (error as Error).message || "تعذر إرسال الطلب. حاول مجددًا.",
+      });
     } finally {
       setIsSubmitting(false);
     }
   }
-  
 
   if (isSubmitted) {
     return (

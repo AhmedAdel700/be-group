@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   try {
     const result = await resend.emails.send({
       from: "GasTech <onboarding@resend.dev>",
-      to: ["info@gastech.com.sa"],
+      to: ["ahmedadel.engineer1@gmail.com"],
       subject: `New Consultation Request - ${data.name}`,
       html: generateEmailTemplate(data),
     });
