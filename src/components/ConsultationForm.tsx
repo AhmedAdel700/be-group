@@ -48,7 +48,11 @@ const mergedSchema = z.object({
 
 type MergedFormValues = z.infer<typeof mergedSchema>;
 
-export default function MergedConsultationForm() {
+interface ConsultationFormProps {
+  onSuccess?: () => void;
+}
+
+export default function MergedConsultationForm({ onSuccess }: ConsultationFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -85,6 +89,7 @@ export default function MergedConsultationForm() {
       if (result.success) {
         setIsSubmitted(true);
         form.reset();
+        onSuccess?.();
         setTimeout(() => setIsSubmitted(false), 10000);
       } else {
         console.error(result.error);
