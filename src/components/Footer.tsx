@@ -90,7 +90,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Mail className="w-5 h-5" />
-                <span>info@gastech.com.sa</span>
+                <span>support@gastech.com.sa</span>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <MapPin className="w-5 h-5 shrink-0" />

@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import ConsultationForm from "@/components/ConsultationForm";
 
 export default function ContactUs() {
