@@ -83,17 +83,17 @@ export default function Footer() {
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Phone className="w-5 h-5 shrink-0" />
                 <div className="flex gap-2" dir="rtl">
-                  <span dir="ltr">966 566 765 222</span>
+                  <a href="tel:966566765222" className="hover:underline cursor-pointer" dir="ltr">966 566 765 222</a>
                   <span className="font-semibold">-</span>
-                  <span dir="ltr">966 569 765 744</span>
+                  <a href="tel:966569765744" className="hover:underline cursor-pointer" dir="ltr">966 569 765 744</a>
                 </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Mail className="w-5 h-5 shrink-0 self-start mt-1.5" />
                 <div className="flex flex-col gap-2">
-                  <span>support@gastech.com.sa</span>
-                  <span>m.badr@betech.com.sa</span>
-                  <span>ahmed.mousa@betech.com.sa</span>
+                  <a href="mailto:support@gastech.com.sa" className="hover:underline cursor-pointer">support@gastech.com.sa</a>
+                  <a href="mailto:m.badr@betech.com.sa" className="hover:underline cursor-pointer">m.badr@betech.com.sa</a>
+                  <a href="mailto:ahmed.mousa@betech.com.sa" className="hover:underline cursor-pointer">ahmed.mousa@betech.com.sa</a>
                 </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">

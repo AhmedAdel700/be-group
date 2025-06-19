@@ -4,11 +4,11 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Almarai', system-ui, sans-serif;
+  font-family: "Almarai", system-ui, sans-serif;
 }
 
 body {
-  font-family: 'Almarai', system-ui, sans-serif;
+  font-family: "Almarai", system-ui, sans-serif;
 }
 
 /* Custom Scrollbar Styles */
@@ -72,17 +72,25 @@ body {
 
   .itemLeft {
     animation-name: scrollLeft;
-    left: max(calc(250px * 13), 100%); /*when adding or removing logos => adjust this by increasing or decreasing the number (13) */
+    left: max(
+      calc(250px * 13),
+      100%
+    ); /*when adding or removing logos => adjust this by increasing or decreasing the number (13) */
   }
 
   .itemRight {
     animation-name: scrollRight;
-    right: max(calc(250px * 13), 100%); /*when adding or removing logos => adjust this by increasing or decreasing the number (13) */
+    right: max(
+      calc(250px * 13),
+      100%
+    ); /*when adding or removing logos => adjust this by increasing or decreasing the number (13) */
   }
 
   .card-inner {
     @apply bg-white rounded-xl shadow-md w-full h-full flex items-center justify-center m-3;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .card-inner:hover {
@@ -195,6 +203,13 @@ body {
   transform: translateX(0);
 }
 
+@media (max-width: 768px) {
+  .absolute.left-12 {
+    left: -12rem;
+    right: auto;
+  }
+}
+
 /* Animation Keyframes */
 @keyframes scrollLeft {
   to {
@@ -206,3 +221,4 @@ body {
     right: -200px;
   }
 }
+

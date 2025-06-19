@@ -10,6 +10,7 @@ import Packages from "@/components/Packages";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Hero from "@/components/Hero";
 import Partners from "@/components/Partners";
+import ContactButtons from "@/components/ContactButtons";
 
 export default function LandingPage() {
   return (
@@ -27,6 +28,8 @@ export default function LandingPage() {
       <Partners />
       <ContactUs />
       <Footer />
+
+       <ContactButtons />
     </div>
   );
 }

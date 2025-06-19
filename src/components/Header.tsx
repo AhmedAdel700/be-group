@@ -28,6 +28,7 @@ export default function Header() {
   useEffect(() => {
     const sections = [
       "hero",
+      "units",
       "about",
       "standards",
       "why-us",
@@ -82,6 +83,7 @@ export default function Header() {
     }
   };
 
+
   const navItems = [
     { id: "units", label: "وحدات النظام" },
     { id: "about", label: "عن جازتك" },
@@ -98,7 +100,12 @@ export default function Header() {
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between">
           <div
-            onClick={() => scrollToSection("hero")}
+            onClick={() => {
+              setIsAutoScrolling(true);
+              setActiveSection("");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setTimeout(() => setIsAutoScrolling(false), 800);
+            }}
             className="cursor-pointer"
           >
             <Image
