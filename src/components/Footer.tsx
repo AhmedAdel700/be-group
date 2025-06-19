@@ -211,6 +211,7 @@ export default function Footer() {
             &copy; 2024
           </p>
         </div>
+
       </div>
     </footer>
   );
