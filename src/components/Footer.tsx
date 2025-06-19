@@ -198,16 +198,17 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>
-            Powered By
+          <p className="text-sm text-center text-muted-foreground">
+            جميع الحقوق محفوظة جازتك, برعاية{" "}
             <Link
               target="_blank"
-              href={"https://betech.com.sa"}
-              className="mx-1"
+              href="https://betech.com.sa"
+              className="mx-1 text-slate-100 hover:text-white"
+              rel="noopener noreferrer"
             >
-              <span className="text-slate-100">BeTech</span>
+              BeTech
             </Link>
-            &copy; 2025
+            &copy; 2024
           </p>
         </div>
       </div>
