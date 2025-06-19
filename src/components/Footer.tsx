@@ -89,11 +89,11 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
-                <Mail className="w-5 h-5 shrink-0" />
-                <div className="flex flex-col sm:flex-row gap-2">
+                <Mail className="w-5 h-5 shrink-0 self-start mt-1.5" />
+                <div className="flex flex-col gap-2">
                   <span>support@gastech.com.sa</span>
-                  <span className="hidden sm:block font-semibold">-</span>
                   <span>m.badr@betech.com.sa</span>
+                  <span>ahmed.mousa@betech.com.sa</span>
                 </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
