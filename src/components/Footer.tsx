@@ -81,16 +81,20 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4">تواصل معنا</h4>
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3 space-x-reverse">
-                <Phone className="w-5 h-5" />
+                <Phone className="w-5 h-5 shrink-0" />
                 <div className="flex gap-2" dir="rtl">
                   <span dir="ltr">966 566 765 222</span>
-                  <span>-</span>
+                  <span className="font-semibold">-</span>
                   <span dir="ltr">966 569 765 744</span>
                 </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
-                <Mail className="w-5 h-5" />
-                <span>support@gastech.com.sa</span>
+                <Mail className="w-5 h-5 shrink-0" />
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <span>support@gastech.com.sa</span>
+                  <span className="hidden sm:block font-semibold">-</span>
+                  <span>m.badr@betech.com.sa</span>
+                </div>
               </div>
               <div className="flex items-center space-x-3 space-x-reverse">
                 <MapPin className="w-5 h-5 shrink-0" />
