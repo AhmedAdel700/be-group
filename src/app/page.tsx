@@ -29,7 +29,7 @@ export default function LandingPage() {
       <ContactUs />
       <Footer />
 
-       <ContactButtons />
+      {/* <ContactButtons /> */}
     </div>
   );
 }
