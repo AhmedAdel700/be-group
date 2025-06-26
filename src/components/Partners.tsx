@@ -42,7 +42,9 @@ export default function ScrollingItems() {
           ))}
         </div>
 
-        <div className="wrapper reduced-mask mt-4">
+        {/* un comment this to have the second row */}
+
+        {/* <div className="wrapper reduced-mask mt-4">
           {items.map((item, i) => (
             <div
               key={`right-${i}`}
@@ -60,7 +62,7 @@ export default function ScrollingItems() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );
