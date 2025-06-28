@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Download, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function HeroWithFloatingImage() {
+  const t = useTranslations("hero");
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
 
@@ -30,7 +32,7 @@ export default function HeroWithFloatingImage() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      setDownloadError("حدث خطأ أثناء تحميل الملف. يرجى المحاولة مرة أخرى.");
+      setDownloadError(t("download.error"));
       console.error("Download error:", error);
     } finally {
       setTimeout(() => {
@@ -194,26 +196,25 @@ export default function HeroWithFloatingImage() {
           {/* Text content right */}
           <div className="text-white py-6 xl:py-0">
             <div className="flex flex-col gap-6">
-              <h1 className="text-4xl md:text-5xl font-bold">نظام جازتك</h1>
+              <h1 className="text-4xl md:text-5xl font-bold">{t("title")}</h1>
               <h2 className="text-yellow-300 text-4xl md:text-5xl font-bold">
-                لإدارة وأتمتة إجراءات محطات الوقود
+                {t("subtitle")}
               </h2>
               <p className="text-lg md:text-xl mb-8 opacity-90">
-                نظام مدعوم بالذكاء الاصطناعي وانترنت الأشياء يحقق التحول الرقمي
-                والأتمتة الشاملة لجميع الإجراءات
+                {t("description")}
               </p>
             </div>
 
             <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-500 mb-8">
               <h3 className="text-2xl font-bold mb-6">
-                مميزات النظام الرئيسية
+                {t("features.title")}
               </h3>
               <div className="space-y-4">
                 {[
-                  "تحكم كامل في إدارة المحطات عن بعد",
-                  "مترابط مع مضخات وخزانات المحطات بشكل مباشر",
-                  "متوافق مع معايير واشتراطات وزارة الطاقة",
-                  "ممتثل لاشتراطات هيئة الزكاة والضريبة والجمارك",
+                  t("features.remoteControl"),
+                  t("features.integration"),
+                  t("features.energyStandards"),
+                  t("features.taxCompliance"),
                 ].map((feature, index) => (
                   <div
                     key={index}
@@ -232,7 +233,7 @@ export default function HeroWithFloatingImage() {
                 className="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-xs sm:text-base"
                 onClick={() => scrollToSection("contact")}
               >
-                اطلب استشارتك المجانية
+                {t("cta.requestConsultation")}
               </Button>
               <Button
                 size="lg"
@@ -245,7 +246,7 @@ export default function HeroWithFloatingImage() {
                 ) : (
                   <Download className="w-4 h-4" />
                 )}
-                {isDownloading ? "جاري التحميل..." : "تحميل ملف الشركة"}
+                {isDownloading ? t("download.loading") : t("download.button")}
               </Button>
               {downloadError && (
                 <p className="text-red-500 text-sm mt-2">{downloadError}</p>
@@ -267,7 +268,7 @@ export default function HeroWithFloatingImage() {
               >
                 <Image
                   src="/hero1.png"
-                  alt="نظام جازتك"
+                  alt={t("image.alt")}
                   width={900}
                   height={900}
                   className="w-full h-auto object-contain drop-shadow-2xl"

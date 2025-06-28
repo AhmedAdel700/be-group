@@ -4,20 +4,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Shield, CheckCircle, ChevronLeft, ChevronsDown, ChevronsUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function MinistryStandards() {
+  const t = useTranslations("ministryStandards");
   const [showAll, setShowAll] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
   const standards = [
-    "إعـداد نظـام للربط الإلكتروني المركزي مســــــؤول عن أخـذ قراءات المضــــــخــات، ومعرفــة الكميات المباعة من الوقود من كل مضـــــخة، والتحكم للتغيير اللحظي وعن بُعد لأســـــعار منتجات الطاقة في المضـــــخات والشـــــاشـــــات الخارجية الخاصـــــة بعرض أســـــعار منتجات الطاقة في محطات الوقود التابعة للمنشأة (Forecourt Controller).",
-    "الالتزام بــالربط المركزي الموحــد لجميع الأنظمــة التي تتطلــب الجهــات المعنيــة ربطهــا، كتعديل الأسعار على المضخات وشاشة الأسعار في لحظتها عن بعد، وغيره من الأنظمة.",
-    "إعـــداد نظـــام آلي لمراقبـــة الوقود في الخزانـــات عن طريق اســــــتخـــدام مقيـــاس الخزان الأوتوماتيكي (ATG) يسمح برصد المخزون في الوقت الفعلي عن بعد.",
-    "إعداد نظام إدارة النقل (System Management Transportation) يدير طلبات الوقود من وقت الطلب إلى تفريغ المنتج في خزانات المحطة.",
-    "توفير نظام تخطيط موارد المؤســـــســـــة (ERP) للموارد البشـــــرية ومبيعات التجزئة، يغطي ت ً جميع الأنظمة تلقائيا بالنظام بما في ُ أعمال الوقود وغير الوقود بصــورة عامة، حيث ربط ذلك نقاط البيع، وأنظمة الدفع المختلفة، والنقد، ونظام الدفع الإلكتروني، والمضـــــخات، والنظام الآلي لأخذ قراءات الخزانات، وغيرها.",
-    "أن تكون جميع الاتصــالات بين أنظمة التشــغيل الآلي والبرامج والأجهزة الأخرى قائمة على السحابة.(cloud based)",
-    "تطبيقات للجوال (أبل وأندوريد) تتضمن معلومات حول المنشأة مثل المنتجات المعروضة وأسعارها ومواقع المحطات وساعات العمل والعروض وشكاوى العملاء.",
+    t("standards.electronicIntegration"),
+    t("standards.centralLinking"),
+    t("standards.fuelMonitoring"),
+    t("standards.transportManagement"),
+    t("standards.erpSystem"),
+    t("standards.cloudBased"),
+    t("standards.mobileApps"),
   ];
 
   const firstTwo = standards.slice(0, 2);
@@ -33,13 +35,13 @@ export default function MinistryStandards() {
     <div className="container mx-auto px-4 max-w-7xl">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-          معايير واشتراطات وزارة الطاقة
+          {t("title")}
         </h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          لتأهيل محطات الوقود وضمان الجودة والكفاءة التشغيلية
+          {t("subtitle")}
         </p>
         <Badge className="mt-4 bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-1 text-sm">
-          وزارة الطاقة
+          {t("badge")}
         </Badge>
       </div>
 
@@ -51,15 +53,14 @@ export default function MinistryStandards() {
                 <Shield className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900">
-                نظام جازتك GasTech
+                {t("systemTitle")}
               </h3>
             </div>
 
             <p className="text-lg text-gray-700 mb-8 leading-relaxed font-medium">
-              يمتاز نظام جازتك{" "}
-              <span className="font-semibold text-blue-700">GasTech</span>{" "}
-              بامتثاله للمعايير التالية، والتي تشترط وزارة الطاقة توفرها حتى
-              تكون المنشأة مؤهلة لإدارة محطات الوقود:
+              {t("description.prefix")}{" "}
+              <span className="font-semibold text-blue-700">{t("description.brand")}</span>{" "}
+              {t("description.content")}
             </p>
 
             <div className="space-y-6 text-gray-700 my-4">
@@ -97,7 +98,7 @@ export default function MinistryStandards() {
                 className="flex items-center justify-center mx-auto text-base font-semibold"
                 style={{ color: "#2A4D8A" }}
               >
-                {showAll ? "إخفاء التفاصيل" : "عرض المزيد"}
+                {showAll ? t("toggle.hide") : t("toggle.show")}
                 {showAll ? (
                   <ChevronsUp
                     className="w-5 h-5 mr-2 rtl:ml-2"
@@ -122,12 +123,11 @@ export default function MinistryStandards() {
                     <Shield className="w-6 h-6 text-blue-600" />
                   </div>
                   <h3 className="font-bold text-lg text-blue-900">
-                    الامتثال الكامل
+                    {t("cards.compliance.title")}
                   </h3>
                 </div>
                 <p className="text-blue-800 relative z-10">
-                  نظام جازتك متوافق بالكامل مع جميع معايير واشتراطات وزارة
-                  الطاقة لتأهيل محطات الوقود
+                  {t("cards.compliance.description")}
                 </p>
               </CardContent>
             </Card>
@@ -140,12 +140,11 @@ export default function MinistryStandards() {
                     <CheckCircle className="w-6 h-6 text-emerald-600" />
                   </div>
                   <h3 className="font-bold text-lg text-emerald-900">
-                    تحديثات مستمرة
+                    {t("cards.updates.title")}
                   </h3>
                 </div>
                 <p className="text-emerald-800 relative z-10">
-                  نظامنا مصمم ليكون مهيأ لأية تطويرات إضافية ومواكباً كذلك لأحدث
-                  التقنيات
+                  {t("cards.updates.description")}
                 </p>
               </CardContent>
             </Card>
@@ -160,25 +159,25 @@ export default function MinistryStandards() {
 
             <div className="relative z-10">
               <h3 className="text-2xl font-bold mb-8 text-center">
-                المعايير والاشتراطات المدعومة
+                {t("supportedStandards.title")}
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-8">
                 {[
-                  "الربط المركزي الإلكتروني",
-                  "قراءات المضخات",
-                  "تغيير أسعار الوقود",
-                  "مراقبة الخزانات",
-                  "إدارة النقليات",
-                  "مبيعات التجزئة",
-                  "إدارة المدفوعات",
-                  "إدارة الصيانة والأعطال",
-                  "برامج ولاء العملاء",
-                  "تطبيقات الجوال",
-                  "الخدمة الذاتية",
-                  "الفواتير الإلكترونية",
-                  "إدارة الموارد البشرية",
-                  "أنظمة تخطيط الموارد",
+                  t("supportedStandards.items.electronicIntegration"),
+                  t("supportedStandards.items.pumpReadings"),
+                  t("supportedStandards.items.fuelPriceChange"),
+                  t("supportedStandards.items.tankMonitoring"),
+                  t("supportedStandards.items.transportManagement"),
+                  t("supportedStandards.items.retailSales"),
+                  t("supportedStandards.items.paymentManagement"),
+                  t("supportedStandards.items.maintenanceManagement"),
+                  t("supportedStandards.items.customerLoyalty"),
+                  t("supportedStandards.items.mobileApps"),
+                  t("supportedStandards.items.selfService"),
+                  t("supportedStandards.items.electronicInvoicing"),
+                  t("supportedStandards.items.hrManagement"),
+                  t("supportedStandards.items.resourcePlanning"),
                 ].map((standard, index) => (
                   <div
                     key={index}
@@ -192,7 +191,7 @@ export default function MinistryStandards() {
 
               <div className="mt-8 text-center">
                 <Badge className="bg-white/20 text-white hover:bg-white/30 px-4 py-1.5">
-                  متوافق 100% مع معايير وزارة الطاقة
+                  {t("supportedStandards.badge")}
                 </Badge>
               </div>
             </div>

@@ -10,8 +10,10 @@ import {
   ChevronsDown,
   ChevronsUp,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function About() {
+  const t = useTranslations("about");
   const [showMore, setShowMore] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -27,23 +29,14 @@ export default function About() {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">عن جازتك</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">{t("title")}</h2>
 
             {/* Always visible paragraphs */}
             <p className="text-lg text-gray-700 mb-6 leading-relaxed transition-all duration-500">
-              <span className="font-semibold">(جازتك GasTech)</span> هو حل تقني
-              شامل ومتكامل يساهم في أتمتة الاجراءات والعمليات داخل محطات الوقود
-              من طلبيات شراء واستلام الوقود، مروراً بتزويد الخزانات بالوقود ثم
-              بيعه من خلال المضخات وإصدار الفواتير وإغلاق الورديات في وقت وجيز،
-              ومن ثم تقليل نسب الأخطاء البشرية و خفض التكاليف وتحقيق الرقابة
-              الداخلية.
+              <span className="font-semibold">{t("paragraph1.brand")}</span> {t("paragraph1.content")}
             </p>
             <p className="text-lg text-gray-700 mb-6 leading-relaxed transition-all duration-500">
-              يوفر <span className="font-semibold">(جازتك GasTech)</span> حلولاً
-              تحقق الترابط الكامل والمباشر بين أجهزة المحطات والأنظمة والتطبيقات
-              والمركز الرئيسي، مما يسهم ذلك وبشكل لحظي في قراءة معلومات المضخات
-              ومراقبة خزانات الوقود وتغيير الأسعار، وكذلك إدارة المحطات والتحكم
-              الكامل عن بعد.
+              {t("paragraph2.prefix")} <span className="font-semibold">{t("paragraph2.brand")}</span> {t("paragraph2.content")}
             </p>
 
             {/* Transitioned wrapper */}
@@ -53,16 +46,10 @@ export default function About() {
             >
               <div ref={contentRef} className="space-y-6">
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  صمم <span className="font-semibold">(جازتك GasTech)</span>{" "}
-                  موافقاً لمعايير واشتراطات وزارة الطاقة ومهيأ لأية تطويرات إضافية
-                  ومواكباً كذلك لأحدث التقنيات، مما أسهم ذلك في الاعتماد عليه من
-                  قبل العديد من منشآت محطات الوقود وذلك في إدارة عملياتهم
-                  واجراءاتهم اليومية.
+                  {t("paragraph3.prefix")} <span className="font-semibold">{t("paragraph3.brand")}</span> {t("paragraph3.content")}
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  <span className="font-semibold">(جازتك GasTech)</span> هو أحد
-                  منتجات شركة بي تك الرائدة والمتخصصة في حلول التحول الرقمي وتقديم
-                  خدمات تكنولوجيا المعلومات ذات الصلة.
+                  <span className="font-semibold">{t("paragraph4.brand")}</span> {t("paragraph4.content")}
                 </p>
               </div>
             </div>
@@ -73,7 +60,7 @@ export default function About() {
               className={`flex items-center text-base font-semibold ${showMore && "mt-4"}`}
               style={{ color: "#2A4D8A" }}
             >
-              {showMore ? "إخفاء التفاصيل" : "عرض المزيد"}
+              {showMore ? t("toggle.hide") : t("toggle.show")}
               {showMore ? (
                 <ChevronsUp
                   className="w-5 h-5 mr-2 rtl:ml-2"
@@ -89,10 +76,10 @@ export default function About() {
 
             <div className="mt-6 flex items-center space-x-4 space-x-reverse">
               <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200">
-                متوافق مع معايير وزارة الطاقة
+                {t("badges.energyStandards")}
               </Badge>
               <Badge className="bg-green-100 text-green-800 hover:bg-green-200">
-                مدعوم بالذكاء الاصطناعي
+                {t("badges.aiSupported")}
               </Badge>
             </div>
           </div>
@@ -102,16 +89,16 @@ export default function About() {
             <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Zap, title: "أتمتة شاملة", color: "text-blue-600" },
-                  { icon: Wifi, title: "ترابط مباشر", color: "text-green-600" },
+                  { icon: Zap, title: t("features.comprehensiveAutomation"), color: "text-blue-600" },
+                  { icon: Wifi, title: t("features.directIntegration"), color: "text-green-600" },
                   {
                     icon: Shield,
-                    title: "أمان عالي",
+                    title: t("features.highSecurity"),
                     color: "text-purple-600",
                   },
                   {
                     icon: Clock,
-                    title: "توفير الوقت",
+                    title: t("features.timeSaving"),
                     color: "text-orange-600",
                   },
                 ].map(({ icon: Icon, title, color }, idx) => (

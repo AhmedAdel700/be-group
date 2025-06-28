@@ -31,28 +31,31 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-
-const mergedSchema = z.object({
-  name: z.string().min(2, "الاسم مطلوب"),
-  phone: z.string().min(10, "رقم الجوال يجب أن يكون 10 أرقام على الأقل"),
-  email: z.string().email("البريد الإلكتروني غير صحيح"),
-  position: z.string().optional(),
-  companyName: z.string().optional(),
-  stationsCount: z.string().optional(),
-  pumpsPerStation: z.string().optional(),
-  nozzlesPerPump: z.string().optional(),
-  tanksCount: z.string().optional(),
-  wantDemo: z.string().optional(),
-  message: z.string().optional(),
-});
-
-type MergedFormValues = z.infer<typeof mergedSchema>;
-
-interface ConsultationFormProps {
-  onSuccess?: () => void;
-}
+import { useTranslations } from "next-intl";
 
 export default function MergedConsultationForm({ onSuccess }: ConsultationFormProps) {
+  const t = useTranslations("consultationForm");
+  
+  const mergedSchema = z.object({
+    name: z.string().min(2, t("validation.nameRequired")),
+    phone: z.string().min(10, t("validation.phoneRequired")),
+    email: z.string().email(t("validation.emailInvalid")),
+    position: z.string().optional(),
+    companyName: z.string().optional(),
+    stationsCount: z.string().optional(),
+    pumpsPerStation: z.string().optional(),
+    nozzlesPerPump: z.string().optional(),
+    tanksCount: z.string().optional(),
+    wantDemo: z.string().optional(),
+    message: z.string().optional(),
+  });
+
+  type MergedFormValues = z.infer<typeof mergedSchema>;
+
+  interface ConsultationFormProps {
+    onSuccess?: () => void;
+  }
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -93,14 +96,14 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
         setTimeout(() => setIsSubmitted(false), 10000);
       } else {
         console.error(result.error);
-        toast.error("خطأ في الإرسال", {
-          description: "حدث خطأ أثناء إرسال النموذج. حاول مرة أخرى.",
+        toast.error(t("errors.submissionError.title"), {
+          description: t("errors.submissionError.description"),
         });
       }
     } catch (error) {
       console.error("Failed to send:", error);
-      toast.error("فشل في الإرسال", {
-        description: (error as Error).message || "تعذر إرسال الطلب. حاول مجددًا.",
+      toast.error(t("errors.sendFailed.title"), {
+        description: (error as Error).message || t("errors.sendFailed.description"),
       });
     } finally {
       setIsSubmitting(false);
@@ -113,10 +116,10 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
         <CardContent className="flex flex-col items-center justify-center h-full p-8 text-center">
           <div className="text-green-600 text-6xl mb-4">✓</div>
           <h3 className="text-2xl font-bold text-green-600 mb-2">
-            تم إرسال طلبك بنجاح!
+            {t("success.title")}
           </h3>
           <p className="text-gray-600">
-            سنتواصل معك خلال 24 ساعة لتحديد موعد الاستشارة المجانية
+            {t("success.description")}
           </p>
         </CardContent>
       </Card>
@@ -126,9 +129,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
-        <CardTitle>اطلب استشارتك المجانية</CardTitle>
+        <CardTitle>{t("title")}</CardTitle>
         <CardDescription>
-          املأ النموذج وسنتواصل معك خلال 24 ساعة
+          {t("description")}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col">
@@ -143,9 +146,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>الاسم *</FormLabel>
+                    <FormLabel>{t("fields.name.label")} *</FormLabel>
                     <FormControl>
-                      <Input placeholder="أدخل اسمك الكامل" {...field} />
+                      <Input placeholder={t("fields.name.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -156,9 +159,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>رقم الجوال *</FormLabel>
+                    <FormLabel>{t("fields.phone.label")} *</FormLabel>
                     <FormControl>
-                      <Input placeholder="05xxxxxxxx" type="tel" {...field} />
+                      <Input placeholder={t("fields.phone.placeholder")} type="tel" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,10 +172,10 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>البريد الإلكتروني *</FormLabel>
+                    <FormLabel>{t("fields.email.label")} *</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="example@domain.com"
+                        placeholder={t("fields.email.placeholder")}
                         type="email"
                         {...field}
                       />
@@ -186,9 +189,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="position"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>المنصب</FormLabel>
+                    <FormLabel>{t("fields.position.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="مدير، مالك، مشرف..." {...field} />
+                      <Input placeholder={t("fields.position.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -199,9 +202,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>اسم المنشأة</FormLabel>
+                    <FormLabel>{t("fields.companyName.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="اسم المنشأة" {...field} />
+                      <Input placeholder={t("fields.companyName.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -212,9 +215,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="stationsCount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>عدد المحطات</FormLabel>
+                    <FormLabel>{t("fields.stationsCount.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="عدد المحطات" {...field} />
+                      <Input placeholder={t("fields.stationsCount.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -225,9 +228,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="pumpsPerStation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>عدد الطرمبات</FormLabel>
+                    <FormLabel>{t("fields.pumpsPerStation.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="عدد الطرمبات" {...field} />
+                      <Input placeholder={t("fields.pumpsPerStation.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -238,9 +241,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="nozzlesPerPump"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>عدد اللي</FormLabel>
+                    <FormLabel>{t("fields.nozzlesPerPump.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="عدد اللي" {...field} />
+                      <Input placeholder={t("fields.nozzlesPerPump.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -251,9 +254,9 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="tanksCount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>عدد الخزانات</FormLabel>
+                    <FormLabel>{t("fields.tanksCount.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="عدد الخزانات" {...field} />
+                      <Input placeholder={t("fields.tanksCount.placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -264,20 +267,20 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="wantDemo"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>هل ترغب في حضور عرض توضيحي؟</FormLabel>
+                    <FormLabel>{t("fields.wantDemo.label")}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="اختر الخيار المناسب" />
+                          <SelectValue placeholder={t("fields.wantDemo.placeholder")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="yes">نعم</SelectItem>
-                        <SelectItem value="no">لا</SelectItem>
-                        <SelectItem value="maybe">ربما لاحقاً</SelectItem>
+                        <SelectItem value="yes">{t("fields.wantDemo.options.yes")}</SelectItem>
+                        <SelectItem value="no">{t("fields.wantDemo.options.no")}</SelectItem>
+                        <SelectItem value="maybe">{t("fields.wantDemo.options.maybe")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -289,11 +292,11 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
                 name="message"
                 render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel>اترك رسالتك</FormLabel>
+                    <FormLabel>{t("fields.message.label")}</FormLabel>
                     <FormControl>
                       <Textarea
                         className="min-h-[120px]"
-                        placeholder="رسالتك أو استفسارك..."
+                        placeholder={t("fields.message.placeholder")}
                         {...field}
                       />
                     </FormControl>
@@ -309,10 +312,10 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> جاري الإرسال...
+                  <Loader2 className="h-4 w-4 animate-spin" /> {t("submit.loading")}
                 </>
               ) : (
-                "اطلب استشارتك المجانية"
+                t("submit.button")
               )}
             </Button>
           </form>

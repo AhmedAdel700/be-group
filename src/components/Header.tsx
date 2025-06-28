@@ -3,14 +3,20 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, Globe } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname } from "@/navigations";
 
 export default function Header() {
+  const t = useTranslations("header");
   const [activeSection, setActiveSection] = useState("");
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const [open, setOpen] = useState(false);
   const partnersRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = useLocale();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -83,16 +89,20 @@ export default function Header() {
     }
   };
 
+  const handleLanguageSwitch = () => {
+    const newLocale = locale === 'ar' ? 'en' : 'ar';
+    router.replace(pathname, { locale: newLocale });
+  };
 
   const navItems = [
-    { id: "units", label: "وحدات النظام" },
-    { id: "about", label: "عن جازتك" },
-    { id: "standards", label: "معايير وزارة الطاقة" },
-    { id: "why-us", label: "لماذا جازتك" },
-    { id: "packages", label: "الباقات" },
-    { id: "why-company", label: "لماذا نحن" },
-    { id: "partners", label: "شركاء النجاح" },
-    { id: "footer", label: "تواصل معنا" },
+    { id: "units", label: t("nav.units") },
+    { id: "about", label: t("nav.about") },
+    { id: "standards", label: t("nav.standards") },
+    { id: "why-us", label: t("nav.whyUs") },
+    { id: "packages", label: t("nav.packages") },
+    { id: "why-company", label: t("nav.whyCompany") },
+    { id: "partners", label: t("nav.partners") },
+    { id: "footer", label: t("nav.contact") },
   ];
 
   return (
@@ -110,7 +120,7 @@ export default function Header() {
           >
             <Image
               src="/gastech-logo.svg"
-              alt="جازتك"
+              alt={t("logo.alt")}
               width={120}
               height={40}
               className="h-10 w-auto"
@@ -136,11 +146,23 @@ export default function Header() {
                 {label}
               </a>
             ))}
+            
+            {/* Language Switcher */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLanguageSwitch}
+              className="flex items-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200"
+            >
+              <Globe size={16} />
+              <span className="font-medium">{locale.toUpperCase()}</span>
+            </Button>
+            
             <Button
               className="bg-[#2A4D8A] hover:bg-blue-900 text-sm xl:text-base text-white px-6 py-2 rounded-md font-medium"
               onClick={() => scrollToSection("contact")}
             >
-              اطلب استشارتك المجانية
+              {t("cta.requestConsultation")}
             </Button>
           </nav>
 
@@ -170,11 +192,22 @@ export default function Header() {
                       {label}
                     </a>
                   ))}
+                  
+                  {/* Mobile Language Switcher */}
+                  <Button
+                    variant="outline"
+                    onClick={handleLanguageSwitch}
+                    className="flex items-center justify-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 h-12"
+                  >
+                    <Globe size={18} />
+                    <span className="font-medium">{locale.toUpperCase()}</span>
+                  </Button>
+                  
                   <Button
                     className="bg-[#2A4D8A] hover:bg-blue-900 text-sm xl:text-base text-white px-6 py-2 rounded-md font-medium"
                     onClick={() => scrollToSection("contact")}
                   >
-                    اطلب استشارتك المجانية
+                    {t("cta.requestConsultation")}
                   </Button>
                 </nav>
               </SheetContent>

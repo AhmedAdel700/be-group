@@ -12,83 +12,87 @@ import {
   Database,
   Monitor,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 function cn(...classes: (string | undefined | false | null)[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
-const features = [
-  {
-    icon: Fuel,
-    title: "إدارة المحطات",
-    desc: "إدارة شاملة لجميع عمليات المحطة",
-  },
-  {
-    icon: Settings,
-    title: "إدارة المضخات",
-    desc: "تحكم كامل في المضخات والشاشات",
-  },
-  {
-    icon: Database,
-    title: "إدارة الخزانات",
-    desc: "مراقبة مستويات الوقود لحظياً",
-  },
-  {
-    icon: Fuel,
-    title: "إدارة النقليات",
-    desc: "طلبات الوقود والنقل",
-  },
-  {
-    icon: TrendingUp,
-    title: "إدارة الأسعار",
-    desc: "تحديث أسعار الوقود لحظياً",
-  },
-  {
-    icon: Monitor,
-    title: "إدارة الشاشات",
-    desc: "اللوحات الإعلانية والشاشات الخارجية",
-  },
-  {
-    icon: Settings,
-    title: "إدارة الصيانة",
-    desc: "متابعة الأعطال والصيانة الدورية",
-  },
-  {
-    icon: Users,
-    title: "الموارد البشرية",
-    desc: "إدارة الموظفين والورديات",
-  },
-  {
-    icon: Smartphone,
-    title: "الخدمة الذاتية",
-    desc: "تطبيقات الجوال والخدمة الذاتية",
-  },
-  {
-    icon: Shield,
-    title: "الحسابات والمالية",
-    desc: "نظام محاسبي متكامل",
-  },
-  {
-    icon: Database,
-    title: "إدارة المخزون",
-    desc: "المشتريات وإدارة المخزون",
-  },
-  {
-    icon: BarChart3,
-    title: "إدارة المبيعات",
-    desc: "نقاط البيع وتقارير المبيعات",
-  },
-];
-
 export default function FeaturesGrid() {
+  const t = useTranslations("featuresGrid");
+  
+  const features = [
+    {
+      icon: Fuel,
+      title: t("features.stationManagement.title"),
+      desc: t("features.stationManagement.desc"),
+    },
+    {
+      icon: Settings,
+      title: t("features.pumpManagement.title"),
+      desc: t("features.pumpManagement.desc"),
+    },
+    {
+      icon: Database,
+      title: t("features.tankManagement.title"),
+      desc: t("features.tankManagement.desc"),
+    },
+    {
+      icon: Fuel,
+      title: t("features.transportManagement.title"),
+      desc: t("features.transportManagement.desc"),
+    },
+    {
+      icon: TrendingUp,
+      title: t("features.priceManagement.title"),
+      desc: t("features.priceManagement.desc"),
+    },
+    {
+      icon: Monitor,
+      title: t("features.displayManagement.title"),
+      desc: t("features.displayManagement.desc"),
+    },
+    {
+      icon: Settings,
+      title: t("features.maintenanceManagement.title"),
+      desc: t("features.maintenanceManagement.desc"),
+    },
+    {
+      icon: Users,
+      title: t("features.humanResources.title"),
+      desc: t("features.humanResources.desc"),
+    },
+    {
+      icon: Smartphone,
+      title: t("features.selfService.title"),
+      desc: t("features.selfService.desc"),
+    },
+    {
+      icon: Shield,
+      title: t("features.accounting.title"),
+      desc: t("features.accounting.desc"),
+    },
+    {
+      icon: Database,
+      title: t("features.inventoryManagement.title"),
+      desc: t("features.inventoryManagement.desc"),
+    },
+    {
+      icon: BarChart3,
+      title: t("features.salesManagement.title"),
+      desc: t("features.salesManagement.desc"),
+    },
+  ];
+
   return (
     <section className="py-16 bg-gray-50" id="units">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            وحدات النظام
+            {t("title")}
           </h2>
           <p className="text-xl text-gray-600">
-            نظام شامل ومتكامل لإدارة جميع جوانب محطة الوقود
+            {t("subtitle")}
           </p>
         </div>
 

@@ -4,62 +4,65 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Packages() {
+  const t = useTranslations("packages");
+  
   const packages = [
     {
-      name: "Gas-Tech Core",
+      name: t("core.name"),
       // stations: "3 محطات",
       // licenses: "6 رخص",
       // users: "5 مستخدم",
       features: [
-        "إدارة مبيعات المحطات",
-        "إدارة مخزون المحطات",
-        "إدارة خزانات المحطات",
-        "إدارة المضخات والشاشات الخارجية",
-        "إدارة المشتريات",
-        "إدارة أسعار منتجات الطاقة",
-        "إدارة الورديات",
-        "إدارة إيجارات المرافق والأقساط",
-        "تطبيق نقاط البيع لماكينات الدفع",
-        "التقارير",
+        t("core.features.stationSales"),
+        t("core.features.stationInventory"),
+        t("core.features.stationTanks"),
+        t("core.features.pumpsDisplays"),
+        t("core.features.purchases"),
+        t("core.features.energyPrices"),
+        t("core.features.shifts"),
+        t("core.features.facilityRentals"),
+        t("core.features.posApp"),
+        t("core.features.reports"),
       ],
       notIncluded: [
-        "نظام الحسابات العامة",
-        "نظام الموارد البشرية",
-        "نظام النقليات",
-        "نظام الصيانة",
+        t("core.notIncluded.generalAccounting"),
+        t("core.notIncluded.humanResources"),
+        t("core.notIncluded.transport"),
+        t("core.notIncluded.maintenance"),
       ],
     },
     {
-      name: "Gas-Tech Plus",
+      name: t("plus.name"),
       // stations: "5 محطات",
       // licenses: "10 رخص",
       // users: "15 مستخدم",
       popular: true,
       features: [
-        "جميع مميزات الباقة الأساسية",
-        "نظام الحسابات العامة",
-        "نظام الموارد البشرية",
-        "عقد الصيانة السنوية - أول سنة",
+        t("plus.features.allCoreFeatures"),
+        t("plus.features.generalAccounting"),
+        t("plus.features.humanResources"),
+        t("plus.features.maintenanceContract"),
       ],
       notIncluded: [
-        "نظام النقليات",
-        "نظام الصيانة",
-        "خدمات الترابط مع الطرف الثالث",
+        t("plus.notIncluded.transport"),
+        t("plus.notIncluded.maintenance"),
+        t("plus.notIncluded.thirdPartyIntegration"),
       ],
     },
     {
-      name: "Gas-Tech Extra",
+      name: t("extra.name"),
       // stations: "7 محطات",
       // licenses: "12 رخصة",
       // users: "50 مستخدم",
       features: [
-        "جميع مميزات الباقات السابقة",
-        "نظام النقليات",
-        "نظام الصيانة",
-        "خدمات الترابط مع الطرف الثالث",
-        "عقد الصيانة السنوية - أول سنة",
+        t("extra.features.allPreviousFeatures"),
+        t("extra.features.transport"),
+        t("extra.features.maintenance"),
+        t("extra.features.thirdPartyIntegration"),
+        t("extra.features.maintenanceContract"),
       ],
       notIncluded: [],
     },
@@ -80,9 +83,9 @@ export default function Packages() {
     <section id="packages" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">باقات جازتك</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h2>
           <p className="text-xl text-gray-600">
-            اختر الباقة المناسبة لاحتياجات محطتك
+            {t("subtitle")}
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -95,7 +98,7 @@ export default function Packages() {
             >
               {pkg.popular && (
                 <Badge className="absolute -top-3 right-4 bg-blue-600">
-                  الأكثر شعبية
+                  {t("popularBadge")}
                 </Badge>
               )}
               <CardHeader className="text-center">
@@ -143,7 +146,7 @@ export default function Packages() {
                   variant={pkg.popular ? "default" : "outline"}
                   onClick={scrollToContact}
                 >
-                  اطلب هذه الباقة
+                  {t("requestPackage")}
                 </Button>
               </CardContent>
             </Card>

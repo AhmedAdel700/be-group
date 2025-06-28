@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const partners = [
   { src: "/logo1.png", alt: "GasTech Partner 1" },
@@ -15,12 +16,14 @@ const partners = [
 const items = [...partners, ...partners];
 
 export default function ScrollingItems() {
+  const t = useTranslations("partners");
+  
   const getDelay = (i: number) =>
     `calc(30s / ${items.length} * (${items.length} - ${i}) * -1)`;
 
   return (
     <section className="flex flex-col gap-8 text-center pt-10" id="partners">
-      <h2 className="text-2xl md:text-4xl font-semibold">شركاء النجاح</h2>
+      <h2 className="text-2xl md:text-4xl font-semibold">{t("title")}</h2>
       <div className="bg-slate-100 py-10">
         <div className="wrapper reduced-mask">
           {items.map((item, i) => (

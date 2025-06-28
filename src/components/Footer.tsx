@@ -3,8 +3,11 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -27,27 +30,27 @@ export default function Footer() {
           <div>
             <Image
               src="/white-logo.svg"
-              alt="جازتك"
+              alt={t("logo.alt")}
               width={120}
               height={40}
               className="h-10 w-auto mb-4"
             />
             <p className="text-gray-400 mb-4">
-              نظام جازتك لإدارة وأتمتة إجراءات محطات الوقود وتخطيط موارد المنشأة
+              {t("description")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-lg mb-4">روابط سريعة</h4>
+            <h4 className="font-bold text-lg mb-4">{t("quickLinks.title")}</h4>
             <ul className="space-y-2 text-gray-400">
               {[
-                { id: "about", label: "عن جازتك" },
-                { id: "standards", label: "معايير وزارة الطاقة" },
-                { id: "why-us", label: "لماذا جازتك" },
-                { id: "why-company", label: "لماذا نحن" },
-                { id: "packages", label: "الباقات" },
-                { id: "partners", label: "شركاء النجاح" },
+                { id: "about", label: t("quickLinks.about") },
+                { id: "standards", label: t("quickLinks.standards") },
+                { id: "why-us", label: t("quickLinks.whyUs") },
+                { id: "why-company", label: t("quickLinks.whyCompany") },
+                { id: "packages", label: t("quickLinks.packages") },
+                { id: "partners", label: t("quickLinks.partners") },
               ].map(({ id, label }) => (
                 <li key={id}>
                   <a
@@ -67,19 +70,19 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-lg mb-4">الخدمات</h4>
+            <h4 className="font-bold text-lg mb-4">{t("services.title")}</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>توريد وربط الأجهزة</li>
-              <li>التدريب والدعم الفني</li>
-              <li>إنشاء الأنظمة</li>
-              <li>تطوير البرمجيات</li>
-              <li>استشارات تقنية</li>
+              <li>{t("services.deviceSupply")}</li>
+              <li>{t("services.training")}</li>
+              <li>{t("services.systemCreation")}</li>
+              <li>{t("services.softwareDevelopment")}</li>
+              <li>{t("services.technicalConsultation")}</li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-bold text-lg mb-4">تواصل معنا</h4>
+            <h4 className="font-bold text-lg mb-4">{t("contact.title")}</h4>
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3 space-x-reverse">
                 <Phone className="w-5 h-5 shrink-0" />
@@ -115,7 +118,7 @@ export default function Footer() {
               <div className="flex items-center space-x-3 space-x-reverse">
                 <MapPin className="w-5 h-5 shrink-0" />
                 <span className="text-sm leading-relaxed">
-                  الرياض - شارع وادي هجر – حي الملقا - 13524
+                  {t("contact.address")}
                 </span>
               </div>
             </div>
@@ -135,7 +138,7 @@ export default function Footer() {
                     width={20}
                     height={20}
                   />
-                  <h5 className="text-xs">تواصل عبر واتساب</h5>
+                  <h5 className="text-xs">{t("contact.whatsapp")}</h5>
                 </div>
               </a>
               {/* Social Media Icons */}
@@ -199,7 +202,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p className="text-sm text-center text-muted-foreground">
-            جميع الحقوق محفوظة جازتك, برعاية{" "}
+            {t("copyright.text")}{" "}
             <Link
               target="_blank"
               href="https://betech.com.sa"
