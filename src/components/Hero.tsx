@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Download, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function HeroWithFloatingImage() {
   const t = useTranslations("hero");
+  const locale = useLocale();
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
 
@@ -16,15 +17,15 @@ export default function HeroWithFloatingImage() {
     try {
       setIsDownloading(true);
       setDownloadError(null);
-      
+
       const response = await fetch("/Gas Tech Company Profile AR.pdf");
       if (!response.ok) {
         throw new Error("Failed to download the file");
       }
-      
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
       link.download = "Gas Tech Company Profile AR.pdf";
       document.body.appendChild(link);
@@ -44,7 +45,8 @@ export default function HeroWithFloatingImage() {
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
-      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 30;
+      const offsetTop =
+        section.getBoundingClientRect().top + window.scrollY - 30;
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth",
@@ -70,14 +72,12 @@ export default function HeroWithFloatingImage() {
         >
           <defs>
             <linearGradient id="grad1" x1="1" y1="0" x2="0" y2="0">
-              <stop offset="0%" stopColor="#38BDF8" stopOpacity="0" />{" "}
-              {/* sky-400 */}
+              <stop offset="0%" stopColor="#38BDF8" stopOpacity="0" />
               <stop offset="50%" stopColor="#EAB308" stopOpacity="0.5" />
               <stop offset="100%" stopColor="#EAB308" stopOpacity="0" />
             </linearGradient>
             <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-              <stop offset="0%" stopColor="#1E40AF" stopOpacity="0" />{" "}
-              {/* blue-800 */}
+              <stop offset="0%" stopColor="#1E40AF" stopOpacity="0" />
               <stop offset="50%" stopColor="#064E3B" stopOpacity="0.5" />
               <stop offset="100%" stopColor="#064E3B" stopOpacity="0" />
             </linearGradient>
@@ -89,7 +89,7 @@ export default function HeroWithFloatingImage() {
             transition={{
               duration: 2,
               ease: "easeInOut",
-              repeat: Number.POSITIVE_INFINITY,
+              repeat: Infinity,
               repeatType: "loop",
               repeatDelay: 1,
             }}
@@ -104,7 +104,7 @@ export default function HeroWithFloatingImage() {
             transition={{
               duration: 2,
               ease: "easeInOut",
-              repeat: Number.POSITIVE_INFINITY,
+              repeat: Infinity,
               repeatType: "loop",
               repeatDelay: 1,
               delay: 0.5,
@@ -121,7 +121,7 @@ export default function HeroWithFloatingImage() {
             transition={{
               duration: 2,
               ease: "easeInOut",
-              repeat: Number.POSITIVE_INFINITY,
+              repeat: Infinity,
               repeatType: "loop",
               repeatDelay: 1,
               delay: 1,
@@ -151,7 +151,7 @@ export default function HeroWithFloatingImage() {
               transition={{
                 duration: 2.5,
                 delay: i * 0.2,
-                repeat: Number.POSITIVE_INFINITY,
+                repeat: Infinity,
                 repeatType: "loop",
                 ease: "linear",
               }}
@@ -196,17 +196,45 @@ export default function HeroWithFloatingImage() {
           {/* Text content right */}
           <div className="text-white py-6 xl:py-0">
             <div className="flex flex-col gap-6">
-              <h1 className="text-4xl md:text-5xl font-bold">{t("title")}</h1>
-              <h2 className="text-yellow-300 text-4xl md:text-5xl font-bold">
+              <h1
+                className={`font-bold ${
+                  locale === "en"
+                    ? "text-4xl"
+                    : "text-5xl md:text-5xl"
+                }`}
+              >
+                {t("title")}
+              </h1>
+
+              <h2
+                className={`text-yellow-300 font-bold ${
+                  locale === "en"
+                    ? "text-4xl"
+                    : "text-4xl md:text-5xl"
+                }`}
+              >
                 {t("subtitle")}
               </h2>
-              <p className="text-lg md:text-xl mb-8 opacity-90">
+
+              <p
+                className={`opacity-90 mb-8 ${
+                  locale === "en"
+                    ? "text-base"
+                    : "text-lg md:text-xl"
+                }`}
+              >
                 {t("description")}
               </p>
             </div>
 
             <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-500 mb-8">
-              <h3 className="text-2xl font-bold mb-6">{t("features.title")}</h3>
+              <h3
+                className={`font-bold mb-6 ${
+                  locale === "en" ? "text-xl" : "text-2xl"
+                }`}
+              >
+                {t("features.title")}
+              </h3>
               <div className="space-y-4">
                 {[
                   t("features.remoteControl"),
@@ -222,23 +250,24 @@ export default function HeroWithFloatingImage() {
                       size={24}
                       className="text-yellow-300 w-6 h-6 flex-shrink-0"
                     />
-                    <span className="text-sm lg:text-base">{feature}</span>
+                    <span className={"text-sm lg:text-base"}>{feature}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 items-center justify-start">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center justify-start">
               <Button
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-sm"
+                className={`bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-sm`}
                 onClick={() => scrollToSection("contact")}
               >
                 {t("cta.requestConsultation")}
               </Button>
+
               <Button
                 size="lg"
-                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-semibold relative text-sm"
+                className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-semibold relative text-sm`}
                 onClick={handleDownload}
                 disabled={isDownloading}
               >
@@ -249,6 +278,7 @@ export default function HeroWithFloatingImage() {
                 )}
                 {isDownloading ? t("download.loading") : t("download.button")}
               </Button>
+
               {downloadError && (
                 <p className="text-red-500 text-sm mt-2">{downloadError}</p>
               )}
@@ -256,7 +286,7 @@ export default function HeroWithFloatingImage() {
           </div>
 
           {/* Floating image left */}
-          <div className="hidden lg:flex relative w-full lg:w-[70%] xl:w-[45%] xl:-ml-[135px]">
+          <div className="hidden lg:flex relative w-full lg:w-[70%] xl:w-[45%] xl:-me-[135px]">
             <div className="relative w-full">
               <motion.div
                 initial={{ y: 0 }}
@@ -272,7 +302,9 @@ export default function HeroWithFloatingImage() {
                   alt={t("image.alt")}
                   width={900}
                   height={900}
-                  className="w-full h-auto object-contain drop-shadow-2xl"
+                  className={`w-full h-auto object-contain drop-shadow-2xl ${
+                    locale === "en" ? "scale-x-[-1]" : ""
+                  }`}
                 />
               </motion.div>
             </div>
