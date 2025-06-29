@@ -168,7 +168,7 @@ export default function Header() {
               variant="outline"
               size="sm"
               onClick={handleLanguageSwitch}
-              className={`flex items-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 ${
+              className={`flex items-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 h-9 ${
                 locale === "en" ? "text-xs" : "text-sm"
               }`}
             >
