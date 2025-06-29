@@ -205,10 +205,8 @@ export default function HeroWithFloatingImage() {
               </p>
             </div>
 
-            <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-500 mb-8">
-              <h3 className="text-2xl font-bold mb-6">
-                {t("features.title")}
-              </h3>
+            <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-500 mb-8">
+              <h3 className="text-2xl font-bold mb-6">{t("features.title")}</h3>
               <div className="space-y-4">
                 {[
                   t("features.remoteControl"),
@@ -218,26 +216,29 @@ export default function HeroWithFloatingImage() {
                 ].map((feature, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-3 space-x-reverse"
+                    className="flex items-center gap-2 space-x-reverse"
                   >
-                    <CheckCircle className="text-yellow-300 w-6 h-6" />
-                    <span>{feature}</span>
+                    <CheckCircle
+                      size={24}
+                      className="text-yellow-300 w-6 h-6 flex-shrink-0"
+                    />
+                    <span className="text-sm lg:text-base">{feature}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:flex-row gap-2 sm:gap-4 items-center justify-start">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 items-center justify-start">
               <Button
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-xs sm:text-base"
+                className="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold text-sm"
                 onClick={() => scrollToSection("contact")}
               >
                 {t("cta.requestConsultation")}
               </Button>
               <Button
                 size="lg"
-                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-semibold relative text-xs sm:text-base"
+                className="bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-semibold relative text-sm"
                 onClick={handleDownload}
                 disabled={isDownloading}
               >

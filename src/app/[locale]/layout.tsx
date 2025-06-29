@@ -5,7 +5,7 @@ import { Almarai } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import "./globals.css";
+import "../globals.css";
 
 const almarai = Almarai({
   subsets: ["arabic"],

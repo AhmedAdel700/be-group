@@ -1,13 +1,21 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, CheckCircle, ChevronLeft, ChevronsDown, ChevronsUp } from "lucide-react";
+import {
+  Shield,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsDown,
+  ChevronsUp,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function MinistryStandards() {
   const t = useTranslations("ministryStandards");
+  const locale = useLocale();
   const [showAll, setShowAll] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -34,7 +42,7 @@ export default function MinistryStandards() {
   return (
     <div className="container mx-auto px-4 max-w-7xl">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight capitalize">
           {t("title")}
         </h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -67,7 +75,7 @@ export default function MinistryStandards() {
               {firstTwo.map((standard, index) => (
                 <div key={index} className="flex gap-4 items-start">
                   <div className="bg-blue-50 rounded-full p-1 mt-1 flex-shrink-0">
-                    <ChevronLeft className="w-4 h-4 text-blue-600" />
+                    {locale === "ar" ? <ChevronLeft className="w-4 h-4 text-blue-600" />: <ChevronRight className="w-4 h-4 text-blue-600"/>}
                   </div>
                   <p className="text-base leading-relaxed">{standard}</p>
                 </div>
@@ -82,7 +90,7 @@ export default function MinistryStandards() {
                   {rest.map((standard, index) => (
                     <div key={index + 2} className="flex gap-4 items-start">
                       <div className="bg-blue-50 rounded-full p-1 mt-1 flex-shrink-0">
-                        <ChevronLeft className="w-4 h-4 text-blue-600" />
+                        {locale === "ar" ? <ChevronLeft className="w-4 h-4 text-blue-600" />: <ChevronRight className="w-4 h-4 text-blue-600"/>}
                       </div>
                       <p className="text-base leading-relaxed">{standard}</p>
                     </div>
@@ -118,7 +126,7 @@ export default function MinistryStandards() {
             <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-none shadow-sm overflow-hidden">
               <CardContent className="p-6 relative">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-200 rounded-full opacity-20 -mr-8 -mt-8"></div>
-                <div className="flex items-center space-x-3 space-x-reverse mb-4">
+                <div className="flex items-center gap-4 mb-4">
                   <div className="bg-white p-2 rounded-lg shadow-sm">
                     <Shield className="w-6 h-6 text-blue-600" />
                   </div>
@@ -135,7 +143,7 @@ export default function MinistryStandards() {
             <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-none shadow-sm overflow-hidden">
               <CardContent className="p-6 relative">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-200 rounded-full opacity-20 -mr-8 -mt-8"></div>
-                <div className="flex items-center space-x-3 space-x-reverse mb-4">
+                <div className="flex items-center gap-4 mb-4">
                   <div className="bg-white p-2 rounded-lg shadow-sm">
                     <CheckCircle className="w-6 h-6 text-emerald-600" />
                   </div>
@@ -181,7 +189,7 @@ export default function MinistryStandards() {
                 ].map((standard, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-3 space-x-reverse bg-white/10 rounded-lg p-3 backdrop-blur-sm"
+                    className="flex items-center gap-2 sm:gap-4 bg-white/10 rounded-lg p-3 backdrop-blur-sm"
                   >
                     <CheckCircle className="w-5 h-5 text-blue-200 flex-shrink-0" />
                     <span className="text-white font-medium">{standard}</span>

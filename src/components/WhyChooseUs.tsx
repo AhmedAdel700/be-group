@@ -140,7 +140,7 @@ export default function WhyChooseUs() {
 
   return (
     <section id="why-us" className="py-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 flex flex-col gap-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h2>
           <p className="text-xl text-gray-600">
@@ -162,7 +162,7 @@ export default function WhyChooseUs() {
         >
           <div
             ref={contentRef}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {rest.map((item, index) => (
               <FeatureCard item={item} key={index + 6} />
@@ -171,7 +171,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Always stays last */}
-        <div className="text-center mt-8">
+        <div className="text-center">
           <button
             onClick={() => setShowAll(!showAll)}
             className="flex items-center justify-center mx-auto text-base font-semibold"
@@ -198,12 +198,12 @@ export default function WhyChooseUs() {
 
 function FeatureCard({ item }: { item: Feature }) {
   return (
-    <div className="p-6 border-b-2 border-gray-200 bg-gray-100 hover:bg-gray-200 transition-all duration-200 h-[135px] lg:h-[100px] hover:scale-[1.02]">
+    <div className="p-6 border-b-2 border-gray-200 bg-gray-100 hover:bg-gray-200 transition-all duration-200 min-h-[120px] hover:scale-[1.02]">
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0">
           <item.icon className="w-6 h-6 text-blue-600 mt-1" />
         </div>
-        <div className="text-right">
+        <div className="text-start">
           <h3 className="font-bold text-lg mb-1 text-gray-800">{item.title}</h3>
           <p className="text-gray-600 text-sm">{item.desc}</p>
         </div>

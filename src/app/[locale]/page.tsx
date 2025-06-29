@@ -19,7 +19,7 @@ export default function LandingPage() {
       <Hero />
       <FeaturesGrid />
       <About />
-      <section id="standards" className="py-16 bg-gray-50">
+      <section id="standards" className="py-10 bg-gray-50">
         <MinistryStandards />
       </section>
       <WhyChooseUs />

@@ -24,6 +24,7 @@ export default function Header() {
         partnersRef.current &&
         !partnersRef.current.contains(event.target as Node)
       ) {
+        // no-op
       }
     };
 
@@ -90,7 +91,7 @@ export default function Header() {
   };
 
   const handleLanguageSwitch = () => {
-    const newLocale = locale === 'ar' ? 'en' : 'ar';
+    const newLocale = locale === "ar" ? "en" : "ar";
     router.replace(pathname, { locale: newLocale });
   };
 
@@ -128,12 +129,16 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-3 xl:gap-8 justify-end flex-1 relative">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-6 justify-center flex-1 relative">
             {navItems.map(({ id, label }) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className={`font-semibold text-sm xl:text-base transition-colors duration-200 ${
+                className={`font-semibold ${
+                  locale === "en"
+                    ? "text-xs xl:text-base"
+                    : "text-sm xl:text-base"
+                } transition-colors duration-200 capitalize ${
                   activeSection === id
                     ? "text-[#2A4D8A]"
                     : "text-gray-700 hover:text-[#2A4D8A]"
@@ -146,25 +151,31 @@ export default function Header() {
                 {label}
               </a>
             ))}
-            
+          </nav>
+
+          <div className="hidden lg:flex items-center gap-8">
+            <Button
+              className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium ${
+                locale === "en" ? "text-xs xl:text-sm" : "text-sm xl:text-base"
+              }`}
+              onClick={() => scrollToSection("contact")}
+            >
+              {t("cta.requestConsultation")}
+            </Button>
+
             {/* Language Switcher */}
             <Button
               variant="outline"
               size="sm"
               onClick={handleLanguageSwitch}
-              className="flex items-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200"
+              className={`flex items-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 ${
+                locale === "en" ? "text-xs" : "text-sm"
+              }`}
             >
               <Globe size={16} />
               <span className="font-medium">{locale.toUpperCase()}</span>
             </Button>
-            
-            <Button
-              className="bg-[#2A4D8A] hover:bg-blue-900 text-sm xl:text-base text-white px-6 py-2 rounded-md font-medium"
-              onClick={() => scrollToSection("contact")}
-            >
-              {t("cta.requestConsultation")}
-            </Button>
-          </nav>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden">
@@ -178,7 +189,7 @@ export default function Header() {
                     <a
                       key={id}
                       href={`#${id}`}
-                      className={`h-12 flex items-center px-4 rounded-md font-medium text-lg transition-colors duration-200 ${
+                      className={`h-10 flex items-center px-4 rounded-md font-medium transition-colors duration-200 text-lg ${
                         activeSection === id
                           ? "text-[#2A4D8A] bg-blue-100 font-semibold"
                           : "text-gray-700 hover:text-[#2A4D8A] hover:bg-gray-100"
@@ -192,19 +203,23 @@ export default function Header() {
                       {label}
                     </a>
                   ))}
-                  
+
                   {/* Mobile Language Switcher */}
                   <Button
                     variant="outline"
                     onClick={handleLanguageSwitch}
-                    className="flex items-center justify-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 h-12"
+                    className={`flex items-center justify-center gap-2 h-9 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 text-base`}
                   >
                     <Globe size={18} />
                     <span className="font-medium">{locale.toUpperCase()}</span>
                   </Button>
-                  
+
                   <Button
-                    className="bg-[#2A4D8A] hover:bg-blue-900 text-sm xl:text-base text-white px-6 py-2 rounded-md font-medium"
+                    className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium ${
+                      locale === "en"
+                        ? "text-xs xl:text-sm"
+                        : "text-sm xl:text-base"
+                    }`}
                     onClick={() => scrollToSection("contact")}
                   >
                     {t("cta.requestConsultation")}

@@ -8,12 +8,12 @@
     },
     "nav": {
       "units": "System Units",
-      "about": "About GasTech",
-      "standards": "Ministry of Energy Standards",
-      "whyUs": "Why GasTech",
+      "about": "About",
+      "standards": "Ministry Standards",
+      "whyUs": "Why Us",
       "packages": "Packages",
       "whyCompany": "Why Choose Us",
-      "partners": "Success Partners",
+      "partners": "Our Partners",
       "contact": "Contact Us"
     },
     "cta": {
@@ -190,6 +190,7 @@
   },
   "consultationForm": {
     "title": "Request Free Consultation",
+    "subtitle": "Contact us to get a free consultation and a custom offer for your station",
     "description": "Fill out the form and we'll contact you within 24 hours",
     "validation": {
       "nameRequired": "Name is required",
@@ -435,9 +436,9 @@
     "description": "GasTech system for managing and automating fuel station procedures and enterprise resource planning",
     "quickLinks": {
       "title": "Quick Links",
-      "about": "About GasTech",
+      "about": "About",
       "standards": "Ministry of Energy Standards",
-      "whyUs": "Why GasTech",
+      "whyUs": "Why Us",
       "whyCompany": "Why Choose Us",
       "packages": "Packages",
       "partners": "Success Partners"

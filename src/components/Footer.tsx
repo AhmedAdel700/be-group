@@ -25,7 +25,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-12" id="footer">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo + Description */}
           <div>
             <Image
@@ -35,9 +35,7 @@ export default function Footer() {
               height={40}
               className="h-10 w-auto mb-4"
             />
-            <p className="text-gray-400 mb-4">
-              {t("description")}
-            </p>
+            <p className="text-gray-400 mb-4">{t("description")}</p>
           </div>
 
           {/* Quick Links */}
@@ -84,7 +82,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4">{t("contact.title")}</h4>
             <div className="space-y-3 text-gray-400">
-              <div className="flex items-center space-x-3 space-x-reverse">
+              <div className="flex items-center gap-2">
                 <Phone className="w-5 h-5 shrink-0" />
                 <div className="flex gap-2" dir="rtl">
                   <a
@@ -104,8 +102,8 @@ export default function Footer() {
                   </a>
                 </div>
               </div>
-              <div className="flex items-center space-x-3 space-x-reverse">
-                <Mail className="w-5 h-5 shrink-0 self-start" />
+              <div className="flex items-center gap-2">
+                <Mail className="w-5 h-5 shrink-0" />
                 <div className="flex flex-col gap-2">
                   <a
                     href="mailto:support@gastech.com.sa"
@@ -115,7 +113,7 @@ export default function Footer() {
                   </a>
                 </div>
               </div>
-              <div className="flex items-center space-x-3 space-x-reverse">
+              <div className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 shrink-0" />
                 <span className="text-sm leading-relaxed">
                   {t("contact.address")}
@@ -129,14 +127,14 @@ export default function Footer() {
                 href="https://wa.me/966566765222"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-4 bg-[#2A4D8A] hover:bg-blue-900 transition-all text-white px-4 py-2 rounded-md font-medium"
+                className="inline-block mt-4 bg-[#2A4D8A] hover:bg-blue-900 transition-all text-white px-3 py-2 rounded-md font-medium capitalize"
               >
                 <div className="flex items-center gap-2">
                   <Image
                     src="/whatsapp.svg"
                     alt="WhatsApp"
-                    width={20}
-                    height={20}
+                    width={18}
+                    height={18}
                   />
                   <h5 className="text-xs">{t("contact.whatsapp")}</h5>
                 </div>
@@ -191,8 +189,8 @@ export default function Footer() {
                   <Image
                     src="/instagram.svg"
                     alt="Instagram"
-                    width={21}
-                    height={21}
+                    width={22}
+                    height={22}
                   />
                 </a>
               </div>
@@ -214,7 +212,6 @@ export default function Footer() {
             &copy; 2024
           </p>
         </div>
-
       </div>
     </footer>
   );

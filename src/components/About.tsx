@@ -74,7 +74,7 @@ export default function About() {
               )}
             </button>
 
-            <div className="mt-6 flex items-center space-x-4 space-x-reverse">
+            <div className="mt-6 flex items-center gap-4 flex-wrap">
               <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200">
                 {t("badges.energyStandards")}
               </Badge>
@@ -107,7 +107,7 @@ export default function About() {
                     className="bg-white rounded-lg p-4 text-center shadow-sm"
                   >
                     <Icon className={`w-8 h-8 ${color} mx-auto mb-2`} />
-                    <h4 className="font-bold">{title}</h4>
+                    <h4 className="font-bold text-sm sm:text-base md:text-lg">{title}</h4>
                   </div>
                 ))}
               </div>

@@ -123,7 +123,7 @@ export default function Packages() {
                   {pkg.features.map((feature, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start space-x-2 space-x-reverse"
+                      className="flex items-start gap-2"
                     >
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{feature}</span>
@@ -132,7 +132,7 @@ export default function Packages() {
                   {pkg.notIncluded.map((feature, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start space-x-2 space-x-reverse opacity-50"
+                      className="flex items-start gap-2 opacity-50"
                     >
                       <div className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-400">
                         ✗
