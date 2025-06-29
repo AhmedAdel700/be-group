@@ -153,7 +153,7 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-4">
             <Button
               className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium ${
                 locale === "en" ? "text-xs xl:text-sm" : "text-sm xl:text-base"
