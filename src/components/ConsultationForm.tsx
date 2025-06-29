@@ -33,7 +33,7 @@ import {
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-export default function MergedConsultationForm({ onSuccess }: ConsultationFormProps) {
+export default function MergedConsultationForm({ onSuccess }: { onSuccess?: () => void }) {
   const t = useTranslations("consultationForm");
   
   const mergedSchema = z.object({
@@ -51,10 +51,6 @@ export default function MergedConsultationForm({ onSuccess }: ConsultationFormPr
   });
 
   type MergedFormValues = z.infer<typeof mergedSchema>;
-
-  interface ConsultationFormProps {
-    onSuccess?: () => void;
-  }
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);

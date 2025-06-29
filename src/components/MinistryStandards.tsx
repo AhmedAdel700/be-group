@@ -161,7 +161,7 @@ export default function MinistryStandards() {
 
         <div>
           <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 shadow-lg text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=800')] opacity-5 bg-repeat"></div>
+            {/* <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=800')] opacity-5 bg-repeat"></div> */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-blue-400 rounded-full opacity-20 -ml-32 -mt-32"></div>
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-indigo-400 rounded-full opacity-20 -mr-32 -mb-32"></div>
 
