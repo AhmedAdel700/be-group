@@ -203,6 +203,36 @@ body {
   transform: translateX(0);
 }
 
+header nav.desktop {
+  font-size: 1rem;
+}
+
+@media (max-width: 1542px) {
+  header nav.desktop {
+    font-size: 0.85rem;
+  }
+
+  .desktop-en {
+    font-size: 0.8rem !important;
+  }
+
+  header button.desktop {
+    font-size: 0.8rem;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .desktop-en {
+    font-size: 0.75rem !important;
+  }
+
+  header button.desktop {
+    font-size: 0.75rem;
+    padding: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .absolute.left-12 {
     left: -12rem;
@@ -221,4 +251,3 @@ body {
     right: -200px;
   }
 }
-

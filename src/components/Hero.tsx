@@ -197,20 +197,14 @@ export default function HeroWithFloatingImage() {
           <div className="text-white py-6 xl:py-0">
             <div className="flex flex-col gap-6">
               <h1
-                className={`font-bold ${
-                  locale === "en"
-                    ? "text-4xl"
-                    : "text-5xl md:text-5xl"
-                }`}
+                className={`font-bold text-5xl`}
               >
                 {t("title")}
               </h1>
 
               <h2
                 className={`text-yellow-300 font-bold ${
-                  locale === "en"
-                    ? "text-4xl"
-                    : "text-4xl md:text-5xl"
+                  locale === "en" ? "text-4xl" : "text-4xl md:text-5xl"
                 }`}
               >
                 {t("subtitle")}
@@ -218,9 +212,7 @@ export default function HeroWithFloatingImage() {
 
               <p
                 className={`opacity-90 mb-8 ${
-                  locale === "en"
-                    ? "text-base"
-                    : "text-lg md:text-xl"
+                  locale === "en" ? "text-base" : "text-lg md:text-xl"
                 }`}
               >
                 {t("description")}
@@ -286,7 +278,9 @@ export default function HeroWithFloatingImage() {
           </div>
 
           {/* Floating image left */}
-          <div className="hidden lg:flex relative w-full lg:w-[70%] xl:w-[45%] xl:-me-[135px]">
+          <div
+            className={`hidden lg:flex relative w-full lg:w-[70%] xl:w-[45%] xl:-me-[165px]`}
+          >
             <div className="relative w-full">
               <motion.div
                 initial={{ y: 0 }}
@@ -297,15 +291,23 @@ export default function HeroWithFloatingImage() {
                   ease: "easeInOut",
                 }}
               >
-                <Image
-                  src="/hero1.png"
-                  alt={t("image.alt")}
-                  width={900}
-                  height={900}
-                  className={`w-full h-auto object-contain drop-shadow-2xl ${
-                    locale === "en" ? "scale-x-[-1]" : ""
-                  }`}
-                />
+                {locale === "en" ? (
+                  <Image
+                    src="/hero2.png"
+                    alt={t("image.alt")}
+                    width={800}
+                    height={800}
+                    className={`w-[85%] h-auto object-contain drop-shadow-2xl mt-8`}
+                  />
+                ) : (
+                  <Image
+                    src="/hero1.webp"
+                    alt={t("image.alt")}
+                    width={800}
+                    height={800}
+                    className={`w-[85%] h-auto object-contain drop-shadow-2xl mt-8`}
+                  />
+                )}
               </motion.div>
             </div>
           </div>

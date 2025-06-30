@@ -14,14 +14,25 @@ const almarai = Almarai({
   preload: true,
 });
 
-export const metadata: Metadata = {
-  title: "جازتك - نظام إدارة محطات الوقود",
-  description:
-    "نظام جازتك لإدارة وأتمتة إجراءات محطات الوقود وتخطيط موارد المنشأة",
-  icons: {
-    icon: "/gastech-logo.svg",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const isArabic = params.locale === "ar";
+
+  return {
+    title: isArabic
+      ? "جازتك - نظام إدارة محطات الوقود"
+      : "GasTech - Fuel Station Management System",
+    description: isArabic
+      ? "نظام جازتك لإدارة وأتمتة إجراءات محطات الوقود وتخطيط موارد المنشأة"
+      : "GasTech system for managing and automating fuel station operations and ERP.",
+    icons: {
+      icon: "/gastech-logo.svg",
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,

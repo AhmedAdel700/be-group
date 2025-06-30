@@ -129,16 +129,12 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-3 xl:gap-6 justify-center flex-1 relative">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-10 justify-center flex-1 relative desktop">
             {navItems.map(({ id, label }) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className={`font-semibold ${
-                  locale === "en"
-                    ? "text-xs xl:text-base"
-                    : "text-sm xl:text-base"
-                } transition-colors duration-200 capitalize ${
+                className={`font-semibold transition-colors duration-200 capitalize ${locale === "en" && "desktop-en"} ${
                   activeSection === id
                     ? "text-[#2A4D8A]"
                     : "text-gray-700 hover:text-[#2A4D8A]"
@@ -153,9 +149,9 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             <Button
-              className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium ${
+              className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium desktop ${
                 locale === "en" ? "text-xs xl:text-sm" : "text-sm xl:text-base"
               }`}
               onClick={() => scrollToSection("contact")}
@@ -172,8 +168,10 @@ export default function Header() {
                 locale === "en" ? "text-xs" : "text-sm"
               }`}
             >
+              <span className="font-medium">
+                {locale === "en" ? "AR" : "EN"}
+              </span>
               <Globe size={16} />
-              <span className="font-medium">{locale.toUpperCase()}</span>
             </Button>
           </div>
 
