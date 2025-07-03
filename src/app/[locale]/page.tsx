@@ -10,6 +10,7 @@ import Packages from "@/components/Packages";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Hero from "@/components/Hero";
 import Partners from "@/components/Partners";
+import WhatsAppIconWithTooltip from "@/components/WhatsAppIconWithTooltip";
 // import ContactButtons from "@/components/ContactButtons";
 
 export default function LandingPage() {
@@ -28,7 +29,7 @@ export default function LandingPage() {
       <Partners />
       <ContactUs />
       <Footer />
-
+      <WhatsAppIconWithTooltip />
       {/* <ContactButtons /> */}
     </div>
   );
