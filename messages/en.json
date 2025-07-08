@@ -17,7 +17,7 @@
       "contact": "Contact Us"
     },
     "cta": {
-      "requestConsultation": "Request Free Consultation"
+      "requestConsultation": "Request A Quote"
     }
   },
   "hero": {
@@ -32,7 +32,7 @@
       "taxCompliance": "Compliant with Zakat, Tax and Customs Authority requirements"
     },
     "cta": {
-      "requestConsultation": "Request Free Consultation"
+      "requestConsultation": "Request A Quote"
     },
     "download": {
       "button": "Download Company Profile",
@@ -189,7 +189,7 @@
     }
   },
   "consultationForm": {
-    "title": "Request Free Consultation",
+    "title": "Request A Quote",
     "subtitle": "Contact us to get a free consultation and a custom offer for your station",
     "description": "Fill out the form and we'll contact you within 24 hours",
     "validation": {
@@ -249,7 +249,7 @@
       }
     },
     "submit": {
-      "button": "Request Free Consultation",
+      "button": "Request A Quote",
       "loading": "Sending..."
     },
     "success": {
