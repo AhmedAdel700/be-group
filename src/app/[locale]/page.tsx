@@ -1,36 +1,19 @@
-"use client";
-import MinistryStandards from "@/components/MinistryStandards";
-import Header from "@/components/Header";
-import FeaturesGrid from "@/components/FeaturesGrid";
-import About from "@/components/About";
-import Footer from "@/components/Footer";
-import WhyUs from "@/components/WhyUs";
-import ContactUs from "@/components/ContactUs";
-import Packages from "@/components/Packages";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Hero from "@/components/Hero";
-import Partners from "@/components/Partners";
-import WhatsAppIconWithTooltip from "@/components/WhatsAppIconWithTooltip";
-// import ContactButtons from "@/components/ContactButtons";
+import AboutSection from "../../components/about-section";
+import CoursesSection from "../../components/courses-section";
+import Footer from "../../components/footer";
+import Header from "../../components/header";
+import HeroSection from "../../components/hero-section";
 
-export default function LandingPage() {
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <Hero />
-      <FeaturesGrid />
-      <About />
-      <section id="standards" className="py-10 bg-gray-50">
-        <MinistryStandards />
-      </section>
-      <WhyChooseUs />
-      <Packages />
-      <WhyUs />
-      <Partners />
-      <ContactUs />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <CoursesSection />
+      </main>
       <Footer />
-      <WhatsAppIconWithTooltip />
-      {/* <ContactButtons /> */}
     </div>
   );
 }

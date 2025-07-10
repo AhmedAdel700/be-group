@@ -1,216 +1,231 @@
 "use client";
 
-import { Phone, Mail, MapPin } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  Heart,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
-  const t = useTranslations("footer");
-  
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const headerOffset = 80;
-      const elementPosition = section.getBoundingClientRect().top;
-      const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
+  const socialLinks = [
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+  ];
+
+  const quickLinks = [
+    { name: "Home", href: "/" },
+    { name: "Courses", href: "#courses" },
+    { name: "Sign In", href: "/signin" },
+    { name: "Register", href: "/register" },
+  ];
 
   return (
-    <footer className="bg-gray-900 text-white py-12" id="footer">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo + Description */}
-          <div>
-            <Image
-              src="/white-logo.svg"
-              alt={t("logo.alt")}
-              width={120}
-              height={40}
-              className="h-10 w-auto mb-4"
-            />
-            <p className="text-gray-400 mb-4">{t("description")}</p>
-          </div>
+    <footer id="footer" className="relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E]">
+        {/* Animated Shapes */}
+        <motion.div
+          animate={{
+            rotate: 360,
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+          className="absolute top-10 right-20 w-32 h-32 border border-[#0EC5C7]/20 rounded-full"
+        />
+        <motion.div
+          animate={{
+            rotate: -360,
+            scale: [1, 0.8, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+          className="absolute bottom-20 left-10 w-24 h-24 border border-[#0EC5C7]/20 rounded-lg"
+        />
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-bold text-lg mb-4">{t("quickLinks.title")}</h4>
-            <ul className="space-y-2 text-gray-400">
-              {[
-                { id: "about", label: t("quickLinks.about") },
-                { id: "standards", label: t("quickLinks.standards") },
-                { id: "why-us", label: t("quickLinks.whyUs") },
-                { id: "why-company", label: t("quickLinks.whyCompany") },
-                { id: "packages", label: t("quickLinks.packages") },
-                { id: "partners", label: t("quickLinks.partners") },
-              ].map(({ id, label }) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className="hover:text-white"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(id);
-                    }}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Floating Dots */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: i * 0.8,
+            }}
+            className="absolute w-2 h-2 bg-[#0EC5C7] rounded-full"
+            style={{
+              left: `${15 + i * 12}%`,
+              top: `${20 + (i % 2) * 40}%`,
+            }}
+          />
+        ))}
 
-          {/* Services */}
-          <div>
-            <h4 className="font-bold text-lg mb-4">{t("services.title")}</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>{t("services.deviceSupply")}</li>
-              <li>{t("services.training")}</li>
-              <li>{t("services.systemCreation")}</li>
-              <li>{t("services.softwareDevelopment")}</li>
-              <li>{t("services.technicalConsultation")}</li>
-            </ul>
-          </div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#001C71]/90 to-transparent" />
+      </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-bold text-lg mb-4">{t("contact.title")}</h4>
-            <div className="space-y-3 text-gray-400">
-              <div className="flex items-center gap-2">
-                <Phone className="w-5 h-5 shrink-0" />
-                <div className="flex gap-2" dir="rtl">
-                  <a
-                    href="tel:966566765222"
-                    className="hover:underline cursor-pointer"
-                    dir="ltr"
-                  >
-                    966 566 765 222
-                  </a>
-                  <span className="font-semibold">-</span>
-                  <a
-                    href="tel:966569765744"
-                    className="hover:underline cursor-pointer"
-                    dir="ltr"
-                  >
-                    966 569 765 744
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-5 h-5 shrink-0" />
-                <div className="flex flex-col gap-2">
-                  <a
-                    href="mailto:support@gastech.com.sa"
-                    className="hover:underline cursor-pointer"
-                  >
-                    support@gastech.com.sa
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 shrink-0" />
-                <span className="text-sm leading-relaxed">
-                  {t("contact.address")}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-center xl:items-end flex-col xl:flex-row justify-between gap-4">
-              {/* WhatsApp CTA */}
-              <a
-                href="https://wa.me/966566765222"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 bg-[#2A4D8A] hover:bg-blue-900 transition-all text-white px-3 py-2 rounded-md font-medium capitalize"
-              >
-                <div className="flex items-center gap-2">
-                  <Image
-                    src="/whatsapp.svg"
-                    alt="WhatsApp"
-                    width={18}
-                    height={18}
-                  />
-                  <h5 className="text-xs">{t("contact.whatsapp")}</h5>
-                </div>
-              </a>
-              {/* Social Media Icons */}
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://www.linkedin.com/company/gastechai/?viewAsMember=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
-                >
-                  <Image
-                    src="/linkedin.svg"
-                    alt="Linkedin"
-                    width={21}
-                    height={21}
-                  />
-                </a>
-                <a
-                  href="https://x.com/GastechAj"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded bg-gray-400 hover:bg-slate-400 transition-all"
-                >
-                  <Image
-                    src="/x.svg"
-                    alt="X (Twitter)"
-                    width={15}
-                    height={15}
-                  />
-                </a>
-                <a
-                  href="https://www.facebook.com/profile.php?id=61572542068792"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
-                >
-                  <Image
-                    src="/facebook.svg"
-                    alt="Facebook"
-                    width={22}
-                    height={22}
-                  />
-                </a>
-                <a
-                  href="https://www.instagram.com/qastechai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-1 rounded bg-gray-400 hover:bg-slate-400 transition-all"
-                >
-                  <Image
-                    src="/instagram.svg"
-                    alt="Instagram"
-                    width={22}
-                    height={22}
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p className="text-sm text-center text-muted-foreground">
-            {t("copyright.text")}{" "}
-            <Link
-              target="_blank"
-              href="https://betech.com.sa"
-              className="mx-1 text-slate-100 hover:text-white"
-              rel="noopener noreferrer"
+      <div className="relative z-10 text-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Logo and Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="md:col-span-2"
             >
-              BeTech
-            </Link>
-            &copy; 2024
-          </p>
+              <Link href="/" className="flex items-center space-x-2 mb-4">
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                  className="w-10 h-10 bg-gradient-to-r from-[#0EC5C7] to-[#5F289E] rounded-lg flex items-center justify-center"
+                >
+                  <span className="text-white font-bold">SU</span>
+                </motion.div>
+                <span className="text-2xl font-bold">Se-University</span>
+              </Link>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-gray-300 mb-6 max-w-md"
+              >
+                Empowering learners worldwide with quality education and
+                innovative online learning experiences. Transform your future
+                with Se-University.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="flex space-x-4"
+              >
+                {socialLinks.map((social) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    whileHover={{ scale: 1.2, y: -5 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 p-2 rounded-full hover:bg-white/10"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-6 h-6" />
+                  </motion.a>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Quick Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-lg font-semibold mb-4 text-[#0EC5C7]">
+                Quick Links
+              </h3>
+              <ul className="space-y-2">
+                {quickLinks.map((link, index) => (
+                  <motion.li
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 hover:translate-x-2 inline-block"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-lg font-semibold mb-4 text-[#0EC5C7]">
+                Contact Us
+              </h3>
+              <div className="space-y-3">
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-200"
+                >
+                  <Mail className="w-5 h-5 text-[#0EC5C7]" />
+                  <span>info@se-university.com</span>
+                </motion.div>
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-200"
+                >
+                  <Phone className="w-5 h-5 text-[#0EC5C7]" />
+                  <span>+1 (555) 123-4567</span>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+          >
+            <motion.p
+              className="text-gray-300 text-sm flex items-center"
+              whileHover={{ scale: 1.05 }}
+            >
+              © {new Date().getFullYear()} Se-University. Made with{" "}
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
+                className="mx-1"
+              >
+                <Heart className="w-4 h-4 text-red-500 fill-current" />
+              </motion.span>{" "}
+              for learners worldwide.
+            </motion.p>
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <Link
+                href="/terms"
+                className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 text-sm mt-2 md:mt-0"
+              >
+                Terms and Conditions
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </footer>

@@ -1,232 +1,132 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { Menu, Globe } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useTranslations, useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/navigations";
+import { useState } from "react";
+import Link from "next/link";
+import { Globe, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "./ui/button";
+import { useLocale } from "next-intl";
 
 export default function Header() {
-  const t = useTranslations("header");
-  const [activeSection, setActiveSection] = useState("");
-  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
-  const [open, setOpen] = useState(false);
-  const partnersRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
-  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [language, setLanguage] = useState("en");
   const locale = useLocale();
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        partnersRef.current &&
-        !partnersRef.current.contains(event.target as Node)
-      ) {
-        // no-op
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    const sections = [
-      "hero",
-      "units",
-      "about",
-      "standards",
-      "why-us",
-      "packages",
-      "why-company",
-      "partners",
-      "contact",
-    ];
-
-    const handleScroll = () => {
-      if (isAutoScrolling) return;
-
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isAutoScrolling]);
-
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      const offsetTop =
-        section.getBoundingClientRect().top + window.scrollY - 40;
-
-      setIsAutoScrolling(true);
-      setActiveSection(id);
-
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-
-      setTimeout(() => {
-        setIsAutoScrolling(false);
-      }, 800);
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
+    setIsMenuOpen(false);
   };
 
-  const handleLanguageSwitch = () => {
-    const newLocale = locale === "ar" ? "en" : "ar";
-    router.replace(pathname, { locale: newLocale });
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "ar" : "en");
   };
-
-  const navItems = [
-    { id: "units", label: t("nav.units") },
-    { id: "about", label: t("nav.about") },
-    { id: "standards", label: t("nav.standards") },
-    { id: "why-us", label: t("nav.whyUs") },
-    { id: "packages", label: t("nav.packages") },
-    { id: "why-company", label: t("nav.whyCompany") },
-    { id: "partners", label: t("nav.partners") },
-    { id: "footer", label: t("nav.contact") },
-  ];
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50 w-full">
-      <div className="container mx-auto p-4">
-        <div className="flex items-center justify-between">
-          <div
-            onClick={() => {
-              setIsAutoScrolling(true);
-              setActiveSection("");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              setTimeout(() => setIsAutoScrolling(false), 800);
-            }}
-            className="cursor-pointer"
-          >
-            <Image
-              src="/gastech-logo.svg"
-              alt={t("logo.alt")}
-              width={120}
-              height={40}
-              className="h-10 w-auto"
-            />
-          </div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">SU</span>
+            </div>
+            <span className="text-xl font-bold text-[#001C71]">
+              Se-University
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-3 xl:gap-10 justify-center flex-1 relative desktop">
-            {navItems.map(({ id, label }) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className={`font-semibold transition-colors duration-200 capitalize ${locale === "en" && "desktop-en"} ${
-                  activeSection === id
-                    ? "text-[#2A4D8A]"
-                    : "text-gray-700 hover:text-[#2A4D8A]"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(id);
-                }}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <Button
-              className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium desktop ${
-                locale === "en" ? "text-xs xl:text-sm" : "text-sm xl:text-base"
-              }`}
-              onClick={() => scrollToSection("contact")}
+          <nav className="hidden md:flex items-center space-x-8">
+            <button
+              onClick={() => scrollToSection("courses")}
+              className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
             >
-              {t("cta.requestConsultation")}
-            </Button>
-
-            {/* Language Switcher */}
+              {language === "en" ? "Courses" : "الدورات"}
+            </button>
+            <button
+              onClick={() => scrollToSection("footer")}
+              className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+            >
+              {language === "en" ? "Contact Us" : "اتصل بنا"}
+            </button>
             <Button
               variant="outline"
               size="sm"
-              onClick={handleLanguageSwitch}
-              className={`flex items-center gap-2 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 h-9 ${
-                locale === "en" ? "text-xs" : "text-sm"
-              }`}
+              onClick={toggleLanguage}
+              className="flex items-center space-x-1 bg-transparent"
             >
-              <span className="font-medium">
-                {locale === "en" ? "AR" : "EN"}
-              </span>
-              <Globe size={16} />
+              <Globe className="w-4 h-4" />
+              <span>{language === "en" ? "العربية" : "English"}</span>
             </Button>
-          </div>
+            <Link href={`/${locale}/signin`}>
+              <Button className="bg-[#001C71] hover:bg-[#001C71]/90">
+                {language === "en"
+                  ? "Sign In / Register"
+                  : "تسجيل الدخول / التسجيل"}
+              </Button>
+            </Link>
+          </nav>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <Menu size={24} color="#2A4D8A" className="cursor-pointer" />
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col mt-8 gap-2">
-                  {navItems.map(({ id, label }) => (
-                    <a
-                      key={id}
-                      href={`#${id}`}
-                      className={`h-10 flex items-center px-4 rounded-md font-medium transition-colors duration-200 text-lg ${
-                        activeSection === id
-                          ? "text-[#2A4D8A] bg-blue-100 font-semibold"
-                          : "text-gray-700 hover:text-[#2A4D8A] hover:bg-gray-100"
-                      }`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection(id);
-                        setOpen(false);
-                      }}
-                    >
-                      {label}
-                    </a>
-                  ))}
-
-                  {/* Mobile Language Switcher */}
-                  <Button
-                    variant="outline"
-                    onClick={handleLanguageSwitch}
-                    className={`flex items-center justify-center gap-2 h-9 border-[#2A4D8A] text-[#2A4D8A] hover:bg-[#2A4D8A] hover:text-white transition-colors duration-200 text-base`}
-                  >
-                    <Globe size={18} />
-                    <span className="font-medium">{locale.toUpperCase()}</span>
-                  </Button>
-
-                  <Button
-                    className={`bg-[#2A4D8A] hover:bg-blue-900 text-white px-6 py-2 rounded-md font-medium ${
-                      locale === "en"
-                        ? "text-xs xl:text-sm"
-                        : "text-sm xl:text-base"
-                    }`}
-                    onClick={() => scrollToSection("contact")}
-                  >
-                    {t("cta.requestConsultation")}
-                  </Button>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
+          </Button>
         </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-gray-200 py-4"
+            >
+              <nav className="flex flex-col space-y-4">
+                <button
+                  onClick={() => scrollToSection("courses")}
+                  className="text-left text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+                >
+                  {language === "en" ? "Courses" : "الدورات"}
+                </button>
+                <button
+                  onClick={() => scrollToSection("footer")}
+                  className="text-left text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+                >
+                  {language === "en" ? "Contact Us" : "اتصل بنا"}
+                </button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={toggleLanguage}
+                  className="flex items-center space-x-1 w-fit bg-transparent"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>{language === "en" ? "العربية" : "English"}</span>
+                </Button>
+                <Link href={`/${locale}/signin`}>
+                  <Button className="bg-[#001C71] hover:bg-[#001C71]/90 w-full">
+                    {language === "en"
+                      ? "Sign In / Register"
+                      : "تسجيل الدخول / التسجيل"}
+                  </Button>
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
