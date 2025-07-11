@@ -1,4 +1,4 @@
-import placeholder from '../../images/placeholder.png'
+import placeholder from '@/app/assets/placeholder.png';
 export const courseData = {
   1: {
     title: "Full Stack Web Development",

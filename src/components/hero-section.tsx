@@ -13,11 +13,12 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import hero from "../images/hero.png";
-import { useLocale } from "next-intl";
+import hero from "@/app/assets/hero.png";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function HeroSection() {
   const locale = useLocale();
+  const t = useTranslations("hero");
   const scrollToCourses = () => {
     const element = document.getElementById("courses");
     if (element) {
@@ -154,7 +155,7 @@ export default function HeroSection() {
               >
                 <GraduationCap className="w-5 h-5 text-[#0EC5C7] mr-2" />
                 <span className="text-sm font-medium text-[#0EC5C7]">
-                  Transform Your Future Today
+                  {t("Transform Your Future Today")}
                 </span>
               </motion.div>
 
@@ -164,7 +165,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               >
-                Master New Skills with
+                {t("Master New Skills with")}
                 <motion.span
                   className="text-[#0EC5C7] block relative"
                   animate={{
@@ -180,7 +181,7 @@ export default function HeroSection() {
                     ease: "easeInOut",
                   }}
                 >
-                  Se-University
+                  {t("Se-University")}
                 </motion.span>
               </motion.h1>
 
@@ -190,9 +191,9 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.5 }}
                 className="text-xl text-gray-200 leading-relaxed max-w-lg"
               >
-                Join thousands of learners worldwide and unlock your potential
-                with our expertly crafted courses. Learn from industry
-                professionals and build the skills that matter.
+                {t(
+                  "Join thousands of learners worldwide and unlock your potential with our expertly crafted diplomas Learn from industry professionals and build the skills that matter"
+                )}
               </motion.p>
             </div>
 
@@ -207,7 +208,7 @@ export default function HeroSection() {
                 onClick={scrollToCourses}
                 className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/90 text-[#001C71] font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group"
               >
-                Explore Courses
+                {t("Explore Diplomas")}
                 {locale === "en" ? (
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 ) : (
@@ -219,7 +220,7 @@ export default function HeroSection() {
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white hover:text-[#001C71] px-8 py-4 rounded-xl transition-all duration-300 bg-transparent hover:shadow-2xl"
               >
-                Watch Demo
+                {t("Watch Demo")}
               </Button>
             </motion.div>
 
@@ -238,7 +239,9 @@ export default function HeroSection() {
                   <BookOpen className="w-6 h-6 text-[#0EC5C7]" />
                 </div>
                 <div className="text-2xl font-bold">50+</div>
-                <div className="text-sm text-gray-300">Expert Courses</div>
+                <div className="text-sm text-gray-300">
+                  {t("Explore Diplomas")}
+                </div>
               </motion.div>
               <motion.div
                 className="text-center"
@@ -249,7 +252,7 @@ export default function HeroSection() {
                   <Users className="w-6 h-6 text-[#0EC5C7]" />
                 </div>
                 <div className="text-2xl font-bold">10K+</div>
-                <div className="text-sm text-gray-300">Happy Students</div>
+                <div className="text-sm text-gray-300">{t("Happy Students")}</div>
               </motion.div>
               <motion.div
                 className="text-center"
@@ -260,7 +263,7 @@ export default function HeroSection() {
                   <Award className="w-6 h-6 text-[#0EC5C7]" />
                 </div>
                 <div className="text-2xl font-bold">95%</div>
-                <div className="text-sm text-gray-300">Success Rate</div>
+                <div className="text-sm text-gray-300">{t("Success Rate")}</div>
               </motion.div>
             </motion.div>
           </motion.div>

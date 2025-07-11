@@ -2,32 +2,44 @@
 
 import type React from "react";
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
-  Upload,
-  X,
-  CheckCircle,
-  Check,
-  CreditCard,
-  Wallet,
-  Building2,
-  Target,
-  GraduationCap,
-  BookOpen,
-  Lightbulb,
   ArrowRight,
+  BookOpen,
+  Building2,
+  Check,
+  CheckCircle,
+  CreditCard,
+  GraduationCap,
+  Lightbulb,
+  Target,
+  Upload,
+  Wallet,
+  X,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "../../../components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../components/ui/card";
-import { Label } from "../../../components/ui/label";
-import { Input } from "../../../components/ui/input";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
-import { Alert, AlertDescription } from "../../../components/ui/alert";
 import { useLocale } from "next-intl";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function PurchasePage() {
   const locale = useLocale();

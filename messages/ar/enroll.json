@@ -1,0 +1,18 @@
+{
+    "Personal Information": "المعلومات الشخصية",
+    "First Name": "الاسم الاول",
+    "Middle Name": "الاسم الثاني",
+    "Last Name": "Last Name",
+    "National ID": "رقم الهوية",
+    "Phone Number": "رقم الهاتف",
+    "Email": "البريد الالكتروني",
+    "Password": "كلمة المرور",
+    "Upload Documents": "تحميل المستندات",
+    "Choose Files": "اختر الملفات",
+    "Next Step": "الخطوة التالية",
+    "OTP Verification": "التحقق من OTP",
+    "Enter the 4-digit code sent to your phone/email": "ادخل الرمز المرسل لهاتفك/بريدك الالكتروني",
+    "Demo: Use 1234": "مثال: استخدم 1234",
+    "Back": "العودة",
+    "Verify": "التحقق"
+}

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { Clock, CheckCircle, XCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
-import { Badge } from "../../../components/ui/badge";
+import { CheckCircle, Clock, XCircle } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function EnrollmentStatusPage() {
   const searchParams = useSearchParams();
@@ -14,7 +14,8 @@ export default function EnrollmentStatusPage() {
 
   // Mock enrollment status - in real app this would come from API or searchParams
   const enrollmentStatus: "pending" | "approved" | "rejected" =
-    (searchParams.get("status") as "pending" | "approved" | "rejected") || "pending"; // pending, approved, rejected
+    (searchParams.get("status") as "pending" | "approved" | "rejected") ||
+    "pending"; // pending, approved, rejected
 
   const diplomaInfo = {
     intermediate: {
