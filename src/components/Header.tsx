@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { Globe, Menu, X, LogOut } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "./ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { Globe, LogOut, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter, usePathname } from "../navigations";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "../navigations";
+import { Button } from "./ui/button";
+import Image from "next/image";
+import universityLogo from "@/app/assets/university-logo.svg";
 
-export default function Header() {
+
+export default function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = useTranslations("header");
   const locale = useLocale();
@@ -40,7 +43,7 @@ export default function Header() {
   const toggleLanguage = () => {
     const newLocale = locale === "en" ? "ar" : "en";
     // Preserve query parameters when switching locale
-    const search = typeof window !== 'undefined' ? window.location.search : '';
+    const search = typeof window !== "undefined" ? window.location.search : "";
     router.replace(pathname + search, { locale: newLocale });
   };
 
@@ -72,7 +75,7 @@ export default function Header() {
   const toggleEnrollmentLanguage = () => {
     const newLocale = language === "en" ? "ar" : "en";
     setLanguage(newLocale);
-    const search = typeof window !== 'undefined' ? window.location.search : '';
+    const search = typeof window !== "undefined" ? window.location.search : "";
     router.replace(pathname + search, { locale: newLocale });
   };
 
@@ -84,11 +87,16 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SU</span>
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Image
+                  src="@/app/assets/university-logo.svg"
+                  alt="Logo"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span className="text-xl font-bold text-[#001C71]">
-                Se-University
+                {t("Se-University")}
               </span>
             </Link>
             {/* Header Actions */}
@@ -128,11 +136,11 @@ export default function Header() {
             onClick={scrollToTop}
             className="flex items-center focus:outline-none gap-4"
           >
-            <div className="w-8 h-8 bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">SU</span>
+            <div className=" w-24 h-24 flex items-center justify-center">
+              <Image src={universityLogo} alt="Logo" width={250} height={250} />
             </div>
             <span className="text-xl font-bold text-[#001C71]">
-              Se-University
+              {t("Se-University")}
             </span>
           </button>
 
@@ -142,7 +150,7 @@ export default function Header() {
               onClick={() => scrollToSection("courses")}
               className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
             >
-              {t("Courses")}
+              {t("Diplomas")}
             </button>
             <button
               onClick={() => scrollToSection("footer")}
@@ -195,7 +203,7 @@ export default function Header() {
                   onClick={() => scrollToSection("courses")}
                   className="text-gray-700 hover:text-[#001C71] transition-colors duration-200 text-start"
                 >
-                  {t("Courses")}
+                  {t("Diplomas")}
                 </button>
                 <button
                   onClick={() => scrollToSection("footer")}

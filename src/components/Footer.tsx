@@ -1,20 +1,21 @@
 "use client";
 
-import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   Facebook,
-  Twitter,
+  Heart,
   Instagram,
   Linkedin,
   Mail,
   Phone,
-  Heart,
+  Twitter,
 } from "lucide-react";
-import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function Footer() {
   const locale = useLocale();
+  const t = useTranslations("footer");
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
@@ -103,7 +104,7 @@ export default function Footer() {
                 >
                   <span className="text-white font-bold">SU</span>
                 </motion.div>
-                <span className="text-2xl font-bold">Se-University</span>
+                <span className="text-2xl font-bold">{t("Se-University")}</span>
               </Link>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -112,9 +113,9 @@ export default function Footer() {
                 viewport={{ once: true }}
                 className="text-gray-300 mb-6 max-w-md"
               >
-                Empowering learners worldwide with quality education and
-                innovative online learning experiences. Transform your future
-                with Se-University.
+                {t(
+                  "Empowering learners worldwide with quality education and innovative online learning experiences Transform your future with Se-University"
+                )}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -146,7 +147,7 @@ export default function Footer() {
               viewport={{ once: true }}
             >
               <h3 className="text-lg font-semibold mb-4 text-[#0EC5C7]">
-                Quick Links
+                {t("Quick Links")}
               </h3>
               <ul className="space-y-2">
                 {quickLinks.map((link, index) => (
@@ -176,7 +177,7 @@ export default function Footer() {
               viewport={{ once: true }}
             >
               <h3 className="text-lg font-semibold mb-4 text-[#0EC5C7]">
-                Contact Us
+                {t("Contact Us")}
               </h3>
               <div className="space-y-3">
                 <motion.div
@@ -208,7 +209,7 @@ export default function Footer() {
               className="text-gray-300 text-sm flex items-center"
               whileHover={{ scale: 1.05 }}
             >
-              © {new Date().getFullYear()} Se-University. Made with{" "}
+              © {new Date().getFullYear()} {t("Se-University")}. {t("Made with")}{" "}
               <motion.span
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
@@ -216,14 +217,14 @@ export default function Footer() {
               >
                 <Heart className="w-4 h-4 text-red-500 fill-current" />
               </motion.span>{" "}
-              for learners worldwide.
+              {t("for learners worldwide")}
             </motion.p>
             <motion.div whileHover={{ scale: 1.05 }}>
               <Link
                 href={`/${locale}/terms`}
                 className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 text-sm mt-2 md:mt-0"
               >
-                Terms and Conditions
+                {t("Terms and Conditions")}
               </Link>
             </motion.div>
           </motion.div>

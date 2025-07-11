@@ -2,27 +2,35 @@
 
 import type React from "react";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../../../components/ui/card";
-import { Eye, EyeOff, ArrowLeft, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { Button } from "../../../components/ui/button";
-import { Alert, AlertDescription } from "../../../components/ui/alert";
-import { Label } from "../../../components/ui/label";
-import { Input } from "../../../components/ui/input";
-import { useLocale } from "next-intl";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Eye,
+  EyeOff,
+  GraduationCap,
+} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SignInPage() {
   const locale = useLocale();
   const router = useRouter();
+  const t = useTranslations("signin");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -177,7 +185,7 @@ export default function SignInPage() {
             ) : (
               <ArrowRight className="w-5 h-5 me-2" />
             )}
-            Back to Home
+            {t("Back to Home")}
           </Link>
         </div>
 
@@ -191,10 +199,10 @@ export default function SignInPage() {
               <span className="text-white font-bold text-xl">SU</span>
             </motion.div>
             <CardTitle className="text-2xl font-bold text-[#001C71]">
-              Welcome Back
+              {t("Welcome Back")}
             </CardTitle>
             <CardDescription>
-              Sign in to your Se-University account
+              {t("Sign in to your Se-University account")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -205,12 +213,12 @@ export default function SignInPage() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="space-y-2"
               >
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("Email")}</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t("Enter your email")}
                   value={formData.email}
                   onChange={handleInputChange}
                   className={errors.email ? "border-red-500" : ""}
@@ -228,13 +236,13 @@ export default function SignInPage() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="space-y-2"
               >
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("Password")}</Label>
                 <div className="relative">
                   <Input
                     id="password"
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
+                    placeholder={t("Enter your password")}
                     value={formData.password}
                     onChange={handleInputChange}
                     className={errors.password ? "border-red-500" : ""}
@@ -266,13 +274,13 @@ export default function SignInPage() {
                       onChange={(e) => setRememberMe(e.target.checked)}
                       className="mr-2 accent-[#001C71]"
                     />
-                    Remember Me
+                    {t("Remember Me")}
                   </label>
                   <Link
                     href={`/${locale}/forgot-password`}
                     className="text-[#001C71] hover:text-[#0EC5C7] text-sm font-medium transition-colors"
                   >
-                    Forgot Password?
+                    {t("Forgot Password")}
                   </Link>
                 </div>
               </motion.div>
@@ -287,7 +295,7 @@ export default function SignInPage() {
                   className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-all duration-300 transform hover:scale-105"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing In..." : "Sign In"}
+                  {isLoading ? t("Signing In") : t("Sign In")}
                 </Button>
               </motion.div>
             </form>
