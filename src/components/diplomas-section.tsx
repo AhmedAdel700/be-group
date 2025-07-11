@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
-// Animation Variants (Smoother)
+// Animation Variants 
 const containerVariants = {
   hidden: {},
   show: {
