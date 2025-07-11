@@ -12,9 +12,13 @@ import {
   CheckCircle,
   Check,
   CreditCard,
-  Smartphone,
   Wallet,
   Building2,
+  Target,
+  GraduationCap,
+  BookOpen,
+  Lightbulb,
+  ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../../components/ui/button";
@@ -42,8 +46,6 @@ export default function PurchasePage() {
     cardholderName: "",
     // PayPal fields
     paypalEmail: "",
-    // STC Pay fields
-    phoneNumber: "",
     // Bank Transfer fields
     accountNumber: "",
     routingNumber: "",
@@ -52,9 +54,6 @@ export default function PurchasePage() {
     appleId: "",
     // Google Pay fields
     googleEmail: "",
-    // Crypto fields
-    walletAddress: "",
-    cryptoType: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -94,10 +93,6 @@ export default function PurchasePage() {
         if (!formData.paypalEmail)
           newErrors.paypalEmail = "PayPal email is required";
         break;
-      case "stc-pay":
-        if (!formData.phoneNumber)
-          newErrors.phoneNumber = "Phone number is required";
-        break;
       case "bank-transfer":
         if (!formData.accountNumber)
           newErrors.accountNumber = "Account number is required";
@@ -111,12 +106,6 @@ export default function PurchasePage() {
       case "google-pay":
         if (!formData.googleEmail)
           newErrors.googleEmail = "Google email is required";
-        break;
-      case "crypto":
-        if (!formData.walletAddress)
-          newErrors.walletAddress = "Wallet address is required";
-        if (!formData.cryptoType)
-          newErrors.cryptoType = "Cryptocurrency type is required";
         break;
     }
 
@@ -289,40 +278,6 @@ export default function PurchasePage() {
           </motion.div>
         );
 
-      case "stc-pay":
-        return (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="space-y-4 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border border-purple-200"
-          >
-            <div className="flex items-center space-x-2 mb-4">
-              <Smartphone className="w-5 h-5 text-[#5F289E]" />
-              <h3 className="font-semibold text-[#5F289E]">
-                STC Pay Information
-              </h3>
-            </div>
-            <div>
-              <Label htmlFor="phoneNumber">Phone Number *</Label>
-              <Input
-                id="phoneNumber"
-                name="phoneNumber"
-                placeholder="+966 50 123 4567"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                className={errors.phoneNumber ? "border-red-500" : ""}
-              />
-              {errors.phoneNumber && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.phoneNumber}
-                </p>
-              )}
-            </div>
-          </motion.div>
-        );
-
       case "bank-transfer":
         return (
           <motion.div
@@ -457,65 +412,6 @@ export default function PurchasePage() {
           </motion.div>
         );
 
-      case "crypto":
-        return (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="space-y-4 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200"
-          >
-            <div className="flex items-center space-x-2 mb-4">
-              <span className="text-lg">₿</span>
-              <h3 className="font-semibold text-orange-600">
-                Cryptocurrency Information
-              </h3>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="cryptoType">Cryptocurrency Type *</Label>
-                <select
-                  id="cryptoType"
-                  name="cryptoType"
-                  value={formData.cryptoType}
-                  onChange={handleInputChange}
-                  className={`w-full p-2 border rounded-md ${
-                    errors.cryptoType ? "border-red-500" : "border-gray-300"
-                  }`}
-                >
-                  <option value="">Select Cryptocurrency</option>
-                  <option value="bitcoin">Bitcoin (BTC)</option>
-                  <option value="ethereum">Ethereum (ETH)</option>
-                  <option value="usdt">Tether (USDT)</option>
-                  <option value="bnb">Binance Coin (BNB)</option>
-                </select>
-                {errors.cryptoType && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.cryptoType}
-                  </p>
-                )}
-              </div>
-              <div>
-                <Label htmlFor="walletAddress">Wallet Address *</Label>
-                <Input
-                  id="walletAddress"
-                  name="walletAddress"
-                  placeholder="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
-                  value={formData.walletAddress}
-                  onChange={handleInputChange}
-                  className={errors.walletAddress ? "border-red-500" : ""}
-                />
-                {errors.walletAddress && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.walletAddress}
-                  </p>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        );
-
       default:
         return null;
     }
@@ -537,82 +433,150 @@ export default function PurchasePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Animated Background */}
+    <div className="min-h-screen bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated Background Elements - Same as Forms */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Shapes */}
+        {/* Educational Icons */}
         <motion.div
           animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            rotate: [0, 180, 360],
+            y: [0, -25, 0],
+            rotate: [0, 5, -5, 0],
           }}
           transition={{
-            duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-          className="absolute top-20 left-10 w-20 h-20 bg-[#0EC5C7] opacity-5 rounded-full"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            rotate: [0, -180, -360],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-          className="absolute top-40 right-20 w-16 h-16 bg-[#5F289E] opacity-5 rounded-lg"
-        />
-        <motion.div
-          animate={{
-            x: [0, 60, 0],
-            y: [0, -80, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 15,
+            duration: 7,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
-          className="absolute bottom-20 left-1/4 w-24 h-24 bg-[#001C71] opacity-5 rounded-full"
-        />
+          className="absolute top-16 left-16 text-[#0EC5C7] opacity-15"
+        >
+          <BookOpen className="w-16 h-16" />
+        </motion.div>
+
+        <motion.div
+          animate={{
+            y: [0, 35, 0],
+            rotate: [0, -8, 8, 0],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute top-32 right-20 text-[#0EC5C7] opacity-15"
+        >
+          <GraduationCap className="w-20 h-20" />
+        </motion.div>
+
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute bottom-24 left-12 text-[#0EC5C7] opacity-15"
+        >
+          <Lightbulb className="w-14 h-14" />
+        </motion.div>
+
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+          className="absolute bottom-16 right-16 text-[#0EC5C7] opacity-15"
+        >
+          <Target className="w-12 h-12" />
+        </motion.div>
+
+        {/* Floating Particles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -60, 0],
+              x: [0, Math.sin(i) * 30, 0],
+              opacity: [0.2, 0.6, 0.2],
+            }}
+            transition={{
+              duration: 5 + i * 0.3,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: i * 0.2,
+            }}
+            className="absolute w-1.5 h-1.5 bg-[#0EC5C7] rounded-full"
+            style={{
+              left: `${8 + i * 6}%`,
+              top: `${10 + (i % 5) * 18}%`,
+            }}
+          />
+        ))}
 
         {/* Gradient Orbs */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#0EC5C7]/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#5F289E]/10 to-transparent rounded-full blur-3xl" />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.08, 0.15, 0.08],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          className="absolute top-1/3 right-1/5 w-72 h-72 bg-[#0EC5C7] rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 0.7, 1],
+            opacity: [0.08, 0.12, 0.08],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+            delay: 3,
+          }}
+          className="absolute bottom-1/3 left-1/5 w-56 h-56 bg-[#5F289E] rounded-full blur-3xl"
+        />
       </div>
 
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b relative z-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="max-w-2xl mx-auto mb-4">
           <Link
             href={`/${locale}/course/${courseId}`}
-            className="inline-flex items-center text-[#001C71] hover:text-[#0EC5C7] transition-colors duration-200"
+            className="inline-flex items-center text-white hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            {locale === "en" ? (
+              <ArrowLeft className="w-5 h-5 mr-2" />
+            ) : (
+              <ArrowRight className="w-5 h-5 ml-2" />
+            )}
             Back to Course
           </Link>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Card className="shadow-xl bg-white/95 backdrop-blur-sm">
+            <Card className="shadow-2xl bg-white/95 backdrop-blur-sm border-0">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-[#001C71]">
                   Complete Your Purchase
                 </CardTitle>
                 <CardDescription>
-                  You're purchasing {selectedSemesters.length} semester
+                  You are purchasing {selectedSemesters.length} semester
                   {selectedSemesters.length > 1 ? "s" : ""} for the Full Stack
                   Web Development course.
                 </CardDescription>
@@ -643,12 +607,12 @@ export default function PurchasePage() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Payment Method - Card Based */}
+                  {/* Payment Method - Card Based (Removed STC Pay and Crypto) */}
                   <div className="space-y-4">
                     <Label className="text-lg font-semibold text-[#001C71]">
                       Choose Payment Method *
                     </Label>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {[
                         {
                           id: "visa",
@@ -672,13 +636,6 @@ export default function PurchasePage() {
                           description: "Digital Wallet",
                         },
                         {
-                          id: "stc-pay",
-                          name: "STC Pay",
-                          icon: "📱",
-                          color: "from-[#5F289E] to-[#001C71]",
-                          description: "Mobile Payment",
-                        },
-                        {
                           id: "apple-pay",
                           name: "Apple Pay",
                           icon: "🍎",
@@ -698,13 +655,6 @@ export default function PurchasePage() {
                           icon: "🏦",
                           color: "from-[#0EC5C7] to-[#001C71]",
                           description: "Direct Transfer",
-                        },
-                        {
-                          id: "crypto",
-                          name: "Cryptocurrency",
-                          icon: "₿",
-                          color: "from-orange-500 to-yellow-500",
-                          description: "Bitcoin/Ethereum",
                         },
                       ].map((method) => (
                         <motion.div
@@ -856,7 +806,7 @@ export default function PurchasePage() {
 
       {/* Success Modal */}
       <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-sm">
           <DialogHeader>
             <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mx-auto mb-4">
               <CheckCircle className="w-8 h-8 text-green-500" />

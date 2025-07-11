@@ -2,6 +2,7 @@ import type React from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "../globals.css";
+import Header from "../../components/header";
 
 export const metadata = {
   title: "Se-University",
@@ -25,6 +26,7 @@ export default async function LocaleLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
+          <Header />
           {children}
         </NextIntlClientProvider>
       </body>

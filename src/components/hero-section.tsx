@@ -9,10 +9,15 @@ import {
   GraduationCap,
   Lightbulb,
   Target,
+  ArrowLeft,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import Image from "next/image";
+import hero from "../images/hero.png";
+import { useLocale } from "next-intl";
 
 export default function HeroSection() {
+  const locale = useLocale();
   const scrollToCourses = () => {
     const element = document.getElementById("courses");
     if (element) {
@@ -20,38 +25,12 @@ export default function HeroSection() {
     }
   };
 
-  // Floating animation variants
-  const floatingVariants = {
-    animate: {
-      y: [0, -20, 0],
-      rotate: [0, 5, -5, 0],
-      transition: {
-        duration: 6,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const pulseVariants = {
-    animate: {
-      scale: [1, 1.1, 1],
-      opacity: [0.7, 1, 0.7],
-      transition: {
-        duration: 4,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   return (
-    <section className="relative pt-20 pb-16 bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] text-white overflow-hidden">
+    <section className="relative pt-24 pb-16 xl:pb-0 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Books */}
         <motion.div
-          variants={floatingVariants}
           animate="animate"
           className="absolute top-20 left-10 text-[#0EC5C7] opacity-20"
         >
@@ -59,7 +38,6 @@ export default function HeroSection() {
         </motion.div>
 
         <motion.div
-          variants={floatingVariants}
           animate="animate"
           style={{ animationDelay: "2s" }}
           className="absolute top-40 right-20 text-[#0EC5C7] opacity-20"
@@ -69,7 +47,6 @@ export default function HeroSection() {
 
         {/* Graduation Caps */}
         <motion.div
-          variants={floatingVariants}
           animate="animate"
           style={{ animationDelay: "1s" }}
           className="absolute top-32 left-1/4 text-[#0EC5C7] opacity-15"
@@ -78,7 +55,6 @@ export default function HeroSection() {
         </motion.div>
 
         <motion.div
-          variants={floatingVariants}
           animate="animate"
           style={{ animationDelay: "3s" }}
           className="absolute bottom-20 right-10 text-[#0EC5C7] opacity-15"
@@ -88,7 +64,6 @@ export default function HeroSection() {
 
         {/* Light Bulbs */}
         <motion.div
-          variants={pulseVariants}
           animate="animate"
           className="absolute top-60 left-20 text-[#0EC5C7] opacity-20"
         >
@@ -96,7 +71,6 @@ export default function HeroSection() {
         </motion.div>
 
         <motion.div
-          variants={pulseVariants}
           animate="animate"
           style={{ animationDelay: "2s" }}
           className="absolute bottom-40 left-1/3 text-[#0EC5C7] opacity-20"
@@ -106,7 +80,6 @@ export default function HeroSection() {
 
         {/* Target Icons */}
         <motion.div
-          variants={floatingVariants}
           animate="animate"
           style={{ animationDelay: "4s" }}
           className="absolute top-80 right-1/4 text-[#0EC5C7] opacity-15"
@@ -235,7 +208,11 @@ export default function HeroSection() {
                 className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/90 text-[#001C71] font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group"
               >
                 Explore Courses
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {locale === "en" ? (
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                ) : (
+                  <ArrowLeft className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                )}
               </Button>
               <Button
                 size="lg"
@@ -305,10 +282,12 @@ export default function HeroSection() {
                   ease: "easeInOut",
                 }}
               >
-                <img
-                  src="/placeholder.svg?height=600&width=500"
+                <Image
+                  src={hero}
                   alt="Students learning online"
                   className="w-full h-auto rounded-2xl shadow-2xl"
+                  width={400}
+                  height={400}
                 />
               </motion.div>
             </div>

@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronUp,
   Check,
+  ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -18,184 +19,12 @@ import { Button } from "../../../../components/ui/button";
 import { Badge } from "../../../../components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../../components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../components/ui/tabs";
+import {courseData } from '../../../(dummyData)/courseData';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../../../../components/ui/dialog";
 import { useLocale } from "next-intl";
-
-// Mock course data
-const courseData = {
-  1: {
-    title: "Full Stack Web Development",
-    description:
-      "Master modern web development with React, Node.js, and MongoDB. Build real-world applications from scratch and become a professional full-stack developer.",
-    image: "/placeholder.svg?height=400&width=600",
-    startDate: "2024-02-15",
-    endDate: "2024-05-15",
-    available: true,
-    rating: 4.8,
-    totalReviews: 245,
-    instructor: "Dr. Sarah Johnson",
-    whatYouLearn: [
-      "Modern JavaScript ES6+ features and best practices",
-      "React.js fundamentals and advanced concepts",
-      "Node.js and Express.js backend development",
-      "MongoDB database design and operations",
-      "RESTful API development and integration",
-      "Authentication and authorization systems",
-      "Deployment strategies and DevOps basics",
-    ],
-    benefits: [
-      "Build a complete portfolio of real-world projects",
-      "Gain skills demanded by top tech companies",
-      "Increase your earning potential by 40-60%",
-      "Join a community of 10,000+ successful graduates",
-      "Get personalized career guidance and mentorship",
-      "Access to exclusive job placement assistance",
-    ],
-    whoShouldTake: [
-      "Beginners with basic HTML/CSS knowledge",
-      "Frontend developers wanting to learn backend",
-      "Career changers looking to enter tech",
-      "Students seeking practical programming skills",
-      "Entrepreneurs building their own products",
-    ],
-    semesters: [
-      {
-        id: 1,
-        name: "Semester 1: Frontend Foundations",
-        modules: [
-          {
-            name: "HTML5 & CSS3 Mastery",
-            startDate: "2024-02-15",
-            endDate: "2024-02-28",
-            instructor: "John Smith",
-          },
-          {
-            name: "JavaScript Fundamentals",
-            startDate: "2024-03-01",
-            endDate: "2024-03-15",
-            instructor: "Jane Doe",
-          },
-          {
-            name: "React.js Basics",
-            startDate: "2024-03-16",
-            endDate: "2024-03-31",
-            instructor: "Dr. Sarah Johnson",
-          },
-        ],
-      },
-      {
-        id: 2,
-        name: "Semester 2: Advanced Frontend",
-        modules: [
-          {
-            name: "Advanced React Patterns",
-            startDate: "2024-04-01",
-            endDate: "2024-04-15",
-            instructor: "Dr. Sarah Johnson",
-          },
-          {
-            name: "State Management with Redux",
-            startDate: "2024-04-16",
-            endDate: "2024-04-30",
-            instructor: "Mike Wilson",
-          },
-          {
-            name: "Testing React Applications",
-            startDate: "2024-05-01",
-            endDate: "2024-05-15",
-            instructor: "Lisa Chen",
-          },
-        ],
-      },
-      {
-        id: 3,
-        name: "Semester 3: Backend Development",
-        modules: [
-          {
-            name: "Node.js & Express.js",
-            startDate: "2024-05-16",
-            endDate: "2024-05-31",
-            instructor: "Robert Brown",
-          },
-          {
-            name: "Database Design with MongoDB",
-            startDate: "2024-06-01",
-            endDate: "2024-06-15",
-            instructor: "Emily Davis",
-          },
-          {
-            name: "RESTful API Development",
-            startDate: "2024-06-16",
-            endDate: "2024-06-30",
-            instructor: "David Lee",
-          },
-        ],
-      },
-      {
-        id: 4,
-        name: "Semester 4: Full Stack Integration",
-        modules: [
-          {
-            name: "Authentication & Security",
-            startDate: "2024-07-01",
-            endDate: "2024-07-15",
-            instructor: "Dr. Sarah Johnson",
-          },
-          {
-            name: "Deployment & DevOps",
-            startDate: "2024-07-16",
-            endDate: "2024-07-31",
-            instructor: "Alex Turner",
-          },
-          {
-            name: "Capstone Project",
-            startDate: "2024-08-01",
-            endDate: "2024-08-15",
-            instructor: "Dr. Sarah Johnson",
-          },
-        ],
-      },
-    ],
-    reviews: [
-      {
-        name: "Ahmed Hassan",
-        rating: 5,
-        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
-      },
-      {
-        name: "Maria Rodriguez",
-        rating: 5,
-        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
-      },
-      {
-        name: "James Wilson",
-        rating: 4,
-        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
-      },
-    ],
-    faqs: [
-      {
-        question: "Do I need prior programming experience?",
-        answer:
-          "Basic knowledge of HTML and CSS is recommended, but we start from the fundamentals and build up gradually.",
-      },
-      {
-        question: "How much time should I dedicate per week?",
-        answer:
-          "We recommend 10-15 hours per week for optimal learning, but the course is self-paced so you can adjust as needed.",
-      },
-      {
-        question: "Will I get a certificate upon completion?",
-        answer:
-          "Yes, you will receive a verified certificate that you can add to your LinkedIn profile and resume.",
-      },
-      {
-        question: "Is there job placement assistance?",
-        answer:
-          "Yes, we provide career guidance, resume review, interview preparation, and access to our job placement network.",
-      },
-    ],
-  },
-};
+import PersonalInfoForm from "../../../../components/PersonalInfoForm";
+import OtpVerification from "../../../../components/OtpVerification";
+import PaymentStep from "../../../../components/PaymentStep";
 
 export default function CourseDetailsPage() {
   const params = useParams();
@@ -203,12 +32,30 @@ export default function CourseDetailsPage() {
   const locale = useLocale();
   const courseId = Number.parseInt(params.id as string);
   const course = courseData[courseId as keyof typeof courseData];
-
-  const [selectedSemesters, setSelectedSemesters] = useState<number[]>([
-    1, 2, 3, 4,
-  ]);
   const [openSemesters, setOpenSemesters] = useState<number[]>([]);
-  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+  const [selectedDiploma, setSelectedDiploma] = useState<string>("");
+  const [showEnrollmentModal, setShowEnrollmentModal] = useState(false);
+  const [enrollmentStep, setEnrollmentStep] = useState(1);
+  const [enrollmentData, setEnrollmentData] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    nationalId: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    paymentMethod: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardholderName: "",
+  });
+  const [enrollmentFiles, setEnrollmentFiles] = useState<File[]>([]);
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [enrollmentErrors, setEnrollmentErrors] = useState<
+    Record<string, string>
+  >({});
+  const [isEnrollmentLoading, setIsEnrollmentLoading] = useState(false);
 
   if (!course) {
     return (
@@ -225,14 +72,6 @@ export default function CourseDetailsPage() {
     );
   }
 
-  const toggleSemester = (semesterId: number) => {
-    setSelectedSemesters((prev) =>
-      prev.includes(semesterId)
-        ? prev.filter((id) => id !== semesterId)
-        : [...prev, semesterId]
-    );
-  };
-
   const toggleSemesterOpen = (semesterId: number) => {
     setOpenSemesters((prev) =>
       prev.includes(semesterId)
@@ -241,38 +80,79 @@ export default function CourseDetailsPage() {
     );
   };
 
-  const toggleFaq = (faqIndex: number) => {
-    setOpenFaqs((prev) =>
-      prev.includes(faqIndex)
-        ? prev.filter((id) => id !== faqIndex)
-        : [...prev, faqIndex]
-    );
+  const handleStep1Next = () => {
+    const errors: Record<string, string> = {};
+
+    if (!enrollmentData.firstName.trim())
+      errors.firstName = "First name is required";
+    if (!enrollmentData.lastName.trim())
+      errors.lastName = "Last name is required";
+    if (!enrollmentData.nationalId.trim())
+      errors.nationalId = "National ID is required";
+    if (!enrollmentData.phoneNumber.trim())
+      errors.phoneNumber = "Phone number is required";
+    if (!enrollmentData.email.trim()) errors.email = "Email is required";
+    if (!enrollmentData.password.trim())
+      errors.password = "Password is required";
+
+    setEnrollmentErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      setEnrollmentStep(2);
+    }
   };
 
-  const handleBuySemesters = () => {
-    if (selectedSemesters.length > 0) {
-      router.push(
-        `/${locale}/purchase?course=${courseId}&semesters=${selectedSemesters.join(",")}`
-      );
+  const handleOtpChange = (index: number, value: string) => {
+    if (value.length <= 1 && /^\d*$/.test(value)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+
+      if (value && index < 3) {
+        const nextInput = document.querySelector(
+          `input[type="text"]:nth-of-type(${index + 2})`
+        ) as HTMLInputElement;
+        nextInput?.focus();
+      }
     }
+  };
+
+  const handleOtpVerification = () => {
+    const otpValue = otp.join("");
+    if (otpValue === "1234") {
+      setEnrollmentStep(3);
+    } else {
+      alert("Invalid OTP. Please use 1234 for demo.");
+    }
+  };
+
+  const handleEnrollmentSubmit = () => {
+    setIsEnrollmentLoading(true);
+
+    setTimeout(() => {
+      setIsEnrollmentLoading(false);
+      setShowEnrollmentModal(false);
+      router.push(`/${locale}/enrollment-status?diploma=${selectedDiploma}`);
+    }, 2000);
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mt-12 mb-4">
           <Link
-            href="/"
-            className="inline-flex items-center text-[#001C71] hover:text-[#0EC5C7] transition-colors duration-200"
+            href={`/${locale}`}
+            className="inline-flex items-center text-[#001C71] hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Courses
+            {locale === "en" ? (
+              <ArrowLeft className="w-5 h-5 mr-2" />
+            ) : (
+              <ArrowRight className="w-5 h-5 me-2" />
+            )}
+            Back to Home
           </Link>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid lg:grid-cols-10 gap-8">
           {/* Main Content - 70% */}
           <div className="lg:col-span-7">
@@ -287,7 +167,8 @@ export default function CourseDetailsPage() {
                   src={course.image || "/placeholder.svg"}
                   alt={course.title}
                   className="w-full h-64 object-cover"
-                  fill
+                  width={400}
+                  height={400}
                 />
                 <div className="p-6">
                   <h1 className="text-3xl font-bold text-[#001C71] mb-4">
@@ -317,13 +198,13 @@ export default function CourseDetailsPage() {
 
               {/* Tabbed Content */}
               <div className="bg-white rounded-xl shadow-lg">
-                <Tabs defaultValue="reviews" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4 bg-gray-100 p-1 rounded-t-xl">
+                <Tabs defaultValue="description" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-t-xl">
                     <TabsTrigger
-                      value="reviews"
+                      value="description"
                       className="data-[state=active]:bg-[#001C71] data-[state=active]:text-white"
                     >
-                      Reviews
+                      Description
                     </TabsTrigger>
                     <TabsTrigger
                       value="schedule"
@@ -332,16 +213,10 @@ export default function CourseDetailsPage() {
                       Schedule
                     </TabsTrigger>
                     <TabsTrigger
-                      value="faq"
+                      value="reviews"
                       className="data-[state=active]:bg-[#001C71] data-[state=active]:text-white"
                     >
-                      FAQ
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="description"
-                      className="data-[state=active]:bg-[#001C71] data-[state=active]:text-white"
-                    >
-                      Description
+                      Reviews
                     </TabsTrigger>
                   </TabsList>
 
@@ -438,39 +313,11 @@ export default function CourseDetailsPage() {
                     </div>
                   </TabsContent>
 
-                  <TabsContent value="faq" className="p-6">
-                    <div className="space-y-4">
-                      {course.faqs.map((faq, index) => (
-                        <Collapsible
-                          key={index}
-                          open={openFaqs.includes(index)}
-                          onOpenChange={() => toggleFaq(index)}
-                        >
-                          <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-left">
-                            <span className="font-semibold text-[#001C71]">
-                              {faq.question}
-                            </span>
-                            {openFaqs.includes(index) ? (
-                              <ChevronUp className="w-5 h-5 flex-shrink-0" />
-                            ) : (
-                              <ChevronDown className="w-5 h-5 flex-shrink-0" />
-                            )}
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="mt-2">
-                            <div className="p-4 bg-white rounded border">
-                              <p className="text-gray-600">{faq.answer}</p>
-                            </div>
-                          </CollapsibleContent>
-                        </Collapsible>
-                      ))}
-                    </div>
-                  </TabsContent>
-
                   <TabsContent value="description" className="p-6">
                     <div className="space-y-8">
                       <div>
                         <h3 className="text-xl font-bold text-[#001C71] mb-4">
-                          {"What You'll Learn"}
+                          What You will Learn
                         </h3>
                         <ul className="space-y-2">
                           {course.whatYouLearn.map((item, index) => (
@@ -528,56 +375,145 @@ export default function CourseDetailsPage() {
               <Card className="shadow-lg">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold text-[#001C71] mb-4">
-                    Select Semesters
+                    Choose Your Diploma
                   </h3>
 
-                  <div className="space-y-3 mb-6">
-                    {course.semesters.map((semester) => (
+                  <div className="space-y-4 mb-6">
+                    {[
+                      {
+                        id: "intermediate",
+                        name: "Intermediate Diploma",
+                        semesters: 2,
+                        price: 598,
+                        description:
+                          "Perfect for beginners looking to get started",
+                      },
+                      {
+                        id: "associate",
+                        name: "Associate Diploma",
+                        semesters: 4,
+                        price: 1196,
+                        description:
+                          "Comprehensive program for career advancement",
+                      },
+                    ].map((diploma) => (
                       <div
-                        key={semester.id}
-                        className={`p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
-                          selectedSemesters.includes(semester.id)
+                        key={diploma.id}
+                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                          selectedDiploma === diploma.id
                             ? "border-[#001C71] bg-[#001C71]/5"
                             : "border-gray-200 hover:border-[#0EC5C7]"
                         }`}
-                        onClick={() => toggleSemester(semester.id)}
+                        onClick={() => setSelectedDiploma(diploma.id)}
                       >
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h4 className="font-medium text-sm">
-                              {semester.name}
-                            </h4>
-                            <p className="text-xs text-gray-600">
-                              {semester.modules.length} modules
-                            </p>
-                          </div>
-                          {selectedSemesters.includes(semester.id) && (
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-[#001C71]">
+                            {diploma.name}
+                          </h4>
+                          {selectedDiploma === diploma.id && (
                             <Check className="w-5 h-5 text-[#001C71]" />
                           )}
+                        </div>
+                        <p className="text-sm text-gray-600 mb-2">
+                          {diploma.description}
+                        </p>
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-gray-600">
+                            {diploma.semesters} semesters
+                          </span>
+                          <span className="font-bold text-[#001C71]">
+                            ${diploma.price}
+                          </span>
                         </div>
                       </div>
                     ))}
                   </div>
 
                   <Button
-                    onClick={handleBuySemesters}
-                    disabled={selectedSemesters.length === 0}
+                    onClick={() => setShowEnrollmentModal(true)}
+                    disabled={!selectedDiploma}
                     className="w-full bg-[#001C71] hover:bg-[#001C71]/90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Buy Selected Semesters ({selectedSemesters.length})
+                    Enroll Now
                   </Button>
-
-                  <div className="mt-4 text-center">
-                    <p className="text-sm text-gray-600">
-                      Total: ${selectedSemesters.length * 299}
-                    </p>
-                  </div>
                 </CardContent>
               </Card>
             </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Enrollment Modal */}
+      <Dialog open={showEnrollmentModal} onOpenChange={setShowEnrollmentModal}>
+        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden">
+          <div className="max-h-[80vh] overflow-y-auto p-2 hide-scrollbar">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold text-[#001C71]">
+                Enroll in{" "}
+                {selectedDiploma === "intermediate"
+                  ? "Intermediate"
+                  : "Associate"}{" "}
+                Diploma
+              </DialogTitle>
+              <div className="flex items-center space-x-2 mt-2">
+                {[1, 2, 3].map((step) => (
+                  <div key={step} className="flex items-center">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                        step <= enrollmentStep
+                          ? "bg-[#001C71] text-white"
+                          : "bg-gray-200 text-gray-600"
+                      }`}
+                    >
+                      {step}
+                    </div>
+                    {step < 3 && (
+                      <div
+                        className={`w-8 h-0.5 ${
+                          step < enrollmentStep ? "bg-[#001C71]" : "bg-gray-200"
+                        }`}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </DialogHeader>
+
+            {/* Step 1: Personal Information */}
+            {enrollmentStep === 1 && (
+              <PersonalInfoForm
+                enrollmentData={enrollmentData}
+                setEnrollmentData={setEnrollmentData}
+                enrollmentErrors={enrollmentErrors}
+                enrollmentFiles={enrollmentFiles}
+                setEnrollmentFiles={setEnrollmentFiles}
+                handleStep1Next={handleStep1Next}
+              />
+            )}
+
+            {/* Step 2: OTP Verification */}
+            {enrollmentStep === 2 && (
+              <OtpVerification
+                otp={otp}
+                handleOtpChange={handleOtpChange}
+                handleOtpVerification={handleOtpVerification}
+                setEnrollmentStep={setEnrollmentStep}
+              />
+            )}
+
+            {/* Step 3: Payment Method */}
+            {enrollmentStep === 3 && (
+              <PaymentStep
+                enrollmentData={enrollmentData}
+                setEnrollmentData={setEnrollmentData}
+                isEnrollmentLoading={isEnrollmentLoading}
+                setEnrollmentStep={setEnrollmentStep}
+                handleEnrollmentSubmit={handleEnrollmentSubmit}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

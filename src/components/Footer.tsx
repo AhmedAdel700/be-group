@@ -11,8 +11,10 @@ import {
   Heart,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 
 export default function Footer() {
+  const locale = useLocale();
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
@@ -21,10 +23,9 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { name: "Home", href: "/" },
+    { name: "Home", href: `/${locale}` },
     { name: "Courses", href: "#courses" },
-    { name: "Sign In", href: "/signin" },
-    { name: "Register", href: "/register" },
+    { name: "Sign In", href: `/${locale}/signin` },
   ];
 
   return (
@@ -219,7 +220,7 @@ export default function Footer() {
             </motion.p>
             <motion.div whileHover={{ scale: 1.05 }}>
               <Link
-                href="/terms"
+                href={`/${locale}/terms`}
                 className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 text-sm mt-2 md:mt-0"
               >
                 Terms and Conditions

@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../components/ui/card";
-import { Eye, EyeOff, ArrowLeft, BookOpen, GraduationCap } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../../../components/ui/button";
 import { Alert, AlertDescription } from "../../../components/ui/alert";
@@ -30,6 +30,7 @@ export default function SignInPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -60,6 +61,7 @@ export default function SignInPage() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      // You can handle rememberMe here if needed
       router.push("/");
     }, 1500);
   };
@@ -167,10 +169,14 @@ export default function SignInPage() {
       >
         <div className="mb-6">
           <Link
-            href="/"
-            className="inline-flex items-center text-white hover:text-[#0EC5C7] transition-colors duration-200"
+            href={`/${locale}`}
+            className="inline-flex items-center text-white hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            {locale === "en" ? (
+              <ArrowLeft className="w-5 h-5 mr-2" />
+            ) : (
+              <ArrowRight className="w-5 h-5 me-2" />
+            )}
             Back to Home
           </Link>
         </div>
@@ -252,6 +258,23 @@ export default function SignInPage() {
                     <AlertDescription>{errors.password}</AlertDescription>
                   </Alert>
                 )}
+                <div className="flex justify-between items-center mt-2">
+                  <label className="flex items-center text-sm">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className="mr-2 accent-[#001C71]"
+                    />
+                    Remember Me
+                  </label>
+                  <Link
+                    href={`/${locale}/forgot-password`}
+                    className="text-[#001C71] hover:text-[#0EC5C7] text-sm font-medium transition-colors"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
               </motion.div>
 
               <motion.div
@@ -269,7 +292,8 @@ export default function SignInPage() {
               </motion.div>
             </form>
 
-            <motion.div
+            {/* Remove the register link below */}
+            {/* <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -284,7 +308,7 @@ export default function SignInPage() {
                   Register here
                 </Link>
               </p>
-            </motion.div>
+            </motion.div> */}
           </CardContent>
         </Card>
       </motion.div>

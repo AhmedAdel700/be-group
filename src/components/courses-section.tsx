@@ -7,115 +7,40 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
 import { useLocale } from "next-intl";
+import { courses } from "../app/(dummyData)/courseData";
 
-const courses = [
-  {
-    id: 1,
-    title: "Full Stack Web Development",
-    description:
-      "Master modern web development with React, Node.js, and MongoDB. Build real-world applications from scratch.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "12 weeks",
-    students: 1250,
-    rating: 4.8,
-    price: "$299",
-    level: "Intermediate",
+// Animation Variants (Smoother)
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
   },
-  {
-    id: 2,
-    title: "Data Science & Analytics",
-    description:
-      "Learn Python, machine learning, and data visualization to become a data science professional.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "16 weeks",
-    students: 890,
-    rating: 4.9,
-    price: "$399",
-    level: "Advanced",
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeInOut",
+    },
   },
-  {
-    id: 3,
-    title: "Digital Marketing Mastery",
-    description:
-      "Comprehensive digital marketing course covering SEO, social media, PPC, and content marketing.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "8 weeks",
-    students: 2100,
-    rating: 4.7,
-    price: "$199",
-    level: "Beginner",
-  },
-  {
-    id: 4,
-    title: "Mobile App Development",
-    description:
-      "Build native mobile apps for iOS and Android using React Native and Flutter frameworks.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "14 weeks",
-    students: 750,
-    rating: 4.8,
-    price: "$349",
-    level: "Intermediate",
-  },
-  {
-    id: 5,
-    title: "Cybersecurity Fundamentals",
-    description:
-      "Learn essential cybersecurity concepts, ethical hacking, and network security principles.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "10 weeks",
-    students: 650,
-    rating: 4.6,
-    price: "$279",
-    level: "Intermediate",
-  },
-  {
-    id: 6,
-    title: "UI/UX Design Bootcamp",
-    description:
-      "Master user interface and user experience design with industry-standard tools and methodologies.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "12 weeks",
-    students: 980,
-    rating: 4.9,
-    price: "$259",
-    level: "Beginner",
-  },
-  {
-    id: 7,
-    title: "Cloud Computing with AWS",
-    description:
-      "Become proficient in Amazon Web Services and cloud architecture for scalable applications.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "10 weeks",
-    students: 540,
-    rating: 4.7,
-    price: "$329",
-    level: "Advanced",
-  },
-  {
-    id: 8,
-    title: "Artificial Intelligence & ML",
-    description:
-      "Dive deep into AI and machine learning algorithms, neural networks, and practical applications.",
-    image: "/placeholder.svg?height=200&width=300",
-    duration: "18 weeks",
-    students: 420,
-    rating: 4.9,
-    price: "$449",
-    level: "Advanced",
-  },
-];
+};
 
 export default function CoursesSection() {
-    const locale = useLocale();
+  const locale = useLocale();
   return (
     <section id="courses" className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
@@ -128,29 +53,33 @@ export default function CoursesSection() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {courses.map((course, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+          {courses.map((course) => (
             <motion.div
               key={course.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
+              variants={cardVariants}
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full"
             >
               <div className="relative">
                 <Image
                   src={course.image || "/placeholder.svg"}
                   alt={course.title}
                   className="w-full h-48 object-cover"
-                  fill
+                  width={300}
+                  height={192}
                 />
                 <Badge className="absolute top-3 right-3 bg-[#0EC5C7] text-white">
                   {course.level}
                 </Badge>
               </div>
 
-              <div className="p-6">
+              <div className="flex flex-col p-6 flex-grow">
                 <h3 className="text-lg font-bold text-[#001C71] mb-2 line-clamp-2">
                   {course.title}
                 </h3>
@@ -179,15 +108,17 @@ export default function CoursesSection() {
                   </span>
                 </div>
 
-                <Link href={`/${locale}/course/${course.id}`}>
-                  <Button className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-colors duration-200">
-                    View Details
-                  </Button>
-                </Link>
+                <div className="mt-auto pt-4">
+                  <Link href={`/${locale}/course/${course.id}`}>
+                    <Button className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-colors duration-200">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
