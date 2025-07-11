@@ -1,7 +1,7 @@
 "use client";
 
 import { courses } from "@/app/(dummyData)/courseData";
-import { motion } from "framer-motion";
+import { motion, easeInOut } from "framer-motion";
 import { Clock, Star, Users } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
-// Animation Variants (Smoother)
+// Animation Variants 
 const containerVariants = {
   hidden: {},
   show: {
@@ -27,7 +27,7 @@ const cardVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: "easeInOut",
+      ease: easeInOut,
     },
   },
 };
