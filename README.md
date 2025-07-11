@@ -1,5 +1,6 @@
 # Se-University
 
+
 **Se-University** is a modern, multilingual online education platform designed to empower learners worldwide with high-quality, accessible, and engaging diploma programs. Built with Next.js, React, and Tailwind CSS, it offers expertly crafted diplomas in fields like Full Stack Web Development, Data Science, UI/UX Design, and more. The platform features a seamless enrollment process, multi-step forms, payment integration, and a fully responsive, accessible UI.
 
 ## 🌍 Mission & Vision
