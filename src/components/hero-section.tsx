@@ -27,7 +27,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative pt-32 pb-16 xl:pb-0 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] text-white overflow-hidden">
+    <section className="relative pt-32 pb-16 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Books */}
@@ -144,26 +144,28 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="flex flex-col gap-8"
           >
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="inline-flex items-center px-4 py-2 bg-[#0EC5C7]/20 rounded-full border border-[#0EC5C7]/30"
+                className="inline-flex items-center w-fit px-4 py-2 bg-[#0EC5C7]/20 rounded-full border border-[#0EC5C7]/30"
               >
-                <GraduationCap className="w-5 h-5 text-[#0EC5C7] mr-2" />
-                <span className="text-sm font-medium text-[#0EC5C7]">
-                  {t("Transform Your Future Today")}
-                </span>
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="w-5 h-5 text-[#0EC5C7]" />
+                  <span className="text-sm font-medium text-[#0EC5C7]">
+                    {t("Transform Your Future Today")}
+                  </span>
+                </div>
               </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold !leading-tight"
               >
                 {t("Master New Skills with")}
                 <motion.span
@@ -208,12 +210,14 @@ export default function HeroSection() {
                 onClick={scrollToCourses}
                 className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/90 text-[#001C71] font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group"
               >
-                {t("Explore Diplomas")}
-                {locale === "en" ? (
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                ) : (
-                  <ArrowLeft className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                )}
+                <div className="flex items-center gap-2">
+                  {t("Explore Diplomas")}
+                  {locale === "en" ? (
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  ) : (
+                    <ArrowLeft className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  )}
+                </div>
               </Button>
               <Button
                 size="lg"
@@ -228,19 +232,21 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="grid grid-cols-3 gap-8 pt-8"
+              className="grid grid-cols-3 gap-8"
             >
               <motion.div
                 className="text-center"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <BookOpen className="w-6 h-6 text-[#0EC5C7]" />
-                </div>
-                <div className="text-2xl font-bold">50+</div>
-                <div className="text-sm text-gray-300">
-                  {t("Explore Diplomas")}
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-[#0EC5C7]" />
+                  </div>
+                  <div className="text-2xl font-bold">50+</div>
+                  <div className="text-sm text-gray-300">
+                    {t("Explore Diplomas")}
+                  </div>
                 </div>
               </motion.div>
               <motion.div
@@ -248,22 +254,30 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Users className="w-6 h-6 text-[#0EC5C7]" />
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center">
+                    <Users className="w-6 h-6 text-[#0EC5C7]" />
+                  </div>
+                  <div className="text-2xl font-bold">10K+</div>
+                  <div className="text-sm text-gray-300">
+                    {t("Happy Students")}
+                  </div>
                 </div>
-                <div className="text-2xl font-bold">10K+</div>
-                <div className="text-sm text-gray-300">{t("Happy Students")}</div>
               </motion.div>
               <motion.div
                 className="text-center"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Award className="w-6 h-6 text-[#0EC5C7]" />
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center">
+                    <Award className="w-6 h-6 text-[#0EC5C7]" />
+                  </div>
+                  <div className="text-2xl font-bold">95%</div>
+                  <div className="text-sm text-gray-300">
+                    {t("Success Rate")}
+                  </div>
                 </div>
-                <div className="text-2xl font-bold">95%</div>
-                <div className="text-sm text-gray-300">{t("Success Rate")}</div>
               </motion.div>
             </motion.div>
           </motion.div>

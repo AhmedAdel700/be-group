@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 export default function AboutSection() {
   const t = useTranslations("about");
+
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,30 +15,31 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="flex flex-col items-center text-center gap-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#001C71] mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#001C71]">
             {t("About Se-University")}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
             {t(
               "We are dedicated to providing world-class education that empowers students to achieve their dreams and build successful careers in the digital age"
             )}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="mt-16 grid md:grid-cols-3 gap-8">
+          {/* Mission */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 gap-4"
           >
-            <div className="w-16 h-16 bg-[#001C71] rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-[#001C71] rounded-full flex items-center justify-center">
               <Target className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-[#001C71] mb-4">
+            <h3 className="text-xl font-bold text-[#001C71]">
               {t("Our Mission")}
             </h3>
             <p className="text-gray-600 leading-relaxed">
@@ -47,17 +49,18 @@ export default function AboutSection() {
             </p>
           </motion.div>
 
+          {/* Vision */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 gap-4"
           >
-            <div className="w-16 h-16 bg-[#0EC5C7] rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-[#0EC5C7] rounded-full flex items-center justify-center">
               <Eye className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-[#001C71] mb-4">
+            <h3 className="text-xl font-bold text-[#001C71]">
               {t("Our Vision")}
             </h3>
             <p className="text-gray-600 leading-relaxed">
@@ -67,17 +70,18 @@ export default function AboutSection() {
             </p>
           </motion.div>
 
+          {/* Values */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 gap-4"
           >
-            <div className="w-16 h-16 bg-[#5F289E] rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-[#5F289E] rounded-full flex items-center justify-center">
               <Heart className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-[#001C71] mb-4">
+            <h3 className="text-xl font-bold text-[#001C71]">
               {t("Our Values")}
             </h3>
             <p className="text-gray-600 leading-relaxed">

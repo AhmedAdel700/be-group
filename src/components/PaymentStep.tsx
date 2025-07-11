@@ -19,7 +19,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
   setEnrollmentStep,
   handleEnrollmentSubmit,
 }) => (
-  <div className="space-y-4 mt-4">
+  <div className="flex flex-col gap-4">
     <h3 className="font-semibold text-[#001C71]">Payment Information</h3>
     <div className="grid grid-cols-2 gap-3 mb-4">
       {[
@@ -49,7 +49,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     </div>
 
     {enrollmentData.paymentMethod && (
-      <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+      <div className=" p-4 bg-gray-50 rounded-lg">
         {enrollmentData.paymentMethod === "mastercard" && (
           <>
             <div>
@@ -181,18 +181,18 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
       </div>
     )}
 
-    <div className="flex space-x-2">
+    <div className="flex justify-end gap-4">
       <Button
         variant="outline"
         onClick={() => setEnrollmentStep(2)}
-        className="flex-1"
+        
       >
         Back
       </Button>
       <Button
         onClick={handleEnrollmentSubmit}
         disabled={isEnrollmentLoading}
-        className="flex-1 bg-[#001C71] hover:bg-[#001C71]/90"
+        className="bg-[#001C71] hover:bg-[#001C71]/90"
       >
         {isEnrollmentLoading ? "Processing..." : "Complete Enrollment"}
       </Button>

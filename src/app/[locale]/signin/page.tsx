@@ -83,7 +83,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] flex items-center justify-center relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Books */}
@@ -175,150 +175,134 @@ export default function SignInPage() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="mb-6">
+        <div className="flex flex-col gap-6">
           <Link
             href={`/${locale}`}
-            className="inline-flex items-center text-white hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
+            className="inline-flex items-center gap-2 text-white hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
           >
             {locale === "en" ? (
-              <ArrowLeft className="w-5 h-5 mr-2" />
+              <ArrowLeft className="w-5 h-5" />
             ) : (
-              <ArrowRight className="w-5 h-5 me-2" />
+              <ArrowRight className="w-5 h-5" />
             )}
             {t("Back to Home")}
           </Link>
-        </div>
 
-        <Card className="shadow-2xl bg-white/95 backdrop-blur-sm border-0">
-          <CardHeader className="text-center">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-              className="w-16 h-16 bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <span className="text-white font-bold text-xl">SU</span>
-            </motion.div>
-            <CardTitle className="text-2xl font-bold text-[#001C71]">
-              {t("Welcome Back")}
-            </CardTitle>
-            <CardDescription>
-              {t("Sign in to your Se-University account")}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <Card className="shadow-2xl bg-white/95 backdrop-blur-sm border-0">
+            <CardHeader className="text-center">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="space-y-2"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+                className="w-16 h-16 bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-full flex items-center justify-center"
               >
-                <Label htmlFor="email">{t("Email")}</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder={t("Enter your email")}
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={errors.email ? "border-red-500" : ""}
-                />
-                {errors.email && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{errors.email}</AlertDescription>
-                  </Alert>
-                )}
+                <span className="text-white font-bold text-xl">SU</span>
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="space-y-2"
-              >
-                <Label htmlFor="password">{t("Password")}</Label>
-                <div className="relative">
+              <CardTitle className="text-2xl font-bold text-[#001C71]">
+                {t("Welcome Back")}
+              </CardTitle>
+              <CardDescription>
+                {t("Sign in to your Se-University account")}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="flex flex-col gap-2"
+                >
+                  <Label htmlFor="email">{t("Email")}</Label>
                   <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder={t("Enter your password")}
-                    value={formData.password}
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder={t("Enter your email")}
+                    value={formData.email}
                     onChange={handleInputChange}
-                    className={errors.password ? "border-red-500" : ""}
+                    className={errors.email ? "border-red-500" : ""}
                   />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4" />
-                    ) : (
-                      <Eye className="w-4 h-4" />
-                    )}
-                  </Button>
-                </div>
-                {errors.password && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{errors.password}</AlertDescription>
-                  </Alert>
-                )}
-                <div className="flex justify-between items-center mt-2">
-                  <label className="flex items-center text-sm">
-                    <input
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={(e) => setRememberMe(e.target.checked)}
-                      className="mr-2 accent-[#001C71]"
+                  {errors.email && (
+                    <Alert variant="destructive">
+                      <AlertDescription>{errors.email}</AlertDescription>
+                    </Alert>
+                  )}
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex flex-col gap-2"
+                >
+                  <Label htmlFor="password">{t("Password")}</Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("Enter your password")}
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      className={errors.password ? "border-red-500" : ""}
                     />
-                    {t("Remember Me")}
-                  </label>
-                  <Link
-                    href={`/${locale}/forgot-password`}
-                    className="text-[#001C71] hover:text-[#0EC5C7] text-sm font-medium transition-colors"
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className={`absolute top-0 h-full hover:bg-transparent ${
+                        locale === "en" ? "right-0" : "left-0"
+                      }`}
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </Button>
+                  </div>
+                  {errors.password && (
+                    <Alert variant="destructive">
+                      <AlertDescription>{errors.password}</AlertDescription>
+                    </Alert>
+                  )}
+                  <div className="flex justify-between items-center">
+                    <label className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        className="accent-[#001C71]"
+                      />
+                      {t("Remember Me")}
+                    </label>
+                    <Link
+                      href={`/${locale}/forgot-password`}
+                      className="text-[#001C71] hover:text-[#0EC5C7] text-sm font-medium transition-colors"
+                    >
+                      {t("Forgot Password")}
+                    </Link>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-all duration-300 transform hover:scale-105"
+                    disabled={isLoading}
                   >
-                    {t("Forgot Password")}
-                  </Link>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <Button
-                  type="submit"
-                  className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-all duration-300 transform hover:scale-105"
-                  disabled={isLoading}
-                >
-                  {isLoading ? t("Signing In") : t("Sign In")}
-                </Button>
-              </motion.div>
-            </form>
-
-            {/* Remove the register link below */}
-            {/* <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-6 text-center"
-            >
-              <p className="text-sm text-gray-600">
-                {"Don't have an account?"}
-                <Link
-                  href={`/${locale}/register`}
-                  className="text-[#001C71] hover:text-[#0EC5C7] font-medium transition-colors"
-                >
-                  Register here
-                </Link>
-              </p>
-            </motion.div> */}
-          </CardContent>
-        </Card>
+                    {isLoading ? t("Signing In") : t("Sign In")}
+                  </Button>
+                </motion.div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </motion.div>
     </div>
   );

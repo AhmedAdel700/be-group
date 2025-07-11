@@ -84,21 +84,20 @@ export default function MainHeader() {
     return (
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-24">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4">
-              <div className="w-8 h-8 flex items-center justify-center">
+              <div className="w-24 h-24 flex items-center justify-center">
                 <Image
-                  src="@/app/assets/university-logo.svg"
+                  src={universityLogo}
                   alt="Logo"
-                  width={32}
-                  height={32}
+                  width={250}
+                  height={250}
                 />
               </div>
-              
             </Link>
             {/* Header Actions */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
               <Button
                 variant="outline"
                 size="sm"
@@ -141,7 +140,7 @@ export default function MainHeader() {
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 font-medium">
+          <nav className="hidden md:flex items-center gap-4 font-medium">
             <button
               onClick={() => scrollToSection("courses")}
               className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
