@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import {
   Facebook,
-  Heart,
   Instagram,
   Linkedin,
   Mail,
@@ -206,27 +205,18 @@ export default function Footer() {
             className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
           >
             <motion.p
-              className="text-gray-300 text-sm flex items-center"
+              className="text-gray-300 text-sm flex items-center gap-1"
               whileHover={{ scale: 1.05 }}
             >
-              © {new Date().getFullYear()} {t("Se-University")}. {t("Made with")}{" "}
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
-                className="mx-1"
-              >
-                <Heart className="w-4 h-4 text-red-500 fill-current" />
-              </motion.span>{" "}
-              {t("for learners worldwide")}
-            </motion.p>
-            <motion.div whileHover={{ scale: 1.05 }}>
+              {t("All rights reserved")} © {t("Se-University")}{" "}
+              {new Date().getFullYear()}. {t("Developed by")}{" "}
               <Link
-                href={`/${locale}/terms`}
-                className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 text-sm mt-2 md:mt-0"
+                className="hover:text-[#0EC5C7]"
+                href="https://betech.com.sa/"
               >
-                {t("Terms and Conditions")}
+                {t("Be Tech")}
               </Link>
-            </motion.div>
+            </motion.p>
           </motion.div>
         </div>
       </div>

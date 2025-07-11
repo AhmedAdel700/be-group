@@ -68,6 +68,14 @@
   }
 }
 
+html[lang='ar'] * {
+  font-family: var(--ar-font-family), sans-serif !important;
+}
+
+html[lang='en'] * {
+  font-family: var(--en-font-family), sans-serif !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

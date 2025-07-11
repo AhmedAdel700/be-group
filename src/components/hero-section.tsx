@@ -27,7 +27,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative pt-24 pb-16 xl:pb-0 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] text-white overflow-hidden">
+    <section className="relative pt-32 pb-16 xl:pb-0 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Books */}
