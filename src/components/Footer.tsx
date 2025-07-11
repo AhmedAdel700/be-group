@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import {
   Facebook,
-  Heart,
   Instagram,
   Linkedin,
   Mail,
@@ -24,9 +23,9 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { name: "Home", href: `/${locale}` },
-    { name: "Courses", href: "#courses" },
-    { name: "Sign In", href: `/${locale}/signin` },
+    { name: t("Home"), href: `/${locale}` },
+    { name: t("Diplomas"), href: "#diplomas" },
+    { name: t("Sign In"), href: `/${locale}/signin` },
   ];
 
   return (
@@ -96,7 +95,7 @@ export default function Footer() {
               viewport={{ once: true }}
               className="md:col-span-2"
             >
-              <Link href="/" className="flex items-center space-x-2 mb-4">
+              <Link href="/" className="flex items-center gap-2 mb-4">
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
@@ -122,7 +121,7 @@ export default function Footer() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="flex space-x-4"
+                className="flex gap-4"
               >
                 {socialLinks.map((social) => (
                   <motion.a
@@ -149,7 +148,7 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-[#0EC5C7]">
                 {t("Quick Links")}
               </h3>
-              <ul className="space-y-2">
+              <ul className="flex flex-col gap-2">
                 {quickLinks.map((link, index) => (
                   <motion.li
                     key={link.name}
@@ -179,17 +178,17 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-[#0EC5C7]">
                 {t("Contact Us")}
               </h3>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
                 >
                   <Mail className="w-5 h-5 text-[#0EC5C7]" />
                   <span>info@se-university.com</span>
                 </motion.div>
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5 text-[#0EC5C7]" />
                   <span>+1 (555) 123-4567</span>
@@ -206,27 +205,18 @@ export default function Footer() {
             className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
           >
             <motion.p
-              className="text-gray-300 text-sm flex items-center"
+              className="text-gray-300 text-sm flex items-center gap-1"
               whileHover={{ scale: 1.05 }}
             >
-              © {new Date().getFullYear()} {t("Se-University")}. {t("Made with")}{" "}
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
-                className="mx-1"
-              >
-                <Heart className="w-4 h-4 text-red-500 fill-current" />
-              </motion.span>{" "}
-              {t("for learners worldwide")}
-            </motion.p>
-            <motion.div whileHover={{ scale: 1.05 }}>
+              {t("All rights reserved")} © {t("Se-University")}{" "}
+              {new Date().getFullYear()}. {t("Developed by")}{" "}
               <Link
-                href={`/${locale}/terms`}
-                className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 text-sm mt-2 md:mt-0"
+                className="hover:text-[#0EC5C7]"
+                href="https://betech.com.sa/"
               >
-                {t("Terms and Conditions")}
+                {t("Be Tech")}
               </Link>
-            </motion.div>
+            </motion.p>
           </motion.div>
         </div>
       </div>

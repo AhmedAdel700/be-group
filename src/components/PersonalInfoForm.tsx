@@ -25,12 +25,12 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
 }) => {
   const t = useTranslations("enroll");
   return (
-    <div className="space-y-4 mt-4">
+    <div className="flex flex-col gap-4">
       <h3 className="font-semibold text-[#001C71]">
         {t("Personal Information")}
       </h3>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
+      <div className="grid grid-cols-2 gap-6">
+        <div className="flex flex-col gap-4">
           <Label htmlFor="firstName">{t("First Name")} *</Label>
           <Input
             id="firstName"
@@ -47,7 +47,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             <p className="text-sm text-red-500">{enrollmentErrors.firstName}</p>
           )}
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           <Label htmlFor="middleName">{t("Middle Name")}</Label>
           <Input
             id="middleName"
@@ -61,7 +61,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           />
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <Label htmlFor="lastName">{t("Last Name")} *</Label>
         <Input
           id="lastName"
@@ -78,7 +78,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.lastName}</p>
         )}
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <Label htmlFor="nationalId">{t("National ID")} *</Label>
         <Input
           id="nationalId"
@@ -95,7 +95,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.nationalId}</p>
         )}
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <Label htmlFor="phoneNumber">{t("Phone Number")} *</Label>
         <Input
           id="phoneNumber"
@@ -112,7 +112,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.phoneNumber}</p>
         )}
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <Label htmlFor="email">{t("Email")} *</Label>
         <Input
           id="email"
@@ -130,7 +130,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.email}</p>
         )}
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <Label htmlFor="password">{t("Password")} *</Label>
         <Input
           id="password"
@@ -148,7 +148,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.password}</p>
         )}
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <Label htmlFor="files">{t("Upload Documents")}</Label>
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
           <Input
