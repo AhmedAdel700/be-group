@@ -1,20 +1,18 @@
 "use client";
 
+import hero from "@/app/assets/hero.png";
 import { motion } from "framer-motion";
 import {
+  ArrowLeft,
   ArrowRight,
   BookOpen,
-  Users,
-  Award,
   GraduationCap,
   Lightbulb,
   Target,
-  ArrowLeft,
 } from "lucide-react";
-import { Button } from "./ui/button";
-import Image from "next/image";
-import hero from "@/app/assets/hero.png";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { Button } from "./ui/button";
 
 export default function HeroSection() {
   const locale = useLocale();
@@ -215,20 +213,13 @@ export default function HeroSection() {
                   {locale === "en" ? (
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   ) : (
-                    <ArrowLeft className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                   )}
                 </div>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-[#001C71] px-8 py-4 rounded-xl transition-all duration-300 bg-transparent hover:shadow-2xl"
-              >
-                {t("Watch Demo")}
-              </Button>
             </motion.div>
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
@@ -279,7 +270,7 @@ export default function HeroSection() {
                   </div>
                 </div>
               </motion.div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           <motion.div

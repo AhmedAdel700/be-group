@@ -1,11 +1,26 @@
-import placeholder from '@/app/assets/placeholder.png';
+import accountingTechniques from "@/app/assets/accountingTechniques.jpeg";
+import artificialIntelligence from "@/app/assets/artificialIntelligence.jpg";
+import digitalmedia from "@/app/assets/digitalmedia.jpg";
+import entrepreneurship from "@/app/assets/entrepreneurship.jpg";
+import executiveManagement from "@/app/assets/executiveManagement.jpg";
+import humanResources from "@/app/assets/humanResources.jpg";
+import laborMarket from "@/app/assets/laborMarket.jpeg";
+import skillsManagement from "@/app/assets/skillsManagement.jpg";
+
 export const courseData = {
   1: {
-    title: "Full Stack Web Development",
-    description:
-      "Master modern web development with React, Node.js, and MongoDB. Build real-world applications from scratch and become a professional full-stack developer.",
-    image: placeholder,
-    startDate: "2024-02-15",
+    title: "Diploma in Innovation and Entrepreneurship",
+    titleAr: "دبلوم الابتكار وريادة الأعمال",
+    image: entrepreneurship,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "16,000",
+    semester: "4,000",
     endDate: "2024-05-15",
     available: true,
     rating: 4.8,
@@ -20,6 +35,15 @@ export const courseData = {
       "Authentication and authorization systems",
       "Deployment strategies and DevOps basics",
     ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
+    ],
     benefits: [
       "Build a complete portfolio of real-world projects",
       "Gain skills demanded by top tech companies",
@@ -28,6 +52,14 @@ export const courseData = {
       "Get personalized career guidance and mentorship",
       "Access to exclusive job placement assistance",
     ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
+    ],
     whoShouldTake: [
       "Beginners with basic HTML/CSS knowledge",
       "Frontend developers wanting to learn backend",
@@ -35,28 +67,29 @@ export const courseData = {
       "Students seeking practical programming skills",
       "Entrepreneurs building their own products",
     ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
+    ],
     semesters: [
       {
         id: 1,
         name: "Semester 1: Frontend Foundations",
         modules: [
           {
-            name: "HTML5 & CSS3 Mastery",
-            startDate: "2024-02-15",
-            endDate: "2024-02-28",
-            instructor: "John Smith",
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
           },
           {
-            name: "JavaScript Fundamentals",
-            startDate: "2024-03-01",
-            endDate: "2024-03-15",
-            instructor: "Jane Doe",
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
           },
           {
-            name: "React.js Basics",
+            name: "🗓️ 🚀 From Discovery to Launch",
             startDate: "2024-03-16",
-            endDate: "2024-03-31",
-            instructor: "Dr. Sarah Johnson",
           },
         ],
       },
@@ -65,22 +98,16 @@ export const courseData = {
         name: "Semester 2: Advanced Frontend",
         modules: [
           {
-            name: "Advanced React Patterns",
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
             startDate: "2024-04-01",
-            endDate: "2024-04-15",
-            instructor: "Dr. Sarah Johnson",
           },
           {
-            name: "State Management with Redux",
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
             startDate: "2024-04-16",
-            endDate: "2024-04-30",
-            instructor: "Mike Wilson",
           },
           {
-            name: "Testing React Applications",
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
             startDate: "2024-05-01",
-            endDate: "2024-05-15",
-            instructor: "Lisa Chen",
           },
         ],
       },
@@ -89,22 +116,16 @@ export const courseData = {
         name: "Semester 3: Backend Development",
         modules: [
           {
-            name: "Node.js & Express.js",
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
             startDate: "2024-05-16",
-            endDate: "2024-05-31",
-            instructor: "Robert Brown",
           },
           {
-            name: "Database Design with MongoDB",
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
             startDate: "2024-06-01",
-            endDate: "2024-06-15",
-            instructor: "Emily Davis",
           },
           {
-            name: "RESTful API Development",
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
             startDate: "2024-06-16",
-            endDate: "2024-06-30",
-            instructor: "David Lee",
           },
         ],
       },
@@ -113,26 +134,95 @@ export const courseData = {
         name: "Semester 4: Full Stack Integration",
         modules: [
           {
-            name: "Authentication & Security",
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
             startDate: "2024-07-01",
-            endDate: "2024-07-15",
-            instructor: "Dr. Sarah Johnson",
           },
           {
-            name: "Deployment & DevOps",
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
             startDate: "2024-07-16",
-            endDate: "2024-07-31",
-            instructor: "Alex Turner",
           },
           {
-            name: "Capstone Project",
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
             startDate: "2024-08-01",
-            endDate: "2024-08-15",
-            instructor: "Dr. Sarah Johnson",
           },
         ],
       },
     ],
+    semestersAr: [
+      {
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+
     reviews: [
       {
         name: "Ahmed Hassan",
@@ -150,381 +240,1899 @@ export const courseData = {
         text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
       },
     ],
-    faqs: [
+    reviewsAr: [
       {
-        question: "Do I need prior programming experience?",
-        answer:
-          "Basic knowledge of HTML and CSS is recommended, but we start from the fundamentals and build up gradually.",
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
       },
       {
-        question: "How much time should I dedicate per week?",
-        answer:
-          "We recommend 10-15 hours per week for optimal learning, but the course is self-paced so you can adjust as needed.",
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
       },
       {
-        question: "Will I get a certificate upon completion?",
-        answer:
-          "Yes, you will receive a verified certificate that you can add to your LinkedIn profile and resume.",
-      },
-      {
-        question: "Is there job placement assistance?",
-        answer:
-          "Yes, we provide career guidance, resume review, interview preparation, and access to our job placement network.",
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
       },
     ],
   },
   2: {
-    title: "Data Science & Machine Learning",
-    description:
-      "Dive into data analysis, visualization, and machine learning with Python. Learn to build predictive models and gain insights from real-world datasets.",
-    image: placeholder,
-    startDate: "2024-03-01",
+    title: "Diploma in Digital Media and Content Creation",
+    titleAr: "دبلوم الإعلام الرقمي وصناعة المحتوي",
+    image: digitalmedia,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
     endDate: "2024-06-01",
     available: true,
     rating: 4.7,
     totalReviews: 180,
     instructor: "Dr. Omar El-Sayed",
     whatYouLearn: [
-      "Python programming for data science",
-      "Data cleaning and preprocessing",
-      "Exploratory data analysis and visualization",
-      "Supervised and unsupervised machine learning",
-      "Model evaluation and selection",
-      "Deep learning basics",
-      "Deploying ML models to production",
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
     ],
     benefits: [
-      "Work with real datasets from industry",
-      "Build a portfolio of data science projects",
-      "Prepare for data science interviews",
-      "Access to Kaggle competitions and resources",
-      "Mentorship from experienced data scientists",
-      "Job placement support in analytics roles",
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
     ],
     whoShouldTake: [
-      "Aspiring data scientists",
-      "Analysts wanting to upskill",
-      "Developers interested in AI/ML",
-      "Students in STEM fields",
-      "Professionals transitioning to data roles",
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
     ],
     semesters: [
       {
         id: 1,
-        name: "Semester 1: Python & Data Analysis",
+        name: "Semester 1: Frontend Foundations",
         modules: [
           {
-            name: "Python Basics",
-            startDate: "2024-03-01",
-            endDate: "2024-03-14",
-            instructor: "Dr. Omar El-Sayed",
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
           },
           {
-            name: "Data Wrangling",
-            startDate: "2024-03-15",
-            endDate: "2024-03-28",
-            instructor: "Sara Ali",
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
           },
           {
-            name: "Data Visualization",
-            startDate: "2024-03-29",
-            endDate: "2024-04-10",
-            instructor: "Mohamed Fathy",
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
           },
         ],
       },
       {
         id: 2,
-        name: "Semester 2: Machine Learning Foundations",
+        name: "Semester 2: Advanced Frontend",
         modules: [
           {
-            name: "Supervised Learning",
-            startDate: "2024-04-11",
-            endDate: "2024-04-25",
-            instructor: "Dr. Omar El-Sayed",
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
           },
           {
-            name: "Unsupervised Learning",
-            startDate: "2024-04-26",
-            endDate: "2024-05-10",
-            instructor: "Sara Ali",
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
           },
           {
-            name: "Model Evaluation",
-            startDate: "2024-05-11",
-            endDate: "2024-05-20",
-            instructor: "Mohamed Fathy",
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
           },
         ],
       },
       {
         id: 3,
-        name: "Semester 3: Deep Learning & Deployment",
+        name: "Semester 3: Backend Development",
         modules: [
           {
-            name: "Neural Networks Basics",
-            startDate: "2024-05-21",
-            endDate: "2024-05-31",
-            instructor: "Dr. Omar El-Sayed",
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
           },
           {
-            name: "Model Deployment",
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
             startDate: "2024-06-01",
-            endDate: "2024-06-10",
-            instructor: "Sara Ali",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
           },
         ],
       },
     ],
-    reviews: [
+    semestersAr: [
       {
-        name: "Fatima Noor",
-        rating: 5,
-        text: "A fantastic introduction to data science. The projects were practical and the support was excellent!",
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
       },
       {
-        name: "Ali Mahmoud",
-        rating: 4,
-        text: "Great course, but I wish there were more deep learning modules. Still, I learned a lot!",
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
       },
     ],
-    faqs: [
+
+    reviews: [
       {
-        question: "Do I need to know Python before starting?",
-        answer:
-          "No, we start from the basics and quickly ramp up to data science applications.",
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
       },
       {
-        question: "Are there real-world projects?",
-        answer:
-          "Yes, each semester includes hands-on projects with real datasets.",
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
       },
       {
-        question: "Is this course suitable for beginners?",
-        answer:
-          "Absolutely! The course is designed for those new to data science.",
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
       },
     ],
   },
   3: {
-    title: "UI/UX Design Bootcamp",
-    description:
-      "Learn the principles of user interface and user experience design. Create beautiful, user-friendly digital products from concept to prototype.",
-    image: placeholder,
-    startDate: "2024-04-01",
+    title: "Executive Management Diploma",
+    titleAr: "دبلوم الإدارة التنفيذية",
+    image: executiveManagement,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
     endDate: "2024-07-01",
     available: false,
     rating: 4.6,
     totalReviews: 95,
     instructor: "Layla Hassan",
     whatYouLearn: [
-      "UI/UX fundamentals and best practices",
-      "Wireframing and prototyping",
-      "User research and personas",
-      "Design systems and accessibility",
-      "Figma and design tools",
-      "Usability testing",
-      "Portfolio development",
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
     ],
     benefits: [
-      "Build a professional design portfolio",
-      "Learn from industry experts",
-      "Access to design job boards",
-      "1:1 feedback on your projects",
-      "Community design critiques",
-      "Certificate of completion",
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
     ],
     whoShouldTake: [
-      "Aspiring UI/UX designers",
-      "Graphic designers moving to digital",
-      "Product managers",
-      "Developers interested in design",
-      "Entrepreneurs building digital products",
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
     ],
     semesters: [
       {
         id: 1,
-        name: "Semester 1: UI/UX Foundations",
+        name: "Semester 1: Frontend Foundations",
         modules: [
           {
-            name: "Design Principles",
-            startDate: "2024-04-01",
-            endDate: "2024-04-14",
-            instructor: "Layla Hassan",
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
           },
           {
-            name: "User Research",
-            startDate: "2024-04-15",
-            endDate: "2024-04-28",
-            instructor: "Omar Khaled",
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
           },
         ],
       },
       {
         id: 2,
-        name: "Semester 2: Prototyping & Tools",
+        name: "Semester 2: Advanced Frontend",
         modules: [
           {
-            name: "Wireframing & Prototyping",
-            startDate: "2024-05-01",
-            endDate: "2024-05-14",
-            instructor: "Layla Hassan",
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
           },
           {
-            name: "Figma Essentials",
-            startDate: "2024-05-15",
-            endDate: "2024-05-28",
-            instructor: "Omar Khaled",
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
           },
         ],
       },
       {
         id: 3,
-        name: "Semester 3: Advanced Design & Portfolio",
+        name: "Semester 3: Backend Development",
         modules: [
           {
-            name: "Design Systems",
-            startDate: "2024-06-01",
-            endDate: "2024-06-14",
-            instructor: "Layla Hassan",
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
           },
           {
-            name: "Portfolio Project",
-            startDate: "2024-06-15",
-            endDate: "2024-07-01",
-            instructor: "Omar Khaled",
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
           },
         ],
       },
     ],
-    reviews: [
+    semestersAr: [
       {
-        name: "Sara Ibrahim",
-        rating: 5,
-        text: "I landed my first design internship after this bootcamp! The portfolio help was invaluable.",
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
       },
       {
-        name: "Mohamed Salah",
-        rating: 4,
-        text: "Great for beginners. I wish there were more advanced topics, but overall very helpful.",
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
       },
     ],
-    faqs: [
+
+    reviews: [
       {
-        question: "Do I need to know how to draw?",
-        answer:
-          "No drawing skills required! We focus on digital design and user experience.",
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
       },
       {
-        question: "Is Figma provided?",
-        answer:
-          "We provide free access to Figma for all students during the course.",
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
       },
       {
-        question: "Can I join if I have no design background?",
-        answer:
-          "Yes, this bootcamp is beginner-friendly and covers all the basics.",
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
+      },
+    ],
+  },
+  4: {
+    title: "Diploma in Modern Accounting Techniques",
+    titleAr: "دبلوم تقنيات المحاسبة الحديثة",
+    image: accountingTechniques,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "16,000",
+    semester: "4,000",
+    endDate: "2024-07-01",
+    available: false,
+    rating: 4.6,
+    totalReviews: 95,
+    instructor: "Layla Hassan",
+    whatYouLearn: [
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
+    ],
+    benefits: [
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
+    ],
+    whoShouldTake: [
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
+    ],
+    semesters: [
+      {
+        id: 1,
+        name: "Semester 1: Frontend Foundations",
+        modules: [
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "Semester 2: Advanced Frontend",
+        modules: [
+          {
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "Semester 3: Backend Development",
+        modules: [
+          {
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+    semestersAr: [
+      {
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+
+    reviews: [
+      {
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
+      },
+      {
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
+      },
+      {
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
+      },
+    ],
+  },
+  5: {
+    title: "Diploma in Human Resources Management",
+    titleAr: "دبلوم إدارة الموارد البشرية",
+    image: humanResources,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "16,000",
+    semester: "4,000",
+    endDate: "2024-07-01",
+    available: false,
+    rating: 4.6,
+    totalReviews: 95,
+    instructor: "Layla Hassan",
+    whatYouLearn: [
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
+    ],
+    benefits: [
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
+    ],
+    whoShouldTake: [
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
+    ],
+    semesters: [
+      {
+        id: 1,
+        name: "Semester 1: Frontend Foundations",
+        modules: [
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "Semester 2: Advanced Frontend",
+        modules: [
+          {
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "Semester 3: Backend Development",
+        modules: [
+          {
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+    semestersAr: [
+      {
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+
+    reviews: [
+      {
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
+      },
+      {
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
+      },
+      {
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
+      },
+    ],
+  },
+  6: {
+    title: "Diploma in Generative Artificial Intelligence",
+    titleAr: "دبلوم الذكاء الإصطناعي التوليدي",
+    image: artificialIntelligence,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "20,000",
+    semester: "5,000",
+    endDate: "2024-07-01",
+    available: false,
+    rating: 4.6,
+    totalReviews: 95,
+    instructor: "Layla Hassan",
+    whatYouLearn: [
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
+    ],
+    benefits: [
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
+    ],
+    whoShouldTake: [
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
+    ],
+    semesters: [
+      {
+        id: 1,
+        name: "Semester 1: Frontend Foundations",
+        modules: [
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "Semester 2: Advanced Frontend",
+        modules: [
+          {
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "Semester 3: Backend Development",
+        modules: [
+          {
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+    semestersAr: [
+      {
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+
+    reviews: [
+      {
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
+      },
+      {
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
+      },
+      {
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
+      },
+    ],
+  },
+  7: {
+    title: "Diploma in Organizational Skills Management",
+    titleAr: "دبلوم إدارة المهارات في المنظمات",
+    image: skillsManagement,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
+    endDate: "2024-07-01",
+    available: false,
+    rating: 4.6,
+    totalReviews: 95,
+    instructor: "Layla Hassan",
+    whatYouLearn: [
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
+    ],
+    benefits: [
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
+    ],
+    whoShouldTake: [
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
+    ],
+    semesters: [
+      {
+        id: 1,
+        name: "Semester 1: Frontend Foundations",
+        modules: [
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "Semester 2: Advanced Frontend",
+        modules: [
+          {
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "Semester 3: Backend Development",
+        modules: [
+          {
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+    semestersAr: [
+      {
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+
+    reviews: [
+      {
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
+      },
+      {
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
+      },
+      {
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
+      },
+    ],
+  },
+  8: {
+    title: "Diploma in Labor Market Economics",
+    titleAr: "دبلوم إقتصاديات سوق العمل",
+    image: laborMarket,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
+    endDate: "2024-07-01",
+    available: false,
+    rating: 4.6,
+    totalReviews: 95,
+    instructor: "Layla Hassan",
+    whatYouLearn: [
+      "Modern JavaScript ES6+ features and best practices",
+      "React.js fundamentals and advanced concepts",
+      "Node.js and Express.js backend development",
+      "MongoDB database design and operations",
+      "RESTful API development and integration",
+      "Authentication and authorization systems",
+      "Deployment strategies and DevOps basics",
+    ],
+    whatYouLearnAr: [
+      "ميزات JavaScript ES6+ الحديثة وأفضل الممارسات",
+      "أساسيات React.js ومفاهيمها المتقدمة",
+      "تطوير الواجهة الخلفية لـ Node.js وExpress.js",
+      "تصميم وتشغيل قواعد بيانات MongoDB",
+      "تطوير وتكامل واجهات برمجة التطبيقات RESTful",
+      "أنظمة المصادقة والتفويض",
+      "استراتيجيات النشر وأساسيات DevOps",
+    ],
+    benefits: [
+      "Build a complete portfolio of real-world projects",
+      "Gain skills demanded by top tech companies",
+      "Increase your earning potential by 40-60%",
+      "Join a community of 10,000+ successful graduates",
+      "Get personalized career guidance and mentorship",
+      "Access to exclusive job placement assistance",
+    ],
+    benefitsAr: [
+      "أنشئ محفظة متكاملة من المشاريع العملية",
+      "اكتسب المهارات المطلوبة في كبرى شركات التكنولوجيا",
+      "زد من إمكاناتك في الكسب بنسبة 40-60%",
+      "انضم إلى مجتمع يضم أكثر من 10,000 خريج ناجح",
+      "احصل على توجيه وإرشاد مهني شخصي",
+      "احصل على مساعدة حصرية في التوظيف",
+    ],
+    whoShouldTake: [
+      "Beginners with basic HTML/CSS knowledge",
+      "Frontend developers wanting to learn backend",
+      "Career changers looking to enter tech",
+      "Students seeking practical programming skills",
+      "Entrepreneurs building their own products",
+    ],
+    whoShouldTakeAr: [
+      "المبتدئون ذوو المعرفة الأساسية بـ HTML/CSS",
+      "مطورو واجهات المستخدم الأمامية الراغبون في تعلم البرمجة الخلفية",
+      "الراغبون في تغيير مسارهم المهني ودخول مجال التكنولوجيا",
+      "الطلاب الذين يبحثون عن مهارات برمجة عملية",
+      "رواد الأعمال الذين يبنون منتجاتهم الخاصة",
+    ],
+    semesters: [
+      {
+        id: 1,
+        name: "Semester 1: Frontend Foundations",
+        modules: [
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "🗓️ 🚀 From Discovery to Launch",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "Semester 2: Advanced Frontend",
+        modules: [
+          {
+            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "Semester 3: Backend Development",
+        modules: [
+          {
+            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Semester 4: Full Stack Integration",
+        modules: [
+          {
+            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+    semestersAr: [
+      {
+        id: 1,
+        name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+        modules: [
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "24-8-2025",
+          },
+          {
+            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            startDate: "2024-03-16",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+        modules: [
+          {
+            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            startDate: "2024-04-01",
+          },
+          {
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            startDate: "2024-04-16",
+          },
+          {
+            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            startDate: "2024-05-01",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+        modules: [
+          {
+            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            startDate: "2024-05-16",
+          },
+          {
+            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            startDate: "2024-06-01",
+          },
+          {
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            startDate: "2024-06-16",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+        modules: [
+          {
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            startDate: "2024-07-01",
+          },
+          {
+            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            startDate: "2024-07-16",
+          },
+          {
+            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            startDate: "2024-08-01",
+          },
+        ],
+      },
+    ],
+
+    reviews: [
+      {
+        name: "Ahmed Hassan",
+        rating: 5,
+        text: "Excellent course! The instructor explains complex concepts in a very clear way. I landed my first developer job after completing this course.",
+      },
+      {
+        name: "Maria Rodriguez",
+        rating: 5,
+        text: "Best investment I ever made. The hands-on projects really helped me understand how everything works together in real applications.",
+      },
+      {
+        name: "James Wilson",
+        rating: 4,
+        text: "Great content and structure. The only thing I would improve is having more live coding sessions, but overall very satisfied.",
+      },
+    ],
+    reviewsAr: [
+      {
+        name: "أحمد حسن",
+        rating: 5,
+        text: "دورة ممتازة! يشرح المدرب المفاهيم المعقدة بطريقة واضحة جدًا. حصلت على أول وظيفة كمطور بعد إتمام هذه الدورة.",
+      },
+      {
+        name: "ماريا رودريغيز",
+        rating: 5,
+        text: "أفضل استثمار قمت به على الإطلاق. المشاريع العملية ساعدتني حقًا في فهم كيفية عمل كل شيء معًا في التطبيقات الحقيقية.",
+      },
+      {
+        name: "جيمس ويلسون",
+        rating: 4,
+        text: "محتوى رائع وهيكل ممتاز. الشيء الوحيد الذي سأحسنه هو إضافة المزيد من الجلسات الحية للبرمجة، ولكن بشكل عام أنا راضٍ جدًا.",
       },
     ],
   },
 };
 
-
 export const courses = [
   {
     id: 1,
-    title: "Full Stack Web Development",
-    description:
-      "Master modern web development with React, Node.js, and MongoDB. Build real-world applications from scratch.",
-    image: placeholder,
-    duration: "12 weeks",
-    students: 1250,
-    rating: 4.8,
-    price: "$299",
-    level: "Intermediate",
+    title: "Diploma in Innovation and Entrepreneurship",
+    titleAr: "دبلوم الابتكار وريادة الأعمال",
+    image: entrepreneurship,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "16,000",
+    semester: "4,000",
+    // students: 1250,
+    // rating: 4.8,
+    // price: "$299",
+    // level: "Intermediate",
   },
   {
     id: 2,
-    title: "Data Science & Analytics",
-    description:
-      "Learn Python, machine learning, and data visualization to become a data science professional.",
-    image: placeholder,
-    duration: "16 weeks",
-    students: 890,
-    rating: 4.9,
-    price: "$399",
-    level: "Advanced",
+    title: "Diploma in Digital Media and Content Creation",
+    titleAr: "دبلوم الإعلام الرقمي وصناعة المحتوي",
+    image: digitalmedia,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
   },
   {
     id: 3,
-    title: "Digital Marketing Mastery",
-    description:
-      "Comprehensive digital marketing course covering SEO, social media, PPC, and content marketing.",
-    image: placeholder,
-    duration: "8 weeks",
-    students: 2100,
-    rating: 4.7,
-    price: "$199",
-    level: "Beginner",
+    title: "Executive Management Diploma",
+    titleAr: "دبلوم الإدارة التنفيذية",
+    image: executiveManagement,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
   },
   {
     id: 4,
-    title: "Mobile App Development",
-    description:
-      "Build native mobile apps for iOS and Android using React Native and Flutter frameworks.",
-    image: placeholder,
-    duration: "14 weeks",
-    students: 750,
-    rating: 4.8,
-    price: "$349",
-    level: "Intermediate",
+    title: "Diploma in Modern Accounting Techniques",
+    titleAr: "دبلوم تقنيات المحاسبة الحديثة",
+    image: accountingTechniques,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "16,000",
+    semester: "4,000",
   },
   {
     id: 5,
-    title: "Cybersecurity Fundamentals",
-    description:
-      "Learn essential cybersecurity concepts, ethical hacking, and network security principles.",
-    image: placeholder,
-    duration: "10 weeks",
-    students: 650,
-    rating: 4.6,
-    price: "$279",
-    level: "Intermediate",
+    title: "Diploma in Human Resources Management",
+    titleAr: "دبلوم إدارة الموارد البشرية",
+    image: humanResources,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "16,000",
+    semester: "4,000",
   },
   {
     id: 6,
-    title: "UI/UX Design Bootcamp",
-    description:
-      "Master user interface and user experience design with industry-standard tools and methodologies.",
-    image: placeholder,
-    duration: "12 weeks",
-    students: 980,
-    rating: 4.9,
-    price: "$259",
-    level: "Beginner",
+    title: "Diploma in Generative Artificial Intelligence",
+    titleAr: "دبلوم الذكاء الإصطناعي التوليدي",
+    image: artificialIntelligence,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "Two years",
+    durationAr: "عامين",
+    AcademicHours: "80 Hours",
+    AcademicHoursAR: "80 ساعة",
+    ProgramFee: "20,000",
+    semester: "5,000",
   },
   {
     id: 7,
-    title: "Cloud Computing with AWS",
-    description:
-      "Become proficient in Amazon Web Services and cloud architecture for scalable applications.",
-    image: placeholder,
-    duration: "10 weeks",
-    students: 540,
-    rating: 4.7,
-    price: "$329",
-    level: "Advanced",
+    title: "Diploma in Organizational Skills Management",
+    titleAr: "دبلوم إدارة المهارات في المنظمات",
+    image: skillsManagement,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
   },
   {
     id: 8,
-    title: "Artificial Intelligence & ML",
-    description:
-      "Dive deep into AI and machine learning algorithms, neural networks, and practical applications.",
-    image: placeholder,
-    duration: "18 weeks",
-    students: 420,
-    rating: 4.9,
-    price: "$449",
-    level: "Advanced",
+    title: "Diploma in Labor Market Economics",
+    titleAr: "دبلوم إقتصاديات سوق العمل",
+    image: laborMarket,
+    description: "Study Program",
+    descriptionAr: "برنامج دراسي",
+    startDate: "24-8-2025",
+    duration: "One Year",
+    durationAr: "عام",
+    AcademicHours: "40 Hours",
+    AcademicHoursAR: "40 ساعة",
+    ProgramFee: "10,000",
+    semester: "5,000",
   },
 ];

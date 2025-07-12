@@ -1,15 +1,14 @@
 "use client";
 
+import universityLogo from "@/app/assets/university-logo.svg";
+import { usePathname, useRouter } from "@/navigations";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, LogOut, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "../navigations";
-import { Button } from "./ui/button";
-import Image from "next/image";
-import universityLogo from "@/app/assets/university-logo.svg";
-
+import { Button } from "../ui/button";
 
 export default function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -91,8 +90,8 @@ export default function MainHeader() {
                 <Image
                   src={universityLogo}
                   alt="Logo"
-                  width={250}
-                  height={250}
+                  width={75}
+                  height={75}
                 />
               </div>
             </Link>
@@ -134,9 +133,8 @@ export default function MainHeader() {
             className="flex items-center focus:outline-none gap-4"
           >
             <div className=" w-24 h-24 flex items-center justify-center">
-              <Image src={universityLogo} alt="Logo" width={250} height={250} />
+              <Image src={universityLogo} alt="Logo" width={75} height={75} />
             </div>
-            
           </button>
 
           {/* Desktop Navigation */}

@@ -1,8 +1,8 @@
 "use client";
 
 import { courses } from "@/app/(dummyData)/courseData";
-import { motion, easeInOut } from "framer-motion";
-import { Clock, Star, Users } from "lucide-react";
+import { easeInOut, motion } from "framer-motion";
+import {  Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
 // Animation Variants
+
 const containerVariants = {
   hidden: {},
   show: {
@@ -79,40 +80,51 @@ export default function DiplomasSection() {
                   height={192}
                 />
                 <Badge className="absolute top-3 right-3 bg-[#0EC5C7] text-white">
-                  {course.level}
+                  {locale === "en" ? course.description : course.descriptionAr}
                 </Badge>
               </div>
 
               {/* Card Content */}
               <div className="flex flex-col p-6 flex-grow gap-4">
                 <h3 className="text-lg font-bold text-[#001C71] line-clamp-2">
-                  {course.title}
+                  {locale === "en" ? course.title : course.titleAr}
                 </h3>
-                <p className="text-gray-600 text-sm line-clamp-3">
-                  {course.description}
-                </p>
+                {/* <p className="text-gray-600 text-sm line-clamp-3">
+                  {locale === "en" ? course.description : course.descriptionAr}
+                </p> */}
 
                 <div className="flex items-center justify-between text-sm text-gray-500 gap-2">
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    {course.duration}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Users className="w-4 h-4" />
-                    {course.students}
+                    {t("Duration time")}:{" "}
+                    {locale === "en" ? course.duration : course.durationAr}
                   </div>
                 </div>
-
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1 text-yellow-400">
-                    <Star className="w-4 h-4" />
-                    <span className="text-sm font-medium text-gray-800">
-                      {course.rating}
-                    </span>
+                <div className="flex items-center justify-between text-sm text-gray-500 gap-2">
+                  <div className="flex items-center gap-1">
+                    <Timer className="w-4 h-4" />
+                    {locale === "en"
+                      ? course.AcademicHours
+                      : course.AcademicHoursAR}
                   </div>
-                  <span className="text-lg font-bold text-[#001C71]">
-                    {course.price}
-                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm text-gray-500 gap-2">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {course.startDate}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm text-gray-500 gap-2">
+                  <div className="flex items-center gap-1">
+                    <SaudiRiyal className="w-4 h-4" />
+                    {t("Program price")}: {course.ProgramFee} {t("SAR")}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm text-gray-500 gap-2">
+                  <div className="flex items-center gap-1">
+                    <SaudiRiyal className="w-4 h-4" />
+                    {t("Semester")}: {course.semester} {t("SAR")}
+                  </div>
                 </div>
 
                 <div className="pt-4 mt-auto">

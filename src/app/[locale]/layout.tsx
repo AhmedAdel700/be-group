@@ -1,7 +1,7 @@
 import { Public_Sans, Tajawal } from "next/font/google";
 import type React from "react";
 
-import MainHeader from "@/components/Header";
+import MainHeader from "@/components/header/Header";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "../styles/globals.css";

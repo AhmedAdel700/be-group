@@ -193,7 +193,7 @@ export default function SignInPage() {
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
-                className="w-16 h-16 bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-full flex items-center justify-center"
+                className="w-16 h-16 mx-auto bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-full flex items-center justify-center"
               >
                 <span className="text-white font-bold text-xl">SU</span>
               </motion.div>
@@ -205,12 +205,12 @@ export default function SignInPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="flex flex-col gap-2"
+                  className="flex flex-col gap-4"
                 >
                   <Label htmlFor="email">{t("Email")}</Label>
                   <Input
@@ -233,7 +233,7 @@ export default function SignInPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="flex flex-col gap-2"
+                  className="flex flex-col gap-4"
                 >
                   <Label htmlFor="password">{t("Password")}</Label>
                   <div className="relative">
@@ -273,7 +273,7 @@ export default function SignInPage() {
                         type="checkbox"
                         checked={rememberMe}
                         onChange={(e) => setRememberMe(e.target.checked)}
-                        className="accent-[#001C71]"
+                        className="accent-[#001C71] size-4"
                       />
                       {t("Remember Me")}
                     </label>
