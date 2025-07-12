@@ -97,8 +97,8 @@ export default function Footer() {
                 <Image
                   src={universityLogo}
                   alt="University Logo"
-                  width={75}
-                  height={75}
+                  width={50}
+                  height={50}
                 />
               </Link>
               <motion.p

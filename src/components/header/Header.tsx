@@ -90,8 +90,8 @@ export default function MainHeader() {
                 <Image
                   src={universityLogo}
                   alt="Logo"
-                  width={75}
-                  height={75}
+                  width={50}
+                  height={50}
                 />
               </div>
             </Link>
@@ -133,7 +133,7 @@ export default function MainHeader() {
             className="flex items-center focus:outline-none gap-4"
           >
             <div className=" w-24 h-24 flex items-center justify-center">
-              <Image src={universityLogo} alt="Logo" width={75} height={75} />
+              <Image src={universityLogo} alt="Logo" width={50} height={50} />
             </div>
           </button>
 
