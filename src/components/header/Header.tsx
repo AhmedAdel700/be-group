@@ -1,15 +1,14 @@
 "use client";
 
+import universityLogo from "@/app/assets/university-logo.svg";
+import { usePathname, useRouter } from "@/navigations";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, LogOut, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "../navigations";
-import { Button } from "./ui/button";
-import Image from "next/image";
-import universityLogo from "@/app/assets/university-logo.svg";
-
+import { Button } from "../ui/button";
 
 export default function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -91,8 +90,8 @@ export default function MainHeader() {
                 <Image
                   src={universityLogo}
                   alt="Logo"
-                  width={250}
-                  height={250}
+                  width={75}
+                  height={75}
                 />
               </div>
             </Link>
@@ -134,22 +133,21 @@ export default function MainHeader() {
             className="flex items-center focus:outline-none gap-4"
           >
             <div className=" w-24 h-24 flex items-center justify-center">
-              <Image src={universityLogo} alt="Logo" width={250} height={250} />
+              <Image src={universityLogo} alt="Logo" width={75} height={75} />
             </div>
-            
           </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4 font-medium">
             <button
               onClick={() => scrollToSection("courses")}
-              className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+              className="text-black-tint-80 hover:text-main-primary transition-colors duration-200"
             >
               {t("Diplomas")}
             </button>
             <button
               onClick={() => scrollToSection("footer")}
-              className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+              className="text-black-tint-80 hover:text-main-primary transition-colors duration-200"
             >
               {t("Contact Us")}
             </button>
@@ -163,7 +161,7 @@ export default function MainHeader() {
               <span>{locale === "en" ? t("Arabic") : t("English")}</span>
             </Button>
             <Link href={`/${locale}/signin`}>
-              <Button className="bg-[#001C71] hover:bg-[#001C71]/90">
+              <Button className="bg-main-primary hover:bg-p-shades-shade-80">
                 {t("Sign In")}
               </Button>
             </Link>
@@ -196,13 +194,13 @@ export default function MainHeader() {
               <nav className="flex flex-col gap-y-6">
                 <button
                   onClick={() => scrollToSection("courses")}
-                  className="text-gray-700 hover:text-[#001C71] transition-colors duration-200 text-start"
+                  className="text-black-tint-80 hover:text-main-primary transition-colors duration-200 text-start"
                 >
                   {t("Diplomas")}
                 </button>
                 <button
                   onClick={() => scrollToSection("footer")}
-                  className="text-start text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+                  className="text-start text-black-tint-80 hover:text-main-primary transition-colors duration-200"
                 >
                   {t("Contact Us")}
                 </button>
@@ -216,7 +214,7 @@ export default function MainHeader() {
                   <span>{locale === "en" ? t("Arabic") : t("English")}</span>
                 </Button>
                 <Link href={`/${locale}/signin`}>
-                  <Button className="bg-[#001C71] hover:bg-[#001C71]/90 w-full">
+                  <Button className="bg-main-primary hover:bg-p-shades-shade-80 w-full">
                     {t("Sign In")}
                   </Button>
                 </Link>

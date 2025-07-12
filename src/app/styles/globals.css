@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'variables.css';
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -86,7 +88,7 @@ html[lang='en'] * {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #001c71;
+  background: var(--main-colors-primary);
   border-radius: 4px;
 }
 

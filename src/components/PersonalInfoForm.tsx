@@ -26,62 +26,32 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
   const t = useTranslations("enroll");
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="font-semibold text-[#001C71]">
+      <h3 className="font-semibold text-main-primary">
         {t("Personal Information")}
       </h3>
-      <div className="grid grid-cols-2 gap-6">
-        <div className="flex flex-col gap-4">
-          <Label htmlFor="firstName">{t("First Name")} *</Label>
-          <Input
-            id="firstName"
-            value={enrollmentData.firstName}
-            onChange={(e) =>
-              setEnrollmentData((prev: any) => ({
-                ...prev,
-                firstName: e.target.value,
-              }))
-            }
-            className={enrollmentErrors.firstName ? "border-red-500" : ""}
-          />
-          {enrollmentErrors.firstName && (
-            <p className="text-sm text-red-500">{enrollmentErrors.firstName}</p>
-          )}
-        </div>
-        <div className="flex flex-col gap-4">
-          <Label htmlFor="middleName">{t("Middle Name")}</Label>
-          <Input
-            id="middleName"
-            value={enrollmentData.middleName}
-            onChange={(e) =>
-              setEnrollmentData((prev: any) => ({
-                ...prev,
-                middleName: e.target.value,
-              }))
-            }
-          />
-        </div>
-      </div>
       <div className="flex flex-col gap-4">
-        <Label htmlFor="lastName">{t("Last Name")} *</Label>
+        <Label htmlFor="firstName">{t("The full name")} *</Label>
         <Input
-          id="lastName"
-          value={enrollmentData.lastName}
+          id="firstName"
+          placeholder={t("Please enter your full name")}
+          value={enrollmentData.firstName}
           onChange={(e) =>
             setEnrollmentData((prev: any) => ({
               ...prev,
-              lastName: e.target.value,
+              firstName: e.target.value,
             }))
           }
-          className={enrollmentErrors.lastName ? "border-red-500" : ""}
+          className={enrollmentErrors.firstName ? "border-red-500" : ""}
         />
-        {enrollmentErrors.lastName && (
-          <p className="text-sm text-red-500">{enrollmentErrors.lastName}</p>
+        {enrollmentErrors.firstName && (
+          <p className="text-sm text-red-500">{enrollmentErrors.firstName}</p>
         )}
       </div>
       <div className="flex flex-col gap-4">
         <Label htmlFor="nationalId">{t("National ID")} *</Label>
         <Input
           id="nationalId"
+          placeholder={t("Please enter your national ID")}
           value={enrollmentData.nationalId}
           onChange={(e) =>
             setEnrollmentData((prev: any) => ({
@@ -99,6 +69,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         <Label htmlFor="phoneNumber">{t("Phone Number")} *</Label>
         <Input
           id="phoneNumber"
+          placeholder={t("Please enter your phone number")}
           value={enrollmentData.phoneNumber}
           onChange={(e) =>
             setEnrollmentData((prev: any) => ({
@@ -116,6 +87,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         <Label htmlFor="email">{t("Email")} *</Label>
         <Input
           id="email"
+          placeholder={t("Please enter your email")}
           type="email"
           value={enrollmentData.email}
           onChange={(e) =>
@@ -135,6 +107,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         <Input
           id="password"
           type="password"
+          placeholder={t("Please enter your password")}
           value={enrollmentData.password}
           onChange={(e) =>
             setEnrollmentData((prev: any) => ({
@@ -148,35 +121,64 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.password}</p>
         )}
       </div>
-      <div className="flex flex-col gap-4">
-        <Label htmlFor="files">{t("Upload Documents")}</Label>
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-          <Input
-            id="files"
-            type="file"
-            multiple
-            onChange={(e) =>
-              setEnrollmentFiles(Array.from(e.target.files || []))
-            }
-            className="hidden"
-          />
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => document.getElementById("files")?.click()}
-          >
-            {t("Choose Files")}
-          </Button>
-          {enrollmentFiles.length > 0 && (
-            <div className="mt-2 text-sm text-gray-600">
-              {enrollmentFiles.length} file(s) selected
-            </div>
-          )}
+      <div className="grid grid-cols-2 gap-6">
+        <div className="flex flex-col gap-4">
+          <Label htmlFor="files">{t("Upload high school diploma")}</Label>
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+            <Input
+              id="files"
+              type="file"
+              multiple
+              onChange={(e) =>
+                setEnrollmentFiles(Array.from(e.target.files || []))
+              }
+              className="hidden"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => document.getElementById("files")?.click()}
+            >
+              {t("Choose Files")}
+            </Button>
+            {enrollmentFiles.length > 0 && (
+              <div className="mt-2 text-sm text-black-tint-80">
+                {enrollmentFiles.length} file(s) selected
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Label htmlFor="files">{t("Upload ID photo")}</Label>
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+            <Input
+              id="files"
+              type="file"
+              multiple
+              onChange={(e) =>
+                setEnrollmentFiles(Array.from(e.target.files || []))
+              }
+              className="hidden"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => document.getElementById("files")?.click()}
+            >
+              {t("Choose Files")}
+            </Button>
+            {enrollmentFiles.length > 0 && (
+              <div className="mt-2 text-sm text-black-tint-80">
+                {enrollmentFiles.length} file(s) selected
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
       <Button
         onClick={handleStep1Next}
-        className="w-full bg-[#001C71] hover:bg-[#001C71]/90"
+        className="w-full bg-main-primary hover:bg-p-shades-shade-80"
       >
         {t("Next Step")}
       </Button>

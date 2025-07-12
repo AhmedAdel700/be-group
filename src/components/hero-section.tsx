@@ -1,20 +1,18 @@
 "use client";
 
+import hero from "@/app/assets/hero.png";
 import { motion } from "framer-motion";
 import {
+  ArrowLeft,
   ArrowRight,
   BookOpen,
-  Users,
-  Award,
   GraduationCap,
   Lightbulb,
   Target,
-  ArrowLeft,
 } from "lucide-react";
-import { Button } from "./ui/button";
-import Image from "next/image";
-import hero from "@/app/assets/hero.png";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { Button } from "./ui/button";
 
 export default function HeroSection() {
   const locale = useLocale();
@@ -208,77 +206,17 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 onClick={scrollToCourses}
-                className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/90 text-[#001C71] font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group"
+                className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/90 text-main-primary font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group"
               >
                 <div className="flex items-center gap-2">
                   {t("Explore Diplomas")}
                   {locale === "en" ? (
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   ) : (
-                    <ArrowLeft className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                   )}
                 </div>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-[#001C71] px-8 py-4 rounded-xl transition-all duration-300 bg-transparent hover:shadow-2xl"
-              >
-                {t("Watch Demo")}
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="grid grid-cols-3 gap-8"
-            >
-              <motion.div
-                className="text-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-[#0EC5C7]" />
-                  </div>
-                  <div className="text-2xl font-bold">50+</div>
-                  <div className="text-sm text-gray-300">
-                    {t("Explore Diplomas")}
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                className="text-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center">
-                    <Users className="w-6 h-6 text-[#0EC5C7]" />
-                  </div>
-                  <div className="text-2xl font-bold">10K+</div>
-                  <div className="text-sm text-gray-300">
-                    {t("Happy Students")}
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                className="text-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 bg-[#0EC5C7]/20 rounded-full flex items-center justify-center">
-                    <Award className="w-6 h-6 text-[#0EC5C7]" />
-                  </div>
-                  <div className="text-2xl font-bold">95%</div>
-                  <div className="text-sm text-gray-300">
-                    {t("Success Rate")}
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
           </motion.div>
 

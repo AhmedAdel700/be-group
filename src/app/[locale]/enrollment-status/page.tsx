@@ -68,8 +68,8 @@ export default function EnrollmentStatusPage() {
         };
       default:
         return {
-          icon: <Clock className="w-8 h-8 text-gray-500" />,
-          color: "bg-gray-100 text-gray-800 border-gray-200",
+          icon: <Clock className="w-8 h-8 text-black-tint-80" />,
+          color: "bg-gray-100 text-black-tint-80 border-gray-200",
           text: t("Unknown"),
         };
     }
@@ -116,14 +116,14 @@ export default function EnrollmentStatusPage() {
                 <h3 className="font-semibold text-[#001C71]">
                   {t("Program Name")}
                 </h3>
-                <p className="text-gray-700">{currentDiploma.name}</p>
+                <p className="text-black-tint-80">{currentDiploma.name}</p>
               </div>
 
               <div className="flex flex-col gap-2">
                 <h3 className="font-semibold text-[#001C71]">
                   {t("Description")}
                 </h3>
-                <p className="text-gray-700">{currentDiploma.description}</p>
+                <p className="text-black-tint-80">{currentDiploma.description}</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -131,13 +131,13 @@ export default function EnrollmentStatusPage() {
                   <h3 className="font-semibold text-[#001C71]">
                     {t("Duration")}
                   </h3>
-                  <p className="text-gray-700">{currentDiploma.duration}</p>
+                  <p className="text-black-tint-80">{currentDiploma.duration}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold text-[#001C71]">
                     {t("Total Price")}
                   </h3>
-                  <p className="text-gray-700 font-bold">
+                  <p className="text-black-tint-80 font-bold">
                     {currentDiploma.price}
                   </p>
                 </div>
@@ -156,7 +156,7 @@ export default function EnrollmentStatusPage() {
                       <div className="w-6 h-6 bg-[#001C71] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <p className="text-gray-700">{semester}</p>
+                      <p className="text-black-tint-80">{semester}</p>
                     </div>
                   ))}
                 </div>

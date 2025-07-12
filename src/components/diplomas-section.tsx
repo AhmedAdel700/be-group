@@ -1,8 +1,8 @@
 "use client";
 
 import { courses } from "@/app/(dummyData)/courseData";
-import { motion, easeInOut } from "framer-motion";
-import { Clock, Star, Users } from "lucide-react";
+import { easeInOut, motion } from "framer-motion";
+import {  Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
 // Animation Variants
+
 const containerVariants = {
   hidden: {},
   show: {
@@ -46,10 +47,10 @@ export default function DiplomasSection() {
           viewport={{ once: true }}
           className="text-center flex flex-col items-center gap-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#001C71]">
+          <h2 className="text-3xl md:text-4xl font-bold text-main-primary">
             {t("Our Popular Diplomas")}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+          <p className="text-xl text-black-tint-80 max-w-3xl leading-relaxed">
             {t(
               "Choose from our wide range of expertly designed diplomas to advance your career and achieve your learning goals"
             )}
@@ -79,45 +80,56 @@ export default function DiplomasSection() {
                   height={192}
                 />
                 <Badge className="absolute top-3 right-3 bg-[#0EC5C7] text-white">
-                  {course.level}
+                  {locale === "en" ? course.description : course.descriptionAr}
                 </Badge>
               </div>
 
               {/* Card Content */}
               <div className="flex flex-col p-6 flex-grow gap-4">
-                <h3 className="text-lg font-bold text-[#001C71] line-clamp-2">
-                  {course.title}
+                <h3 className="text-lg font-bold text-main-primary line-clamp-2">
+                  {locale === "en" ? course.title : course.titleAr}
                 </h3>
-                <p className="text-gray-600 text-sm line-clamp-3">
-                  {course.description}
-                </p>
+                {/* <p className="text-black-tint-80 text-sm line-clamp-3">
+                  {locale === "en" ? course.description : course.descriptionAr}
+                </p> */}
 
-                <div className="flex items-center justify-between text-sm text-gray-500 gap-2">
+                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    {course.duration}
+                    {t("Duration time")}:{" "}
+                    {locale === "en" ? course.duration : course.durationAr}
                   </div>
+                </div>
+                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
                   <div className="flex items-center gap-1">
-                    <Users className="w-4 h-4" />
-                    {course.students}
+                    <Timer className="w-4 h-4" />
+                    {locale === "en"
+                      ? course.AcademicHours
+                      : course.AcademicHoursAR}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {course.startDate}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
+                  <div className="flex items-center gap-1">
+                    <SaudiRiyal className="w-4 h-4" />
+                    {t("Program price")}: {course.ProgramFee} {t("SAR")}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
+                  <div className="flex items-center gap-1">
+                    <SaudiRiyal className="w-4 h-4" />
+                    {t("Semester")}: {course.semester} {t("SAR")}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1 text-yellow-400">
-                    <Star className="w-4 h-4" />
-                    <span className="text-sm font-medium text-gray-800">
-                      {course.rating}
-                    </span>
-                  </div>
-                  <span className="text-lg font-bold text-[#001C71]">
-                    {course.price}
-                  </span>
-                </div>
-
-                <div className="pt-4 mt-auto">
+                <div className="">
                   <Link href={`/${locale}/diploma/${course.id}`}>
-                    <Button className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-colors duration-200">
+                    <Button className="w-full bg-main-primary hover:bg-p-shades-shade-80 transition-colors duration-200">
                       {t("View Details")}
                     </Button>
                   </Link>

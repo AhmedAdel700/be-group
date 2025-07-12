@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -34,7 +34,6 @@ export default function CourseDetailsPage() {
   const [enrollmentData, setEnrollmentData] = useState({
     firstName: "",
     middleName: "",
-    lastName: "",
     nationalId: "",
     phoneNumber: "",
     email: "",
@@ -56,7 +55,7 @@ export default function CourseDetailsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-[#001C71] mb-4">
+          <h1 className="text-2xl font-bold text-main-primary mb-4">
             {t("Diploma Not Found")}
           </h1>
           <Link href="/">
@@ -80,8 +79,6 @@ export default function CourseDetailsPage() {
 
     if (!enrollmentData.firstName.trim())
       errors.firstName = t("First name is required");
-    if (!enrollmentData.lastName.trim())
-      errors.lastName = t("Last name is required");
     if (!enrollmentData.nationalId.trim())
       errors.nationalId = t("National ID is required");
     if (!enrollmentData.phoneNumber.trim())
@@ -134,24 +131,11 @@ export default function CourseDetailsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mt-20 mb-4">
-          <Link
-            href={`/${locale}`}
-            className="inline-flex items-center text-[#001C71] hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
-          >
-            {locale === "en" ? (
-              <ArrowLeft className="w-5 h-5 mr-2" />
-            ) : (
-              <ArrowRight className="w-5 h-5 me-2" />
-            )}
-            {t("Back to Home")}
-          </Link>
-        </div>
-
-        <div className="grid lg:grid-cols-10 gap-8">
+        <div className="grid lg:grid-cols-10 gap-8 pt-24">
           {/* Main Content - 70% */}
           <MainContent
             t={t}
+            locale={locale}
             course={course}
             openSemesters={openSemesters}
             toggleSemesterOpen={toggleSemesterOpen}
@@ -166,66 +150,73 @@ export default function CourseDetailsPage() {
               className="sticky top-8"
             >
               <Card className="shadow-lg">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-[#001C71] mb-4">
+                <CardContent className="flex flex-col gap-6 p-6">
+                  <h3 className="text-lg font-bold text-main-primary">
                     {t("Choose Your Diploma")}
                   </h3>
 
-                  <div className="space-y-4 mb-6">
+                  <div className="space-y-4">
                     {[
                       {
                         id: "intermediate",
-                        name: "Intermediate Diploma",
+                        name: t("Intermediate Diploma"),
                         semesters: 2,
-                        price: 598,
-                        description:
-                          "Perfect for beginners looking to get started",
+                        price: 250,
+                        description: t(
+                          "Perfect for beginners looking to get started"
+                        ),
                       },
                       {
                         id: "associate",
-                        name: "Associate Diploma",
+                        name: t("Associate Diploma"),
                         semesters: 4,
-                        price: 1196,
-                        description:
-                          "Comprehensive program for career advancement",
+                        price: 250,
+                        description: t(
+                          "Comprehensive program for career advancement"
+                        ),
                       },
                     ].map((diploma) => (
                       <div
                         key={diploma.id}
                         className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           selectedDiploma === diploma.id
-                            ? "border-[#001C71] bg-[#001C71]/5"
+                            ? "border-main-primary bg-[#001C71]/5"
                             : "border-gray-200 hover:border-[#0EC5C7]"
                         }`}
                         onClick={() => setSelectedDiploma(diploma.id)}
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-[#001C71]">
+                          <h4 className="font-semibold text-main-primary">
                             {diploma.name}
                           </h4>
                           {selectedDiploma === diploma.id && (
-                            <Check className="w-5 h-5 text-[#001C71]" />
+                            <Check className="w-5 h-5 text-main-primary" />
                           )}
                         </div>
-                        <p className="text-sm text-gray-600 mb-2">
+                        <p className="text-sm text-black-tint-80 mb-2">
                           {diploma.description}
                         </p>
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">
-                            {diploma.semesters} semesters
+                          <span className="text-black-tint-80">
+                            {diploma.semesters} {t("semesters")}
                           </span>
-                          <span className="font-bold text-[#001C71]">
-                            ${diploma.price}
+                          <span className="font-bold flex items-center gap-0.5 text-main-primary">
+                            {diploma.price} {t("SAR")}
                           </span>
                         </div>
                       </div>
                     ))}
+                    <span className="text-xs font-semibold">
+                      {t(
+                        "The official subscription fee for the platform is 250 SAR"
+                      )}
+                    </span>
                   </div>
 
                   <Button
                     onClick={() => setShowEnrollmentModal(true)}
                     disabled={!selectedDiploma}
-                    className="w-full bg-[#001C71] hover:bg-[#001C71]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-main-primary hover:bg-p-shades-shade-80 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {t("Enroll Now")}
                   </Button>
@@ -240,29 +231,37 @@ export default function CourseDetailsPage() {
       <Dialog open={showEnrollmentModal} onOpenChange={setShowEnrollmentModal}>
         <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden">
           <div className="max-h-[80vh] overflow-y-auto p-2 flex flex-col gap-6 hide-scrollbar">
-            <DialogHeader>
-              <DialogTitle className="text-xl font-bold text-[#001C71]">
-                {t("Enroll in")}{" "}
+            <DialogHeader className="flex flex-col gap-4">
+              <DialogTitle className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
+                {t("Enroll in")} {t("Diploma")}{" "}
                 {selectedDiploma === "intermediate"
                   ? t("Intermediate")
                   : t("Associate")}{" "}
-                {t("Diploma")}
               </DialogTitle>
-              <div className="flex items-center space-x-2 mt-2">
+              <div className="flex justify-between">
                 {[1, 2, 3].map((step) => (
                   <div key={step} className="flex items-center">
+                    {/* Circle representing the step */}
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                        step <= enrollmentStep
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold transition-colors duration-300 ease-in-out ${
+                        step < enrollmentStep
                           ? "bg-[#001C71] text-white"
-                          : "bg-gray-200 text-gray-600"
+                          : step === enrollmentStep
+                          ? "bg-[#001C71]/80 text-white"
+                          : "bg-gray-200 text-black-tint-80"
                       }`}
                     >
-                      {step}
+                      {step <= enrollmentStep ? (
+                        <Check className="w-6 h-6" />
+                      ) : (
+                        step
+                      )}
                     </div>
+
+                    {/* Line connecting steps */}
                     {step < 3 && (
                       <div
-                        className={`w-8 h-0.5 ${
+                        className={`w-60 h-0.5 transition-colors duration-300 ease-in-out ${
                           step < enrollmentStep ? "bg-[#001C71]" : "bg-gray-200"
                         }`}
                       />

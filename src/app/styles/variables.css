@@ -1,0 +1,60 @@
+:root {
+  /* Main Colors */
+  --main-colors-primary: #001c71;
+  --main-colors-secondary: #6b7a86;
+  --main-colors-black: #000000;
+  --main-colors-white: #ffffff;
+
+  /* P Tints */
+  --p-tints-tint-2: #FAFAFC;
+  --p-tints-tint-3: #F7F8FB;
+  --p-tints-tint-5: #F2F4F8;
+  --p-tints-tint-10: #E6E8F1;
+  --p-tints-tint-15: #D9DDEA;
+  --p-tints-tint-20: #CCD2E3;
+  --p-tints-tint-30: #B3BBD4;
+  --p-tints-tint-40: #99A4C6;
+  --p-tints-tint-50: #808DB8;
+  --p-tints-tint-80: #33498D;
+  --p-tints-tint-90: #1A337F;
+
+  /* P Shades */
+  --p-shades-shade-50: #001C7180;
+  --p-shades-shade-60: #001C7199;
+  --p-shades-shade-70: #001C71B2;
+  --p-shades-shade-80: #001C71CC;
+  --p-shades-shade-90: #001C71E5;
+
+  /* S Tints */
+  --s-tints-tint-3: #FAFAFB;
+  --s-tints-tint-5: #F7F7F8;
+  --s-tints-tint-10: #EFF1F2;
+  --s-tints-tint-15: #E7E9EB;
+  --s-tints-tint-20: #DEE1E4;
+  --s-tints-tint-30: #CED3D7;
+  --s-tints-tint-40: #BDC4C9;
+  --s-tints-tint-50: #ADB5BC;
+  --s-tints-tint-60: #9DA6AF;
+  --s-tints-tint-80: #7C8994;
+  --s-tints-tint-90: #6B7A86;
+
+  /* Black */
+  --black-tint-2: #fafafa;
+  --black-tint-3: #f7f7f7;
+  --black-tint-5: #f2f2f2;
+  --black-tint-8: #ebebeb;
+  --black-tint-10: #e5e5e5;
+  --black-tint-12: #e0e0e0;
+  --black-tint-15: #d9d9d9;
+  --black-tint-20: #cccccc;
+  --black-tint-30: #b3b3b3;
+  --black-tint-40: #999999;
+  --black-tint-50: #808080;
+  --black-tint-60: #666666;
+  --black-tint-70: #4d4d4d;
+  --black-tint-80: #333333;
+  --black-tint-90: #1a1a1a;
+
+  /* Neutrals */
+  
+}
