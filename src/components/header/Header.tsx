@@ -141,13 +141,13 @@ export default function MainHeader() {
           <nav className="hidden md:flex items-center gap-4 font-medium">
             <button
               onClick={() => scrollToSection("courses")}
-              className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+              className="text-black-tint-80 hover:text-main-primary transition-colors duration-200"
             >
               {t("Diplomas")}
             </button>
             <button
               onClick={() => scrollToSection("footer")}
-              className="text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+              className="text-black-tint-80 hover:text-main-primary transition-colors duration-200"
             >
               {t("Contact Us")}
             </button>
@@ -161,7 +161,7 @@ export default function MainHeader() {
               <span>{locale === "en" ? t("Arabic") : t("English")}</span>
             </Button>
             <Link href={`/${locale}/signin`}>
-              <Button className="bg-[#001C71] hover:bg-[#001C71]/90">
+              <Button className="bg-main-primary hover:bg-p-shades-shade-80">
                 {t("Sign In")}
               </Button>
             </Link>
@@ -194,13 +194,13 @@ export default function MainHeader() {
               <nav className="flex flex-col gap-y-6">
                 <button
                   onClick={() => scrollToSection("courses")}
-                  className="text-gray-700 hover:text-[#001C71] transition-colors duration-200 text-start"
+                  className="text-black-tint-80 hover:text-main-primary transition-colors duration-200 text-start"
                 >
                   {t("Diplomas")}
                 </button>
                 <button
                   onClick={() => scrollToSection("footer")}
-                  className="text-start text-gray-700 hover:text-[#001C71] transition-colors duration-200"
+                  className="text-start text-black-tint-80 hover:text-main-primary transition-colors duration-200"
                 >
                   {t("Contact Us")}
                 </button>
@@ -214,7 +214,7 @@ export default function MainHeader() {
                   <span>{locale === "en" ? t("Arabic") : t("English")}</span>
                 </Button>
                 <Link href={`/${locale}/signin`}>
-                  <Button className="bg-[#001C71] hover:bg-[#001C71]/90 w-full">
+                  <Button className="bg-main-primary hover:bg-p-shades-shade-80 w-full">
                     {t("Sign In")}
                   </Button>
                 </Link>

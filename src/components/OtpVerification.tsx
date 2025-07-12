@@ -20,15 +20,18 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
   const t = useTranslations("enroll");
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
+  // Handle OTP change and move focus automatically
   const handleChange = (index: number, value: string) => {
     const onlyDigit = value.replace(/\D/g, ""); // only keep numbers
-    handleOtpChange(index, onlyDigit);
+    handleOtpChange(index, onlyDigit); // Call the handle function to update OTP state
 
+    // Move focus to the next input if the value is a digit
     if (onlyDigit && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
     }
   };
 
+  // Handle Backspace key press and move focus backward
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     index: number
@@ -40,7 +43,9 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="font-semibold text-[#001C71]">{t("OTP Verification")}</h3>
+      <h3 className="font-semibold text-main-primary">
+        {t("OTP Verification")}
+      </h3>
       <p className="text-gray-600">
         {t("Enter the 4-digit code sent to your phone/email")}
       </p>
@@ -60,7 +65,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
           />
         ))}
       </div>
-      <div className="text-center text-sm text-gray-600">
+      <div className="text-center text-sm text-p-">
         <p>{t("Demo: Use 1234")}</p>
       </div>
       <div className="flex justify-end gap-4">
@@ -69,7 +74,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
         </Button>
         <Button
           onClick={handleOtpVerification}
-          className="bg-[#001C71] hover:bg-[#001C71]/90"
+          className="bg-main-primary hover:bg-p-shades-shade-80"
         >
           {t("Verify")}
         </Button>

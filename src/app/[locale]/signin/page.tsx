@@ -197,7 +197,7 @@ export default function SignInPage() {
               >
                 <span className="text-white font-bold text-xl">SU</span>
               </motion.div>
-              <CardTitle className="text-2xl font-bold text-[#001C71]">
+              <CardTitle className="text-2xl font-bold text-main-primary">
                 {t("Welcome Back")}
               </CardTitle>
               <CardDescription>
@@ -273,13 +273,13 @@ export default function SignInPage() {
                         type="checkbox"
                         checked={rememberMe}
                         onChange={(e) => setRememberMe(e.target.checked)}
-                        className="accent-[#001C71] size-4"
+                        className="accent-main-primary size-4"
                       />
                       {t("Remember Me")}
                     </label>
                     <Link
                       href={`/${locale}/forgot-password`}
-                      className="text-[#001C71] hover:text-[#0EC5C7] text-sm font-medium transition-colors"
+                      className="text-main-primary hover:text-[#0EC5C7] text-sm font-medium transition-colors"
                     >
                       {t("Forgot Password")}
                     </Link>
@@ -293,7 +293,7 @@ export default function SignInPage() {
                 >
                   <Button
                     type="submit"
-                    className="w-full bg-[#001C71] hover:bg-[#001C71]/90 transition-all duration-300 transform hover:scale-105"
+                    className="w-full bg-main-primary hover:bg-p-shades-shade-80 transition-all duration-300 transform hover:scale-105"
                     disabled={isLoading}
                   >
                     {isLoading ? t("Signing In") : t("Sign In")}

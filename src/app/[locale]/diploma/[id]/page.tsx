@@ -34,7 +34,6 @@ export default function CourseDetailsPage() {
   const [enrollmentData, setEnrollmentData] = useState({
     firstName: "",
     middleName: "",
-    lastName: "",
     nationalId: "",
     phoneNumber: "",
     email: "",
@@ -56,7 +55,7 @@ export default function CourseDetailsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-[#001C71] mb-4">
+          <h1 className="text-2xl font-bold text-main-primary mb-4">
             {t("Diploma Not Found")}
           </h1>
           <Link href="/">
@@ -80,8 +79,6 @@ export default function CourseDetailsPage() {
 
     if (!enrollmentData.firstName.trim())
       errors.firstName = t("First name is required");
-    if (!enrollmentData.lastName.trim())
-      errors.lastName = t("Last name is required");
     if (!enrollmentData.nationalId.trim())
       errors.nationalId = t("National ID is required");
     if (!enrollmentData.phoneNumber.trim())
@@ -154,7 +151,7 @@ export default function CourseDetailsPage() {
             >
               <Card className="shadow-lg">
                 <CardContent className="flex flex-col gap-6 p-6">
-                  <h3 className="text-lg font-bold text-[#001C71]">
+                  <h3 className="text-lg font-bold text-main-primary">
                     {t("Choose Your Diploma")}
                   </h3>
 
@@ -183,27 +180,27 @@ export default function CourseDetailsPage() {
                         key={diploma.id}
                         className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           selectedDiploma === diploma.id
-                            ? "border-[#001C71] bg-[#001C71]/5"
+                            ? "border-main-primary bg-[#001C71]/5"
                             : "border-gray-200 hover:border-[#0EC5C7]"
                         }`}
                         onClick={() => setSelectedDiploma(diploma.id)}
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-[#001C71]">
+                          <h4 className="font-semibold text-main-primary">
                             {diploma.name}
                           </h4>
                           {selectedDiploma === diploma.id && (
-                            <Check className="w-5 h-5 text-[#001C71]" />
+                            <Check className="w-5 h-5 text-main-primary" />
                           )}
                         </div>
-                        <p className="text-sm text-gray-600 mb-2">
+                        <p className="text-sm text-black-tint-80 mb-2">
                           {diploma.description}
                         </p>
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">
+                          <span className="text-black-tint-80">
                             {diploma.semesters} {t("semesters")}
                           </span>
-                          <span className="font-bold flex items-center gap-0.5 text-[#001C71]">
+                          <span className="font-bold flex items-center gap-0.5 text-main-primary">
                             {diploma.price} {t("SAR")}
                           </span>
                         </div>
@@ -219,7 +216,7 @@ export default function CourseDetailsPage() {
                   <Button
                     onClick={() => setShowEnrollmentModal(true)}
                     disabled={!selectedDiploma}
-                    className="w-full bg-[#001C71] hover:bg-[#001C71]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-main-primary hover:bg-p-shades-shade-80 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {t("Enroll Now")}
                   </Button>
@@ -235,7 +232,7 @@ export default function CourseDetailsPage() {
         <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden">
           <div className="max-h-[80vh] overflow-y-auto p-2 flex flex-col gap-6 hide-scrollbar">
             <DialogHeader className="flex flex-col gap-4">
-              <DialogTitle className="text-xl font-bold text-[#001C71] text-right rtl:text-right ltr:text-left">
+              <DialogTitle className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
                 {t("Enroll in")} {t("Diploma")}{" "}
                 {selectedDiploma === "intermediate"
                   ? t("Intermediate")
@@ -251,7 +248,7 @@ export default function CourseDetailsPage() {
                           ? "bg-[#001C71] text-white"
                           : step === enrollmentStep
                           ? "bg-[#001C71]/80 text-white"
-                          : "bg-gray-200 text-gray-600"
+                          : "bg-gray-200 text-black-tint-80"
                       }`}
                     >
                       {step <= enrollmentStep ? (

@@ -106,7 +106,7 @@ export default function Footer() {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="text-gray-300 mb-6 max-w-md"
+                className="text-p-tints-tint-10 mb-6 max-w-md"
               >
                 {t(
                   "Empowering learners worldwide with quality education and innovative online learning experiences Transform your future with Se-University"
@@ -125,7 +125,7 @@ export default function Footer() {
                     href={social.href}
                     whileHover={{ scale: 1.2, y: -5 }}
                     whileTap={{ scale: 0.9 }}
-                    className="text-gray-300 hover:text-[#0EC5C7] transition-colors duration-200 p-2 rounded-full hover:bg-white/10"
+                    className="text-p-tints-tint-10 hover:text-[#0EC5C7] transition-colors duration-200 p-2 rounded-full hover:bg-white/10"
                     aria-label={social.label}
                   >
                     <social.icon className="w-6 h-6" />
@@ -147,33 +147,33 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Link
                     href={`/${locale}`}
-                    className="text-gray-300 hover:text-[#0EC5C7] inline-block"
+                    className="text-p-tints-tint-10 hover:text-[#0EC5C7] inline-block"
                   >
                     {t("Home")}
                   </Link>
                 </motion.div>
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Link
                     href="#diplomas"
-                    className="text-gray-300 hover:text-[#0EC5C7] inline-block"
+                    className="text-p-tints-tint-10 hover:text-[#0EC5C7] inline-block"
                   >
                     {t("Diplomas")}
                   </Link>
                 </motion.div>
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Link
                     href={`/${locale}/signin`}
-                    className="text-gray-300 hover:text-[#0EC5C7] inline-block"
+                    className="text-p-tints-tint-10 hover:text-[#0EC5C7] inline-block"
                   >
                     {t("Sign In")}
                   </Link>
@@ -194,14 +194,14 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Mail className="w-5 h-5 text-[#0EC5C7]" />
                   <span>info@se-university.com</span>
                 </motion.div>
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5 text-[#0EC5C7]" />
                   <span>+1 (555) 123-4567</span>
@@ -218,7 +218,7 @@ export default function Footer() {
             className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-center items-center"
           >
             <motion.p
-              className="text-gray-300 text-sm flex items-center gap-1 text-center"
+              className="text-p-tints-tint-10 text-sm flex items-center gap-1 text-center"
               // whileHover={{ scale: 1.05 }}
             >
               {t("All rights reserved")} © {t("Se-University")}{" "}

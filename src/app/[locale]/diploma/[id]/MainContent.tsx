@@ -25,7 +25,7 @@ export default function MainContent({
         transition={{ duration: 0.8 }}
       >
         {/* Diploma Header */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+        <div className="bg-white rounded-md border-black overflow-hidden mb-8">
           <Image
             src={course.image || "/placeholder.svg"}
             alt={course.title}
@@ -33,16 +33,17 @@ export default function MainContent({
             width={400}
             height={400}
           />
-          <div className="p-6">
-            <h1 className="text-3xl font-bold text-[#001C71] mb-4">
+          <div className="p-6 flex flex-col gap-6">
+            <h1 className="text-3xl font-bold text-main-primary">
               {locale === "en" ? course.title : course.titleAr}
             </h1>
-            <p className="text-gray-600 mb-6">
+
+            <p className="text-black-tint-80">
               {locale === "en" ? course.description : course.descriptionAr}
             </p>
 
             <div className="flex flex-wrap gap-3 mb-6">
-              <Badge className="bg-[#001C71] text-white px-3 py-1 flex gap-2">
+              <Badge className="bg-main-primary text-white px-3 py-1 flex gap-2">
                 <Calendar className="w-4 h-4" />
                 {t("Start")}: {course.startDate}
               </Badge>
@@ -62,28 +63,28 @@ export default function MainContent({
         </div>
 
         {/* Tabbed Content */}
-        <div className="bg-white rounded-xl">
+        <div className="bg-white rounded-md border border-gray-200">
           <Tabs defaultValue="description" className="w-full ">
             <TabsList
-              className={`flex justify-start items-center gap-16 w-full  p-4 rounded-t-xl !bg-transparent border-b border-b-[#001C71] !h-16 !rounded-none ${
+              className={`flex justify-start items-center gap-16 w-full  p-4 rounded-t-xl !bg-transparent border-b border-b-main-primary !h-16 !rounded-none ${
                 locale === "ar" ? "flex-row-reverse" : ""
               }`}
             >
               <TabsTrigger
                 value="description"
-                className="data-[state=active]:text-[#001C71] !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-[#001C71] data-[state=active]:after:z-10"
+                className="data-[state=active]:text-main-primary !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-main-primary data-[state=active]:after:z-10"
               >
                 {t("Description")}
               </TabsTrigger>
               <TabsTrigger
                 value="schedule"
-                className="data-[state=active]:text-[#001C71] !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-[#001C71] data-[state=active]:after:z-10"
+                className="data-[state=active]:text-main-primary !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-main-primary data-[state=active]:after:z-10"
               >
                 {t("Schedule")}
               </TabsTrigger>
               <TabsTrigger
                 value="reviews"
-                className="data-[state=active]:text-[#001C71] !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-[#001C71] data-[state=active]:after:z-10"
+                className="data-[state=active]:text-main-primary !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-main-primary data-[state=active]:after:z-10"
               >
                 {t("Reviews")}
               </TabsTrigger>
@@ -100,7 +101,7 @@ export default function MainContent({
                     <Star className="w-6 h-6 text-yellow-400" />
                     <span className="text-2xl font-bold">{course.rating}</span>
                   </div>
-                  <span className="text-gray-600">
+                  <span className="text-black-tint-80">
                     ({course.totalReviews} reviews)
                   </span>
                 </div>
@@ -112,7 +113,7 @@ export default function MainContent({
                         className="border-dashed border-b-2 flex flex-col  gap-4 p-4 border-gray-200"
                       >
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-[#001C71]">
+                          <span className="font-semibold text-main-primary">
                             {review.name}
                           </span>
                           <div className="flex">
@@ -128,7 +129,7 @@ export default function MainContent({
                             ))}
                           </div>
                         </div>
-                        <p className="text-gray-600">{review.text}</p>
+                        <p className="text-black-tint-80">{review.text}</p>
                       </div>
                     ))
                   : course?.reviewsAr?.map((review: any, index: any) => (
@@ -141,7 +142,7 @@ export default function MainContent({
                             locale === "ar" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="font-semibold text-[#001C71]">
+                          <span className="font-semibold text-main-primary">
                             {review.name}
                           </span>
                           <div className="flex">
@@ -157,7 +158,7 @@ export default function MainContent({
                             ))}
                           </div>
                         </div>
-                        <p className="text-gray-600 text-right rtl:text-right ltr:text-left">
+                        <p className="text-black-tint-80 text-right rtl:text-right ltr:text-left">
                           {review.text}
                         </p>
                       </div>
@@ -180,7 +181,7 @@ export default function MainContent({
                             locale === "ar" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="font-semibold text-[#001C71]">
+                          <span className="font-semibold text-main-primary">
                             {semester.name}
                           </span>
                           {openSemesters.includes(semester.id) ? (
@@ -200,10 +201,10 @@ export default function MainContent({
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
-                                    <h4 className="font-bold text-xl text-gray-900">
+                                    <h4 className="font-bold text-xl text-black-tint-80">
                                       {module.name}
                                     </h4>
-                                    <p className="text-medium text-lg text-gray-600">
+                                    <p className="text-medium text-lg text-black-tint-80">
                                       {t("Date and Time")}: {module.startDate}
                                     </p>
                                   </div>
@@ -226,7 +227,7 @@ export default function MainContent({
                             locale === "ar" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="font-semibold text-[#001C71]">
+                          <span className="font-semibold text-main-primary">
                             {semester.name}
                           </span>
                           {openSemesters.includes(semester.id) ? (
@@ -246,10 +247,10 @@ export default function MainContent({
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
-                                    <h4 className="font-bold text-2xl text-gray-900">
+                                    <h4 className="font-bold text-2xl text-black-tint-80">
                                       {module.name}
                                     </h4>
-                                    <p className="text-medium text-2xl text-gray-600 self-end">
+                                    <p className="text-medium text-2xl text-black-tint-80 self-end">
                                       {t("Date and Time")}: {module.startDate}
                                     </p>
                                   </div>
@@ -266,7 +267,7 @@ export default function MainContent({
             <TabsContent value="description" className="p-6 flex-row-reverse">
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-xl font-bold text-[#001C71] text-right rtl:text-right ltr:text-left">
+                  <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
                     {t("What You will Learn")}
                   </h3>
                   <ul className="flex flex-col gap-2">
@@ -274,7 +275,7 @@ export default function MainContent({
                       ? course.whatYouLearn.map((item: any, index: any) => (
                           <li key={index} className="flex items-start gap-2">
                             <Check className="w-5 h-5 text-green-500  flex-shrink-0" />
-                            <span className="text-gray-600">{item}</span>
+                            <span className="text-black-tint-80">{item}</span>
                           </li>
                         ))
                       : course.whatYouLearnAr.map((item: any, index: any) => (
@@ -283,14 +284,14 @@ export default function MainContent({
                             className="flex items-start rtl:flex-row-reverse gap-2"
                           >
                             <Check className="w-5 h-5 text-green-500  flex-shrink-0" />
-                            <span className="text-gray-600">{item}</span>
+                            <span className="text-black-tint-80">{item}</span>
                           </li>
                         ))}
                   </ul>
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-xl font-bold text-[#001C71] text-right rtl:text-right ltr:text-left">
+                  <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
                     {t(
                       "What Potential Benefits Can You Unlock After This Bootcamp"
                     )}
@@ -300,7 +301,7 @@ export default function MainContent({
                       ? course.benefits.map((benefit: any, index: any) => (
                           <li key={index} className="flex items-start gap-2">
                             <Check className="w-5 h-5 text-[#0EC5C7]  flex-shrink-0" />
-                            <span className="text-gray-600">{benefit}</span>
+                            <span className="text-black-tint-80">{benefit}</span>
                           </li>
                         ))
                       : course.benefitsAr.map((benefit: any, index: any) => (
@@ -309,14 +310,14 @@ export default function MainContent({
                             className="flex items-start gap-2 rtl:flex-row-reverse"
                           >
                             <Check className="w-5 h-5 text-[#0EC5C7]  flex-shrink-0" />
-                            <span className="text-gray-600">{benefit}</span>
+                            <span className="text-black-tint-80">{benefit}</span>
                           </li>
                         ))}
                   </ul>
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-xl font-bold text-[#001C71] text-right rtl:text-right ltr:text-left">
+                  <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
                     {t("Who Should Take This Bootcamp")}
                   </h3>
                   <ul className="flex flex-col gap-2">
@@ -324,7 +325,7 @@ export default function MainContent({
                       ? course.whoShouldTake.map((person: any, index: any) => (
                           <li key={index} className="flex items-start gap-2">
                             <Check className="w-5 h-5 text-[#5F289E] flex-shrink-0" />
-                            <span className="text-gray-600">{person}</span>
+                            <span className="text-black-tint-80">{person}</span>
                           </li>
                         ))
                       : course.whoShouldTakeAr.map(
@@ -334,7 +335,7 @@ export default function MainContent({
                               className="flex items-start rtl:flex-row-reverse gap-2"
                             >
                               <Check className="w-5 h-5 text-[#5F289E] flex-shrink-0 " />
-                              <span className="text-gray-600">{person}</span>
+                              <span className="text-black-tint-80">{person}</span>
                             </li>
                           )
                         )}
