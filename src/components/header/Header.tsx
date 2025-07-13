@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { scrollToSectionWithOffset } from "@/lib/utils";
 
 export default function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,10 +25,7 @@ export default function MainHeader() {
       return;
     }
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    scrollToSectionWithOffset(sectionId, 70);
     setIsMenuOpen(false);
   };
 
@@ -51,10 +49,7 @@ export default function MainHeader() {
     if (pathname === "/" && target) {
       sessionStorage.removeItem("scrollTarget");
       setTimeout(() => {
-        const element = document.getElementById(target);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+        scrollToSectionWithOffset(target, 70);
       }, 100);
       setIsMenuOpen(false);
     }
@@ -83,16 +78,11 @@ export default function MainHeader() {
     return (
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4">
-              <div className="w-24 h-24 flex items-center justify-center">
-                <Image
-                  src={universityLogo}
-                  alt="Logo"
-                  width={50}
-                  height={50}
-                />
+              <div className="w-24 h-20 flex items-center justify-center">
+                <Image src={universityLogo} alt="Logo" width={50} height={50} />
               </div>
             </Link>
             {/* Header Actions */}
@@ -125,14 +115,14 @@ export default function MainHeader() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <button
             type="button"
             onClick={scrollToTop}
             className="flex items-center focus:outline-none gap-4"
           >
-            <div className=" w-24 h-24 flex items-center justify-center">
+            <div className=" w-24 h-20 flex items-center justify-center">
               <Image src={universityLogo} alt="Logo" width={50} height={50} />
             </div>
           </button>
@@ -170,7 +160,7 @@ export default function MainHeader() {
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
-            size="sm"
+            size="icon"
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -186,12 +176,13 @@ export default function MainHeader() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-gray-200 py-4"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ ease: "easeOut", duration: 0.3 }}
+              className="md:hidden border-t border-gray-200 py-4 bg-white fixed inset-0 top-[81px] z-40"
             >
-              <nav className="flex flex-col gap-y-6">
+              <nav className="flex flex-col gap-y-6 p-4 bg-main-white">
                 <button
                   onClick={() => scrollToSection("courses")}
                   className="text-black-tint-80 hover:text-main-primary transition-colors duration-200 text-start"
@@ -207,14 +198,20 @@ export default function MainHeader() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={toggleLanguage}
+                  onClick={() => {
+                    toggleLanguage();
+                    setIsMenuOpen(false);
+                  }}
                   className="flex items-center gap-1 w-full bg-transparent h-9"
                 >
                   <Globe className="w-4 h-4" />
                   <span>{locale === "en" ? t("Arabic") : t("English")}</span>
                 </Button>
-                <Link href={`/${locale}/signin`}>
-                  <Button className="bg-main-primary hover:bg-p-shades-shade-80 w-full">
+                <Link href={`/${locale}/signin`} passHref legacyBehavior>
+                  <Button
+                    className="bg-main-primary hover:bg-p-shades-shade-80 w-full"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     {t("Sign In")}
                   </Button>
                 </Link>

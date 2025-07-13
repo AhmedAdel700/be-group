@@ -34,7 +34,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
             key={method.id}
             className={`p-3 rounded-lg border-2 cursor-pointer text-center ${
               enrollmentData.paymentMethod === method.id
-                ? "border-main-primary bg-p-shades-shade-80"
+                ? "border-main-primary bg-p-shades-shade-80 text-main-white"
                 : "border-gray-200 hover:border-[#0EC5C7]"
             }`}
             onClick={() =>

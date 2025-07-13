@@ -24,8 +24,6 @@ export default function Footer() {
     { icon: Linkedin, href: "#", label: "LinkedIn" },
   ];
 
- 
-
   return (
     <footer id="footer" className="relative overflow-hidden">
       {/* Animated Background */}
@@ -82,7 +80,7 @@ export default function Footer() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#001C71]/90 to-transparent" />
       </div>
 
-      <div className="relative z-10 text-white py-16">
+      <div className="relative z-10 text-white pt-16 pb-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Logo and Description */}
@@ -123,8 +121,6 @@ export default function Footer() {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    whileHover={{ scale: 1.2, y: -5 }}
-                    whileTap={{ scale: 0.9 }}
                     className="text-p-tints-tint-10 hover:text-[#0EC5C7] transition-colors duration-200 p-2 rounded-full hover:bg-white/10"
                     aria-label={social.label}
                   >
@@ -146,7 +142,6 @@ export default function Footer() {
               </h3>
               <div className="flex flex-col gap-3">
                 <motion.div
-                  whileHover={{ x: 5 }}
                   className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Link
@@ -157,7 +152,6 @@ export default function Footer() {
                   </Link>
                 </motion.div>
                 <motion.div
-                  whileHover={{ x: 5 }}
                   className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Link
@@ -168,7 +162,6 @@ export default function Footer() {
                   </Link>
                 </motion.div>
                 <motion.div
-                  whileHover={{ x: 5 }}
                   className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Link
@@ -193,18 +186,26 @@ export default function Footer() {
               </h3>
               <div className="flex flex-col gap-3">
                 <motion.div
-                  whileHover={{ x: 5 }}
                   className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Mail className="w-5 h-5 text-[#0EC5C7]" />
-                  <span>info@se-university.com</span>
+                  <a
+                    href="mailto:info@se-university.com"
+                    className="hover:text-[#0EC5C7] transition-colors duration-200"
+                  >
+                    info@se-university.com
+                  </a>
                 </motion.div>
                 <motion.div
-                  whileHover={{ x: 5 }}
                   className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5 text-[#0EC5C7]" />
-                  <span>+1 (555) 123-4567</span>
+                  <a
+                    href="tel:+15551234567"
+                    className="hover:text-[#0EC5C7] transition-colors duration-200"
+                  >
+                    +1 (555) 123-4567
+                  </a>
                 </motion.div>
               </div>
             </motion.div>
@@ -215,10 +216,10 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
-            className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-center items-center"
+            className="border-t border-gray-700 mt-12 pt-6 flex flex-col md:flex-row justify-center md:justify-start items-center"
           >
             <motion.p
-              className="text-p-tints-tint-10 text-sm flex items-center gap-1 text-center"
+              className="text-p-tints-tint-10 text-sm text-center"
               // whileHover={{ scale: 1.05 }}
             >
               {t("All rights reserved")} © {t("Se-University")}{" "}
