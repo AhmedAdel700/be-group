@@ -57,7 +57,7 @@ export default function MainContent({
             width={400}
             height={400}
           />
-          <div className="p-6 flex flex-col gap-6">
+          <div className="px-6 py-9 flex flex-col gap-6">
             <h1 className="text-3xl font-bold text-main-primary">
               {locale === "en" ? course.title : course.titleAr}
             </h1>
@@ -66,13 +66,13 @@ export default function MainContent({
               {locale === "en" ? course.description : course.descriptionAr}
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-6">
+            <div className="flex flex-wrap gap-3">
               <Badge className="bg-main-primary hover:bg-main-primary/80 transition-colors duration-200 text-white px-3 py-1 flex gap-2 cursor-pointer text-sm">
                 <Calendar className="w-4 h-4" />
                 {t("Start")}: {formatDate(course.startDate)}
               </Badge>
               <Badge className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/80 transition-colors duration-200 text-white px-3 py-1 flex gap-2 cursor-pointer text-sm">
-                <Calendar className="w-4 h-4 mr-1" />
+                <Calendar className="w-4 h-4" />
                 {t("End")}: {formatDate(course.endDate)}
               </Badge>
               {/* <Badge
