@@ -2,7 +2,6 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { BACKEND_API_URL } from "../../apiConfig";
 
-
 const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/",
@@ -24,6 +23,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const endPoint = `${BACKEND_API_URL}users/admin/login`;
+        console.log(req);
 
         const response = await fetch(endPoint, {
           method: "POST",
