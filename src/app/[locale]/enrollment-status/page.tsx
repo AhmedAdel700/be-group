@@ -22,6 +22,7 @@ import {
 import Image from "next/image";
 import imagePlaceholder from "@/app/assets/image-placeholder.svg";
 import { useLocale, useTranslations } from "next-intl";
+import PaymentStep from "@/components/PaymentStep";
 
 type EnrollmentStatus = "pending" | "approved" | "rejected";
 
@@ -55,6 +56,21 @@ export default function EnrollmentStatusPage() {
   const locale = useLocale();
   const t = useTranslations("enroll");
   const [activeTab, setActiveTab] = useState("diploma");
+  const [enrollmentData, setEnrollmentData] = useState({
+    paymentMethod: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardholderName: "",
+  });
+  const [isEnrollmentLoading, setIsEnrollmentLoading] = useState(false);
+  const handleEnrollmentSubmit = () => {
+    setIsEnrollmentLoading(true);
+    setTimeout(() => {
+      setIsEnrollmentLoading(false);
+      // Optionally show a success message or update status
+    }, 2000);
+  };
 
   // Mock data - in real app this would come from API
   const [currentStatus] = useState<EnrollmentStatus>("pending");
@@ -328,10 +344,10 @@ const currentDiploma: DiplomaDetails = {
                               </h4>
                               <p className="text-green-700 text-sm">
                                 {t(
-                                  "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours.",
+                                  "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours",
                                   {
                                     default:
-                                      "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours.",
+                                      "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours",
                                   }
                                 )}
                               </p>
@@ -345,10 +361,10 @@ const currentDiploma: DiplomaDetails = {
                               </h4>
                               <p className="text-red-700 text-sm">
                                 {t(
-                                  "Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information.",
+                                  "Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information",
                                   {
                                     default:
-                                      "Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information.",
+                                      "Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information",
                                   }
                                 )}
                               </p>
@@ -703,10 +719,10 @@ const currentDiploma: DiplomaDetails = {
                               </h4>
                               <p className="text-red-700 text-sm">
                                 {t(
-                                  "Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information.",
+                                  "Unfortunately, your enrollment application was not approved at this time Please contact our admissions team for more information",
                                   {
                                     default:
-                                      "Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information.",
+                                      "Unfortunately, your enrollment application was not approved at this time Please contact our admissions team for more information",
                                   }
                                 )}
                               </p>
@@ -719,6 +735,24 @@ const currentDiploma: DiplomaDetails = {
                 </Tabs>
               </CardHeader>
             </Card>
+
+            {/* PaymentStep Card (conditionally rendered, now at bottom) */}
+            {currentStatus === "approved" && (
+              <Card className="shadow-lg mt-6">
+                <CardHeader>
+                  <CardTitle>{t("Complete Your Payment")}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <PaymentStep
+                    enrollmentData={enrollmentData}
+                    setEnrollmentData={setEnrollmentData}
+                    isEnrollmentLoading={isEnrollmentLoading}
+                    setEnrollmentStep={() => {}}
+                    handleEnrollmentSubmit={handleEnrollmentSubmit}
+                  />
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>

@@ -67,5 +67,10 @@
   "Phone number is required": "Phone number is required",
   "Email is required": "Email is required",
   "Password is required": "Password is required",
-  "(Enter the first four names)": "( Enter the first four names )"
+  "(Enter the first four names)": "( Enter the first four names )",
+  "Complete Your Payment": "Complete Your Payment",
+  "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours": "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours",
+  "Unfortunately, your enrollment application was not approved at this time Please contact our admissions team for more information":"Unfortunately, your enrollment application was not approved at this time. Please contact our admissions team for more information",
+  "Remote": "Remote",
+  "Learning Type": "Learning Type"
 }

@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { Calendar, Check, ChevronDown, ChevronUp, Star } from "lucide-react";
+import { Calendar, Check, ChevronDown, ChevronUp, Star, Monitor } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // Function to format date as day-month-year
 const formatDate = (dateString: string) => {
@@ -41,6 +42,7 @@ export default function MainContent({
   toggleSemesterOpen,
   locale,
 }: any) {
+  const tEnroll = useTranslations("enroll");
   return (
     <div className="lg:col-span-7">
       <motion.div
@@ -75,13 +77,10 @@ export default function MainContent({
                 <Calendar className="w-4 h-4" />
                 {t("End")}: {formatDate(course.endDate)}
               </Badge>
-              {/* <Badge
-                className={`px-3 py-1 ${
-                  course.available ? "bg-green-500" : "bg-red-500"
-                } text-white`}
-              >
-                {course.available ? t("Available") : t("Not Available")}
-              </Badge> */}
+              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 items-center text-sm font-semibold transition-colors duration-200 cursor-pointer">
+                <Monitor className="w-4 h-4" />
+                {tEnroll("Learning Type")}: {tEnroll("Remote")}
+              </Badge>
             </div>
           </div>
         </div>

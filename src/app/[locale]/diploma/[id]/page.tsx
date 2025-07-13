@@ -2,7 +2,6 @@
 
 import { courseData } from "@/app/(dummyData)/courseData";
 import OtpVerification from "@/components/OtpVerification";
-import PaymentStep from "@/components/PaymentStep";
 import PersonalInfoForm from "@/components/PersonalInfoForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -121,20 +120,15 @@ export default function CourseDetailsPage() {
   const handleOtpVerification = () => {
     const otpValue = otp.join("");
     if (otpValue === "1234") {
-      setEnrollmentStep(3);
+      setIsEnrollmentLoading(true);
+      setTimeout(() => {
+        setIsEnrollmentLoading(false);
+        setShowEnrollmentModal(false);
+        router.push(`/${locale}/enrollment-status?diploma=${selectedDiploma}`);
+      }, 2000);
     } else {
       alert("Invalid OTP. Please use 1234 for demo.");
     }
-  };
-
-  const handleEnrollmentSubmit = () => {
-    setIsEnrollmentLoading(true);
-
-    setTimeout(() => {
-      setIsEnrollmentLoading(false);
-      setShowEnrollmentModal(false);
-      router.push(`/${locale}/enrollment-status?diploma=${selectedDiploma}`);
-    }, 2000);
   };
 
   return (
@@ -245,10 +239,10 @@ export default function CourseDetailsPage() {
                 {t("Enroll in")} {t("Diploma")}
                 {selectedDiploma === "intermediate"
                   ? t("Intermediate")
-                  : t("Associate")}{" "}
+                  : t("Associate")} {" "}
               </DialogTitle>
-              <div className="flex justify-between">
-                {[1, 2, 3].map((step) => {
+              <div className="flex justify-center sm:justify-between">
+                {[1, 2].map((step) => {
                   const isCompleted = step < enrollmentStep;
                   const isCurrent = step === enrollmentStep;
                   return (
@@ -265,11 +259,10 @@ export default function CourseDetailsPage() {
                           step
                         )}
                       </div>
-
                       {/* Line connecting steps */}
-                      {step < 3 && (
+                      {step < 2 && (
                         <div
-                          className={`w-24 sm:w-60 h-0.5 transition-colors duration-300 ease-in-out ${
+                          className={`w-[210px] sm:w-[525px] h-0.5 transition-colors duration-300 ease-in-out ${
                             isCompleted ? "bg-[#001C71]" : "bg-gray-200"
                           }`}
                         />
@@ -279,7 +272,6 @@ export default function CourseDetailsPage() {
                 })}
               </div>
             </DialogHeader>
-
             {/* Step 1: Personal Information */}
             {enrollmentStep === 1 && (
               <PersonalInfoForm
@@ -295,25 +287,14 @@ export default function CourseDetailsPage() {
                 handleStep1Next={handleStep1Next}
               />
             )}
-
-            {/* Step 2: OTP Verification */}
+            {/* Step 2: OTP Verification (now submits) */}
             {enrollmentStep === 2 && (
               <OtpVerification
                 otp={otp}
                 handleOtpChange={handleOtpChange}
                 handleOtpVerification={handleOtpVerification}
                 setEnrollmentStep={setEnrollmentStep}
-              />
-            )}
-
-            {/* Step 3: Payment Method */}
-            {enrollmentStep === 3 && (
-              <PaymentStep
-                enrollmentData={enrollmentData}
-                setEnrollmentData={setEnrollmentData}
                 isEnrollmentLoading={isEnrollmentLoading}
-                setEnrollmentStep={setEnrollmentStep}
-                handleEnrollmentSubmit={handleEnrollmentSubmit}
               />
             )}
           </div>
