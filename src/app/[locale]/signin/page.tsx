@@ -28,7 +28,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
-import universityLogo from "@/app/assets/university-logo.svg";
 import universityLogoWhite from "@/app/assets/university-logo-white.svg";
 
 export default function SignInPage() {
