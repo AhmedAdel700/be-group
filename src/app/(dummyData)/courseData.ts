@@ -80,15 +80,15 @@ export const courseData = {
         name: "Semester 1: Frontend Foundations",
         modules: [
           {
-            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            name: "What Makes a Great Product Decision",
             startDate: "24-8-2025",
           },
           {
-            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            name: "Decision Clarity Through Frameworks",
             startDate: "24-8-2025",
           },
           {
-            name: "🗓️ 🚀 From Discovery to Launch",
+            name: "From Discovery to Launch",
             startDate: "2024-03-16",
           },
         ],
@@ -98,15 +98,15 @@ export const courseData = {
         name: "Semester 2: Advanced Frontend",
         modules: [
           {
-            name: "🗓️ 💰 Smart Pricing Decisions (B2B & B2C)",
+            name: "Smart Pricing Decisions (B2B & B2C)",
             startDate: "2024-04-01",
           },
           {
-            name: "🗓️ 🤝 Mapping Stakeholders & Aligning Incentives",
+            name: "Mapping Stakeholders & Aligning Incentives",
             startDate: "2024-04-16",
           },
           {
-            name: "🗓️ 🧭 Navigating Conflicts and Driving Momentum",
+            name: "Navigating Conflicts and Driving Momentum",
             startDate: "2024-05-01",
           },
         ],
@@ -116,15 +116,15 @@ export const courseData = {
         name: "Semester 3: Backend Development",
         modules: [
           {
-            name: "🗓️ 🎨 Leading Bold Rebrands with Clarity",
+            name: "Leading Bold Rebrands with Clarity",
             startDate: "2024-05-16",
           },
           {
-            name: "🗓️ 💣 When to Kill It – Smart Product Sunsetting",
+            name: "When to Kill It – Smart Product Sunsetting",
             startDate: "2024-06-01",
           },
           {
-            name: "🗓️ 🤖 Spotting Real AI Opportunities in Your Product",
+            name: "Spotting Real AI Opportunities in Your Product",
             startDate: "2024-06-16",
           },
         ],
@@ -134,15 +134,15 @@ export const courseData = {
         name: "Semester 4: Full Stack Integration",
         modules: [
           {
-            name: "🗓️ 🎯 Prioritizing AI Bets for Real Impact",
+            name: "Prioritizing AI Bets for Real Impact",
             startDate: "2024-07-01",
           },
           {
-            name: "🗓️ 🔍 What Makes a Great Product Decision",
+            name: "What Makes a Great Product Decision",
             startDate: "2024-07-16",
           },
           {
-            name: "🗓️ 🧠 Decision Clarity Through Frameworks",
+            name: "Decision Clarity Through Frameworks",
             startDate: "2024-08-01",
           },
         ],
@@ -154,15 +154,15 @@ export const courseData = {
         name: "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
         modules: [
           {
-            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            name: "ما الذي يجعل قرار المنتج رائعاً",
             startDate: "24-8-2025",
           },
           {
-            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            name: "وضوح القرار من خلال الأطر",
             startDate: "24-8-2025",
           },
           {
-            name: "من الاكتشاف إلى الإطلاق 🗓️ 🚀",
+            name: "من الاكتشاف إلى الإطلاق",
             startDate: "2024-03-16",
           },
         ],
@@ -172,15 +172,15 @@ export const courseData = {
         name: "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
         modules: [
           {
-            name: "قرارات التسعير الذكية (B2B و B2C) 🗓️ 💰",
+            name: "قرارات التسعير الذكية (B2B و B2C)",
             startDate: "2024-04-01",
           },
           {
-            name: "تحديد أصحاب المصلحة ومزامنة الحوافز 🗓️ 🤝",
+            name: "تحديد أصحاب المصلحة ومزامنة الحوافز",
             startDate: "2024-04-16",
           },
           {
-            name: "التنقل في النزاعات ودفع الزخم 🗓️ 🧭",
+            name: "التنقل في النزاعات ودفع الزخم",
             startDate: "2024-05-01",
           },
         ],
@@ -190,15 +190,15 @@ export const courseData = {
         name: "الفصل الدراسي 3: تطوير الواجهة الخلفية",
         modules: [
           {
-            name: "قيادة إعادة تصميم جريئة بوضوح 🗓️ 🎨",
+            name: "قيادة إعادة تصميم جريئة بوضوح",
             startDate: "2024-05-16",
           },
           {
-            name: "متى نوقفه - إغلاق المنتج الذكي 🗓️ 💣",
+            name: "متى نوقفه - إغلاق المنتج الذكي",
             startDate: "2024-06-01",
           },
           {
-            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك 🗓️ 🤖",
+            name: "اكتشاف فرص الذكاء الاصطناعي الحقيقية في منتجك",
             startDate: "2024-06-16",
           },
         ],
@@ -208,15 +208,15 @@ export const courseData = {
         name: "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
         modules: [
           {
-            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي 🗓️ 🎯",
+            name: "تحديد أولويات الرهانات على الذكاء الاصطناعي من أجل تأثير حقيقي",
             startDate: "2024-07-01",
           },
           {
-            name: "ما الذي يجعل قرار المنتج رائعاً 🗓️ 🔍",
+            name: "ما الذي يجعل قرار المنتج رائعاً",
             startDate: "2024-07-16",
           },
           {
-            name: "وضوح القرار من خلال الأطر 🗓️ 🧠",
+            name: "وضوح القرار من خلال الأطر",
             startDate: "2024-08-01",
           },
         ],

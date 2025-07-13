@@ -26,6 +26,10 @@ import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
+import universityLogo from "@/app/assets/university-logo.svg";
+import universityLogoWhite from "@/app/assets/university-logo-white.svg";
 
 export default function SignInPage() {
   const locale = useLocale();
@@ -83,7 +87,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] flex items-center justify-center relative overflow-hidden px-4 py-[120px] xl:py-0">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Books */}
@@ -195,7 +199,7 @@ export default function SignInPage() {
                 transition={{ duration: 0.6 }}
                 className="w-16 h-16 mx-auto bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-full flex items-center justify-center"
               >
-                <span className="text-white font-bold text-xl">SU</span>
+                <Image src={universityLogoWhite} alt="University Logo" width={48} height={48} />
               </motion.div>
               <CardTitle className="text-2xl font-bold text-main-primary">
                 {t("Welcome Back")}
@@ -269,11 +273,11 @@ export default function SignInPage() {
                   )}
                   <div className="flex justify-between items-center">
                     <label className="flex items-center gap-2 text-sm">
-                      <input
-                        type="checkbox"
+                      <Checkbox
+                        id="rememberMe"
                         checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
-                        className="accent-main-primary size-4"
+                        onCheckedChange={(checked) => setRememberMe(checked === true)}
+                        className=""
                       />
                       {t("Remember Me")}
                     </label>

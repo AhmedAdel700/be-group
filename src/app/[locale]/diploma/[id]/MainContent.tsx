@@ -10,6 +10,30 @@ import { motion } from "framer-motion";
 import { Calendar, Check, ChevronDown, ChevronUp, Star } from "lucide-react";
 import Image from "next/image";
 
+// Function to format date as day-month-year
+const formatDate = (dateString: string) => {
+  if (!dateString) return "";
+  
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      // If it's already in DD-MM-YYYY format, return as is
+      if (dateString.includes('-') && dateString.split('-').length === 3) {
+        return dateString;
+      }
+      return dateString;
+    }
+    
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    
+    return `${day}-${month}-${year}`;
+  } catch {
+    return dateString;
+  }
+};
+
 export default function MainContent({
   course,
   t,
@@ -25,7 +49,7 @@ export default function MainContent({
         transition={{ duration: 0.8 }}
       >
         {/* Diploma Header */}
-        <div className="bg-white rounded-md border-black overflow-hidden mb-8">
+        <div className="bg-white rounded-md border-black overflow-hidden mb-8 shadow-sm">
           <Image
             src={course.image || "/placeholder.svg"}
             alt={course.title}
@@ -43,13 +67,13 @@ export default function MainContent({
             </p>
 
             <div className="flex flex-wrap gap-3 mb-6">
-              <Badge className="bg-main-primary text-white px-3 py-1 flex gap-2">
+              <Badge className="bg-main-primary hover:bg-main-primary/80 transition-colors duration-200 text-white px-3 py-1 flex gap-2 cursor-pointer text-sm">
                 <Calendar className="w-4 h-4" />
-                {t("Start")}: {course.startDate}
+                {t("Start")}: {formatDate(course.startDate)}
               </Badge>
-              <Badge className="bg-[#0EC5C7] text-white px-3 py-1 flex gap-2">
+              <Badge className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/80 transition-colors duration-200 text-white px-3 py-1 flex gap-2 cursor-pointer text-sm">
                 <Calendar className="w-4 h-4 mr-1" />
-                {t("End")}: {}
+                {t("End")}: {formatDate(course.endDate)}
               </Badge>
               {/* <Badge
                 className={`px-3 py-1 ${
@@ -63,28 +87,26 @@ export default function MainContent({
         </div>
 
         {/* Tabbed Content */}
-        <div className="bg-white rounded-md border border-gray-200">
-          <Tabs defaultValue="description" className="w-full ">
+        <div className="bg-white rounded-md border border-gray-200 shadow-sm">
+          <Tabs defaultValue="description" className="w-full">
             <TabsList
-              className={`flex justify-start items-center gap-16 w-full  p-4 rounded-t-xl !bg-transparent border-b border-b-main-primary !h-16 !rounded-none ${
-                locale === "ar" ? "flex-row-reverse" : ""
-              }`}
+              className={`flex ${locale === "ar" ? "flex-row-reverse" : ""} justify-between sm:justify-start items-center gap-1 sm:gap-4 w-full py-4 rounded-t-xl bg-transparent border-b border-gray-200 rounded-none h-12`}
             >
               <TabsTrigger
                 value="description"
-                className="data-[state=active]:text-main-primary !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-main-primary data-[state=active]:after:z-10"
+                className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
               >
                 {t("Description")}
               </TabsTrigger>
               <TabsTrigger
                 value="schedule"
-                className="data-[state=active]:text-main-primary !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-main-primary data-[state=active]:after:z-10"
+                className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
               >
                 {t("Schedule")}
               </TabsTrigger>
               <TabsTrigger
                 value="reviews"
-                className="data-[state=active]:text-main-primary !bg-transparent !shadow-none !font-old relative data-[state=active]:after:content-[''] data-[state=active]:after:absolute data-[state=active]:after:bottom-[-20px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[4px] data-[state=active]:after:bg-main-primary data-[state=active]:after:z-10"
+                className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
               >
                 {t("Reviews")}
               </TabsTrigger>
@@ -110,7 +132,7 @@ export default function MainContent({
                   ? course.reviews.map((review: any, index: any) => (
                       <div
                         key={index}
-                        className="border-dashed border-b-2 flex flex-col  gap-4 p-4 border-gray-200"
+                        className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
                       >
                         <div className="flex items-center gap-2">
                           <span className="font-semibold text-main-primary">
@@ -166,7 +188,7 @@ export default function MainContent({
               </div>
             </TabsContent>
 
-            <TabsContent value="schedule" className="p-6">
+            <TabsContent value="schedule" className="p-3 sm:p-6">
               <div className="flex flex-col gap-4">
                 {locale === "en"
                   ? course.semesters.map((semester: any) => (
@@ -181,7 +203,7 @@ export default function MainContent({
                             locale === "ar" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="font-semibold text-main-primary">
+                          <span className="font-semibold text-main-primary text-base">
                             {semester.name}
                           </span>
                           {openSemesters.includes(semester.id) ? (
@@ -201,11 +223,12 @@ export default function MainContent({
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
-                                    <h4 className="font-bold text-xl text-black-tint-80">
+                                    <h4 className="font-bold text-base text-black-tint-80">
                                       {module.name}
                                     </h4>
-                                    <p className="text-medium text-lg text-black-tint-80">
-                                      {t("Date and Time")}: {module.startDate}
+                                    <p className="text-base text-black-tint-80">
+                                      {t("Date and Time")}:{" "}
+                                      {formatDate(module.startDate)}
                                     </p>
                                   </div>
                                 </div>
@@ -227,7 +250,7 @@ export default function MainContent({
                             locale === "ar" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="font-semibold text-main-primary">
+                          <span className="font-semibold text-main-primary text-base">
                             {semester.name}
                           </span>
                           {openSemesters.includes(semester.id) ? (
@@ -247,11 +270,12 @@ export default function MainContent({
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
-                                    <h4 className="font-bold text-2xl text-black-tint-80">
+                                    <h4 className="font-bold text-base text-black-tint-80">
                                       {module.name}
                                     </h4>
-                                    <p className="text-medium text-2xl text-black-tint-80 self-end">
-                                      {t("Date and Time")}: {module.startDate}
+                                    <p className="text-base text-black-tint-80 self-end">
+                                      {t("Date and Time")}:{" "}
+                                      {formatDate(module.startDate)}
                                     </p>
                                   </div>
                                 </div>
@@ -301,7 +325,9 @@ export default function MainContent({
                       ? course.benefits.map((benefit: any, index: any) => (
                           <li key={index} className="flex items-start gap-2">
                             <Check className="w-5 h-5 text-[#0EC5C7]  flex-shrink-0" />
-                            <span className="text-black-tint-80">{benefit}</span>
+                            <span className="text-black-tint-80">
+                              {benefit}
+                            </span>
                           </li>
                         ))
                       : course.benefitsAr.map((benefit: any, index: any) => (
@@ -310,7 +336,9 @@ export default function MainContent({
                             className="flex items-start gap-2 rtl:flex-row-reverse"
                           >
                             <Check className="w-5 h-5 text-[#0EC5C7]  flex-shrink-0" />
-                            <span className="text-black-tint-80">{benefit}</span>
+                            <span className="text-black-tint-80">
+                              {benefit}
+                            </span>
                           </li>
                         ))}
                   </ul>
@@ -335,7 +363,9 @@ export default function MainContent({
                               className="flex items-start rtl:flex-row-reverse gap-2"
                             >
                               <Check className="w-5 h-5 text-[#5F289E] flex-shrink-0 " />
-                              <span className="text-black-tint-80">{person}</span>
+                              <span className="text-black-tint-80">
+                                {person}
+                              </span>
                             </li>
                           )
                         )}

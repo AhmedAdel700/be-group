@@ -2,11 +2,10 @@
 
 import { courses } from "@/app/(dummyData)/courseData";
 import { easeInOut, motion } from "framer-motion";
-import {  Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
+import { Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
 // Animation Variants
@@ -75,13 +74,10 @@ export default function DiplomasSection() {
                 <Image
                   src={course.image || "/placeholder.svg"}
                   alt={course.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover max-w-full"
                   width={300}
                   height={192}
                 />
-                <Badge className="absolute top-3 right-3 bg-[#0EC5C7] text-white">
-                  {locale === "en" ? course.description : course.descriptionAr}
-                </Badge>
               </div>
 
               {/* Card Content */}
@@ -89,9 +85,6 @@ export default function DiplomasSection() {
                 <h3 className="text-lg font-bold text-main-primary line-clamp-2">
                   {locale === "en" ? course.title : course.titleAr}
                 </h3>
-                {/* <p className="text-black-tint-80 text-sm line-clamp-3">
-                  {locale === "en" ? course.description : course.descriptionAr}
-                </p> */}
 
                 <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
                   <div className="flex items-center gap-1">
@@ -116,18 +109,18 @@ export default function DiplomasSection() {
                 </div>
                 <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
                   <div className="flex items-center gap-1">
+                    {t("Program price")}: {course.ProgramFee}
                     <SaudiRiyal className="w-4 h-4" />
-                    {t("Program price")}: {course.ProgramFee} {t("SAR")}
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
                   <div className="flex items-center gap-1">
+                    {t("Semester")}: {course.semester}
                     <SaudiRiyal className="w-4 h-4" />
-                    {t("Semester")}: {course.semester} {t("SAR")}
                   </div>
                 </div>
 
-                <div className="">
+                <div className="mt-auto">
                   <Link href={`/${locale}/diploma/${course.id}`}>
                     <Button className="w-full bg-main-primary hover:bg-p-shades-shade-80 transition-colors duration-200">
                       {t("View Details")}

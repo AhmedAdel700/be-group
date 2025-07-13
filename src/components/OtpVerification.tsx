@@ -49,7 +49,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
       <p className="text-gray-600">
         {t("Enter the 4-digit code sent to your phone/email")}
       </p>
-      <div className="flex justify-center gap-5">
+      <div className="flex justify-center gap-3 sm:gap-5">
         {otp.map((digit, index) => (
           <Input
             key={index}
@@ -61,7 +61,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
             onChange={(e) => handleChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             ref={(el: any) => (inputRefs.current[index] = el)}
-            className="w-20 h-20 text-center !text-2xl font-bold"
+            className="w-16 h-16 sm:w-20 sm:h-20 text-center !text-2xl font-bold"
           />
         ))}
       </div>
