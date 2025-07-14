@@ -18,7 +18,6 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import MainContent from "./MainContent";
-import { Checkbox } from "@/components/ui/checkbox";
 
 type CourseType = {
   diploma?: string;
