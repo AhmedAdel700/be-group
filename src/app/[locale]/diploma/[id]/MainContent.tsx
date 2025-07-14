@@ -65,7 +65,7 @@ export default function MainContent({
             </h1>
 
             <p className="text-black-tint-80">
-              {locale === "en" ? course.description : course.descriptionAr}
+              {locale === "en" ? course.brief : course.briefAr}
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -115,75 +115,74 @@ export default function MainContent({
 
             <TabsContent value="reviews" className="p-6">
               <div className="flex flex-col gap-6">
-                <div
-                  className={`flex items-center gap-4 ${
-                    locale === "ar" ? "flex-row-reverse" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <Star className="w-6 h-6 text-yellow-400" />
-                    <span className="text-2xl font-bold">{course.rating}</span>
-                  </div>
-                  <span className="text-black-tint-80">
-                    ({course.totalReviews} reviews)
-                  </span>
-                </div>
-
+                {/* Removed star, rating, and (reviews) count */}
                 {locale === "en"
-                  ? course.reviews.map((review: any, index: any) => (
-                      <div
-                        key={index}
-                        className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-main-primary">
-                            {review.name}
-                          </span>
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < review.rating
-                                    ? "text-yellow-400 fill-current"
-                                    : "text-gray-300"
-                                }`}
-                              />
-                            ))}
+                  ? (course.reviews && course.reviews.length > 0 ? (
+                      course.reviews.map((review: any, index: any) => (
+                        <div
+                          key={index}
+                          className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-main-primary">
+                              {review.name}
+                            </span>
+                            <div className="flex">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${
+                                    i < review.rating
+                                      ? "text-yellow-400 fill-current"
+                                      : "text-gray-300"
+                                  }`}
+                                />
+                              ))}
+                            </div>
                           </div>
+                          <p className="text-black-tint-80">{review.text}</p>
                         </div>
-                        <p className="text-black-tint-80">{review.text}</p>
+                      ))
+                    ) : (
+                      <div className="text-center text-gray-400 py-8 text-lg font-semibold border border-dashed border-gray-200 rounded-md bg-gray-50">
+                        No reviews yet
                       </div>
                     ))
-                  : course?.reviewsAr?.map((review: any, index: any) => (
-                      <div
-                        key={index}
-                        className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
-                      >
+                  : (course?.reviewsAr && course.reviewsAr.length > 0 ? (
+                      course.reviewsAr.map((review: any, index: any) => (
                         <div
-                          className={`flex items-center gap-2 ${
-                            locale === "ar" ? "flex-row-reverse" : ""
-                          }`}
+                          key={index}
+                          className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
                         >
-                          <span className="font-semibold text-main-primary">
-                            {review.name}
-                          </span>
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < review.rating
-                                    ? "text-yellow-400 fill-current"
-                                    : "text-gray-300"
-                                }`}
-                              />
-                            ))}
+                          <div
+                            className={`flex items-center gap-2 ${
+                              locale === "ar" ? "flex-row-reverse" : ""
+                            }`}
+                          >
+                            <span className="font-semibold text-main-primary">
+                              {review.name}
+                            </span>
+                            <div className="flex">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${
+                                    i < review.rating
+                                      ? "text-yellow-400 fill-current"
+                                      : "text-gray-300"
+                                  }`}
+                                />
+                              ))}
+                            </div>
                           </div>
+                          <p className="text-black-tint-80 text-right rtl:text-right ltr:text-left">
+                            {review.text}
+                          </p>
                         </div>
-                        <p className="text-black-tint-80 text-right rtl:text-right ltr:text-left">
-                          {review.text}
-                        </p>
+                      ))
+                    ) : (
+                      <div className="text-center text-gray-400 py-8 text-lg font-semibold border border-dashed border-gray-200 rounded-md bg-gray-50">
+                        لا توجد مراجعات بعد
                       </div>
                     ))}
               </div>
@@ -291,87 +290,56 @@ export default function MainContent({
 
             <TabsContent value="description" className="p-6 flex-row-reverse">
               <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-4">
-                  <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
-                    {t("What You will Learn")}
-                  </h3>
-                  <ul className="flex flex-col gap-2">
-                    {locale === "en"
-                      ? course.whatYouLearn.map((item: any, index: any) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <Check className="w-5 h-5 text-green-500  flex-shrink-0" />
-                            <span className="text-black-tint-80">{item}</span>
-                          </li>
-                        ))
-                      : course.whatYouLearnAr.map((item: any, index: any) => (
-                          <li
-                            key={index}
-                            className="flex items-start rtl:flex-row-reverse gap-2"
-                          >
-                            <Check className="w-5 h-5 text-green-500  flex-shrink-0" />
-                            <span className="text-black-tint-80">{item}</span>
-                          </li>
-                        ))}
-                  </ul>
-                </div>
 
-                <div className="flex flex-col gap-4">
-                  <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
-                    {t(
-                      "What Potential Benefits Can You Unlock After This Bootcamp"
-                    )}
-                  </h3>
-                  <ul className="flex flex-col gap-2">
+                {course.description && course.description.length > 0 && (
+                  <div className="flex flex-col gap-4">
                     {locale === "en"
-                      ? course.benefits.map((benefit: any, index: any) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <Check className="w-5 h-5 text-[#0EC5C7]  flex-shrink-0" />
-                            <span className="text-black-tint-80">
-                              {benefit}
-                            </span>
-                          </li>
-                        ))
-                      : course.benefitsAr.map((benefit: any, index: any) => (
-                          <li
-                            key={index}
-                            className="flex items-start gap-2 rtl:flex-row-reverse"
-                          >
-                            <Check className="w-5 h-5 text-[#0EC5C7]  flex-shrink-0" />
-                            <span className="text-black-tint-80">
-                              {benefit}
-                            </span>
-                          </li>
-                        ))}
-                  </ul>
-                </div>
+                      ? course.description.map((item: { title: string; items: string[] }, index: number) => (
+                          <div key={index} className="flex flex-col gap-4">
 
-                <div className="flex flex-col gap-4">
-                  <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
-                    {t("Who Should Take This Bootcamp")}
-                  </h3>
-                  <ul className="flex flex-col gap-2">
-                    {locale === "en"
-                      ? course.whoShouldTake.map((person: any, index: any) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <Check className="w-5 h-5 text-[#5F289E] flex-shrink-0" />
-                            <span className="text-black-tint-80">{person}</span>
-                          </li>
+                            <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
+                              {item.title}
+                            </h3>
+
+                            <ul className="flex flex-col gap-2">
+                              {item.items.map((subItem: string, subIndex: number) => (
+                                <li
+                                  key={subIndex}
+                                  className="flex items-start gap-2"
+                                >
+                                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                  <span className="text-black-tint-80">
+                                    {subItem}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         ))
-                      : course.whoShouldTakeAr.map(
-                          (person: any, index: any) => (
-                            <li
-                              key={index}
-                              className="flex items-start rtl:flex-row-reverse gap-2"
-                            >
-                              <Check className="w-5 h-5 text-[#5F289E] flex-shrink-0 " />
-                              <span className="text-black-tint-80">
-                                {person}
-                              </span>
-                            </li>
-                          )
-                        )}
-                  </ul>
-                </div>
+                      : course.descriptionAr.map((item: { title: string; items: string[] }, index: number) => (
+                          <div key={index} className="flex flex-col gap-4">
+
+                            <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
+                              {item.title}
+                            </h3>
+
+                            <ul className="flex flex-col gap-2">
+                              {item.items.map((subItem, subIndex) => (
+                                <li
+                                  key={subIndex}
+                                  className="flex items-start gap-2 rtl:flex-row-reverse"
+                                >
+                                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                  <span className="text-black-tint-80">
+                                    {subItem}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                  </div>
+                )}
               </div>
             </TabsContent>
           </Tabs>
