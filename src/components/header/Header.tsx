@@ -144,6 +144,10 @@ export default function MainHeader() {
             >
               {t("Contact Us")}
             </button>
+            
+          </nav>
+          <nav className="hidden md:flex items-center gap-4 font-medium">
+            
             <Button
               variant="outline"
               size="sm"

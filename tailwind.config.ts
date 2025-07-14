@@ -26,6 +26,7 @@ const config: Config = {
           "tint-30": "var(--p-tints-tint-30)",
           "tint-40": "var(--p-tints-tint-40)",
           "tint-50": "var(--p-tints-tint-50)",
+          "tint-60": "var(--p-tints-tint-60)",
           "tint-80": "var(--p-tints-tint-80)",
           "tint-90": "var(--p-tints-tint-90)",
         },

@@ -2,6 +2,7 @@
 
 import OtpVerification from "@/components/OtpVerification";
 import PersonalInfoForm from "@/components/PersonalInfoForm";
+import { DiplomaDetailsData } from "@/components/types/diplomasApiTypes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -16,7 +17,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import MainContent from "./MainContent";
-import { DiplomaDetailsData } from "@/components/types/diplomasApiTypes";
 
 type CourseType = {
   diploma?: string;
@@ -29,7 +29,11 @@ function hasDiplomaField(
   return course && typeof course.diploma === "string";
 }
 
-export default function DiplomaDetails({ DetailsData: initialData }: { DetailsData: DiplomaDetailsData }) {
+export default function DiplomaDetails({
+  DetailsData: initialData,
+}: {
+  DetailsData: DiplomaDetailsData;
+}) {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("diplomas");
@@ -61,7 +65,7 @@ export default function DiplomaDetails({ DetailsData: initialData }: { DetailsDa
         price: s.credits || 0,
         modules:
           s.courseIds?.map((c) => ({
-            name: (locale === "ar" ? c.titleAr : c.title),
+            name: locale === "ar" ? c.titleAr : c.title,
             startDate: c.date,
           })) || [],
       })) || [],
@@ -246,10 +250,13 @@ export default function DiplomaDetails({ DetailsData: initialData }: { DetailsDa
                           className="flex justify-between items-center text-sm"
                         >
                           <span className="text-black-tint-80">
-                            {locale === "ar" ? semester.titleAr : semester.title}
+                            {locale === "ar"
+                              ? semester.titleAr
+                              : semester.title}
                           </span>
                           <span className="font-bold flex items-center gap-1 text-main-primary">
-                            {initialData.data.semesterCost} <SaudiRiyal className="w-4 h-4" />
+                            {initialData.data.semesterCost}{" "}
+                            <SaudiRiyal className="w-4 h-4" />
                           </span>
                         </div>
                       ))}
@@ -266,7 +273,10 @@ export default function DiplomaDetails({ DetailsData: initialData }: { DetailsDa
                   <div className="flex justify-between items-center font-bold text-main-primary text-base border-t pt-4 mt-2">
                     <span>{t("Total Price")}</span>
                     <span className="flex items-center gap-2">
-                      {initialData.data.semesterCost * initialData.data.semesters.length + 100} <SaudiRiyal className="w-4 h-4" />
+                      {initialData.data.semesterCost *
+                        initialData.data.semesters.length +
+                        100}{" "}
+                      <SaudiRiyal className="w-4 h-4" />
                     </span>
                   </div>
 
@@ -291,39 +301,11 @@ export default function DiplomaDetails({ DetailsData: initialData }: { DetailsDa
               <DialogTitle className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left capitalize">
                 {t("Submit An Order")}
               </DialogTitle>
-              <div className="flex justify-center sm:justify-between">
-                {[1, 2, 3].map((step) => {
-                  const isCompleted = step < enrollmentStep;
-                  const isCurrent = step === enrollmentStep;
-                  return (
-                    <div key={step} className="flex items-center">
-                      {/* Circle representing the step */}
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold transition-colors duration-300 ease-in-out border-2 border-[#001C71] 
-                          ${
-                            isCurrent
-                              ? "bg-[#001C71] text-white"
-                              : "bg-white text-[#001C71]"
-                          }
-                        `}
-                      >
-                        {isCompleted ? (
-                          <Check className="w-6 h-6 text-[#001C71]" />
-                        ) : (
-                          step
-                        )}
-                      </div>
-                      {/* Line connecting steps */}
-                      {step < 3 && (
-                        <div
-                          className={`w-[85px] sm:w-[242px] h-0.5 transition-colors duration-300 ease-in-out ${
-                            isCompleted ? "bg-[#001C71]" : "bg-gray-200"
-                          }`}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
+              <div className="w-full bg-s-tints-tint-20 rounded-full h-2">
+                <div
+                  className="h-2 rounded-full bg-[#001C71] transition-all duration-300 ease-in-out"
+                  style={{ width: `${(enrollmentStep / 3) * 100}%` }} // Dynamically calculates progress
+                />
               </div>
             </DialogHeader>
             {/* Step 1: Personal Information */}

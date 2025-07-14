@@ -141,9 +141,7 @@ export default function Footer() {
                 {t("Quick Links")}
               </h3>
               <div className="flex flex-col gap-3">
-                <motion.div
-                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
-                >
+                <motion.div className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200">
                   <Link
                     href={`/${locale}`}
                     className="text-p-tints-tint-10 hover:text-[#0EC5C7] inline-block"
@@ -151,9 +149,7 @@ export default function Footer() {
                     {t("Home")}
                   </Link>
                 </motion.div>
-                <motion.div
-                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
-                >
+                <motion.div className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200">
                   <Link
                     href="#diplomas"
                     className="text-p-tints-tint-10 hover:text-[#0EC5C7] inline-block"
@@ -161,9 +157,7 @@ export default function Footer() {
                     {t("Diplomas")}
                   </Link>
                 </motion.div>
-                <motion.div
-                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
-                >
+                <motion.div className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200">
                   <Link
                     href={`/${locale}/signin`}
                     className="text-p-tints-tint-10 hover:text-[#0EC5C7] inline-block"
@@ -185,24 +179,20 @@ export default function Footer() {
                 {t("Contact Us")}
               </h3>
               <div className="flex flex-col gap-3">
-                <motion.div
-                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
-                >
+                <motion.div className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200">
                   <Mail className="w-5 h-5 text-[#0EC5C7]" />
                   <a
                     href="mailto:info@se-university.com"
-                    className="hover:text-[#0EC5C7] transition-colors duration-200"
+                    className="hover:text-[#0EC5C7]"
                   >
                     info@se-university.com
                   </a>
                 </motion.div>
-                <motion.div
-                  className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200"
-                >
+                <motion.div className="flex items-center gap-3 text-p-tints-tint-10 hover:text-white transition-colors duration-200">
                   <Phone className="w-5 h-5 text-[#0EC5C7]" />
                   <a
                     href="tel:+15551234567"
-                    className="hover:text-[#0EC5C7] transition-colors duration-200"
+                    className="hover:text-[#0EC5C7]"
                   >
                     +1 (555) 123-4567
                   </a>
@@ -227,6 +217,7 @@ export default function Footer() {
               <Link
                 className="hover:text-white text-[#0EC5C7] font-semibold transition-all"
                 href="https://betech.com.sa/"
+                target="_blank"
               >
                 {t("Be Tech")}
               </Link>
