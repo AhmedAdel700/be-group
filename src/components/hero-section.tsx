@@ -20,12 +20,12 @@ export default function HeroSection() {
       style={{ backgroundImage: `url(${HeroFrame.src})` }}
     >
       <div className="container h-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="h-full grid lg:grid-cols-2 gap-12 items-center ">
+        <div className="h-full grid gap-12 items-center lg:grid-cols-[55%_41.7%]">
           <motion.div
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="flex flex-col justify-between h-full"
+            className="flex flex-col justify-between h-full w-full gap-7 order-last lg:order-first"
           >
             <h1 className="text-[32px] md:text-[60px] leading-[1.4] font-bold text-main-black">
               {t("Learn develop and achieve anytime anywhere")}
@@ -45,14 +45,15 @@ export default function HeroSection() {
             initial={{ x: 200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative h-full w-full z-10 flex justify-center items-center"
+            className="relative h-full w-full z-10 flex justify-center items-center order-first lg:order-last"
           >
-            <div className="relative h-[60vh] w-auto">
+            <div className="relative w-full grid place-items-end">
               <Image
                 src="/heroFrame2.svg"
                 alt="Students learning online"
-                className="shadow-[-4px_4px_15.8px_10px_rgba(60,67,91,0.10)]"
-                fill
+                className="shadow-[-4px_4px_15.8px_10px_rgba(60,67,91,0.10)] rounded-[12px]"
+                width={500}
+                height={400}
                 priority
                 style={{ objectFit: "contain" }}
               />
