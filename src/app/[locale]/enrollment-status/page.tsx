@@ -747,7 +747,6 @@ const currentDiploma: DiplomaDetails = {
                     enrollmentData={enrollmentData}
                     setEnrollmentData={setEnrollmentData}
                     isEnrollmentLoading={isEnrollmentLoading}
-                    setEnrollmentStep={() => {}}
                     handleEnrollmentSubmit={handleEnrollmentSubmit}
                   />
                 </CardContent>
