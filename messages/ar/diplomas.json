@@ -43,5 +43,9 @@
   "Semester 3: Backend Development": "الفصل الدراسي 3: تطوير الواجهة الخلفية",
   "Semester 4: Full Stack Integration": "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
   "The official enrollment fee for the platform is": "الرسوم الرسمية للتسجيل في المنصة هي",
-  "Total Price": "السعر الإجمالي"
+  "Total Price": "السعر الإجمالي",
+  "Start Date": "تاريخ البدء",
+  "One Year": "عام",
+  "Two Years": "عامين",
+  "Hours": "ساعة"
 }
