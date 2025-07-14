@@ -63,12 +63,14 @@ export default function CourseDetailsPage() {
   >({});
   const [isEnrollmentLoading, setIsEnrollmentLoading] = useState(false);
   const [step2Answers, setStep2Answers] = useState({
-    question1: false,
-    question2: false,
+    hasDisability: undefined as boolean | undefined,
+    applyScholarship: undefined as boolean | undefined,
+    disabilityProofFile: null as File | null,
   });
   const [step2Errors, setStep2Errors] = useState({
-    question1: "",
-    question2: "",
+    hasDisability: "",
+    disabilityProofFile: "",
+    applyScholarship: "",
   });
 
   if (!course) {
@@ -122,11 +124,12 @@ export default function CourseDetailsPage() {
 
   // Step 2 handler
   const handleStep2Next = () => {
-    const errors: { question1: string; question2: string } = { question1: "", question2: "" };
-    if (!step2Answers.question1) errors.question1 = "This field is required.";
-    if (!step2Answers.question2) errors.question2 = "This field is required.";
+    const errors = { hasDisability: "", disabilityProofFile: "", applyScholarship: "" };
+    if (step2Answers.hasDisability === undefined) errors.hasDisability = "This field is required.";
+    if (step2Answers.hasDisability && !step2Answers.disabilityProofFile) errors.disabilityProofFile = "Proof of disability is required.";
+    if (step2Answers.applyScholarship === undefined) errors.applyScholarship = "This field is required.";
     setStep2Errors(errors);
-    if (!errors.question1 && !errors.question2) {
+    if (!errors.hasDisability && !errors.disabilityProofFile && !errors.applyScholarship) {
       setEnrollmentStep(3);
     }
   };
@@ -328,42 +331,102 @@ export default function CourseDetailsPage() {
             {enrollmentStep === 2 && (
               <div className="flex flex-col gap-6">
                 <div>
-                  <label className="font-semibold mb-2 block">1. Do you agree to the terms and conditions?</label>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="question1"
-                      checked={step2Answers.question1}
-                      onCheckedChange={(checked) =>
-                        setStep2Answers((prev) => ({ ...prev, question1: !!checked }))
-                      }
-                    />
-                    <label htmlFor="question1" className="text-sm">Yes</label>
-                  </div>
-                  {step2Errors.question1 && (
-                    <div className="text-xs text-red-500 mt-1">{step2Errors.question1}</div>
-                  )}
+                  <label className="font-bold mb-2 block text-main-primary text-lg">{tEnroll("Disability Information and Scholarship")}</label>
                 </div>
                 <div>
-                  <label className="font-semibold mb-2 block">2. Do you confirm that all information provided is accurate?</label>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="question2"
-                      checked={step2Answers.question2}
-                      onCheckedChange={(checked) =>
-                        setStep2Answers((prev) => ({ ...prev, question2: !!checked }))
-                      }
-                    />
-                    <label htmlFor="question2" className="text-sm">Yes</label>
+                  <label className="font-semibold mb-2 block">{tEnroll("Are you a person with a disability?")}</label>
+                  <div className="flex items-center gap-4">
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="hasDisability"
+                        checked={step2Answers.hasDisability === true}
+                        onChange={() => setStep2Answers((prev) => ({ ...prev, hasDisability: true }))}
+                      />
+                      {tEnroll("Yes")}
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="hasDisability"
+                        checked={step2Answers.hasDisability === false}
+                        onChange={() => setStep2Answers((prev) => ({ ...prev, hasDisability: false, disabilityProofFile: null }))}
+                      />
+                      {tEnroll("No")}
+                    </label>
                   </div>
-                  {step2Errors.question2 && (
-                    <div className="text-xs text-red-500 mt-1">{step2Errors.question2}</div>
+                  {step2Errors.hasDisability && (
+                    <div className="text-xs text-red-500 mt-1">{step2Errors.hasDisability}</div>
                   )}
+                </div>
+                {step2Answers.hasDisability && (
+                  <div className="flex flex-col gap-4">
+                    <label htmlFor="disabilityProofFile" className="font-semibold mb-2 block">
+                      {tEnroll("Please attach proof of your disability")} <span className="text-red-500">*</span>
+                    </label>
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                      <input
+                        id="disabilityProofFile"
+                        type="file"
+                        accept="application/pdf,image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0] || null;
+                          setStep2Answers((prev) => ({ ...prev, disabilityProofFile: file }));
+                        }}
+                        className="hidden"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => document.getElementById("disabilityProofFile")?.click()}
+                      >
+                        {tEnroll("Choose File")}
+                      </Button>
+                      {step2Answers.disabilityProofFile && (
+                        <div className="mt-2 text-sm text-black-tint-80">
+                          {step2Answers.disabilityProofFile.name}
+                        </div>
+                      )}
+                      {step2Errors.disabilityProofFile && (
+                        <p className="text-sm text-red-500">{tEnroll("Proof of disability is required")}</p>
+                      )}
+                    </div>
+                  </div>
+                )}
+                <div>
+                  <label className="font-semibold mb-2 block">{tEnroll("Do you wish to apply for the scholarship?")}</label>
+                  <div className="flex items-center gap-4">
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="applyScholarship"
+                        checked={step2Answers.applyScholarship === true}
+                        onChange={() => setStep2Answers((prev) => ({ ...prev, applyScholarship: true }))}
+                      />
+                      {tEnroll("Yes")}
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="applyScholarship"
+                        checked={step2Answers.applyScholarship === false}
+                        onChange={() => setStep2Answers((prev) => ({ ...prev, applyScholarship: false }))}
+                      />
+                      {tEnroll("No")}
+                    </label>
+                  </div>
+                  {step2Errors.applyScholarship && (
+                    <div className="text-xs text-red-500 mt-1">{step2Errors.applyScholarship}</div>
+                  )}
+                </div>
+                <div className="bg-gray-100 p-3 rounded text-xs text-gray-700 border border-gray-300">
+                  <strong>{tEnroll("Scholarship Disclaimer")}</strong>
                 </div>
                 <Button
                   className="mt-4 w-full bg-main-primary hover:bg-p-shades-shade-80"
                   onClick={handleStep2Next}
                 >
-                  Next Step
+                  {tEnroll("Next Step")}
                 </Button>
               </div>
             )}
