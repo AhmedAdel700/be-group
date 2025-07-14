@@ -8,7 +8,6 @@ interface PaymentStepProps {
   enrollmentData: any;
   setEnrollmentData: React.Dispatch<React.SetStateAction<any>>;
   isEnrollmentLoading: boolean;
-  setEnrollmentStep: React.Dispatch<React.SetStateAction<number>>;
   handleEnrollmentSubmit: () => void;
 }
 
@@ -16,7 +15,6 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
   enrollmentData,
   setEnrollmentData,
   isEnrollmentLoading,
-  setEnrollmentStep,
   handleEnrollmentSubmit,
 }) => {
   const t = useTranslations("enroll");
