@@ -2,12 +2,11 @@
 import { Provider } from "react-redux";
 import { SessionProvider } from "next-auth/react";
 import { store } from "@/app/store/store";
-
 import { Session } from "next-auth";
 
 interface ProvidersProps {
 	children: React.ReactNode;
-	session: Session | null;
+	session?: Session | null;
 }
 
 export function Providers({ children, session }: ProvidersProps) {

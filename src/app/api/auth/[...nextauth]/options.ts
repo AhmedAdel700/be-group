@@ -22,7 +22,7 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const endPoint = `${BACKEND_API_URL}users/admin/login`;
+        const endPoint = `${BACKEND_API_URL}`;
         console.log(req);
 
         const response = await fetch(endPoint, {

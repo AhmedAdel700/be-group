@@ -3,10 +3,10 @@ import type React from "react";
 
 import MainHeader from "@/components/header/Header";
 import { NextIntlClientProvider } from "next-intl";
-import { Providers } from "../store/provider";
+// import { Providers } from "../store/provider";
 import { getMessages } from "next-intl/server";
-import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+// import { getServerSession } from "next-auth";
+// import authOptions from "@/app/api/auth/[...nextauth]/options";
 import "../styles/globals.css";
 
 const PublicSans = Public_Sans({
@@ -37,7 +37,7 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages();
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
   return (
     <html
@@ -47,10 +47,8 @@ export default async function LocaleLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Providers session={session}>
             <MainHeader />
             {children}
-          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>
