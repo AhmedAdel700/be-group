@@ -151,12 +151,9 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
       )}
 
       <div className="flex justify-end gap-4">
-        <Button variant="outline" onClick={() => setEnrollmentStep(2)}>
-          Back
-        </Button>
         <Button
           onClick={handleEnrollmentSubmit}
-          disabled={isEnrollmentLoading}
+          disabled={isEnrollmentLoading || !enrollmentData.paymentMethod}
           className="bg-main-primary hover:bg-p-shades-shade-80"
         >
           {isEnrollmentLoading ? t("Processing") : t("Complete Enrollment")}

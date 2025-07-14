@@ -9,6 +9,7 @@ interface OtpVerificationProps {
   handleOtpChange: (index: number, value: string) => void;
   handleOtpVerification: () => void;
   setEnrollmentStep: React.Dispatch<React.SetStateAction<number>>;
+  isEnrollmentLoading?: boolean;
 }
 
 const OtpVerification: React.FC<OtpVerificationProps> = ({
@@ -16,6 +17,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
   handleOtpChange,
   handleOtpVerification,
   setEnrollmentStep,
+  isEnrollmentLoading = false,
 }) => {
   const t = useTranslations("enroll");
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -74,9 +76,10 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
         </Button>
         <Button
           onClick={handleOtpVerification}
+          disabled={isEnrollmentLoading}
           className="bg-main-primary hover:bg-p-shades-shade-80"
         >
-          {t("Verify")}
+          {isEnrollmentLoading ? t("Processing") : t("Verify")}
         </Button>
       </div>
     </div>

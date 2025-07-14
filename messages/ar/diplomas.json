@@ -19,9 +19,8 @@
   "What You will Learn": "ماذا سوف تتعلم",
   "What Potential Benefits Can You Unlock After This Bootcamp": "ماذا سوف تحصل على مزايا ثابتة بعد هذا البوتكامب؟",
   "Who Should Take This Bootcamp": "من يجب أن يأخذ هذا البوتكامب؟",
-  "Choose Your Diploma": "اختر الدبلومة الخاصة بك",
-  "Enroll Now": "التسجيل الآن",
-  "Enroll in": "التسجيل في",
+  "Diploma Details": "تفاصيل الدبلوم",
+  "Submit An Order": "قدم طلب",
   "Intermediate": "متوسطة",
   "Associate": "مشتركة",
   "Diploma": "دبلومة",
@@ -37,5 +36,12 @@
   "Perfect for beginners looking to get started": "مناسبة للمبتدئين",
   "Associate Diploma": "دبلومة مشتركة",
   "Comprehensive program for career advancement": "برنامج متكامل لتطوير المسيرة المهنية",
-  "semesters": "فصول دراسية"
+  "semesters": "فصول دراسية",
+  "Registration fees": "رسوم التسجيل",
+  "Semester 1: Frontend Foundations": "الفصل الدراسي 1: أساسيات الواجهة الأمامية",
+  "Semester 2: Advanced Frontend": "الفصل الدراسي 2: الواجهة الأمامية المتقدمة",
+  "Semester 3: Backend Development": "الفصل الدراسي 3: تطوير الواجهة الخلفية",
+  "Semester 4: Full Stack Integration": "الفصل الدراسي 4: دمج الواجهة الأمامية والخلفية",
+  "The official enrollment fee for the platform is": "الرسوم الرسمية للتسجيل في المنصة هي",
+  "Total Price": "السعر الإجمالي"
 }

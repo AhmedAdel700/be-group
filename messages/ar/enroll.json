@@ -66,5 +66,10 @@
   "National ID is required": "رقم الهوية مطلوب",
   "Phone number is required": "رقم الهاتف مطلوب",
   "Email is required": "البريد الإلكتروني مطلوب",
-  "Password is required": "كلمة المرور مطلوبة"
+  "Password is required": "كلمة المرور مطلوبة",
+  "Complete Your Payment": "أكمل دفعتك",
+  "Your enrollment has been approved! You will receive access credentials and course materials via email within 24 hours": "تمت الموافقة على تسجيلك! ستصلك بيانات الدخول ومواد الدورة عبر البريد الإلكتروني خلال ٢٤ ساعة.",
+  "Unfortunately, your enrollment application was not approved at this time Please contact our admissions team for more information": "للأسف، لم تتم الموافقة على طلب تسجيلك حتى الآن. يُرجى التواصل مع فريق القبول لمزيد من المعلومات.",
+  "Remote": "عن بعد",
+  "Learning Type": "نوع التعلم"
 }

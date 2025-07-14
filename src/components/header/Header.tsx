@@ -1,6 +1,7 @@
 "use client";
 
-import universityLogo from "@/app/assets/university-logo.svg";
+// import universityLogo from "@/app/assets/university-logo.svg";
+import logo from "@/app/assets/logo.svg";
 import { usePathname, useRouter } from "@/navigations";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, LogOut, Menu, X } from "lucide-react";
@@ -78,11 +79,12 @@ export default function MainHeader() {
     return (
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-4">
-              <div className="w-24 h-20 flex items-center justify-center">
-                <Image src={universityLogo} alt="Logo" width={50} height={50} />
+            <Link href={`/${locale}`} className="flex items-center gap-4">
+              <div className="w-full flex items-center justify-center">
+                <Image src={logo} alt="Logo" width={120} height={120} />{" "}
+                {/* Increased size */}
               </div>
             </Link>
             {/* Header Actions */}
@@ -113,17 +115,18 @@ export default function MainHeader() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-sm border-b border-gray-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <button
             type="button"
             onClick={scrollToTop}
             className="flex items-center focus:outline-none gap-4"
           >
-            <div className=" w-24 h-20 flex items-center justify-center">
-              <Image src={universityLogo} alt="Logo" width={50} height={50} />
+            <div className=" w-full flex items-center justify-center">
+              <Image src={logo} alt="Logo" width={120} height={120} />{" "}
+              {/* Increased size */}
             </div>
           </button>
 

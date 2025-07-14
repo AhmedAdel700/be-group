@@ -233,12 +233,16 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </div>
       </div>
 
-      <Button
-        onClick={handleStep1Next}
-        className="w-full bg-main-primary hover:bg-p-shades-shade-80"
-      >
-        {t("Next Step")}
-      </Button>
+      <div className="h-14"></div>
+
+      <div className="absolute bottom-0 left-0 w-full p-6 bg-white">
+        <Button
+          onClick={handleStep1Next}
+          className="w-full bg-main-primary hover:bg-p-shades-shade-80"
+        >
+          {t("Next Step")}
+        </Button>
+      </div>
     </div>
   );
 };

@@ -19,8 +19,8 @@
   "What You will Learn": "What You will Learn",
   "What Potential Benefits Can You Unlock After This Bootcamp": "What Potential Benefits Can You Unlock After This Bootcamp?",
   "Who Should Take This Bootcamp": "Who Should Take This Bootcamp?",
-  "Choose Your Diploma": "Choose Your Diploma",
-  "Enroll Now": "Enroll Now",
+  "Diploma Details": "Diploma Details",
+  "Submit An Order": "Submit An Order",
   "Enroll in": "Enroll in",
   "Intermediate": "Intermediate",
   "Associate": "Associate",
@@ -37,5 +37,12 @@
   "Perfect for beginners looking to get started": "Perfect for beginners looking to get started",
   "Associate Diploma": "Associate Diploma",
   "Comprehensive program for career advancement": "Comprehensive program for career advancement",
-  "semesters": "semesters"
+  "semesters": "semesters",
+  "Registration fees": "Registration fees",
+  "Semester 1: Frontend Foundations": "Semester 1: Frontend Foundations",
+  "Semester 2: Advanced Frontend": "Semester 2: Advanced Frontend",
+  "Semester 3: Backend Development": "Semester 3: Backend Development",
+  "Semester 4: Full Stack Integration": "Semester 4: Full Stack Integration",
+  "The official enrollment fee for the platform is": "The official enrollment fee for the platform is",
+  "Total Price": "Total Price"
 }

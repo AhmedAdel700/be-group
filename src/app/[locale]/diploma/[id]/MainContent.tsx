@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { Calendar, Check, ChevronDown, ChevronUp, Star } from "lucide-react";
+import { Calendar, Check, ChevronDown, ChevronUp, Star, Monitor } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // Function to format date as day-month-year
 const formatDate = (dateString: string) => {
@@ -41,6 +42,7 @@ export default function MainContent({
   toggleSemesterOpen,
   locale,
 }: any) {
+  const tEnroll = useTranslations("enroll");
   return (
     <div className="lg:col-span-7">
       <motion.div
@@ -49,7 +51,7 @@ export default function MainContent({
         transition={{ duration: 0.8 }}
       >
         {/* Diploma Header */}
-        <div className="bg-white rounded-md border-black overflow-hidden mb-8 shadow-sm">
+        <div className="bg-white rounded-md border-black overflow-hidden mb-8 shadow-sm border">
           <Image
             src={course.image || "/placeholder.svg"}
             alt={course.title}
@@ -57,7 +59,7 @@ export default function MainContent({
             width={400}
             height={400}
           />
-          <div className="px-6 py-9 flex flex-col gap-6">
+          <div className="px-6 py-8 flex flex-col gap-6">
             <h1 className="text-3xl font-bold text-main-primary">
               {locale === "en" ? course.title : course.titleAr}
             </h1>
@@ -67,21 +69,18 @@ export default function MainContent({
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <Badge className="bg-main-primary hover:bg-main-primary/80 transition-colors duration-200 text-white px-3 py-1 flex gap-2 cursor-pointer text-sm">
+              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 cursor-pointer text-sm">
                 <Calendar className="w-4 h-4" />
                 {t("Start")}: {formatDate(course.startDate)}
               </Badge>
-              <Badge className="bg-[#0EC5C7] hover:bg-[#0EC5C7]/80 transition-colors duration-200 text-white px-3 py-1 flex gap-2 cursor-pointer text-sm">
+              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 cursor-pointer text-sm">
                 <Calendar className="w-4 h-4" />
                 {t("End")}: {formatDate(course.endDate)}
               </Badge>
-              {/* <Badge
-                className={`px-3 py-1 ${
-                  course.available ? "bg-green-500" : "bg-red-500"
-                } text-white`}
-              >
-                {course.available ? t("Available") : t("Not Available")}
-              </Badge> */}
+              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 items-center text-sm font-semibold transition-colors duration-200 cursor-pointer">
+                <Monitor className="w-4 h-4" />
+                {tEnroll("Learning Type")}: {tEnroll("Remote")}
+              </Badge>
             </div>
           </div>
         </div>
@@ -90,7 +89,9 @@ export default function MainContent({
         <div className="bg-white rounded-md border border-gray-200 shadow-sm">
           <Tabs defaultValue="description" className="w-full">
             <TabsList
-              className={`flex ${locale === "ar" ? "flex-row-reverse" : ""} justify-between sm:justify-start items-center gap-1 sm:gap-4 w-full py-4 rounded-t-xl bg-transparent border-b border-gray-200 rounded-none h-12`}
+              className={`flex ${
+                locale === "ar" ? "flex-row-reverse" : ""
+              } justify-between sm:justify-start items-center gap-1 sm:gap-4 w-full py-4 rounded-t-xl bg-transparent border-b border-gray-200 rounded-none h-12`}
             >
               <TabsTrigger
                 value="description"

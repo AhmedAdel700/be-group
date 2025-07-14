@@ -119,6 +119,13 @@ export default function DiplomasSection() {
                     <SaudiRiyal className="w-4 h-4" />
                   </div>
                 </div>
+                {/* Registration fees row */}
+                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
+                  <div className="flex items-center gap-1">
+                    {t("Registration fees")}: 100
+                    <SaudiRiyal className="w-4 h-4" />
+                  </div>
+                </div>
 
                 <div className="mt-auto">
                   <Link href={`/${locale}/diploma/${course.id}`}>
