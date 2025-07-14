@@ -4,8 +4,8 @@ import { Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./ui/button";
 import { DiplomaResponseData } from "./types/diplomasApiTypes";
+import { Button } from "./ui/button";
 
 const containerVariants = {
   hidden: {},
@@ -111,7 +111,8 @@ export default function DiplomasSection({
                 </div>
                 <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
                   <div className="flex items-center gap-1">
-                    {t("Program price")}: {diploma.semesterCost * diploma.semesters.length + 100}
+                    {t("Program price")}:{" "}
+                    {diploma.semesterCost * diploma.semesters.length + 100}
                     <SaudiRiyal className="w-4 h-4" />
                   </div>
                 </div>
