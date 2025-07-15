@@ -137,6 +137,26 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           <p className="text-sm text-red-500">{enrollmentErrors.password}</p>
         )}
       </div>
+      {/* Confirm Password Field */}
+      <div className="flex flex-col gap-4">
+        <Label htmlFor="confirmPassword">{t("Confirm Password")} *</Label>
+        <Input
+          id="confirmPassword"
+          type="password"
+          placeholder={t("Please confirm your password")}
+          value={enrollmentData.confirmPassword}
+          onChange={(e) =>
+            setEnrollmentData((prev: any) => ({
+              ...prev,
+              confirmPassword: e.target.value,
+            }))
+          }
+          className={enrollmentErrors.confirmPassword ? "border-red-500" : ""}
+        />
+        {enrollmentErrors.confirmPassword && (
+          <p className="text-sm text-red-500">{enrollmentErrors.confirmPassword}</p>
+        )}
+      </div>
       {/* High School Diploma - its own row */}
       <div className="flex flex-col gap-4">
         <Label htmlFor="highSchoolDiplomaFile">

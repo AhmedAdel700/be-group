@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import diplomasReducer from "@/lib/diplomasApiSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    diplomas: diplomasReducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
