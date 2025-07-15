@@ -25,10 +25,10 @@ export default function HeroSection() {
             <h1 className="text-[32px] md:text-[60px] leading-[1.4] font-bold text-main-black">
               {t("Learn develop and achieve anytime anywhere")}
             </h1>
-            <p className="text-xl sm:text-[32px] leading-[1.5] text-black-tint-70">
+            <p className="text-xl sm:text-[28px] leading-[1.5] text-black-tint-70">
               {t("description")}
             </p>
-            <Link href={`#`} className="flex gap-2 items-center">
+            <Link href="#courses" className="flex gap-2 items-center">
               <Button className="bg-main-primary hover:bg-p-shades-shade-80">
                 {t("Submit request")}
                 {locale === "en" ? <ArrowRight /> : <ArrowLeft />}
