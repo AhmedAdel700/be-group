@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import heroFrame from '@/app/assets/heroFrame3.webp';
 
 export default function HeroSection() {
   const locale = useLocale();
@@ -44,7 +45,7 @@ export default function HeroSection() {
           >
             <div className="relative w-full grid place-items-end">
               <Image
-                src="/heroFrame2.png"
+                src={heroFrame}
                 alt="Students learning online"
                 className="shadow-[-4px_4px_15.8px_10px_rgba(60,67,91,0.10)] rounded-[12px]"
                 width={500}

@@ -1,22 +1,14 @@
 "use client";
 
-import OtpVerification from "@/components/OtpVerification";
-import PersonalInfoForm from "@/components/PersonalInfoForm";
 import { DiplomaDetailsData } from "@/components/types/diplomasApiTypes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { motion } from "framer-motion";
 import { Check, SaudiRiyal } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import MainContent from "./MainContent";
+import { useRouter } from "@/navigations";
 
 type CourseType = {
   diploma?: string;
@@ -34,12 +26,12 @@ export default function DiplomaDetails({
 }: {
   DetailsData: DiplomaDetailsData;
 }) {
-  const router = useRouter();
   const locale = useLocale();
+  const router = useRouter()
   const t = useTranslations("diplomas");
-  const tEnroll = useTranslations("enroll");
 
   const diploma = {
+    id:initialData.data._id,
     title: initialData.data.title,
     titleAr: initialData.data.titleAr,
     diploma: initialData.data.category,
@@ -81,36 +73,7 @@ export default function DiplomaDetails({
       })) || [],
   };
   const [openSemesters, setOpenSemesters] = useState<number[]>([]);
-  const [selectedDiploma] = useState<string>("");
-  const [showEnrollmentModal, setShowEnrollmentModal] = useState(false);
-  const [enrollmentStep, setEnrollmentStep] = useState(1);
-  const [enrollmentData, setEnrollmentData] = useState({
-    firstName: "",
-    middleName: "",
-    nationalId: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-  });
-  const [highSchoolDiplomaFile, setHighSchoolDiplomaFile] =
-    useState<File | null>(null);
-  const [idPhotoFile, setIdPhotoFile] = useState<File | null>(null);
-  const [studentImageFile, setStudentImageFile] = useState<File | null>(null);
-  const [otp, setOtp] = useState(["", "", "", ""]);
-  const [enrollmentErrors, setEnrollmentErrors] = useState<
-    Record<string, string>
-  >({});
-  const [isEnrollmentLoading, setIsEnrollmentLoading] = useState(false);
-  const [step2Answers, setStep2Answers] = useState({
-    hasDisability: undefined as boolean | undefined,
-    applyScholarship: undefined as boolean | undefined,
-    disabilityProofFile: null as File | null,
-  });
-  const [step2Errors, setStep2Errors] = useState({
-    hasDisability: "",
-    disabilityProofFile: "",
-    applyScholarship: "",
-  });
+
 
   const toggleSemesterOpen = (semesterId: number) => {
     setOpenSemesters((prev) =>
@@ -118,84 +81,6 @@ export default function DiplomaDetails({
         ? prev.filter((id) => id !== semesterId)
         : [...prev, semesterId]
     );
-  };
-
-  const handleStep1Next = () => {
-    const errors: Record<string, string> = {};
-
-    if (!enrollmentData.firstName.trim())
-      errors.firstName = tEnroll("Full name is required");
-    if (!enrollmentData.nationalId.trim())
-      errors.nationalId = tEnroll("National ID is required");
-    if (!enrollmentData.phoneNumber.trim())
-      errors.phoneNumber = tEnroll("Phone number is required");
-    if (!enrollmentData.email.trim())
-      errors.email = tEnroll("Email is required");
-    if (!enrollmentData.password.trim())
-      errors.password = tEnroll("Password is required");
-    if (!highSchoolDiplomaFile)
-      errors.highSchoolDiplomaFile = tEnroll("High school diploma is required");
-    if (!idPhotoFile) errors.idPhotoFile = tEnroll("ID photo is required");
-    if (!studentImageFile)
-      errors.studentImageFile = tEnroll("Student image is required");
-
-    setEnrollmentErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      setEnrollmentStep(2);
-    }
-  };
-
-  // Step 2 handler
-  const handleStep2Next = () => {
-    const errors = {
-      hasDisability: "",
-      disabilityProofFile: "",
-      applyScholarship: "",
-    };
-    if (step2Answers.hasDisability === undefined)
-      errors.hasDisability = "This field is required.";
-    if (step2Answers.hasDisability && !step2Answers.disabilityProofFile)
-      errors.disabilityProofFile = "Proof of disability is required.";
-    if (step2Answers.applyScholarship === undefined)
-      errors.applyScholarship = "This field is required.";
-    setStep2Errors(errors);
-    if (
-      !errors.hasDisability &&
-      !errors.disabilityProofFile &&
-      !errors.applyScholarship
-    ) {
-      setEnrollmentStep(3);
-    }
-  };
-
-  const handleOtpChange = (index: number, value: string) => {
-    if (value.length <= 1 && /^\d*$/.test(value)) {
-      const newOtp = [...otp];
-      newOtp[index] = value;
-      setOtp(newOtp);
-
-      if (value && index < 3) {
-        const nextInput = document.querySelector(
-          `input[type="text"]:nth-of-type(${index + 2})`
-        ) as HTMLInputElement;
-        nextInput?.focus();
-      }
-    }
-  };
-
-  const handleOtpVerification = () => {
-    const otpValue = otp.join("");
-    if (otpValue === "1234") {
-      setIsEnrollmentLoading(true);
-      setTimeout(() => {
-        setIsEnrollmentLoading(false);
-        setShowEnrollmentModal(false);
-        router.push(`/${locale}/enrollment-status?diploma=${selectedDiploma}`);
-      }, 2000);
-    } else {
-      alert("Invalid OTP. Please use 1234 for demo.");
-    }
   };
 
   return (
@@ -281,7 +166,11 @@ export default function DiplomaDetails({
                   </div>
 
                   <Button
-                    onClick={() => setShowEnrollmentModal(true)}
+                    onClick={() =>
+                      router.push(
+                        `/place-order?diploma=${diploma.id}`
+                      )
+                    }
                     className="w-full bg-main-primary hover:bg-p-shades-shade-80"
                   >
                     {t("Submit An Order")}
@@ -292,200 +181,6 @@ export default function DiplomaDetails({
           </div>
         </div>
       </div>
-
-      {/* Enrollment Modal */}
-      <Dialog open={showEnrollmentModal} onOpenChange={setShowEnrollmentModal}>
-        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden">
-          <div className="max-h-[80vh] overflow-y-auto p-2 flex flex-col gap-6 hide-scrollbar">
-            <DialogHeader className="flex flex-col gap-4">
-              <DialogTitle className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left capitalize">
-                {t("Submit An Order")}
-              </DialogTitle>
-              <div className="w-full bg-s-tints-tint-20 rounded-full h-2">
-                <div
-                  className="h-2 rounded-full bg-[#001C71] transition-all duration-300 ease-in-out"
-                  style={{ width: `${(enrollmentStep / 3) * 100}%` }} // Dynamically calculates progress
-                />
-              </div>
-            </DialogHeader>
-            {/* Step 1: Personal Information */}
-            {enrollmentStep === 1 && (
-              <PersonalInfoForm
-                enrollmentData={enrollmentData}
-                setEnrollmentData={setEnrollmentData}
-                enrollmentErrors={enrollmentErrors}
-                highSchoolDiplomaFile={highSchoolDiplomaFile}
-                setHighSchoolDiplomaFile={setHighSchoolDiplomaFile}
-                idPhotoFile={idPhotoFile}
-                setIdPhotoFile={setIdPhotoFile}
-                studentImageFile={studentImageFile}
-                setStudentImageFile={setStudentImageFile}
-                handleStep1Next={handleStep1Next}
-              />
-            )}
-            {/* Step 2: Checkbox Questions */}
-            {enrollmentStep === 2 && (
-              <div className="flex flex-col gap-6">
-                <div>
-                  <label className="font-bold mb-2 block text-main-primary text-lg">
-                    {tEnroll("Disability Information and Scholarship")}
-                  </label>
-                </div>
-                <div>
-                  <label className="font-semibold mb-2 block">
-                    {tEnroll("Are you a person with a disability?")}
-                  </label>
-                  <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="hasDisability"
-                        checked={step2Answers.hasDisability === true}
-                        onChange={() =>
-                          setStep2Answers((prev) => ({
-                            ...prev,
-                            hasDisability: true,
-                          }))
-                        }
-                      />
-                      {tEnroll("Yes")}
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="hasDisability"
-                        checked={step2Answers.hasDisability === false}
-                        onChange={() =>
-                          setStep2Answers((prev) => ({
-                            ...prev,
-                            hasDisability: false,
-                            disabilityProofFile: null,
-                          }))
-                        }
-                      />
-                      {tEnroll("No")}
-                    </label>
-                  </div>
-                  {step2Errors.hasDisability && (
-                    <div className="text-xs text-red-500 mt-1">
-                      {step2Errors.hasDisability}
-                    </div>
-                  )}
-                </div>
-                {step2Answers.hasDisability && (
-                  <div className="flex flex-col gap-4">
-                    <label
-                      htmlFor="disabilityProofFile"
-                      className="font-semibold mb-2 block"
-                    >
-                      {tEnroll("Please attach proof of your disability")}{" "}
-                      <span className="text-red-500">*</span>
-                    </label>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                      <input
-                        id="disabilityProofFile"
-                        type="file"
-                        accept="application/pdf,image/*"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0] || null;
-                          setStep2Answers((prev) => ({
-                            ...prev,
-                            disabilityProofFile: file,
-                          }));
-                        }}
-                        className="hidden"
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() =>
-                          document
-                            .getElementById("disabilityProofFile")
-                            ?.click()
-                        }
-                      >
-                        {tEnroll("Choose File")}
-                      </Button>
-                      {step2Answers.disabilityProofFile && (
-                        <div className="mt-2 text-sm text-black-tint-80">
-                          {step2Answers.disabilityProofFile.name}
-                        </div>
-                      )}
-                      {step2Errors.disabilityProofFile && (
-                        <p className="text-sm text-red-500">
-                          {tEnroll("Proof of disability is required")}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-                <div>
-                  <label className="font-semibold mb-2 block">
-                    {tEnroll("Do you wish to apply for the scholarship?")}
-                  </label>
-                  <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="applyScholarship"
-                        checked={step2Answers.applyScholarship === true}
-                        onChange={() =>
-                          setStep2Answers((prev) => ({
-                            ...prev,
-                            applyScholarship: true,
-                          }))
-                        }
-                      />
-                      {tEnroll("Yes")}
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="applyScholarship"
-                        checked={step2Answers.applyScholarship === false}
-                        onChange={() =>
-                          setStep2Answers((prev) => ({
-                            ...prev,
-                            applyScholarship: false,
-                          }))
-                        }
-                      />
-                      {tEnroll("No")}
-                    </label>
-                  </div>
-                  {step2Errors.applyScholarship && (
-                    <div className="text-xs text-red-500 mt-1">
-                      {step2Errors.applyScholarship}
-                    </div>
-                  )}
-                </div>
-                <div className="bg-gray-100 p-3 rounded text-xs text-gray-700 border border-gray-300">
-                  <strong>{tEnroll("Scholarship Disclaimer")}</strong>
-                </div>
-                <Button
-                  className="mt-4 w-full bg-main-primary hover:bg-p-shades-shade-80"
-                  onClick={handleStep2Next}
-                >
-                  {tEnroll("Next Step")}
-                </Button>
-              </div>
-            )}
-            {/* Step 3: OTP Verification (now submits) */}
-            {enrollmentStep === 3 && (
-              <div className="flex flex-col gap-6">
-                <OtpVerification
-                  otp={otp}
-                  handleOtpChange={handleOtpChange}
-                  handleOtpVerification={handleOtpVerification}
-                  setEnrollmentStep={setEnrollmentStep}
-                  isEnrollmentLoading={isEnrollmentLoading}
-                />
-                {/* Button removed as requested */}
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

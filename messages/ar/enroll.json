@@ -79,5 +79,8 @@
   "Please attach proof of your disability": "يرجى إرفاق ما يثبت الإعاقة",
   "Proof of disability is required": "إثبات الإعاقة مطلوب",
   "Do you wish to apply for the scholarship?": "هل ترغب في التقديم والمشاركة في المنافسة على منحة \"سندا محمد بن سلمان\" المخصصة لذوي الإعاقة؟",
-  "Scholarship Disclaimer": "تنويه: التقديم على المنحة لا يعني القبول النهائي. سيتم إشعار الطالب بالقرار النهائي بعد مراجعة الطلب واستيفاء المتطلبات."
+  "Scholarship Disclaimer": "تنويه: التقديم على المنحة لا يعني القبول النهائي. سيتم إشعار الطالب بالقرار النهائي بعد مراجعة الطلب واستيفاء المتطلبات.",
+  "Passwords do not match": "كلمات المرور غير متطابقة",
+  "Confirm password is required": "يلزم تأكيد كلمة المرور",
+  "Confirm Password": "تأكيد كلمة المرور"
 }

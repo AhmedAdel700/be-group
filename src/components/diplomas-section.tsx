@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { DiplomaResponseData } from "./types/diplomasApiTypes";
 import { Button } from "./ui/button";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setDiplomas } from "@/lib/diplomasApiSlice";
 
 const containerVariants = {
   hidden: {},
@@ -36,6 +39,11 @@ export default function DiplomasSection({
 }) {
   const locale = useLocale();
   const t = useTranslations("diplomas");
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(setDiplomas(diplomasData));
+    }, [diplomasData, dispatch]);
 
   return (
     <section id="courses" className="py-20">

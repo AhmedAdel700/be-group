@@ -78,7 +78,6 @@ export default function Signin() {
       if (!res?.ok) throw new Error(res?.error || "Internal Server Error");
 
       const session = await getSession();
-      console.log(`###################`, session);
       
       if (!session) throw new Error("Internal Server Error");
     } catch (error) {
@@ -202,7 +201,7 @@ export default function Signin() {
             {t("Back to Home")}
           </Link>
 
-          <Card className="shadow-2xl bg-white/95 backdrop-blur-sm border-0">
+          <Card className="shadow-2xl bg-white backdrop-blur-sm border-0">
             <CardHeader className="text-center">
               <motion.div
                 whileHover={{ rotate: 360 }}

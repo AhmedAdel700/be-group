@@ -1,6 +1,5 @@
 "use client";
 
-// import universityLogo from "@/app/assets/university-logo.svg";
 import logo from "@/app/assets/logo.svg";
 import { usePathname, useRouter } from "@/navigations";
 import { AnimatePresence, motion } from "framer-motion";
@@ -81,7 +80,7 @@ export default function MainHeader() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-24">
             {/* Logo */}
-            <Link href={`/${locale}`} className="flex items-center gap-4">
+            <Link href={`/${locale}`} prefetch className="flex items-center gap-4">
               <div className="w-full flex items-center justify-center">
                 <Image src={logo} alt="Logo" width={120} height={120} />{" "}
                 {/* Increased size */}
@@ -144,10 +143,6 @@ export default function MainHeader() {
             >
               {t("Contact Us")}
             </button>
-            
-          </nav>
-          <nav className="hidden md:flex items-center gap-4 font-medium">
-            
             <Button
               variant="outline"
               size="sm"
@@ -157,12 +152,13 @@ export default function MainHeader() {
               <Globe className="w-4 h-4" />
               <span>{locale === "en" ? t("Arabic") : t("English")}</span>
             </Button>
-            <Link href={`/${locale}/signin`}>
+            <Link href={`/${locale}/signin`} prefetch>
               <Button className="bg-main-primary hover:bg-p-shades-shade-80">
                 {t("Sign In")}
               </Button>
             </Link>
           </nav>
+          {/* <nav className="hidden md:flex items-center gap-4 font-medium"></nav> */}
 
           {/* Mobile Menu Button */}
           <Button
@@ -214,7 +210,12 @@ export default function MainHeader() {
                   <Globe className="w-4 h-4" />
                   <span>{locale === "en" ? t("Arabic") : t("English")}</span>
                 </Button>
-                <Link href={`/${locale}/signin`} passHref legacyBehavior>
+                <Link
+                  href={`/${locale}/signin`}
+                  prefetch
+                  passHref
+                  legacyBehavior
+                >
                   <Button
                     className="bg-main-primary hover:bg-p-shades-shade-80 w-full"
                     onClick={() => setIsMenuOpen(false)}
