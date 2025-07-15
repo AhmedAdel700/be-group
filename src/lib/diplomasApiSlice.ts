@@ -1,4 +1,4 @@
-import { DiplomaResponseData } from "@/components/types/diplomasApiTypes";
+import { DiplomaResponseData } from "@/types/diplomasApiTypes";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface DiplomasState {

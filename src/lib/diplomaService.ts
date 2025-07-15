@@ -1,4 +1,4 @@
-import { DiplomaDetailsData, DiplomaResponseData } from "@/components/types/diplomasApiTypes";
+import { DiplomaDetailsData, DiplomaResponseData } from "@/types/diplomasApiTypes";
 
 const backendURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const backendVersion = process.env.NEXT_PUBLIC_BACKEND_VERSION;

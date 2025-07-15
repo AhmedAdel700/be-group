@@ -368,8 +368,13 @@ export default function PersonalInfoSection({
             <FormItem>
               <FormLabel>First Diploma Choice *</FormLabel>
               <Select
-                onValueChange={(value) => field.onChange(value)}
+                onValueChange={(value) =>
+                  selectedDiploma
+                    ? field.onChange(selectedDiploma)
+                    : field.onChange(value)
+                }
                 value={selectedDiploma || field.value}
+                disabled={selectedDiploma ? true : false}
               >
                 <FormControl>
                   <SelectTrigger>

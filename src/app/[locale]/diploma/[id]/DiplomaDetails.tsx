@@ -1,6 +1,6 @@
 "use client";
 
-import { DiplomaDetailsData } from "@/components/types/diplomasApiTypes";
+import { DiplomaDetailsData } from "@/types/diplomasApiTypes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -84,7 +84,7 @@ export default function DiplomaDetails({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:grid lg:grid-cols-10 gap-8 pt-24">
           {/* Main Content - 70% */}

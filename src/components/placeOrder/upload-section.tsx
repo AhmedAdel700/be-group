@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Upload } from "lucide-react";
+import { Upload, FileImage, FileText, File } from "lucide-react";
 import type { RegistrationFormData } from "@/lib/validation-schema";
+import { useState } from "react";
+import { uploadToBucket } from "@/utils/upload";
 
 interface UploadSectionProps {
   form: UseFormReturn<RegistrationFormData>;
@@ -33,10 +35,26 @@ const uploadFields = [
 ];
 
 export default function UploadSection({ form }: UploadSectionProps) {
+  // Track loading state for each field
+  const [loadingField, setLoadingField] = useState<string | null>(null);
+
+  const handleFileUpload = async (
+    file: File,
+    fieldName: keyof RegistrationFormData
+  ) => {
+    setLoadingField(fieldName);
+    try {
+      const { fileUrl } = await uploadToBucket(file);
+      form.setValue(fieldName, fileUrl);
+    } finally {
+      setLoadingField(null);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h3 className="text-xl font-semibold text-slate-800">Document Uploads</h3>
-
+      {/* Removed Alert component */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {uploadFields.map((field) => (
           <FormField
@@ -53,10 +71,10 @@ export default function UploadSection({ form }: UploadSectionProps) {
                       accept={field.accept}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       id={field.name}
-                      onChange={(e) => {
+                      onChange={async (e) => {
                         const file = e.target.files?.[0];
                         if (file) {
-                          formField.onChange(file);
+                          await handleFileUpload(file, field.name);
                         }
                       }}
                     />
@@ -76,12 +94,34 @@ export default function UploadSection({ form }: UploadSectionProps) {
                             </p>
                           </div>
                         </div>
-                        {formField.value && (
-                          <div className="mt-3 p-2 bg-p-tints-tint-20 rounded-md">
-                            <p className="text-sm text-main-primary font-medium text-center flex items-center justify-center gap-2">
-                              <span className="text-main-primary">✓</span>
-                              {(formField.value as File).name}
-                            </p>
+                        {/* Only show the status div after a file is selected or uploading */}
+                        {(loadingField === field.name || (typeof formField.value === "string" && formField.value)) && (
+                          <div className="mt-3 p-2 bg-p-tints-tint-20 rounded-md flex items-center justify-center min-h-[40px]">
+                            {loadingField === field.name ? (
+                              <span className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5 text-main-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                </svg>
+                                <span>Uploading...</span>
+                              </span>
+                            ) : formField.value.match(/\.(jpg|jpeg|png|webp)$/i) ? (
+                              <>
+                                <FileImage className="h-6 w-6 text-main-primary" />
+                                <span>File uploaded</span>
+                              </>
+                            ) : formField.value.match(/\.pdf$/i) ? (
+                              <>
+                                <FileText className="h-6 w-6 text-main-primary" />
+                                <span>File uploaded</span>
+                              </>
+                            ) : (
+                              <>
+                                <File className="h-6 w-6 text-main-primary" />
+                                <span>File uploaded</span>
+                              </>
+                            )}
+                            <span className="sr-only">File uploaded</span>
                           </div>
                         )}
                       </CardContent>
