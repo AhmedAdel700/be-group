@@ -42,7 +42,7 @@ export default function ScholarshipSection({ form }: ScholarshipSectionProps) {
               <div className="space-y-1 leading-none">
                 <FormLabel className="text-sm font-medium">
                   Do you have disability information and wish to apply for the
-                  "Sanda Mohammad bin Salman" Scholarship?
+                  &quot;Sanda Mohammad bin Salman&quot; Scholarship?
                 </FormLabel>
               </div>
             </FormItem>
@@ -115,7 +115,7 @@ export default function ScholarshipSection({ form }: ScholarshipSectionProps) {
               <div className="space-y-1 leading-none">
                 <FormLabel className="text-sm font-medium">
                   Do you wish to apply and participate in the competition for
-                  the "Sanda Mohammad bin Salman" Scholarship?
+                  the &quot;Sanda Mohammad bin Salman&quot; Scholarship?
                 </FormLabel>
               </div>
             </FormItem>
