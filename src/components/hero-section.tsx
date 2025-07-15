@@ -8,17 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
-import HeroFrame from "@/app/assets/Section.png";
-
 export default function HeroSection() {
   const locale = useLocale();
   const t = useTranslations("hero");
 
   return (
-    <section
-      className="relative pt-32 pb-16 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center bg-white text-white overflow-hidden"
-      style={{ backgroundImage: `url(${HeroFrame.src})` }}
-    >
+    <section className="relative pt-32 pb-16 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center text-white overflow-hidden">
       <div className="container h-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="h-full grid gap-12 items-center lg:grid-cols-[55%_41.7%]">
           <motion.div
@@ -49,7 +44,7 @@ export default function HeroSection() {
           >
             <div className="relative w-full grid place-items-end">
               <Image
-                src="/heroFrame2.svg"
+                src="/heroFrame2.png"
                 alt="Students learning online"
                 className="shadow-[-4px_4px_15.8px_10px_rgba(60,67,91,0.10)] rounded-[12px]"
                 width={500}
