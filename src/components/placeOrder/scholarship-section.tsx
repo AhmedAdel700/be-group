@@ -11,8 +11,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Upload } from "lucide-react";
 import type { RegistrationFormData } from "@/lib/validation-schema";
+import { useState } from "react";
+import { uploadToBucket } from "@/utils/upload";
+import { FileImage, FileText, File, Upload } from "lucide-react";
 
 interface ScholarshipSectionProps {
   form: UseFormReturn<RegistrationFormData>;
@@ -20,6 +22,18 @@ interface ScholarshipSectionProps {
 
 export default function ScholarshipSection({ form }: ScholarshipSectionProps) {
   const hasDisability = form.watch("hasDisability");
+  // Remove alert state, add loading state
+  const [loading, setLoading] = useState(false);
+
+  const handleFileUpload = async (file: File) => {
+    setLoading(true);
+    try {
+      const { fileUrl } = await uploadToBucket(file);
+      form.setValue("disabilityDocument", fileUrl);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -63,10 +77,10 @@ export default function ScholarshipSection({ form }: ScholarshipSectionProps) {
                       accept=".pdf,.jpg,.jpeg,.png"
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       id="disabilityDocument"
-                      onChange={(e) => {
+                      onChange={async (e) => {
                         const file = e.target.files?.[0];
                         if (file) {
-                          field.onChange(file);
+                          await handleFileUpload(file);
                         }
                       }}
                     />
@@ -83,12 +97,34 @@ export default function ScholarshipSection({ form }: ScholarshipSectionProps) {
                             </p>
                           </div>
                         </div>
-                        {field.value && (
-                          <div className="mt-3 p-2 bg-p-tints-tint-20 rounded-md">
-                            <p className="text-sm text-main-primary font-medium flex items-center justify-center text-center gap-2">
-                              <span className="text-main-primary">✓</span>
-                              {(field.value as File).name}
-                            </p>
+                        {/* Only show the status div after a file is selected or uploading */}
+                        {(loading || (typeof field.value === "string" && field.value)) && (
+                          <div className="mt-3 p-2 bg-p-tints-tint-20 rounded-md flex items-center justify-center min-h-[40px]">
+                            {loading ? (
+                              <span className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5 text-main-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                </svg>
+                                <span>Uploading...</span>
+                              </span>
+                            ) : (typeof field.value === "string" && field.value && field.value.match(/\.(jpg|jpeg|png|webp)$/i)) ? (
+                              <>
+                                <FileImage className="h-6 w-6 text-main-primary" />
+                                <span>File uploaded</span>
+                              </>
+                            ) : (typeof field.value === "string" && field.value && field.value.match(/\.pdf$/i)) ? (
+                              <>
+                                <FileText className="h-6 w-6 text-main-primary" />
+                                <span>File uploaded</span>
+                              </>
+                            ) : (typeof field.value === "string" && field.value) ? (
+                              <>
+                                <File className="h-6 w-6 text-main-primary" />
+                                <span>File uploaded</span>
+                              </>
+                            ) : null}
+                            <span className="sr-only">File uploaded</span>
                           </div>
                         )}
                       </CardContent>

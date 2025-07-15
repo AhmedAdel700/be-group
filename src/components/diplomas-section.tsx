@@ -4,7 +4,7 @@ import { Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { DiplomaResponseData } from "./types/diplomasApiTypes";
+import { DiplomaResponseData } from "../types/diplomasApiTypes";
 import { Button } from "./ui/button";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";

@@ -28,18 +28,12 @@ export const registrationSchema = z
     gender: z.enum(["male", "female"], {
       message: "Please select your gender",
     }),
-    studentImage: z.instanceof(File, {
-      message: "Please upload student image",
-    }),
-    highSchoolDiploma: z.instanceof(File, {
-      message: "Please upload high school diploma",
-    }),
-    idPhoto: z.instanceof(File, { message: "Please upload ID photo" }),
-    employerApproval: z.instanceof(File, {
-      message: "Please upload employer approval",
-    }),
+    studentImage: z.string({ message: "Please upload student image" }).min(1, "Please upload student image"),
+    highSchoolDiploma: z.string({ message: "Please upload high school diploma" }).min(1, "Please upload high school diploma"),
+    idPhoto: z.string({ message: "Please upload ID photo" }).min(1, "Please upload ID photo"),
+    employerApproval: z.string({ message: "Please upload employer approval" }).min(1, "Please upload employer approval"),
     hasDisability: z.boolean(),
-    disabilityDocument: z.instanceof(File).optional(),
+    disabilityDocument: z.string().optional(),
     scholarshipParticipation: z.boolean(),
     applicationAcknowledgment: z
       .boolean()
