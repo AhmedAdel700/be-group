@@ -1,6 +1,6 @@
 "use client";
 import { easeInOut, motion } from "framer-motion";
-import { Calendar, Clock, SaudiRiyal, Timer } from "lucide-react";
+import { Calendar, Clock, SaudiRiyal } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,12 +53,12 @@ export default function DiplomasSection({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           viewport={{ once: true }}
-          className="text-center flex flex-col items-center gap-6"
+          className="text-center flex flex-col items-center gap-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-main-primary">
-            {t("Our Popular Diplomas")}
+          <h2 className="text-3xl md:text-5xl font-bold text-black-tint-90 self-start">
+            {t("Our Diplomas")}
           </h2>
-          <p className="text-xl text-black-tint-80 max-w-3xl leading-relaxed">
+          <p className="text-base max-w-6xl text-[28px] text-black-tint-80 leading-relaxed self-start text-start">
             {t(
               "Choose from our wide range of expertly designed diplomas to advance your career and achieve your learning goals"
             )}
@@ -70,77 +70,72 @@ export default function DiplomasSection({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {diplomasData?.data?.diplomas.map((diploma) => (
             <motion.div
               key={diploma._id}
               variants={cardVariants}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full"
+              className="bg-white rounded-[8px] p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full border border-black-tint-10"
             >
               <div className="relative">
                 <Image
                   src={diploma.image}
                   alt={locale === "en" ? diploma.title : diploma.titleAr}
-                  className="w-full h-48 object-cover max-w-full"
-                  width={300}
+                  className="w-full h-48 object-cover max-w-full rounded-sm"
+                  width={330}
                   height={192}
                 />
               </div>
 
-              <div className="flex flex-col p-6 flex-grow gap-4">
-                <h3 className="text-lg font-bold text-main-primary line-clamp-2">
+              <div className="flex flex-col pt-4 flex-grow gap-4">
+                <h3 className="text-xl font-bold line-clamp-2">
                   {locale === "en" ? diploma.title : diploma.titleAr}
                 </h3>
 
-                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
-                  <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2 text-black-tint-60">
+                  <div className="flex items-center gap-1 text-base">
                     <Clock className="w-4 h-4" />
-                    {t("Duration time")}:{" "}
-                    {diploma.category === "Intermediate"
-                      ? t("One Year")
-                      : t("Two Years")}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
-                  <div className="flex items-center gap-1">
-                    <Timer className="w-4 h-4" />
                     {diploma.hours} <span>{t("Hours")}</span>
                   </div>
-                </div>
-                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>{t("Start Date")} :</span>
-                    {new Date(
-                      diploma.semesters[0].configuration.duration.startDate
-                    ).toLocaleDateString("en-GB")}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
-                  <div className="flex items-center gap-1">
-                    {t("Program price")}:{" "}
-                    {diploma.semesterCost * diploma.semesters.length + 100}
-                    <SaudiRiyal className="w-4 h-4" />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
-                  <div className="flex items-center gap-1">
-                    {t("Semester")}: {diploma.semesterCost}
-                    <SaudiRiyal className="w-4 h-4" />
-                  </div>
+
+                  <div className="h-5 w-[2px] bg-black-tint-10"></div>
+
+                  <Calendar className="w-4 h-4" />
+                  <span className="text-black-tint-60">
+                    {t("Start Date")} :
+                  </span>
+                  {new Date(
+                    diploma.semesters[0].configuration.duration.startDate
+                  ).toLocaleDateString("en-GB")}
                 </div>
 
-                <div className="flex items-center justify-between text-sm text-black-tint-80 gap-2">
-                  <div className="flex items-center gap-1">
-                    {t("Registration fees")}: 100
-                    <SaudiRiyal className="w-4 h-4" />
+                <div className="flex items-center text-black-tint-90 gap-2">
+                  <div className="flex items-center justify-between w-full">
+                    <div className="text-xl text-black-tint-60">
+                      {t("Program price")}
+                    </div>
+                    <div className="flex items-center font-bold text-base gap-1">
+                      {diploma.semesterCost * diploma.semesters.length + 100}
+                      <SaudiRiyal className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center text-black-tint-90 gap-2">
+                  <div className="flex items-center justify-between w-full">
+                    <div className="text-xl text-black-tint-60">
+                      {t("Semester")}
+                    </div>
+                    <div className="flex items-center font-bold text-base gap-1">
+                      {diploma.semesterCost}
+                      <SaudiRiyal className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
 
                 <div className="mt-auto">
                   <Link href={`/${locale}/diploma/${diploma._id}`}>
-                    <Button className="w-full bg-main-primary hover:bg-p-shades-shade-80 transition-colors duration-200">
+                    <Button className="w-full h-12 bg-main-primary hover:bg-p-shades-shade-80 transition-colors duration-200 text-sm rounded-[8px]">
                       {t("View Details")}
                     </Button>
                   </Link>

@@ -30,9 +30,13 @@ export default function HeroSection() {
               {t("description")}
             </p>
             <Link href="#courses" className="flex gap-2 items-center">
-              <Button className="bg-main-primary hover:bg-p-shades-shade-80">
+              <Button className="bg-main-primary hover:bg-p-shades-shade-80 text-lg h-12 w-fit">
                 {t("Submit request")}
-                {locale === "en" ? <ArrowRight /> : <ArrowLeft />}
+                {locale === "en" ? (
+                  <ArrowRight className="!w-5 !h-5" />
+                ) : (
+                  <ArrowLeft className="!w-5 !h-5" />
+                )}
               </Button>
             </Link>
           </motion.div>
