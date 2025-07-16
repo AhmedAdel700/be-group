@@ -56,7 +56,7 @@ export default function DiplomasSection({
           viewport={{ once: true }}
           className="text-center flex flex-col items-center gap-4"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-black-tint-90 self-start">
+          <h2 className="text-3xl md:text-4xl font-bold text-black-tint-90 self-start">
             {t('Our Diplomas')}
           </h2>
           <p className="text-base max-w-6xl text-[28px] text-black-tint-80 leading-relaxed self-start text-start">
