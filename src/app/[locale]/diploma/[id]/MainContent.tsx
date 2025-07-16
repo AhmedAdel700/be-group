@@ -104,23 +104,23 @@ export default function MainContent({
             <TabsList
               className={`flex ${
                 locale === 'ar' ? 'flex-row-reverse' : ''
-              } justify-between sm:justify-start items-center gap-1 sm:gap-4 w-full py-4 rounded-t-xl bg-transparent border-b border-gray-200 rounded-none h-12`}
+              } justify-between sm:justify-start items-center gap-1 sm:gap-4 w-full pt-4 rounded-t-xl bg-transparent border-b border-gray-200 rounded-none h-12 `}
             >
               <TabsTrigger
                 value="description"
-                className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
+                className="data-[state=active]:text-main-primary data-[state=active]:border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold"
               >
                 {t('Description')}
               </TabsTrigger>
               <TabsTrigger
                 value="schedule"
-                className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
+                className="data-[state=active]:text-main-primary data-[state=active]:border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold"
               >
                 {t('Schedule')}
               </TabsTrigger>
               <TabsTrigger
                 value="reviews"
-                className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
+                className="data-[state=active]:text-main-primary data-[state=active]:border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold"
               >
                 {t('Reviews')}
               </TabsTrigger>

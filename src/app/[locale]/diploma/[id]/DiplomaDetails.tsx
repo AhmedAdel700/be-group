@@ -128,7 +128,11 @@ export default function DiplomaDetails({
 
                   <div className="border-b-2 border-s-tints-tint-5"></div>
 
-                  <div className="flex items-center justify-center gap-1 w-full p-4 font-bold text-base border border-dashed border-s-tints-tint-30 bg-s-tints-tint-5 rounded-md">
+                  <div
+                    className={`flex items-center justify-center gap-1 w-full p-4 font-bold text-base border border-dashed border-s-tints-tint-30 bg-s-tints-tint-5 rounded-md ${
+                      locale === 'en' && '!text-sm'
+                    }`}
+                  >
                     {t('The registration fee is 100')}
                     <SaudiRiyal className="w-4 h-4" />
                     {t('Non-refundable')}
