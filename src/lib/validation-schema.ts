@@ -3,7 +3,7 @@ import { z } from "zod";
 const nationalIdRegex = /^[0-9]{10}$/;
 const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
 
-export const getRegistrationSchema = (lang: "en" | "ar") => {
+export const getRegistrationSchema = (lang: string) => {
   const t = (en: string, ar: string) => (lang === "ar" ? ar : en);
 
   return z

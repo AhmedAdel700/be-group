@@ -159,7 +159,7 @@ export default function RegistrationForm() {
   function renderStep() {
     switch (currentStep) {
       case 0:
-        return <PersonalInfoSection form={form} locale={locale} />;
+        return <PersonalInfoSection form={form} />;
       case 1:
         return <UploadSection form={form} />;
       case 2:
