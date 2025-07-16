@@ -1,14 +1,15 @@
-"use client";
-import { easeInOut, motion } from "framer-motion";
-import { Calendar, Clock, SaudiRiyal } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
-import Link from "next/link";
-import { DiplomaResponseData } from "../types/diplomasApiTypes";
-import { Button } from "./ui/button";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setDiplomas } from "@/lib/diplomasApiSlice";
+'use client';
+import { easeInOut, motion } from 'framer-motion';
+import { Calendar, Clock, SaudiRiyal } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import { DiplomaResponseData } from '../types/diplomasApiTypes';
+import { Button } from './ui/button';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setDiplomas } from '@/lib/diplomasApiSlice';
+import { formatDateByLocale } from '@/utils/formatDateByLocale';
 
 const containerVariants = {
   hidden: {},
@@ -38,12 +39,12 @@ export default function DiplomasSection({
   diplomasData: DiplomaResponseData;
 }) {
   const locale = useLocale();
-  const t = useTranslations("diplomas");
+  const t = useTranslations('diplomas');
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      dispatch(setDiplomas(diplomasData));
-    }, [diplomasData, dispatch]);
+  useEffect(() => {
+    dispatch(setDiplomas(diplomasData));
+  }, [diplomasData, dispatch]);
 
   return (
     <section id="courses" className="py-20">
@@ -51,16 +52,16 @@ export default function DiplomasSection({
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
           viewport={{ once: true }}
           className="text-center flex flex-col items-center gap-4"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-black-tint-90 self-start">
-            {t("Our Diplomas")}
+            {t('Our Diplomas')}
           </h2>
           <p className="text-base max-w-6xl text-[28px] text-black-tint-80 leading-relaxed self-start text-start">
             {t(
-              "Choose from our wide range of expertly designed diplomas to advance your career and achieve your learning goals"
+              'Choose from our wide range of expertly designed diplomas to advance your career and achieve your learning goals'
             )}
           </p>
         </motion.div>
@@ -81,7 +82,7 @@ export default function DiplomasSection({
               <div className="relative">
                 <Image
                   src={diploma.image}
-                  alt={locale === "en" ? diploma.title : diploma.titleAr}
+                  alt={locale === 'en' ? diploma.title : diploma.titleAr}
                   className="w-full h-48 object-cover max-w-full rounded-sm"
                   width={330}
                   height={192}
@@ -90,30 +91,28 @@ export default function DiplomasSection({
 
               <div className="flex flex-col pt-4 flex-grow gap-4">
                 <h3 className="text-xl font-bold line-clamp-2">
-                  {locale === "en" ? diploma.title : diploma.titleAr}
+                  {locale === 'en' ? diploma.title : diploma.titleAr}
                 </h3>
 
-                <div className="flex items-center gap-2 text-black-tint-60">
-                  <div className="flex items-center gap-1 text-base">
-                    <Clock className="w-4 h-4" />
-                    {diploma.hours} <span>{t("Hours")}</span>
-                  </div>
+                <div className="flex items-center gap-2 text-black-tint-60 text-base">
+                  <Clock className="w-4 h-4" />
+                  <span>
+                    {diploma.hours} {t('Hours')}
+                  </span>
 
                   <div className="h-5 w-[2px] bg-black-tint-10"></div>
 
                   <Calendar className="w-4 h-4" />
-                  <span className="text-black-tint-60">
-                    {t("Start Date")} :
-                  </span>
-                  {new Date(
-                    diploma.semesters[0].configuration.duration.startDate
-                  ).toLocaleDateString("en-GB")}
+                  {formatDateByLocale(
+                    diploma.semesters[0].configuration.duration.startDate,
+                    locale
+                  )}
                 </div>
 
                 <div className="flex items-center text-black-tint-90 gap-2">
                   <div className="flex items-center justify-between w-full">
-                    <div className="text-xl text-black-tint-60">
-                      {t("Program price")}
+                    <div className="text-base text-black-tint-60">
+                      {t('Program price')}
                     </div>
                     <div className="flex items-center font-bold text-base gap-1">
                       {diploma.semesterCost * diploma.semesters.length + 100}
@@ -123,8 +122,8 @@ export default function DiplomasSection({
                 </div>
                 <div className="flex items-center text-black-tint-90 gap-2">
                   <div className="flex items-center justify-between w-full">
-                    <div className="text-xl text-black-tint-60">
-                      {t("Semester")}
+                    <div className="text-base text-black-tint-60">
+                      {t('Semester')}
                     </div>
                     <div className="flex items-center font-bold text-base gap-1">
                       {diploma.semesterCost}
@@ -136,7 +135,7 @@ export default function DiplomasSection({
                 <div className="mt-auto">
                   <Link href={`/${locale}/diploma/${diploma._id}`}>
                     <Button className="w-full h-12 bg-main-primary hover:bg-p-shades-shade-80 transition-colors duration-200 text-sm rounded-[8px]">
-                      {t("View Details")}
+                      {t('View Details')}
                     </Button>
                   </Link>
                 </div>

@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import missionIcon from "@/app/assets/mission.svg";
-import valuesIcon from "@/app/assets/values.svg";
-import visionIcon from "@/app/assets/vision.svg";
-import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+import missionIcon from '@/app/assets/ourMission.svg';
+import valuesIcon from '@/app/assets/ourValues.svg';
+import visionIcon from '@/app/assets/ourVision.svg';
+import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 export default function AboutSection() {
-  const t = useTranslations("about");
+  const t = useTranslations('about');
 
   return (
     <section className="py-20">
@@ -18,40 +18,42 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center text-center gap-6"
+          className="flex flex-col gap-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-main-primary">
-            {t("About Se-University")}
+          <h2 className="text-3xl md:text-4xl font-bold text-main-black">
+            {t('About Se-University')}
           </h2>
-          <p className="text-xl font-medium text-black-tint-80 max-w-3xl leading-relaxed">
+          <p className="text-2xl font-normal text-black-tint-80 max-w-3xl leading-relaxed">
             {t(
-              "We are dedicated to providing world-class education that empowers students to achieve their dreams and build successful careers in the digital age"
+              'We are dedicated to providing world-class education that empowers students to achieve their dreams and build successful careers in the digital age'
             )}
           </p>
         </motion.div>
 
-        <div className="mt-16 grid md:grid-cols-3 gap-8">
+        <div className="mt-10 grid md:grid-cols-3 gap-8">
           {/* Mission */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center text-center p-8 bg-p-tints-tint-60 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 gap-4"
+            className="p-6 rounded-xl border border-black-tint-10"
           >
-            <Image
-              src={missionIcon}
-              alt="mission-icon"
-              width={316}
-              height={201}
-              className="w-[316px] h-[201px]"
-            />
-            <h3 className="text-[32px] font-bold text-main-white">
-              {t("Our Mission")}
+            <div className="bg-p-tints-tint-5 w-[54px] h-[54px] flex items-center justify-center mb-6 rounded-[8px]">
+              <Image
+                src={missionIcon}
+                alt="mission-icon"
+                width={32}
+                height={32}
+                className="w-[32px] h-[32px]"
+              />
+            </div>
+            <h3 className="text-2xl font-bold text-main-black mb-4">
+              {t('Our Mission')}
             </h3>
-            <p className="text-main-white font-medium leading-relaxed">
+            <p className="text-black-tint-80 font-medium leading-relaxed text-lg">
               {t(
-                "To democratize quality education by making it accessible affordable and engaging for learners worldwide through innovative online learning experiences"
+                'To democratize quality education by making it accessible affordable and engaging for learners worldwide through innovative online learning experiences'
               )}
             </p>
           </motion.div>
@@ -60,23 +62,25 @@ export default function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center text-center p-8 bg-p-tints-tint-60 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 gap-4"
+            className="p-6 rounded-xl border border-black-tint-10"
           >
-            <Image
-              src={visionIcon}
-              alt="vision-icon"
-              width={316}
-              height={201}
-              className="w-[316px] h-[201px]"
-            />
-            <h3 className="text-[32px] font-bold text-main-white">
-              {t("Our Vision")}
+            <div className="bg-p-tints-tint-5 w-[54px] h-[54px] flex items-center justify-center mb-6 rounded-[8px]">
+              <Image
+                src={visionIcon}
+                alt="vision-icon"
+                width={32}
+                height={32}
+                className="w-[32px] h-[32px]"
+              />
+            </div>
+            <h3 className="text-2xl font-bold text-main-black mb-4">
+              {t('Our Vision')}
             </h3>
-            <p className="text-main-white font-medium leading-relaxed">
+            <p className="text-black-tint-80 font-medium leading-relaxed text-lg">
               {t(
-                "To become the leading global platform for professional development and academic excellence fostering a community of lifelong learners"
+                'To become the leading global platform for professional development and academic excellence fostering a community of lifelong learners'
               )}
             </p>
           </motion.div>
@@ -85,23 +89,25 @@ export default function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center text-center p-8 bg-p-tints-tint-60 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 gap-4"
+            className="p-6 rounded-xl border border-black-tint-10"
           >
-            <Image
-              src={valuesIcon}
-              alt="vision-icon"
-              width={316}
-              height={201}
-              className="w-[316px] h-[201px]"
-            />
-            <h3 className="text-[32px] font-bold text-main-white">
-              {t("Our Values")}
+            <div className="bg-p-tints-tint-5 w-[54px] h-[54px] flex items-center justify-center mb-6 rounded-[8px]">
+              <Image
+                src={valuesIcon}
+                alt="values-icon"
+                width={32}
+                height={32}
+                className="w-[32px] h-[32px]"
+              />
+            </div>
+            <h3 className="text-2xl font-bold text-main-black mb-4">
+              {t('Our Values')}
             </h3>
-            <p className="text-main-white font-medium leading-relaxed">
+            <p className="text-black-tint-80 font-medium leading-relaxed text-lg">
               {t(
-                "Excellence innovation inclusivity and student success drive everything we do We believe in the transformative power of education"
+                'Excellence innovation inclusivity and student success drive everything we do We believe in the transformative power of education'
               )}
             </p>
           </motion.div>
