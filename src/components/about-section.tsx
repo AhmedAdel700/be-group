@@ -23,7 +23,7 @@ export default function AboutSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-main-black">
             {t('About Se-University')}
           </h2>
-          <p className="text-2xl font-normal text-black-tint-80 max-w-3xl leading-relaxed">
+          <p className="text-xl font-normal text-black-tint-80 max-w-3xl leading-relaxed">
             {t(
               'We are dedicated to providing world-class education that empowers students to achieve their dreams and build successful careers in the digital age'
             )}

@@ -59,7 +59,7 @@ export default function DiplomasSection({
           <h2 className="text-3xl md:text-4xl font-bold text-black-tint-90 self-start">
             {t('Our Diplomas')}
           </h2>
-          <p className="text-base max-w-6xl text-[28px] text-black-tint-80 leading-relaxed self-start text-start">
+          <p className="text-xl max-w-6xl text-[28px] text-black-tint-80 leading-relaxed self-start text-start">
             {t(
               'Choose from our wide range of expertly designed diplomas to advance your career and achieve your learning goals'
             )}
