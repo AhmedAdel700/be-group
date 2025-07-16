@@ -71,6 +71,12 @@ export default function DiplomaDetails({
             startDate: c.date,
           })) || [],
       })) || [],
+    semesterCost: initialData.data.semesterCost,
+    semesterNumber: initialData.data.semesters[0].semesterNumber,
+    hours: initialData.data.hours,
+    diplomaCost:
+      initialData.data.semesters[0].semesterNumber *
+      initialData.data.semesterCost,
   };
   const [openSemesters, setOpenSemesters] = useState<number[]>([]);
 

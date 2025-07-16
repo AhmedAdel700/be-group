@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { motion } from "framer-motion";
-import { Calendar, Check, ChevronDown, ChevronUp, Star, Monitor } from "lucide-react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+} from '@/components/ui/collapsible';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { motion } from 'framer-motion';
+import { Check, ChevronDown, ChevronUp, SaudiRiyal, Star } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 // Function to format date as day-month-year
 const formatDate = (dateString: string) => {
-  if (!dateString) return "";
-  
+  if (!dateString) return '';
+
   try {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
@@ -24,11 +24,11 @@ const formatDate = (dateString: string) => {
       }
       return dateString;
     }
-    
+
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    
+
     return `${day}-${month}-${year}`;
   } catch {
     return dateString;
@@ -42,7 +42,8 @@ export default function MainContent({
   toggleSemesterOpen,
   locale,
 }: any) {
-  const tEnroll = useTranslations("enroll");
+  const tEnroll = useTranslations('enroll');
+
   return (
     <div className="lg:col-span-7">
       <motion.div
@@ -51,36 +52,48 @@ export default function MainContent({
         transition={{ duration: 0.8 }}
       >
         {/* Diploma Header */}
-        <div className="bg-white rounded-md border-black overflow-hidden mb-8 shadow-sm border">
+        <div className="flex flex-col md:flex-row items-center gap-6 mb-10">
           <Image
-            src={course.image || "/placeholder.svg"}
+            src={course.image || '/placeholder.svg'}
             alt={course.title}
-            className="w-full h-64 object-cover"
-            width={400}
-            height={400}
+            className="rounded-lg"
+            width={350}
+            height={300}
           />
-          <div className="px-6 py-8 flex flex-col gap-6">
-            <h1 className="text-3xl font-bold text-main-primary">
-              {locale === "en" ? course.title : course.titleAr}
+
+          <div className="flex flex-col gap-8">
+            <h1 className="text-3xl font-bold">
+              {locale === 'en' ? course.title : course.titleAr}
             </h1>
 
-            <p className="text-black-tint-80">
-              {locale === "en" ? course.brief : course.briefAr}
+            <p className="text-black-tint-80 text-base font-medium">
+              {locale === 'en' ? course.brief : course.briefAr}
             </p>
 
+            <div className="flex items-center gap-2 text-xl font-bold">
+              <p>{tEnroll('Diploma price')}:</p>
+              <div className="flex items-center gap-1">
+                <p>{course.diplomaCost}</p>
+                <SaudiRiyal className="w-4 h-4" />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-xl font-bold">
+              <p>{tEnroll('Tuition fee for the academic year')}:</p>
+              <div className="flex items-center gap-1">
+                <p>{course.semesterCost}</p>
+                <SaudiRiyal className="w-4 h-4" />
+              </div>
+            </div>
+
             <div className="flex flex-wrap gap-3">
-              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 cursor-pointer text-sm">
-                <Calendar className="w-4 h-4" />
-                {t("Start")}: {formatDate(course.startDate)}
+              <Badge variant={'option1'}>
+                {course.semesterNumber} {tEnroll('years')}
               </Badge>
-              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 cursor-pointer text-sm">
-                <Calendar className="w-4 h-4" />
-                {t("End")}: {formatDate(course.endDate)}
+              <Badge variant={'option2'}>
+                {course.hours} {tEnroll('hour')}
               </Badge>
-              <Badge className="bg-[#0EC5C7]/10 hover:bg-[#0EC5C7]/20 border border-[#0EC5C7] text-main-primary px-3 py-1 flex gap-2 items-center text-sm font-semibold transition-colors duration-200 cursor-pointer">
-                <Monitor className="w-4 h-4" />
-                {tEnroll("Learning Type")}: {tEnroll("Remote")}
-              </Badge>
+              <Badge variant={'option3'}>{tEnroll('Remote')}</Badge>
             </div>
           </div>
         </div>
@@ -90,107 +103,107 @@ export default function MainContent({
           <Tabs defaultValue="description" className="w-full">
             <TabsList
               className={`flex ${
-                locale === "ar" ? "flex-row-reverse" : ""
+                locale === 'ar' ? 'flex-row-reverse' : ''
               } justify-between sm:justify-start items-center gap-1 sm:gap-4 w-full py-4 rounded-t-xl bg-transparent border-b border-gray-200 rounded-none h-12`}
             >
               <TabsTrigger
                 value="description"
                 className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
               >
-                {t("Description")}
+                {t('Description')}
               </TabsTrigger>
               <TabsTrigger
                 value="schedule"
                 className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
               >
-                {t("Schedule")}
+                {t('Schedule')}
               </TabsTrigger>
               <TabsTrigger
                 value="reviews"
                 className="data-[state=active]:bg-main-primary data-[state=active]:text-white !shadow-none !font-old relative !h-10 !rounded-sm"
               >
-                {t("Reviews")}
+                {t('Reviews')}
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="reviews" className="p-6">
               <div className="flex flex-col gap-6">
                 {/* Removed star, rating, and (reviews) count */}
-                {locale === "en"
-                  ? (course.reviews && course.reviews.length > 0 ? (
-                      course.reviews.map((review: any, index: any) => (
-                        <div
-                          key={index}
-                          className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-main-primary">
-                              {review.name}
-                            </span>
-                            <div className="flex">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-4 h-4 ${
-                                    i < review.rating
-                                      ? "text-yellow-400 fill-current"
-                                      : "text-gray-300"
-                                  }`}
-                                />
-                              ))}
-                            </div>
+                {locale === 'en' ? (
+                  course.reviews && course.reviews.length > 0 ? (
+                    course.reviews.map((review: any, index: any) => (
+                      <div
+                        key={index}
+                        className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-main-primary">
+                            {review.name}
+                          </span>
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < review.rating
+                                    ? 'text-yellow-400 fill-current'
+                                    : 'text-gray-300'
+                                }`}
+                              />
+                            ))}
                           </div>
-                          <p className="text-black-tint-80">{review.text}</p>
                         </div>
-                      ))
-                    ) : (
-                      <div className="text-center text-gray-400 py-8 text-lg font-semibold border border-dashed border-gray-200 rounded-md bg-gray-50">
-                        No reviews yet
+                        <p className="text-black-tint-80">{review.text}</p>
                       </div>
                     ))
-                  : (course?.reviewsAr && course.reviewsAr.length > 0 ? (
-                      course.reviewsAr.map((review: any, index: any) => (
-                        <div
-                          key={index}
-                          className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
-                        >
-                          <div
-                            className={`flex items-center gap-2 ${
-                              locale === "ar" ? "flex-row-reverse" : ""
-                            }`}
-                          >
-                            <span className="font-semibold text-main-primary">
-                              {review.name}
-                            </span>
-                            <div className="flex">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-4 h-4 ${
-                                    i < review.rating
-                                      ? "text-yellow-400 fill-current"
-                                      : "text-gray-300"
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                          <p className="text-black-tint-80 text-right rtl:text-right ltr:text-left">
-                            {review.text}
-                          </p>
+                  ) : (
+                    <div className="text-center text-gray-400 py-8 text-lg font-semibold border border-dashed border-gray-200 rounded-md bg-gray-50">
+                      No reviews yet
+                    </div>
+                  )
+                ) : course?.reviewsAr && course.reviewsAr.length > 0 ? (
+                  course.reviewsAr.map((review: any, index: any) => (
+                    <div
+                      key={index}
+                      className="border-dashed border-b-2 flex flex-col gap-4 p-4 border-gray-200"
+                    >
+                      <div
+                        className={`flex items-center gap-2 ${
+                          locale === 'ar' ? 'flex-row-reverse' : ''
+                        }`}
+                      >
+                        <span className="font-semibold text-main-primary">
+                          {review.name}
+                        </span>
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < review.rating
+                                  ? 'text-yellow-400 fill-current'
+                                  : 'text-gray-300'
+                              }`}
+                            />
+                          ))}
                         </div>
-                      ))
-                    ) : (
-                      <div className="text-center text-gray-400 py-8 text-lg font-semibold border border-dashed border-gray-200 rounded-md bg-gray-50">
-                        لا توجد مراجعات بعد
                       </div>
-                    ))}
+                      <p className="text-black-tint-80 text-right rtl:text-right ltr:text-left">
+                        {review.text}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-400 py-8 text-lg font-semibold border border-dashed border-gray-200 rounded-md bg-gray-50">
+                    لا توجد مراجعات بعد
+                  </div>
+                )}
               </div>
             </TabsContent>
 
             <TabsContent value="schedule" className="p-3 sm:p-6">
               <div className="flex flex-col gap-4">
-                {locale === "en"
+                {locale === 'en'
                   ? course.semesters.map((semester: any) => (
                       <Collapsible
                         key={semester.id}
@@ -200,7 +213,7 @@ export default function MainContent({
                       >
                         <CollapsibleTrigger
                           className={`flex items-center justify-between w-full p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors ${
-                            locale === "ar" ? "flex-row-reverse" : ""
+                            locale === 'ar' ? 'flex-row-reverse' : ''
                           }`}
                         >
                           <span className="font-semibold text-main-primary text-base">
@@ -219,7 +232,7 @@ export default function MainContent({
                                 <div
                                   key={moduleIndex}
                                   className={`flex items-center justify-between p-3  border-dashed border-b-2 border-gray-200 ${
-                                    locale === "ar" ? "flex-row-reverse" : ""
+                                    locale === 'ar' ? 'flex-row-reverse' : ''
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
@@ -227,7 +240,7 @@ export default function MainContent({
                                       {module.name}
                                     </h4>
                                     <p className="text-base text-black-tint-80">
-                                      {t("Date and Time")}:{" "}
+                                      {t('Date and Time')}:{' '}
                                       {formatDate(module.startDate)}
                                     </p>
                                   </div>
@@ -247,7 +260,7 @@ export default function MainContent({
                       >
                         <CollapsibleTrigger
                           className={`flex items-center justify-between w-full p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors ${
-                            locale === "ar" ? "flex-row-reverse" : ""
+                            locale === 'ar' ? 'flex-row-reverse' : ''
                           }`}
                         >
                           <span className="font-semibold text-main-primary text-base">
@@ -266,7 +279,7 @@ export default function MainContent({
                                 <div
                                   key={moduleIndex}
                                   className={`flex items-center justify-between p-3  border-dashed border-b-2 border-gray-200 ${
-                                    locale === "ar" ? "flex-row-reverse" : ""
+                                    locale === 'ar' ? 'flex-row-reverse' : ''
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
@@ -274,7 +287,7 @@ export default function MainContent({
                                       {module.name}
                                     </h4>
                                     <p className="text-base text-black-tint-80 self-end">
-                                      {t("Date and Time")}:{" "}
+                                      {t('Date and Time')}:{' '}
                                       {formatDate(module.startDate)}
                                     </p>
                                   </div>
@@ -290,54 +303,63 @@ export default function MainContent({
 
             <TabsContent value="description" className="p-6 flex-row-reverse">
               <div className="flex flex-col gap-8">
-
                 {course.description && course.description.length > 0 && (
                   <div className="flex flex-col gap-4">
-                    {locale === "en"
-                      ? course.description.map((item: { title: string; items: string[] }, index: number) => (
-                          <div key={index} className="flex flex-col gap-4">
+                    {locale === 'en'
+                      ? course.description.map(
+                          (
+                            item: { title: string; items: string[] },
+                            index: number
+                          ) => (
+                            <div key={index} className="flex flex-col gap-4">
+                              <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
+                                {item.title}
+                              </h3>
 
-                            <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
-                              {item.title}
-                            </h3>
+                              <ul className="flex flex-col gap-2">
+                                {item.items.map(
+                                  (subItem: string, subIndex: number) => (
+                                    <li
+                                      key={subIndex}
+                                      className="flex items-start gap-2"
+                                    >
+                                      <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                      <span className="text-black-tint-80">
+                                        {subItem}
+                                      </span>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          )
+                        )
+                      : course.descriptionAr.map(
+                          (
+                            item: { title: string; items: string[] },
+                            index: number
+                          ) => (
+                            <div key={index} className="flex flex-col gap-4">
+                              <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
+                                {item.title}
+                              </h3>
 
-                            <ul className="flex flex-col gap-2">
-                              {item.items.map((subItem: string, subIndex: number) => (
-                                <li
-                                  key={subIndex}
-                                  className="flex items-start gap-2"
-                                >
-                                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                                  <span className="text-black-tint-80">
-                                    {subItem}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))
-                      : course.descriptionAr.map((item: { title: string; items: string[] }, index: number) => (
-                          <div key={index} className="flex flex-col gap-4">
-
-                            <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
-                              {item.title}
-                            </h3>
-
-                            <ul className="flex flex-col gap-2">
-                              {item.items.map((subItem, subIndex) => (
-                                <li
-                                  key={subIndex}
-                                  className="flex items-start gap-2 rtl:flex-row-reverse"
-                                >
-                                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                                  <span className="text-black-tint-80">
-                                    {subItem}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
+                              <ul className="flex flex-col gap-2">
+                                {item.items.map((subItem, subIndex) => (
+                                  <li
+                                    key={subIndex}
+                                    className="flex items-start gap-2 rtl:flex-row-reverse"
+                                  >
+                                    <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                    <span className="text-black-tint-80">
+                                      {subItem}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )
+                        )}
                   </div>
                 )}
               </div>
