@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from './ui/button';
 import heroFrame from '@/app/assets/heroFrame3.webp';
 
 export default function HeroSection() {
   const locale = useLocale();
-  const t = useTranslations("hero");
+  const t = useTranslations('hero');
 
   return (
     <section className="relative pt-32 pb-16 px-4 min-h-[100vh] flex flex-col xl:flex-row justify-center items-center text-white overflow-hidden">
@@ -24,15 +24,15 @@ export default function HeroSection() {
             className="flex flex-col justify-between h-full w-full gap-7 order-last lg:order-first"
           >
             <h1 className="text-[32px] md:text-[60px] leading-[1.4] font-bold text-main-black">
-              {t("Learn develop and achieve anytime anywhere")}
+              {t('Learn develop and achieve anytime anywhere')}
             </h1>
             <p className="text-xl sm:text-[28px] leading-[1.5] text-black-tint-70">
-              {t("description")}
+              {t('description')}
             </p>
             <Link href="#courses" className="flex gap-2 items-center">
-              <Button className="bg-main-primary hover:bg-p-shades-shade-80 text-lg h-12 w-fit">
-                {t("Submit request")}
-                {locale === "en" ? (
+              <Button className="bg-main-primary hover:bg-p-shades-shade-80 text-base h-12 w-fit">
+                {t('Submit request')}
+                {locale === 'en' ? (
                   <ArrowRight className="!w-5 !h-5" />
                 ) : (
                   <ArrowLeft className="!w-5 !h-5" />
@@ -55,7 +55,7 @@ export default function HeroSection() {
                 width={500}
                 height={400}
                 priority
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: 'contain' }}
               />
             </div>
           </motion.div>
