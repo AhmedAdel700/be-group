@@ -27,7 +27,7 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import type { RegistrationFormData } from "@/lib/validation-schema";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -38,7 +38,6 @@ import { ChevronDownIcon } from "lucide-react";
 
 interface PersonalInfoSectionProps {
   form: UseFormReturn<RegistrationFormData>;
-  locale: string;
 }
 
 const nationalities = [
@@ -59,7 +58,6 @@ const nationalities = [
 
 export default function PersonalInfoSection({
   form,
-  locale,
 }: PersonalInfoSectionProps) {
   const t = useTranslations("register");
   interface Diploma {
@@ -67,6 +65,8 @@ export default function PersonalInfoSection({
     title: string;
     titleAr: string;
   }
+
+  const locale = useLocale();
 
   const diplomas: Diploma[] = useSelector(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
