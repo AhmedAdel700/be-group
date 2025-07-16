@@ -1,8 +1,6 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,9 +9,14 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Loader2, AlertTriangle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import type { RegistrationFormData } from "@/lib/validation-schema";
 import PaymentCard from "./payment-card";
+import {
+  useVerifyEmailMutation,
+  useGenerateCodeMutation,
+} from "@/lib/emailApiSlice";
 
 interface OtpModalProps {
   isOpen: boolean;
@@ -26,17 +29,42 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [resendTimer, setResendTimer] = useState(0);
+  const [paymentLink, setPaymentLink] = useState("");
+
+  const [verifyEmail] = useVerifyEmailMutation();
+  const [generateCode] = useGenerateCodeMutation();
+
+  useEffect(() => {
+    if (resendTimer <= 0) return;
+
+    const interval = setInterval(() => {
+      setResendTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [resendTimer]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getErrorMessage = (err: any) => {
+    const msg = err?.data?.message;
+    return typeof msg === "string"
+      ? msg
+      : msg?.en || msg?.ar || "An unknown error occurred";
+  };
 
   const handleOtpChange = (index: number, value: string) => {
-    // Only allow single digits
-    if (value.length > 1) return;
-    if (value && !/^\d$/.test(value)) return;
-
+    if (value.length > 1 || (value && !/^\d$/.test(value))) return;
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
-    // Auto-focus next input
     if (value && index < 3) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
@@ -44,7 +72,6 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
   };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
-    // Handle backspace
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       const prevInput = document.getElementById(`otp-${index - 1}`);
       prevInput?.focus();
@@ -54,19 +81,32 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
   const handleVerifyOtp = async () => {
     const otpString = otp.join("");
     if (otpString.length !== 4) return;
-
+    setError(null);
     setIsVerifying(true);
 
-    // Simulate OTP verification
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      await verifyEmail({ verificationCode: otpString }).unwrap();
+      setIsVerified(true);
+      setTimeout(() => setShowPayment(true), 1000);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setError(getErrorMessage(err));
+    } finally {
+      setIsVerifying(false);
+    }
+  };
 
-    setIsVerifying(false);
-    setIsVerified(true);
-
-    // Show payment card after a brief delay
-    setTimeout(() => {
-      setShowPayment(true);
-    }, 1000);
+  const handleResendCode = async () => {
+    if (!formData?.email) return;
+    setError(null);
+    try {
+      const link = await generateCode().unwrap();
+      setPaymentLink(link.data.paymentUrl);
+      setResendTimer(30);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setError(getErrorMessage(err));
+    }
   };
 
   const handleClose = () => {
@@ -74,6 +114,7 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
     setIsVerifying(false);
     setIsVerified(false);
     setShowPayment(false);
+    setError(null);
     onClose();
   };
 
@@ -91,15 +132,15 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
         </DialogHeader>
 
         {!showPayment ? (
-          <div className="space-y-6 py-4">
-            <div className="text-center space-y-2">
+          <div className="flex flex-col gap-6 py-4">
+            <div className="text-center">
               <p className="text-sm text-slate-600">
                 We have sent a 4-digit verification code to
               </p>
               <p className="font-medium">{formData?.email}</p>
             </div>
 
-            <div className="flex justify-center space-x-3">
+            <div className="flex justify-center gap-3">
               {otp.map((digit, index) => (
                 <Input
                   key={index}
@@ -124,6 +165,14 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
               </div>
             )}
 
+            {error && (
+              <Alert variant="destructive" className="text-center">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
             <div className="flex flex-col gap-4">
               <Button
                 onClick={handleVerifyOtp}
@@ -145,13 +194,17 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
               <Button
                 variant="ghost"
                 className="text-sm text-main-primary hover:text-p-tints-tint-90"
+                onClick={handleResendCode}
+                disabled={resendTimer > 0}
               >
-                Resend Code
+                {resendTimer > 0
+                  ? `Resend Code in ${resendTimer}s`
+                  : "Resend Code"}
               </Button>
             </div>
           </div>
         ) : (
-          <PaymentCard formData={formData} />
+          <PaymentCard formData={formData} paymentLink={paymentLink} />
         )}
       </DialogContent>
     </Dialog>

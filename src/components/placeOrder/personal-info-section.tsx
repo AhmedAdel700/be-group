@@ -24,17 +24,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import type { RegistrationFormData } from "@/lib/validation-schema";
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
+import SAFlag from '@/app/assets/SAFlag.svg';
+import Image from "next/image";
+import { ChevronDownIcon } from "lucide-react";
 
 interface PersonalInfoSectionProps {
   form: UseFormReturn<RegistrationFormData>;
+  locale: string;
 }
 
 const nationalities = [
@@ -55,8 +59,9 @@ const nationalities = [
 
 export default function PersonalInfoSection({
   form,
+  locale,
 }: PersonalInfoSectionProps) {
-  const locale = useLocale();
+  const t = useTranslations("register");
   interface Diploma {
     _id: string;
     title: string;
@@ -73,374 +78,536 @@ export default function PersonalInfoSection({
   const [selectedDiploma, setSelectedDiploma] = useState<string | undefined>(
     undefined
   );
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     if (diploma) {
       setSelectedDiploma(diploma as string);
     }
   }, [diploma]);
+
   return (
-    <div className="space-y-6">
-      <h3 className="text-xl font-semibold text-slate-800">
-        Personal Information
+    <div className="w-full flex flex-col gap-10 mt-2">
+      <h3 className="text-2xl font-bold text-black-tint-90">
+        {t("personalInfo")}
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField
-          control={form.control}
-          name="fullNameEn"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name (English) *</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  value={field.value ?? ""}
-                  placeholder="Enter your full name in English"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="fullNameAr"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name (Arabic) *</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  value={field.value ?? ""}
-                  placeholder="أدخل اسمك الكامل بالعربية"
-                  dir="rtl"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email Address *</FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  placeholder="your.email@example.com"
-                  {...field}
-                  value={field.value ?? ""}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone Number *</FormLabel>
-              <FormControl>
-                <div className="flex">
-                  <div className="flex items-center px-3 border border-main-primary rounded-l-md bg-slate-50">
-                    <span className="text-sm font-medium">+966</span>
-                  </div>
+      <div className="w-full flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("fullNameEnLabel")}
+                </FormLabel>
+                <FormControl>
                   <Input
-                    placeholder="501234567"
-                    className="rounded-l-none border-l-0 focus:border-primary"
                     {...field}
                     value={field.value ?? ""}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      field.onChange(value);
-                    }}
+                    placeholder={t("fullNameEnPlaceholder")}
+                    className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
                   />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password *</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Enter a strong password"
-                  {...field}
-                  value={field.value ?? ""}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password *</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Confirm your password"
-                  {...field}
-                  value={field.value ?? ""}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField
-          control={form.control}
-          name="nationalId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>National ID *</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="1234567890"
-                  maxLength={10}
-                  {...field}
-                  value={field.value ?? ""}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="nationality"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nationality *</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your nationality" />
-                  </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  {nationalities.map((nationality) => (
-                    <SelectItem key={nationality} value={nationality}>
-                      {nationality}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField
-          control={form.control}
-          name="city"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>City *</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter your city"
-                  {...field}
-                  value={field.value ?? ""}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="fullNameAr"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("fullNameArLabel")}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    value={field.value ?? ""}
+                    placeholder={t("fullNameArPlaceholder")}
+                    className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="birthdate"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Birthdate *</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("emailLabel")}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder={t("emailPlaceholder")}
+                    {...field}
+                    value={field.value ?? ""}
+                    className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => {
+              const isRTL = locale === "ar";
+
+              return (
+                <FormItem>
+                  <FormLabel className="text-base font-medium text-black-tint-90">
+                    {t("phoneLabel")}
+                  </FormLabel>
                   <FormControl>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-full pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
+                    <div className="relative">
+                      {/* Flag inside input */}
+                      <div
+                        className={`absolute top-1/2 transform -translate-y-1/2 pointer-events-none bg-[#F2F4F5] py-[14px] px-3 ms-[1px] rounded-s-md ${
+                          isRTL ? "right-0 pr-2" : "left-0 pl-2"
+                        }`}
+                      >
+                        <Image
+                          src={SAFlag}
+                          alt="SA Flag"
+                          width={24}
+                          height={18}
+                          className="rounded"
+                        />
+                      </div>
+
+                      <Input
+                        placeholder={t("phonePlaceholder")}
+                        dir="ltr"
+                        className={`h-12 shadow-none text-sm font-medium placeholder:text-black-tint-50 border border-s-tints-tint-15 rounded-[8px]
+                          ${
+                            isRTL
+                              ? "text-right pe-[55px]"
+                              : "text-left ps-[55px]"
+                          }`}
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, "");
+                          field.onChange(value);
+                        }}
+                      />
+                    </div>
                   </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
 
-      <FormField
-        control={form.control}
-        name="gender"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Gender *</FormLabel>
-            <FormControl>
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex flex-row space-x-6"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="male"
-                    id="male"
-                    className="border-main-primary text-p-tints-tint-50 data-[state=checked]:bg-p-tints-tint-50 data-[state=checked]:border-p-tints-tint-50"
-                  />
-                  <label htmlFor="male" className="cursor-pointer">
-                    Male
-                  </label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="female"
-                    id="female"
-                    className="border-main-primary text-p-tints-tint-50 data-[state=checked]:bg-p-tints-tint-50 data-[state=checked]:border-p-tints-tint-50"
-                  />
-                  <label htmlFor="female" className="cursor-pointer">
-                    Female
-                  </label>
-                </div>
-              </RadioGroup>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("passwordLabel")}
+                </FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("passwordPlaceholder")}
+                      {...field}
+                      value={field.value ?? ""}
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none pr-10 placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                    />
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                      onClick={() => setShowPassword((v) => !v)}
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("confirmPasswordLabel")}
+                </FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type={showConfirmPassword ? "text" : "password"}
+                      placeholder={t("confirmPasswordPlaceholder")}
+                      {...field}
+                      value={field.value ?? ""}
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none pr-10 placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                    />
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                      onClick={() => setShowConfirmPassword((v) => !v)}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff size={20} />
+                      ) : (
+                        <Eye size={20} />
+                      )}
+                    </button>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="nationality"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("nationalityLabel")}
+                </FormLabel>
+                <Select
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      dir={locale === "ar" ? "rtl" : "ltr"}
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                    >
+                      <SelectValue placeholder={t("nationalityPlaceholder")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {nationalities.map((nationality) => (
+                      <SelectItem key={nationality} value={nationality}>
+                        {nationality}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="nationalNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("nationalIdLabel")}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={t("nationalIdPlaceholder")}
+                    maxLength={10}
+                    {...field}
+                    value={field.value ?? ""}
+                    className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-6">
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("cityLabel")}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={t("cityPlaceholder")}
+                    {...field}
+                    value={field.value ?? ""}
+                    className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="birthDate"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("birthdateLabel")}
+                </FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full pl-3 text-left font-normal border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>{t("birthdatePlaceholder")}</span>
+                        )}
+                        <ChevronDownIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    className="w-auto p-0"
+                    align="start"
+                    dir={locale === "ar" ? "rtl" : "ltr"}
+                  >
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      captionLayout="dropdown"
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
-          name="diplomaChoice1"
+          name="gender"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First Diploma Choice *</FormLabel>
-              <Select
-                onValueChange={(value) =>
-                  selectedDiploma
-                    ? field.onChange(selectedDiploma)
-                    : field.onChange(value)
-                }
-                value={selectedDiploma || field.value}
-                disabled={selectedDiploma ? true : false}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your first diploma" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {diplomas.map((diploma) => (
-                    <SelectItem key={diploma._id} value={diploma._id}>
-                      {diploma.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <FormLabel className="text-base font-medium text-black-tint-90">
+                {t("genderLabel")}
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-row gap-20"
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                >
+                  <div className="flex items-center gap-2">
+                    <RadioGroupItem
+                      value="male"
+                      id="male"
+                      className="w-5 h-5 border-[#AEAEB2] data-[state=checked]:bg-main-primary data-[state=checked]:border-main-primary"
+                    />
+                    <label htmlFor="male" className="cursor-pointer">
+                      {t("male")}
+                    </label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <RadioGroupItem
+                      value="female"
+                      id="female"
+                      className="w-5 h-5 border-[#AEAEB2] data-[state=checked]:bg-main-primary data-[state=checked]:border-main-primary"
+                    />
+                    <label htmlFor="female" className="cursor-pointer">
+                      {t("female")}
+                    </label>
+                  </div>
+                </RadioGroup>
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* High-School Degree Field */}
         <FormField
           control={form.control}
-          name="diplomaChoice2"
+          name="highSchoolDegree"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Second Diploma Choice *</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your second diploma" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {diplomas.map((diploma) => (
-                    <SelectItem key={diploma._id} value={diploma._id}>
-                      {locale === "ar" ? diploma.titleAr : diploma.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <FormLabel className="text-base font-medium text-black-tint-90">
+                {t("highSchoolDegreeLabel")}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder={t("highSchoolDegreePlaceholder")}
+                  {...field}
+                  value={field.value ?? ""}
+                  className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* Graduation Year Field */}
         <FormField
           control={form.control}
-          name="diplomaChoice3"
+          name="graduationYear"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Third Diploma Choice *</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your third diploma" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {diplomas.map((diploma) => (
-                    <SelectItem key={diploma._id} value={diploma._id}>
-                      {locale === "ar" ? diploma.titleAr : diploma.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <FormLabel className="text-base font-medium text-black-tint-90">
+                {t("graduationYearLabel")}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder={t("graduationYearPlaceholder")}
+                  {...field}
+                  value={field.value ?? ""}
+                  className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                  maxLength={4}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        <div className="grid grid-cols-1 gap-6">
+          <FormField
+            control={form.control}
+            name="diplomaChoice1"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("diplomaChoice1Label")}
+                </FormLabel>
+                <Select
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                  onValueChange={(value) =>
+                    selectedDiploma
+                      ? field.onChange(selectedDiploma)
+                      : field.onChange(value)
+                  }
+                  value={selectedDiploma || field.value}
+                  disabled={selectedDiploma ? true : false}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      dir={locale === "ar" ? "rtl" : "ltr"}
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                    >
+                      <SelectValue
+                        placeholder={t("diplomaChoice1Placeholder")}
+                      />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {diplomas.map((diploma) => (
+                      <SelectItem key={diploma._id} value={diploma._id}>
+                        {locale === "ar" ? diploma.titleAr : diploma.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="diplomaChoice2"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("diplomaChoice2Label")}
+                </FormLabel>
+                <Select
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      dir={locale === "ar" ? "rtl" : "ltr"}
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                    >
+                      <SelectValue
+                        placeholder={t("diplomaChoice2Placeholder")}
+                      />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {diplomas.map((diploma) => (
+                      <SelectItem key={diploma._id} value={diploma._id}>
+                        {locale === "ar" ? diploma.titleAr : diploma.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="diplomaChoice3"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-medium text-black-tint-90">
+                  {t("diplomaChoice3Label")}
+                </FormLabel>
+                <Select
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      dir={locale === "ar" ? "rtl" : "ltr"}
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                    >
+                      <SelectValue
+                        placeholder={t("diplomaChoice3Placeholder")}
+                      />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {diplomas.map((diploma) => (
+                      <SelectItem key={diploma._id} value={diploma._id}>
+                        {locale === "ar" ? diploma.titleAr : diploma.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
       </div>
     </div>
   );
