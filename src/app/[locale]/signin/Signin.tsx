@@ -1,62 +1,62 @@
-"use client";
+'use client';
 
-import type React from "react";
+import type React from 'react';
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { motion } from "framer-motion";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  Eye,
   EyeOff,
   GraduationCap,
-} from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import Link from "next/link";
+} from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
 // import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
-import Image from "next/image";
-import universityLogoWhite from "@/app/assets/university-logo-white.svg";
-import { signIn, getSession } from "next-auth/react";
+import { useState } from 'react';
+// import { Checkbox } from '@/components/ui/checkbox';
+import Image from 'next/image';
+import ColorfulLogo from '@/app/assets/ColorfulLogo.svg';
+import eyeView from '@/app/assets/view.svg';
+import { signIn, getSession } from 'next-auth/react';
 
 export default function Signin() {
   const locale = useLocale();
   //   const router = useRouter();
-  const t = useTranslations("signin");
+  const t = useTranslations('signin');
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  //   const [rememberMe, setRememberMe] = useState(false);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.email) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = 'Email is invalid';
     }
 
     if (!formData.password) {
-      newErrors.password = "Password is required";
+      newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+      newErrors.password = 'Password must be at least 6 characters';
     }
 
     setErrors(newErrors);
@@ -69,17 +69,17 @@ export default function Signin() {
     setIsLoading(true);
 
     try {
-      const res = await signIn("credentials", {
+      const res = await signIn('credentials', {
         emailOrPhone: formData.email.trim(),
         password: formData.password.trim(),
         redirect: false,
       });
 
-      if (!res?.ok) throw new Error(res?.error || "Internal Server Error");
+      if (!res?.ok) throw new Error(res?.error || 'Internal Server Error');
 
       const session = await getSession();
-      
-      if (!session) throw new Error("Internal Server Error");
+
+      if (!session) throw new Error('Internal Server Error');
     } catch (error) {
       console.error(error);
     } finally {
@@ -91,12 +91,12 @@ export default function Signin() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#001C71] via-[#001C71] to-[#5F289E] flex items-center justify-center relative overflow-hidden px-4 py-[120px] xl:py-0">
+    <div className="min-h-screen bg-gradient-to-br from-[#323B7F] via-[#63C8CD] to-[#A166DE] flex items-center justify-center relative overflow-hidden px-4 py-[120px] xl:py-0">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Books */}
@@ -108,7 +108,7 @@ export default function Signin() {
           transition={{
             duration: 8,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
           className="absolute top-20 left-10 text-[#0EC5C7] opacity-10"
         >
@@ -123,7 +123,7 @@ export default function Signin() {
           transition={{
             duration: 10,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 2,
           }}
           className="absolute bottom-20 right-20 text-[#0EC5C7] opacity-10"
@@ -143,7 +143,7 @@ export default function Signin() {
             transition={{
               duration: 4 + i * 0.5,
               repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
+              ease: 'easeInOut',
               delay: i * 0.3,
             }}
             className="absolute w-2 h-2 bg-[#0EC5C7] rounded-full"
@@ -163,7 +163,7 @@ export default function Signin() {
           transition={{
             duration: 6,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
           className="absolute top-1/4 right-1/4 w-64 h-64 bg-[#0EC5C7] rounded-full blur-3xl"
         />
@@ -175,7 +175,7 @@ export default function Signin() {
           transition={{
             duration: 8,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 2,
           }}
           className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-[#5F289E] rounded-full blur-3xl"
@@ -191,14 +191,14 @@ export default function Signin() {
         <div className="flex flex-col gap-6">
           <Link
             href={`/${locale}`}
-            className="inline-flex items-center gap-2 text-white hover:text-[#0EC5C7] transition-colors duration-200 font-medium"
+            className="inline-flex items-center gap-2 text-white hover:underline transition-colors duration-200 font-medium"
           >
-            {locale === "en" ? (
+            {locale === 'en' ? (
               <ArrowLeft className="w-5 h-5" />
             ) : (
               <ArrowRight className="w-5 h-5" />
             )}
-            {t("Back to Home")}
+            {t('Back to Home')}
           </Link>
 
           <Card className="shadow-2xl bg-white backdrop-blur-sm border-0">
@@ -206,20 +206,20 @@ export default function Signin() {
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
-                className="w-16 h-16 mx-auto bg-gradient-to-r from-[#001C71] to-[#0EC5C7] rounded-full flex items-center justify-center"
+                className="w-16 h-16 mx-auto color-gradient-to-r from-[#001C71] to-[#0EC5C7] flex items-center justify-center mb-4"
               >
                 <Image
-                  src={universityLogoWhite}
+                  src={ColorfulLogo}
                   alt="University Logo"
                   width={48}
                   height={48}
                 />
               </motion.div>
               <CardTitle className="text-2xl font-bold text-main-primary">
-                {t("Welcome Back")}
+                {t('Welcome Back')}
               </CardTitle>
-              <CardDescription>
-                {t("Sign in to your Se-University account")}
+              <CardDescription className="text-main-black text-base font-medium">
+                {t('Sign in to your Se-University account')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -230,15 +230,19 @@ export default function Signin() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="flex flex-col gap-4"
                 >
-                  <Label htmlFor="email">{t("Email")}</Label>
+                  <Label htmlFor="email" className="text-base">
+                    {t('Email')}
+                  </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder={t("Enter your email")}
+                    placeholder={t('Enter your email')}
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={errors.email ? "border-red-500" : ""}
+                    className={`${
+                      errors.email ? 'border-red-500' : ''
+                    } h-[48px]`}
                   />
                   {errors.email && (
                     <Alert variant="destructive">
@@ -253,30 +257,39 @@ export default function Signin() {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="flex flex-col gap-4"
                 >
-                  <Label htmlFor="password">{t("Password")}</Label>
+                  <Label htmlFor="password" className="text-base">
+                    {t('Password')}
+                  </Label>
                   <div className="relative">
                     <Input
                       id="password"
                       name="password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder={t("Enter your password")}
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder={t('Enter your password')}
                       value={formData.password}
                       onChange={handleInputChange}
-                      className={errors.password ? "border-red-500" : ""}
+                      className={`${
+                        errors.password ? 'border-red-500' : ''
+                      } h-[48px]`}
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
                       className={`absolute top-0 h-full hover:bg-transparent ${
-                        locale === "en" ? "right-0" : "left-0"
+                        locale === 'en' ? 'right-0' : 'left-0'
                       }`}
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
                         <EyeOff className="w-4 h-4" />
                       ) : (
-                        <Eye className="w-4 h-4" />
+                        <Image
+                          src={eyeView}
+                          alt="eyePasswordView"
+                          width={18}
+                          height={18}
+                        />
                       )}
                     </Button>
                   </div>
@@ -285,7 +298,7 @@ export default function Signin() {
                       <AlertDescription>{errors.password}</AlertDescription>
                     </Alert>
                   )}
-                  <div className="flex justify-between items-center">
+                  {/* <div className="flex justify-between items-center">
                     <label className="flex items-center gap-2 text-sm">
                       <Checkbox
                         id="rememberMe"
@@ -295,15 +308,15 @@ export default function Signin() {
                         }
                         className=""
                       />
-                      {t("Remember Me")}
+                      {t('Remember Me')}
                     </label>
                     <Link
                       href={`/${locale}/forgot-password`}
                       className="text-main-primary hover:text-[#0EC5C7] text-sm font-medium transition-colors"
                     >
-                      {t("Forgot Password")}
+                      {t('Forgot Password')}
                     </Link>
-                  </div>
+                  </div> */}
                 </motion.div>
 
                 <motion.div
@@ -313,10 +326,10 @@ export default function Signin() {
                 >
                   <Button
                     type="submit"
-                    className="w-full bg-main-primary hover:bg-p-shades-shade-80 transition-all duration-300 transform hover:scale-105"
+                    className="w-full h-[48px] bg-main-primary hover:bg-p-shades-shade-90 transition-all duration-300 transform "
                     disabled={isLoading}
                   >
-                    {isLoading ? t("Signing In") : t("Sign In")}
+                    {isLoading ? t('Signing In') : t('Sign In')}
                   </Button>
                 </motion.div>
               </form>

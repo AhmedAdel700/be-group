@@ -129,7 +129,7 @@ export default function DiplomaDetails({
                   <div className="border-b-2 border-s-tints-tint-5"></div>
 
                   <div
-                    className={`flex items-center justify-center gap-1 w-full p-4 font-bold text-base border border-dashed border-s-tints-tint-30 bg-s-tints-tint-5 rounded-md ${
+                    className={`flex items-center justify-center gap-1 w-full p-4 font-bold text-base border-2 border-dashed border-s-tints-tint-30 bg-s-tints-tint-5 rounded-md ${
                       locale === 'en' && '!text-sm'
                     }`}
                   >

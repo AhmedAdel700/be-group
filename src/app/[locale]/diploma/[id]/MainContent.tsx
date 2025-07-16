@@ -52,16 +52,18 @@ export default function MainContent({
         transition={{ duration: 0.8 }}
       >
         {/* Diploma Header */}
-        <div className="flex flex-col md:flex-row items-center gap-6 mb-10">
-          <Image
-            src={course.image || '/placeholder.svg'}
-            alt={course.title}
-            className="rounded-lg"
-            width={350}
-            height={300}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 mb-10">
+          <div className="w-full md:w-fit md:h-[350px] relative col-span-1">
+            <Image
+              src={course.image || '/placeholder.svg'}
+              alt={course.title}
+              className="rounded-lg object-cover w-full h-full"
+              width={350}
+              height={300}
+            />
+          </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 col-span-2">
             <h1 className="text-3xl font-bold">
               {locale === 'en' ? course.title : course.titleAr}
             </h1>
