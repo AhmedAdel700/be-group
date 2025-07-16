@@ -7,12 +7,13 @@ import type { RegistrationFormData } from "@/lib/validation-schema";
 
 interface PaymentCardProps {
   formData: RegistrationFormData | null;
+  paymentLink: string;
 }
 
-export default function PaymentCard({ formData }: PaymentCardProps) {
+export default function PaymentCard({ formData, paymentLink }: PaymentCardProps) {
   const handlePaymentClick = () => {
     // In a real application, this would redirect to the payment gateway
-    window.open("https://payment.example.com", "_blank");
+    window.open(paymentLink, "_blank");
   };
 
   return (
@@ -32,7 +33,7 @@ export default function PaymentCard({ formData }: PaymentCardProps) {
         <CardContent className="space-y-4">
           <div className="text-center space-y-2">
             <p className="text-sm text-slate-600">
-              Hello {formData?.fullNameEn}, your registration has been
+              Hello {formData?.fullName}, your registration has been
               successfully verified.
             </p>
             <p className="text-sm text-slate-600">
