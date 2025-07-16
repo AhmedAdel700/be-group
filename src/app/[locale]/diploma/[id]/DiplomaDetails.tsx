@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { DiplomaDetailsData } from "@/types/diplomasApiTypes";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { Check, SaudiRiyal } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
-import MainContent from "./MainContent";
-import { useRouter } from "@/navigations";
+import { DiplomaDetailsData } from '@/types/diplomasApiTypes';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { motion } from 'framer-motion';
+import { SaudiRiyal } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useState } from 'react';
+import MainContent from './MainContent';
+import { useRouter } from '@/navigations';
 
-type CourseType = {
-  diploma?: string;
-  semesters: Array<{ id: number; name: string; price: number }>;
-};
+// type CourseType = {
+//   diploma?: string;
+//   semesters: Array<{ id: number; name: string; price: number }>;
+// };
 
-function hasDiplomaField(
-  course: CourseType
-): course is CourseType & { diploma: string } {
-  return course && typeof course.diploma === "string";
-}
+// function hasDiplomaField(
+//   course: CourseType
+// ): course is CourseType & { diploma: string } {
+//   return course && typeof course.diploma === 'string';
+// }
 
 export default function DiplomaDetails({
   DetailsData: initialData,
@@ -27,11 +27,11 @@ export default function DiplomaDetails({
   DetailsData: DiplomaDetailsData;
 }) {
   const locale = useLocale();
-  const router = useRouter()
-  const t = useTranslations("diplomas");
+  const router = useRouter();
+  const t = useTranslations('diplomas');
 
   const diploma = {
-    id:initialData.data._id,
+    id: initialData.data._id,
     title: initialData.data.title,
     titleAr: initialData.data.titleAr,
     diploma: initialData.data.category,
@@ -42,22 +42,22 @@ export default function DiplomaDetails({
     descriptionAr: initialData.data.descriptionAr,
     startDate: new Date(
       initialData.data.semesters[0].configuration.duration.startDate
-    ).toLocaleDateString("en-GB"),
+    ).toLocaleDateString('en-GB'),
     endDate: new Date(
       initialData.data.semesters[
         initialData.data.semesters.length - 1
       ].configuration.duration.endDate
-    ).toLocaleDateString("en-GB"),
+    ).toLocaleDateString('en-GB'),
     semester: initialData.data.semesterCost?.toString(),
     available: initialData.data.isActive,
     semesters:
       initialData.data.semesters?.map((s, idx) => ({
         id: idx + 1,
-        name: (locale === "ar" ? s.titleAr : s.title) || `Semester ${idx + 1}`,
+        name: (locale === 'ar' ? s.titleAr : s.title) || `Semester ${idx + 1}`,
         price: s.credits || 0,
         modules:
           s.courseIds?.map((c) => ({
-            name: locale === "ar" ? c.titleAr : c.title,
+            name: locale === 'ar' ? c.titleAr : c.title,
             startDate: c.date,
           })) || [],
       })) || [],
@@ -71,9 +71,14 @@ export default function DiplomaDetails({
             startDate: c.date,
           })) || [],
       })) || [],
+    semesterCost: initialData.data.semesterCost,
+    semesterNumber: initialData.data.semesters[0].semesterNumber,
+    hours: initialData.data.hours,
+    diplomaCost:
+      initialData.data.semesters[0].semesterNumber *
+      initialData.data.semesterCost,
   };
   const [openSemesters, setOpenSemesters] = useState<number[]>([]);
-
 
   const toggleSemesterOpen = (semesterId: number) => {
     setOpenSemesters((prev) =>
@@ -102,78 +107,44 @@ export default function DiplomaDetails({
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="sticky top-8"
+              className="sticky top-28"
             >
-              <Card className="shadow-sm rounded-md">
-                <CardContent className="flex flex-col gap-6 p-5">
+              <Card className="shadow-sm rounded-xl pt-6">
+                <CardContent className="flex flex-col gap-6">
                   <h3 className="text-lg font-bold text-main-primary">
-                    {t("Diploma Details")}
+                    {t('Application requirements')}
                   </h3>
 
-                  {/* Single Diploma Display */}
-                  <div className="p-4 rounded-lg border-2 border-main-primary bg-[#001C71]/5">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-main-primary">
-                        {hasDiplomaField(diploma) &&
-                        diploma.diploma === "Associate"
-                          ? t("Associate Diploma")
-                          : hasDiplomaField(diploma) &&
-                            diploma.diploma === "Intermediate"
-                          ? t("Intermediate Diploma")
-                          : t("Diploma")}
-                      </h4>
-                      <Check className="w-5 h-5 text-main-primary" />
-                    </div>
-                    <p className="text-sm text-black-tint-80 mb-2">
-                      {/* Optionally add a description here if needed */}
-                    </p>
-                    {/* List semesters with price */}
-                    <div className="space-y-2 mb-2">
-                      {initialData.data.semesters.map((semester) => (
-                        <div
-                          key={semester._id}
-                          className="flex justify-between items-center text-sm"
-                        >
-                          <span className="text-black-tint-80">
-                            {locale === "ar"
-                              ? semester.titleAr
-                              : semester.title}
-                          </span>
-                          <span className="font-bold flex items-center gap-1 text-main-primary">
-                            {initialData.data.semesterCost}{" "}
-                            <SaudiRiyal className="w-4 h-4" />
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="mx-6">
+                    <ol className="list-decimal">
+                      <li>{t('Enter all personal information completely')}</li>
+                      <li>{t('A high school certificate is required')}</li>
+                      <li>{t('Enter your preferred choices')}</li>
+                      <li>
+                        {t('Pay the registration fees for the applied college')}
+                      </li>
+                    </ol>
                   </div>
 
-                  {/* Official enrollment fee */}
-                  <Card className="text-xs font-semibold p-4 text-center rounded-md border-main-primary bg-[#001C71]/5 capitalize flex justify-center items-center gap-1">
-                    {t("The official enrollment fee for the platform is")} 100{" "}
-                    <SaudiRiyal className="w-4 h-4" />
-                  </Card>
+                  <div className="border-b-2 border-s-tints-tint-5"></div>
 
-                  {/* Total price */}
-                  <div className="flex justify-between items-center font-bold text-main-primary text-base border-t pt-4 mt-2">
-                    <span>{t("Total Price")}</span>
-                    <span className="flex items-center gap-2">
-                      {initialData.data.semesterCost *
-                        initialData.data.semesters.length +
-                        100}{" "}
-                      <SaudiRiyal className="w-4 h-4" />
-                    </span>
+                  <div
+                    className={`flex items-center justify-center gap-1 w-full p-4 font-bold text-base border border-dashed border-s-tints-tint-30 bg-s-tints-tint-5 rounded-md ${
+                      locale === 'en' && '!text-sm'
+                    }`}
+                  >
+                    {t('The registration fee is 100')}
+                    <SaudiRiyal className="w-4 h-4" />
+                    {t('Non-refundable')}
                   </div>
 
                   <Button
                     onClick={() =>
-                      router.push(
-                        `/place-order?diploma=${diploma.id}`
-                      )
+                      router.push(`/place-order?diploma=${diploma.id}`)
                     }
-                    className="w-full bg-main-primary hover:bg-p-shades-shade-80"
+                    className="w-full bg-main-primary hover:bg-p-shades-shade-80 h-[48px]"
                   >
-                    {t("Submit An Order")}
+                    {t('Apply now')}
                   </Button>
                 </CardContent>
               </Card>
