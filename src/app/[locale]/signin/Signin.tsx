@@ -18,7 +18,6 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  Eye,
   EyeOff,
   GraduationCap,
 } from 'lucide-react';

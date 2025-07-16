@@ -16,11 +16,11 @@ const badgeVariants = cva(
           'border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80',
         outline: 'text-foreground',
         option1:
-          'bg-[#DDF0FF] text-[#0B5388] border border-[#DDF0FF] rounded-sm px-2 hover:none text-base font-medium',
+          'bg-[#DDF0FF] text-[#0B5388] border border-[#DDF0FF] rounded-sm px-2 hover:none text-sm font-medium',
         option2:
-          'bg-[#EDEDFF] text-[#4B4BD3] border border-[#D8D8FF] rounded-sm px-2 hover:none text-base font-medium',
+          'bg-[#EDEDFF] text-[#4B4BD3] border border-[#D8D8FF] rounded-sm px-2 hover:none text-sm font-medium',
         option3:
-          'bg-[#E9FFFF] text-[#147E7D] border border-[#C5F5F5] rounded-sm px-2 hover:none text-base font-medium',
+          'bg-[#E9FFFF] text-[#147E7D] border border-[#C5F5F5] rounded-sm px-2 hover:none text-sm font-medium',
       },
     },
     defaultVariants: {
