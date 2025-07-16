@@ -9,32 +9,34 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
 import {
-  registrationSchema,
+  getRegistrationSchema,
   type RegistrationFormData,
 } from "@/lib/validation-schema";
 import OtpModal from "./otp-modal";
 import PersonalInfoSection from "./personal-info-section";
 import UploadSection from "./upload-section";
 import ScholarshipSection from "./scholarship-section";
+import { useLocale } from "next-intl";
 
 export default function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [formData, setFormData] = useState<RegistrationFormData | null>(null);
+  const locale = useLocale();
 
   const form = useForm<RegistrationFormData>({
-    resolver: zodResolver(registrationSchema),
+    resolver: zodResolver(getRegistrationSchema(locale)),
     defaultValues: {
-      fullNameEn: "",
+      fullName: "",
       fullNameAr: "",
       email: "",
       password: "",
       confirmPassword: "",
       phoneNumber: "",
-      nationalId: "",
+      nationalNumber: "",
       nationality: "",
       city: "",
-      birthdate: undefined, // keeps date picker uncontrolled
+      birthDate: undefined, // keeps date picker uncontrolled
       gender: undefined,
       // existing defaults
       hasDisability: false,
