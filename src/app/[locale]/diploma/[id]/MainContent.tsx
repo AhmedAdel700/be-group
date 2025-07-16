@@ -108,19 +108,19 @@ export default function MainContent({
             >
               <TabsTrigger
                 value="description"
-                className="data-[state=active]:text-main-primary data-[state=active]:border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold"
+                className="data-[state=active]:text-main-primary border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold pb-4"
               >
                 {t('Description')}
               </TabsTrigger>
               <TabsTrigger
                 value="schedule"
-                className="data-[state=active]:text-main-primary data-[state=active]:border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold"
+                className="data-[state=active]:text-main-primary border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold pb-4"
               >
                 {t('Schedule')}
               </TabsTrigger>
               <TabsTrigger
                 value="reviews"
-                className="data-[state=active]:text-main-primary data-[state=active]:border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold"
+                className="data-[state=active]:text-main-primary border-b  data-[state=active]:border-b-main-primary !shadow-none !font-old relative !h-[37px] !rounded-none font-bold pb-4"
               >
                 {t('Reviews')}
               </TabsTrigger>
