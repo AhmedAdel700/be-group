@@ -1,4 +1,4 @@
-import { fetchDiplomaDetails } from "@/lib/diplomaService";
+import { fetchDiplomaDetails } from "@/app/api/diplomas/diplomaService";
 import DiplomaDetails from "./DiplomaDetails";
 import HeroFrame from "@/app/assets/Section.png";
 

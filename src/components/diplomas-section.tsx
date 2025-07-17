@@ -8,7 +8,7 @@ import { DiplomaResponseData } from '../types/diplomasApiTypes';
 import { Button } from './ui/button';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setDiplomas } from '@/lib/diplomasApiSlice';
+import { setDiplomas } from '@/app/api/diplomas/diplomasApiSlice';
 import { formatDateByLocale } from '@/utils/formatDateByLocale';
 
 const containerVariants = {

@@ -9,27 +9,26 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, Loader2, AlertTriangle } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { CheckCircle, Loader2 } from "lucide-react";
 import type { RegistrationFormData } from "@/lib/validation-schema";
 import PaymentCard from "./payment-card";
 import {
   useVerifyEmailMutation,
   useGenerateCodeMutation,
-} from "@/lib/emailApiSlice";
+} from "@/app/api/signin/emailApiSlice";
 
 interface OtpModalProps {
   isOpen: boolean;
   onClose: () => void;
   formData: RegistrationFormData | null;
+  token: string | undefined;
 }
 
-export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
-  const [otp, setOtp] = useState(["", "", "", ""]);
+export default function OtpModal({ isOpen, onClose, formData, token }: OtpModalProps) {
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [resendTimer, setResendTimer] = useState(0);
   const [paymentLink, setPaymentLink] = useState("");
 
@@ -52,20 +51,12 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
     return () => clearInterval(interval);
   }, [resendTimer]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const getErrorMessage = (err: any) => {
-    const msg = err?.data?.message;
-    return typeof msg === "string"
-      ? msg
-      : msg?.en || msg?.ar || "An unknown error occurred";
-  };
-
   const handleOtpChange = (index: number, value: string) => {
     if (value.length > 1 || (value && !/^\d$/.test(value))) return;
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-    if (value && index < 3) {
+    if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
     }
@@ -80,17 +71,17 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
 
   const handleVerifyOtp = async () => {
     const otpString = otp.join("");
-    if (otpString.length !== 4) return;
-    setError(null);
+    if (otpString.length !== 6) return;
     setIsVerifying(true);
 
     try {
-      await verifyEmail({ verificationCode: otpString }).unwrap();
+      const link = await verifyEmail({ verificationCode: otpString, token }).unwrap();
       setIsVerified(true);
       setTimeout(() => setShowPayment(true), 1000);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setPaymentLink(link.data.paymentUrl);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(getErrorMessage(err));
+      return err;
     } finally {
       setIsVerifying(false);
     }
@@ -98,23 +89,22 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
 
   const handleResendCode = async () => {
     if (!formData?.email) return;
-    setError(null);
     try {
-      const link = await generateCode().unwrap();
+      const link = await generateCode({ token }).unwrap();
       setPaymentLink(link.data.paymentUrl);
       setResendTimer(30);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setIsVerified(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(getErrorMessage(err));
+      return err
     }
   };
 
   const handleClose = () => {
-    setOtp(["", "", "", ""]);
+    setOtp(["", "", "", "", "", ""]);
     setIsVerifying(false);
     setIsVerified(false);
     setShowPayment(false);
-    setError(null);
     onClose();
   };
 
@@ -135,7 +125,7 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
           <div className="flex flex-col gap-6 py-4">
             <div className="text-center">
               <p className="text-sm text-slate-600">
-                We have sent a 4-digit verification code to
+                We have sent a 6-digit verification code to
               </p>
               <p className="font-medium">{formData?.email}</p>
             </div>
@@ -163,14 +153,6 @@ export default function OtpModal({ isOpen, onClose, formData }: OtpModalProps) {
                   Verified successfully!
                 </span>
               </div>
-            )}
-
-            {error && (
-              <Alert variant="destructive" className="text-center">
-                <AlertTriangle className="h-4 w-4" />
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
             )}
 
             <div className="flex flex-col gap-4">

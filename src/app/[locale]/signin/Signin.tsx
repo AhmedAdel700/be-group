@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from 'react';
 // import { Checkbox } from '@/components/ui/checkbox';
 import Image from 'next/image';
@@ -33,7 +33,7 @@ import { signIn, getSession } from 'next-auth/react';
 
 export default function Signin() {
   const locale = useLocale();
-  //   const router = useRouter();
+    const router = useRouter();
   const t = useTranslations('signin');
   const [formData, setFormData] = useState({
     email: '',
@@ -74,6 +74,8 @@ export default function Signin() {
         password: formData.password.trim(),
         redirect: false,
       });
+
+      router.push(`/${locale}/enrollment-status`);
 
       if (!res?.ok) throw new Error(res?.error || 'Internal Server Error');
 

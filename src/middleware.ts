@@ -1,6 +1,9 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+const PROTECTED_ROUTES = ["/enrollment-status"];
 
 const intlMiddleware = createMiddleware({
   locales: ["ar", "en"],
@@ -8,25 +11,30 @@ const intlMiddleware = createMiddleware({
   localeDetection: false,
 });
 
-export default function middleware(request: NextRequest) {
-  const token = request.cookies.get("auth-token")?.value;
+export default async function middleware(request: NextRequest) {
+  const token = await getToken({ req: request });
+  const pathname = request.nextUrl.pathname;
+
+  const locale = pathname.startsWith("/en") ? "en" : "ar";
+  const pathWithoutLocale = pathname.replace(/^\/(en|ar)/, "") || "/";
+
+  const isProtectedRoute = PROTECTED_ROUTES.includes(pathWithoutLocale);
 
   if (token) {
-    const currentPath = request.nextUrl.pathname;
-
-    if (currentPath.match(/^\/(ar|en)\/enrollment-status/)) {
-      return intlMiddleware(request);
+    if (!isProtectedRoute) {
+      return NextResponse.redirect(
+        new URL(`/${locale}/enrollment-status`, request.url)
+      );
     }
-
-    const locale = request.nextUrl.pathname.startsWith("/en") ? "en" : "ar";
-    return NextResponse.redirect(
-      new URL(`/${locale}/enrollment-status`, request.url)
-    );
+  } else {
+    if (isProtectedRoute) {
+      return NextResponse.redirect(new URL(`/${locale}`, request.url));
+    }
   }
 
   return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: ["/", "/(ar|en)/:path*"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };
