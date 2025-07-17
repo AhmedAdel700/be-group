@@ -258,6 +258,10 @@ export default function PersonalInfoSection({
                       placeholder={t("confirmPasswordPlaceholder")}
                       {...field}
                       value={field.value ?? ""}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        form.trigger("confirmPassword");
+                      }}
                       className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none pr-10 placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
                     />
                     <button

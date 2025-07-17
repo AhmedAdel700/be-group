@@ -18,6 +18,7 @@ import OtpModal from "@/components/placeOrder/otp-modal";
 import ScholarshipSection from "@/components/placeOrder/scholarship-section";
 import UploadSection from "@/components/placeOrder/upload-section";
 import PersonalInfoSection from "@/components/placeOrder/personal-info-section";
+import { useRegisterMutation } from "@/app/api/signin/emailApiSlice";
 
 const steps = [
   {
@@ -57,14 +58,17 @@ const steps = [
 ];
 
 export default function RegistrationForm() {
-  const locale = useLocale(); // Get current language: 'en' or 'ar'
+  const locale = useLocale();
   const t = useTranslations("register");
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [formData, setFormData] = useState<RegistrationFormData | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [completed, setCompleted] = useState<number[]>([]);
+  const [isStepLoading, setIsStepLoading] = useState(false);
+  const [token, setToken] = useState<string | undefined>();
+
+  const [register, { isLoading }] = useRegisterMutation();
 
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(getRegistrationSchema(locale as "en" | "ar")),
@@ -94,13 +98,107 @@ export default function RegistrationForm() {
   });
 
   const onSubmit = async (data: RegistrationFormData) => {
-    setIsSubmitting(true);
-    console.log(`@@@@@@@@@@@@@@@@`, data);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setFormData(data);
-    setIsSubmitting(false);
-    setShowOtpModal(true);
+    try {
+      const payload = {
+        ...data,
+        birthDate: data.birthDate
+          ? typeof data.birthDate === "string"
+            ? data.birthDate
+            : data.birthDate.toISOString().split("T")[0]
+          : undefined,
+        graduationYear: data.graduationYear
+          ? typeof data.graduationYear === "number"
+            ? data.graduationYear
+            : Number(data.graduationYear)
+          : undefined,
+        initialRegistrationDiplomaId: [
+          data.diplomaChoice1,
+          data.diplomaChoice2,
+          data.diplomaChoice3,
+        ],
+        countryCode: "SA",
+        isFinalizedRegistration: true,
+      };
+
+      const result = await register(payload).unwrap();
+      setToken(result?.data?.token);
+      console.log("Final Submit Result:", result);
+
+      setFormData(data);
+      setShowOtpModal(true);
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
+
+  const handleNext = async () => {
+    const fields = steps[currentStep].fields;
+    let valid = true;
+
+    if (fields.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      valid = await form.trigger(fields as any);
+    }
+
+    if (valid) {
+      if (currentStep === 0) {
+        try {
+          setIsStepLoading(true);
+          const allValues = form.getValues();
+          const step1Fields = steps[0].fields;
+          const step1DataObject = Object.fromEntries(
+            step1Fields.map((key) => [
+              key,
+              allValues[key as keyof typeof allValues],
+            ])
+          );
+
+          const payload = {
+            ...step1DataObject,
+            initialRegistrationDiplomaId: [
+              step1DataObject.diplomaChoice1,
+              step1DataObject.diplomaChoice2,
+              step1DataObject.diplomaChoice3,
+            ].filter((id): id is string => typeof id === "string" && !!id),
+            countryCode: "SA",
+            isFinalizedRegistration: false,
+          };
+
+          await register(payload).unwrap();
+          setCompleted((prev) =>
+            prev.includes(currentStep) ? prev : [...prev, currentStep]
+          );
+          setCurrentStep((prev) => prev + 1);
+        } catch (error) {
+          console.error("Step 1 error:", error);
+        } finally {
+          setIsStepLoading(false);
+        }
+      } else {
+        setCompleted((prev) =>
+          prev.includes(currentStep) ? prev : [...prev, currentStep]
+        );
+        setCurrentStep((prev) => prev + 1);
+      }
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentStep((prev) => prev - 1);
+  };
+
+  function renderStep() {
+    switch (currentStep) {
+      case 0:
+        return <PersonalInfoSection form={form} />;
+      case 1:
+        return <UploadSection form={form} />;
+      case 2:
+        return <ScholarshipSection form={form} />;
+      default:
+        return null;
+    }
+  }
 
   function StepIndicator() {
     return (
@@ -113,8 +211,7 @@ export default function RegistrationForm() {
             : isCurrent
             ? "bg-transparent text-[#001C71] border-[#001C71]"
             : "bg-transparent text-[#CCCCCC] border-[#CCCCCC]";
-          const nextStepCompleted = completed.includes(idx);
-          const lineClass = nextStepCompleted ? "bg-[#001C71]" : "bg-[#CCCCCC]";
+          const lineClass = isCompleted ? "bg-[#001C71]" : "bg-[#CCCCCC]";
 
           return (
             <div key={step.label} className="flex items-center gap-2 sm:gap-4">
@@ -135,38 +232,6 @@ export default function RegistrationForm() {
         })}
       </div>
     );
-  }
-
-  const handleNext = async () => {
-    const fields = steps[currentStep].fields;
-    let valid = true;
-    if (fields.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      valid = await form.trigger(fields as any);
-    }
-    if (valid) {
-      setCompleted((prev) =>
-        prev.includes(currentStep) ? prev : [...prev, currentStep]
-      );
-      setCurrentStep((prev) => prev + 1);
-    }
-  };
-
-  const handleBack = () => {
-    setCurrentStep((prev) => prev - 1);
-  };
-
-  function renderStep() {
-    switch (currentStep) {
-      case 0:
-        return <PersonalInfoSection form={form} />;
-      case 1:
-        return <UploadSection form={form} />;
-      case 2:
-        return <ScholarshipSection form={form} />;
-      default:
-        return null;
-    }
   }
 
   return (
@@ -190,7 +255,7 @@ export default function RegistrationForm() {
                   variant="outline"
                   onClick={handleBack}
                   className="w-[100px] h-12 text-sm font-bold rounded-[8px] border-main-primary text-main-primary"
-                  disabled={isSubmitting}
+                  disabled={isLoading || isStepLoading}
                 >
                   {t("back")}
                 </Button>
@@ -198,20 +263,27 @@ export default function RegistrationForm() {
               {currentStep < steps.length - 1 && (
                 <Button
                   type="button"
-                  className="w-[100px] h-12 font-bold rounded-[8px] text-sm bg-main-primary hover:bg-p-tints-tint-90 text-primary-foreground"
+                  className="min-w-[100px] h-12 font-bold rounded-[8px] text-sm bg-main-primary hover:bg-p-tints-tint-90 text-primary-foreground"
                   onClick={handleNext}
-                  disabled={isSubmitting}
+                  disabled={isStepLoading}
                 >
-                  {t("next")}
+                  {isStepLoading ? (
+                    <>
+                      <Loader2 className="me-2 h-4 w-4 animate-spin" />
+                      {t("submitting")}
+                    </>
+                  ) : (
+                    t("next")
+                  )}
                 </Button>
               )}
               {currentStep === steps.length - 1 && (
                 <Button
                   type="submit"
                   className="w-fit h-12 text-sm bg-main-primary hover:bg-p-tints-tint-90 text-primary-foreground"
-                  disabled={isSubmitting}
+                  disabled={isLoading}
                 >
-                  {isSubmitting ? (
+                  {isLoading ? (
                     <>
                       <Loader2 className="me-2 h-4 w-4 animate-spin" />
                       {t("submitting")}
@@ -229,6 +301,7 @@ export default function RegistrationForm() {
         isOpen={showOtpModal}
         onClose={() => setShowOtpModal(false)}
         formData={formData}
+        token={token}
       />
     </>
   );

@@ -1,5 +1,6 @@
 import { DM_Sans, Tajawal } from 'next/font/google';
 import type React from 'react';
+import { Toaster } from "@/components/ui/sonner";
 
 import MainHeader from '@/components/header/Header';
 import { NextIntlClientProvider } from 'next-intl';
@@ -50,6 +51,7 @@ export default async function LocaleLayout({
           <Providers session={session}>
             <MainHeader />
             {children}
+            <Toaster />
           </Providers>
         </NextIntlClientProvider>
       </body>
