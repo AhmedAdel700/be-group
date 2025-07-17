@@ -42,22 +42,25 @@ export default function DiplomaDetails({
     descriptionAr: initialData.data.descriptionAr,
     startDate: new Date(
       initialData.data.semesters[0].configuration.duration.startDate
-    ).toLocaleDateString('en-GB'),
+    ).toLocaleDateString("en-GB"),
     endDate: new Date(
       initialData.data.semesters[
         initialData.data.semesters.length - 1
       ].configuration.duration.endDate
-    ).toLocaleDateString('en-GB'),
+    ).toLocaleDateString("en-GB"),
     semester: initialData.data.semesterCost?.toString(),
     available: initialData.data.isActive,
     semesters:
       initialData.data.semesters?.map((s, idx) => ({
         id: idx + 1,
-        name: (locale === 'ar' ? s.titleAr : s.title) || `Semester ${idx + 1}`,
+        name: (locale === "ar" ? s.titleAr : s.title) || `Semester ${idx + 1}`,
         price: s.credits || 0,
+        duration: s.courseIds?.map((c) => ({
+          duration: c.duration.hours,
+        })),
         modules:
           s.courseIds?.map((c) => ({
-            name: locale === 'ar' ? c.titleAr : c.title,
+            name: locale === "ar" ? c.titleAr : c.title,
             startDate: c.date,
           })) || [],
       })) || [],
@@ -87,6 +90,7 @@ export default function DiplomaDetails({
         : [...prev, semesterId]
     );
   };
+console.log(`############################`, diploma);
 
   return (
     <div className="min-h-screen">

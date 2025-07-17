@@ -224,3 +224,24 @@ html {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+/* styles/globals.css or a component CSS file */
+.thin-scroll {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #001C71 !important; /* Firefox */
+}
+
+/* For WebKit (Chrome, Safari, Edge) */
+.thin-scroll::-webkit-scrollbar {
+  height: 6px;  /* horizontal scrollbar height */
+  width: 6px;   /* vertical scrollbar width */
+}
+
+.thin-scroll::-webkit-scrollbar-thumb {
+  scrollbar-color: #001C71 !important;
+  border-radius: 4px;
+}
+
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}

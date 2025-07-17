@@ -8,8 +8,8 @@ import { DiplomaResponseData } from '../types/diplomasApiTypes';
 import { Button } from './ui/button';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setDiplomas } from '@/app/api/diplomas/diplomasApiSlice';
 import { formatDateByLocale } from '@/utils/formatDateByLocale';
+import { setDiplomas } from '@/app/api/diplomas/diplomasApiSlice';
 
 const containerVariants = {
   hidden: {},
@@ -109,7 +109,7 @@ export default function DiplomasSection({
                   )}
                 </div>
 
-                <div className="flex items-center text-black-tint-90 gap-2">
+                <div className="flex items-center text-black-tint-90 gap-2 mt-auto">
                   <div className="flex items-center justify-between w-full">
                     <div className="text-base text-black-tint-60">
                       {t('Program price')}

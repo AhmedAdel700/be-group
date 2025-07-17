@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 const nationalIdRegex = /^[0-9]{10}$/;
-const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
 
 export const getRegistrationSchema = (lang: string) => {
   const t = (en: string, ar: string) => (lang === "ar" ? ar : en);
@@ -39,8 +40,8 @@ export const getRegistrationSchema = (lang: string) => {
         .regex(
           passwordRegex,
           t(
-            "Password must be at least 8 characters with one number and one special character",
-            "كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي على رقم وحرف خاص"
+            "Password must be at least 8 characters with uppercase, lowercase, a number and a special character",
+            "كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي على حرف كبير، وحرف صغير، ورقم، وحرف خاص"
           )
         ),
       confirmPassword: z
