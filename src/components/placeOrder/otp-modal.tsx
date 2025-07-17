@@ -19,12 +19,12 @@ import {
 
 interface OtpModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   formData: RegistrationFormData | null;
   token: string | undefined;
 }
 
-export default function OtpModal({ isOpen, onClose, formData, token }: OtpModalProps) {
+export default function OtpModal({ isOpen, formData, token }: OtpModalProps) {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -100,13 +100,7 @@ export default function OtpModal({ isOpen, onClose, formData, token }: OtpModalP
     }
   };
 
-  const handleClose = () => {
-    setOtp(["", "", "", "", "", ""]);
-    setIsVerifying(false);
-    setIsVerified(false);
-    setShowPayment(false);
-    onClose();
-  };
+  const handleClose = () => {};
 
   const isOtpComplete = otp.every((digit) => digit !== "");
 

@@ -51,7 +51,7 @@ export default async function LocaleLayout({
           <Providers session={session}>
             <MainHeader />
             {children}
-            <Toaster />
+            <Toaster position='top-center' />
           </Providers>
         </NextIntlClientProvider>
       </body>

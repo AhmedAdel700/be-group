@@ -56,5 +56,16 @@
   "computerProvision": "I commit to providing a desktop or laptop computer for use during the study period. *",
   "informationAccuracy": "I acknowledge the accuracy of all information entered and take responsibility for any errors or omissions. *",
   "generalConditions": "I have read and agree to the general application conditions. *",
-  "proctoringAcknowledgment": "I acknowledge the necessity of showing my full face during the proctored examination. *"
+  "proctoringAcknowledgment": "I acknowledge the necessity of showing my full face during the proctored examination. *",
+  "studentIdentityLabel": "Student Identity Photo",
+  "studentPictureLabel": "Student Picture",
+  "highSchoolCertificateLabel": "High School Certificate Photo",
+  "registrationVerified": "Registration Verified!",
+  "completeYourPayment": "Complete Your Payment",
+  "greeting": "Hello {name}, your registration has been successfully verified.",
+  "completeToFinalize": "Please complete the payment to finalize your application.",
+  "registrationFee": "Registration Fee:",
+  "currency": "SAR",
+  "proceedToPayment": "Proceed to Payment",
+  "secureRedirectNotice": "You will be redirected to a secure payment gateway"
 }

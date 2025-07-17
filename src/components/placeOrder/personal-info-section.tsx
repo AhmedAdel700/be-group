@@ -174,8 +174,8 @@ export default function PersonalInfoSection({
                     <div className="relative">
                       {/* Flag inside input */}
                       <div
-                        className={`absolute top-1/2 transform -translate-y-1/2 pointer-events-none bg-[#F2F4F5] py-[14px] px-3 ms-[1px] rounded-s-md ${
-                          isRTL ? "right-0 pr-2" : "left-0 pl-2"
+                        className={`absolute top-1/2 transform -translate-y-1/2 pointer-events-none bg-[#F2F4F5] py-[14px] px-3 rounded-s-md p-2 ${
+                          isRTL ? "right-[0.6px]" : "left-[0.6px]"
                         }`}
                       >
                         <Image
@@ -224,14 +224,15 @@ export default function PersonalInfoSection({
                     <Input
                       type={showPassword ? "text" : "password"}
                       placeholder={t("passwordPlaceholder")}
+                      dir={locale === "en" ? "ltr" : "rtl"}
                       {...field}
                       value={field.value ?? ""}
-                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none pr-10 placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
                     />
                     <button
                       type="button"
                       tabIndex={-1}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                      className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none ${locale === "ar" ? "left-3" : "right-3"}`}
                       onClick={() => setShowPassword((v) => !v)}
                     >
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -256,18 +257,19 @@ export default function PersonalInfoSection({
                     <Input
                       type={showConfirmPassword ? "text" : "password"}
                       placeholder={t("confirmPasswordPlaceholder")}
+                      dir={locale === "en" ? "ltr" : "rtl"}
                       {...field}
                       value={field.value ?? ""}
                       onChange={(e) => {
                         field.onChange(e);
                         form.trigger("confirmPassword");
                       }}
-                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none pr-10 placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
                     />
                     <button
                       type="button"
                       tabIndex={-1}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                      className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none ${locale === "ar" ? "left-3" : "right-3"}`}
                       onClick={() => setShowConfirmPassword((v) => !v)}
                     >
                       {showConfirmPassword ? (

@@ -53,6 +53,10 @@ interface Course {
   date: string;
   title: string;
   titleAr: string;
+  duration: {
+    weeks: number;
+    hours: number;
+  };
 }
 
 interface Configuration {
@@ -117,6 +121,10 @@ export interface DiplomaDetailsData {
         date: string;
         title: string;
         titleAr: string;
+        duration: {
+          weeks: number;
+          hours: number;
+        };
       }[];
       semesterNumber: number;
       title: string;

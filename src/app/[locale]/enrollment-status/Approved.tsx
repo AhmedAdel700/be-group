@@ -1,27 +1,20 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import {
-//   CheckCircle,
-//   Clock,
-//   XCircle,
-// } from "lucide-react";
-import {
-  Clock,
-} from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import imagePlaceholder from "@/app/assets/image-placeholder.svg";
 import { useLocale, useTranslations } from "next-intl";
-import pendingIcon from '@/app/assets/pending.svg';
+import ApprovedIcon from "@/app/assets/Approved.svg";
 import { EnrollmentResponse } from "@/types/enrollmentApiTypes";
 
-export default function Pending({ enrollmentData }: { enrollmentData: EnrollmentResponse }) {
+export default function Approved({ enrollmentData }: { enrollmentData: EnrollmentResponse }) {
   const locale = useLocale();
   const t = useTranslations("enroll");
 
   const previousApplications = [
     {
       id: 1,
-      status: t("Pending"),
+      status: t("Accepted"),
       date: "2024-01-15",
     },
   ];
@@ -29,20 +22,26 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
   return (
     <div className="grid grid-col-1 lg:grid-cols-3 container mx-auto p-6 lg:p-8 gap-6">
       <div className="col-span-2 w-full h-fit flex flex-col gap-6">
-        <div className="w-full h-fit border border-[#FEDF89] bg-[#FFFCF5] rounded-[8px] shadow-none p-4 flex items-center gap-3 relative">
-          <Image src={pendingIcon} alt="pending icon" width={40} height={40} />
+        <div className="w-full h-fit border border-[#FEDF89] bg-[#F3FDF7] rounded-[8px] shadow-none p-4 flex items-center gap-3 relative">
+          <Image
+            src={ApprovedIcon}
+            alt="Accepted Icon"
+            width={40}
+            height={40}
+          />
           <div className="flex flex-col">
-            <h2 className="text-[#B54708] font-bold text-xl">
-              {t("Pending Review")}
+            <h2 className="text-[#00A468] font-bold text-xl">
+              {t("Accepted")}
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-black-tint-90 font-normal">
-              {t(
-                "Your enrollment is currently under review We'll notify you via email once a decision has been made This process typically takes 2-3 business days"
-              )}
+              {t("Congratulations! You have been accepted in")}{" "}
+              <span className="text-xs sm:text-sm md:text-base text-black-tint-90 font-bold">
+                {t("Innovation and Entrepreneurship Diploma")}
+              </span>
             </p>
           </div>
           <div
-            className={`absolute bg-[#DC6803] w-2 h-full ${
+            className={`absolute bg-[#00A468] w-2 h-full ${
               locale === "en" ? "left-0 " : "right-0"
             } rounded-s-[8px]`}
           ></div>
@@ -219,8 +218,8 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
               className="flex items-center justify-between py-4 px-5 border border-main-primary rounded-lg hover:bg-gray-50 transition-colors h-20"
             >
               <div className="flex-1 min-w-0 flex gap-2 items-center">
-                <div className="bg-[#FEFCE8] w-12 h-12 flex justify-center items-center rounded-full">
-                  <Clock className="text-[#B54708]" />
+                <div className="bg-[#F0FDF4] w-12 h-12 flex justify-center items-center rounded-full">
+                  <CheckCircle className="text-[#00A468]" />
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">
