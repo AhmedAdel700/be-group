@@ -52,8 +52,8 @@ export default function MainContent({
         transition={{ duration: 0.8 }}
       >
         {/* Diploma Header */}
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 mb-10">
-          <div className="w-full md:w-fit md:h-[350px] relative col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 md:gap-6 mb-10">
+          <div className="w-full md:w-fit md:h-[350px] relative md:col-span-1">
             <Image
               src={course.image || '/placeholder.svg'}
               alt={course.title}
@@ -63,7 +63,7 @@ export default function MainContent({
             />
           </div>
 
-          <div className="flex flex-col gap-8 col-span-2">
+          <div className="flex flex-col gap-8 md:col-span-2">
             <h1 className="text-3xl font-bold">
               {locale === 'en' ? course.title : course.titleAr}
             </h1>
@@ -285,7 +285,7 @@ export default function MainContent({
                                   }`}
                                 >
                                   <div className="flex flex-col gap-4">
-                                    <h4 className="font-bold text-base text-black-tint-80">
+                                    <h4 className="font-bold text-base text-black-tint-80 text-right">
                                       {module.name}
                                     </h4>
                                     <p className="text-base text-black-tint-80 self-end">
