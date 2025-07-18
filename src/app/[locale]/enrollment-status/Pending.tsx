@@ -104,7 +104,7 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
               </h4>
               <Image
                 src={
-                  enrollmentData.data.student.highSchoolCertificate ||
+                  enrollmentData?.data?.student?.highSchoolCertificate ||
                   imagePlaceholder
                 }
                 alt="High School Certificate"
@@ -119,7 +119,7 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
               </h4>
               <Image
                 src={
-                  enrollmentData.data.student.studentIdentity ||
+                  enrollmentData?.data?.student?.studentIdentity ||
                   imagePlaceholder
                 }
                 alt="Student Identity"
@@ -134,7 +134,7 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
               </h4>
               <Image
                 src={
-                  enrollmentData.data.student.studentPicture || imagePlaceholder
+                  enrollmentData?.data?.student?.studentPicture || imagePlaceholder
                 }
                 alt="Student Picture"
                 className="w-full h-32 border border-[#DCDCDC] rounded-[8px] object-cover"
@@ -148,7 +148,7 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
               </h4>
               <Image
                 src={
-                  enrollmentData.data.student.employerApproval ||
+                  enrollmentData?.data?.student?.employerApproval ||
                   imagePlaceholder
                 }
                 alt="Employer Approval"
@@ -179,7 +179,7 @@ export default function Pending({ enrollmentData }: { enrollmentData: Enrollment
                     {t("Status")}
                   </div>
                 </div>
-                {enrollmentData.data.student.studentDiploma.initialRegistrationDiplomaId.map(
+                {enrollmentData?.data?.student?.studentDiploma?.initialRegistrationDiplomaId?.map(
                   (diploma, index) => (
                     <div key={diploma._id} className="grid grid-cols-7 px-6">
                       <div className="text-black-tint-90 font-medium text-lg col-span-1 h-11">

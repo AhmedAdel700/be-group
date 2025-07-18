@@ -104,7 +104,7 @@ export default function Rejected({ enrollmentData }: { enrollmentData: Enrollmen
               </h4>
               <Image
                 src={
-                  enrollmentData.data.student.highSchoolCertificate ||
+                  enrollmentData?.data?.student?.highSchoolCertificate ||
                   imagePlaceholder
                 }
                 alt="High School Certificate"
