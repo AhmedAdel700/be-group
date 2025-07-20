@@ -67,5 +67,10 @@
   "registrationFee": "Registration Fee:",
   "currency": "SAR",
   "proceedToPayment": "Proceed to Payment",
-  "secureRedirectNotice": "You will be redirected to a secure payment gateway"
+  "secureRedirectNotice": "You will be redirected to a secure payment gateway",
+  "Registration Complete": "Registration Complete",
+  "Verify Your Email Address": "Verify Your Email Address",
+  "Upload Document": "Upload Document",
+  "Personal Information": "Personal Information",
+  "Scholarship Information": "Scholarship Information"
 }

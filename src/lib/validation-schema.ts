@@ -4,6 +4,9 @@ const nationalIdRegex = /^[0-9]{10}$/;
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
 
+const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+const englishRegex = /^[A-Za-z\s]+$/;
+
 export const getRegistrationSchema = (lang: string) => {
   const t = (en: string, ar: string) => (lang === "ar" ? ar : en);
 
@@ -12,21 +15,47 @@ export const getRegistrationSchema = (lang: string) => {
       fullName: z
         .string()
         .min(
-          2,
+          7,
           t(
-            "English name must be at least 2 characters",
-            "يجب ألا يقل الاسم الإنجليزي عن حرفين"
+            "Please enter your full English name (at least 4 names)",
+            "يرجى إدخال الاسم الرباعي باللغة الإنجليزية"
           )
-        ),
+        )
+        .refine((val) => englishRegex.test(val), {
+          message: t(
+            "English name must contain only English letters",
+            "يجب أن يحتوي الاسم الإنجليزي على أحرف إنجليزية فقط"
+          ),
+        })
+        .refine((val) => val.trim().split(/\s+/).length >= 4, {
+          message: t(
+            "Please enter your full English name (at least 4 names)",
+            "يرجى إدخال الاسم الرباعي باللغة الإنجليزية"
+          ),
+        }),
+
       fullNameAr: z
         .string()
         .min(
-          2,
+          7,
           t(
-            "Arabic name must be at least 2 characters",
-            "يجب ألا يقل الاسم العربي عن حرفين"
+            "Please enter your full Arabic name (at least 4 names)",
+            "يرجى إدخال الاسم الرباعي باللغة العربية"
           )
-        ),
+        )
+        .refine((val) => arabicRegex.test(val), {
+          message: t(
+            "Arabic name must contain only Arabic letters",
+            "يجب أن يحتوي الاسم العربي على أحرف عربية فقط"
+          ),
+        })
+        .refine((val) => val.trim().split(/\s+/).length >= 4, {
+          message: t(
+            "Please enter your full Arabic name (at least 4 names)",
+            "يرجى إدخال الاسم الرباعي باللغة العربية"
+          ),
+        }),
+
       email: z
         .string()
         .email(

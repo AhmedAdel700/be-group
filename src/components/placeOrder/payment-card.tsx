@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, CreditCard, ExternalLink } from "lucide-react";
+import { CheckCircle, CreditCard, ExternalLink, SaudiRiyal } from "lucide-react";
 import type { RegistrationFormData } from "@/lib/validation-schema";
 import { useTranslations } from "next-intl";
 
@@ -25,7 +25,7 @@ export default function PaymentCard({ formData, paymentLink }: PaymentCardProps)
         <span className="font-semibold">{t("registrationVerified")}</span>
       </div>
 
-      <Card className="border-1 border-gray-300">
+      <Card>
         <CardHeader className="text-center">
           <CardTitle className="flex items-center justify-center gap-2 text-primary">
             <CreditCard className="h-5 w-5" />
@@ -44,7 +44,7 @@ export default function PaymentCard({ formData, paymentLink }: PaymentCardProps)
             <div className="flex justify-between items-center">
               <span className="font-medium">{t("registrationFee")}</span>
               <span className="text-xl font-bold text-main-primary">
-                100 {t("currency")}
+                100 <SaudiRiyal className="w-4 h-4" />
               </span>
             </div>
           </div>

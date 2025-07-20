@@ -18,6 +18,7 @@ export default function MainContent({
   locale,
 }: any) {
   const tEnroll = useTranslations('enroll');
+console.log(course);
 
   return (
     <div className="lg:col-span-7">
@@ -50,13 +51,13 @@ export default function MainContent({
             <div className="flex items-center gap-2 text-xl font-bold">
               <p>{tEnroll("Diploma price")}:</p>
               <div className="flex items-center gap-1">
-                <p>{course.diplomaCost}</p>
+                <p>{course.diplomaCost * course.semesters.length}</p>
                 <SaudiRiyal className="w-4 h-4" />
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-xl font-bold">
-              <p>{tEnroll("Tuition fee for the academic year")}:</p>
+              <p>{tEnroll("Semester Cost")}:</p>
               <div className="flex items-center gap-1">
                 <p>{course.semesterCost}</p>
                 <SaudiRiyal className="w-4 h-4" />
@@ -237,56 +238,55 @@ export default function MainContent({
                         </CollapsibleContent>
                       </Collapsible>
                     ))
-                  : [...course.semesters]
-                      .map((semester: any) => (
-                        <Collapsible
-                          key={semester.id}
-                          open={openSemesters.includes(semester.id)}
-                          onOpenChange={() => toggleSemesterOpen(semester.id)}
-                          className="flex flex-col gap-4"
+                  : [...course.semesters].map((semester: any) => (
+                      <Collapsible
+                        key={semester.id}
+                        open={openSemesters.includes(semester.id)}
+                        onOpenChange={() => toggleSemesterOpen(semester.id)}
+                        className="flex flex-col gap-4"
+                      >
+                        <CollapsibleTrigger
+                          className={`flex items-center justify-between w-full p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors flex-row-reverse`}
                         >
-                          <CollapsibleTrigger
-                            className={`flex items-center justify-between w-full p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors flex-row-reverse`}
-                          >
-                            <span className="font-semibold text-main-primary text-base">
-                              {semester.name}
-                            </span>
-                            {openSemesters.includes(semester.id) ? (
-                              <ChevronUp className="w-5 h-5" />
-                            ) : (
-                              <ChevronDown className="w-5 h-5" />
-                            )}
-                          </CollapsibleTrigger>
-                          <CollapsibleContent>
-                            <div className="flex flex-col gap-4">
-                              {semester.modules.map(
-                                (module: any, moduleIndex: any) => (
-                                  <div
-                                    key={moduleIndex}
-                                    className={`flex items-center justify-between p-3 border-dashed border-b-2 border-gray-200 ${
-                                      locale === "ar" ? "flex-row-reverse" : ""
-                                    }`}
-                                  >
-                                    <div className="flex flex-col gap-4">
-                                      <h4 className="font-bold text-base text-black-tint-80">
-                                        {module.name}
-                                      </h4>
-                                      <p className="text-base text-black-tint-80">
-                                        {t("Duration")}:{" "}
-                                        {
-                                          semester.duration?.[moduleIndex]
-                                            ?.duration
-                                        }{" "}
-                                        {t("hour")}
-                                      </p>
-                                    </div>
+                          <span className="font-semibold text-main-primary text-base">
+                            {semester.name}
+                          </span>
+                          {openSemesters.includes(semester.id) ? (
+                            <ChevronUp className="w-5 h-5" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5" />
+                          )}
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <div className="flex flex-col gap-4">
+                            {semester.modules.map(
+                              (module: any, moduleIndex: any) => (
+                                <div
+                                  key={moduleIndex}
+                                  className={`flex items-center justify-between p-3 border-dashed border-b-2 border-gray-200 ${
+                                    locale === "ar" ? "flex-row-reverse" : ""
+                                  }`}
+                                >
+                                  <div className="flex flex-col gap-4">
+                                    <h4 className="font-bold text-base text-black-tint-80">
+                                      {module.name}
+                                    </h4>
+                                    <p className="text-base text-black-tint-80">
+                                      {t("Duration")}:{" "}
+                                      {
+                                        semester.duration?.[moduleIndex]
+                                          ?.duration
+                                      }{" "}
+                                      {t("hour")}
+                                    </p>
                                   </div>
-                                )
-                              )}
-                            </div>
-                          </CollapsibleContent>
-                        </Collapsible>
-                      ))}
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    ))}
               </div>
             </TabsContent>
 
@@ -328,8 +328,11 @@ export default function MainContent({
                             item: { title: string; items: string[] },
                             index: number
                           ) => (
-                            <div key={index} className="flex flex-col gap-4">
-                              <h3 className="text-xl font-bold text-main-primary text-right rtl:text-right ltr:text-left">
+                            <div
+                              key={index}
+                              className="flex flex-col gap-4 items-end"
+                            >
+                              <h3 className="text-xl font-bold text-main-primary text-end">
                                 {item.title}
                               </h3>
 
@@ -337,7 +340,7 @@ export default function MainContent({
                                 {item.items.map((subItem, subIndex) => (
                                   <li
                                     key={subIndex}
-                                    className="flex items-start gap-2 rtl:flex-row-reverse"
+                                    className="flex items-start gap-2 rtl:flex-row-reverse text-end"
                                   >
                                     <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
                                     <span className="text-black-tint-80">

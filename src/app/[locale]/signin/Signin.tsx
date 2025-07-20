@@ -1,43 +1,44 @@
-'use client';
+"use client";
 
-import type React from 'react';
+import type React from "react";
 
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { motion } from 'framer-motion';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
   EyeOff,
   GraduationCap,
-} from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next/link';
+} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
+import { useState } from "react";
 // import { Checkbox } from '@/components/ui/checkbox';
-import Image from 'next/image';
-import ColorfulLogo from '@/app/assets/ColorfulLogo.svg';
-import eyeView from '@/app/assets/view.svg';
-import { signIn, getSession } from 'next-auth/react';
+import Image from "next/image";
+import ColorfulLogo from "@/app/assets/ColorfulLogo.svg";
+import eyeView from "@/app/assets/view.svg";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 export default function Signin() {
   const locale = useLocale();
-    const router = useRouter();
-  const t = useTranslations('signin');
+  const router = useRouter();
+  const t = useTranslations("signin");
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showPassword, setShowPassword] = useState(false);
@@ -48,60 +49,59 @@ export default function Signin() {
     const newErrors: Record<string, string> = {};
 
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = "Email is invalid";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-    setIsLoading(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+  setIsLoading(true);
 
-    try {
-      const res = await signIn('credentials', {
-        emailOrPhone: formData.email.trim(),
-        password: formData.password.trim(),
-        redirect: false,
-      });
+  try {
+    const result = await signIn("credentials", {
+      emailOrPhone: formData.email.trim(),
+      password: formData.password.trim(),
+      redirect: false,
+    });
 
-      router.push(`/${locale}/enrollment-status`);
-
-      if (!res?.ok) throw new Error(res?.error || 'Internal Server Error');
-
-      const session = await getSession();
-
-      if (!session) throw new Error('Internal Server Error');
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+    if (!result?.ok) {
+      let errorMessage = "";
+      errorMessage =
+        locale === "ar" ? "بيانات الدخول غير صالحة" : "Invalid Credentials";
+      toast.error(errorMessage, { duration: 5000 });
     }
-  };
+
+    router.push(`/${locale}/enrollment-status`);
+  } catch (error) {
+    console.error("Unexpected error", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#323B7F] via-[#63C8CD] to-[#A166DE] flex items-center justify-center relative overflow-hidden px-4 py-[120px] xl:py-0">
-      {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Books */}
         <motion.div
           animate={{
             y: [0, -30, 0],
@@ -110,7 +110,7 @@ export default function Signin() {
           transition={{
             duration: 8,
             repeat: Number.POSITIVE_INFINITY,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           className="absolute top-20 left-10 text-[#0EC5C7] opacity-10"
         >
@@ -125,7 +125,7 @@ export default function Signin() {
           transition={{
             duration: 10,
             repeat: Number.POSITIVE_INFINITY,
-            ease: 'easeInOut',
+            ease: "easeInOut",
             delay: 2,
           }}
           className="absolute bottom-20 right-20 text-[#0EC5C7] opacity-10"
@@ -133,7 +133,6 @@ export default function Signin() {
           <GraduationCap className="w-24 h-24" />
         </motion.div>
 
-        {/* Floating Particles */}
         {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
@@ -145,7 +144,7 @@ export default function Signin() {
             transition={{
               duration: 4 + i * 0.5,
               repeat: Number.POSITIVE_INFINITY,
-              ease: 'easeInOut',
+              ease: "easeInOut",
               delay: i * 0.3,
             }}
             className="absolute w-2 h-2 bg-[#0EC5C7] rounded-full"
@@ -156,7 +155,6 @@ export default function Signin() {
           />
         ))}
 
-        {/* Gradient Orbs */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -165,7 +163,7 @@ export default function Signin() {
           transition={{
             duration: 6,
             repeat: Number.POSITIVE_INFINITY,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           className="absolute top-1/4 right-1/4 w-64 h-64 bg-[#0EC5C7] rounded-full blur-3xl"
         />
@@ -177,7 +175,7 @@ export default function Signin() {
           transition={{
             duration: 8,
             repeat: Number.POSITIVE_INFINITY,
-            ease: 'easeInOut',
+            ease: "easeInOut",
             delay: 2,
           }}
           className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-[#5F289E] rounded-full blur-3xl"
@@ -195,12 +193,12 @@ export default function Signin() {
             href={`/${locale}`}
             className="inline-flex items-center gap-2 text-white hover:underline transition-colors duration-200 font-medium"
           >
-            {locale === 'en' ? (
+            {locale === "en" ? (
               <ArrowLeft className="w-5 h-5" />
             ) : (
               <ArrowRight className="w-5 h-5" />
             )}
-            {t('Back to Home')}
+            {t("Back to Home")}
           </Link>
 
           <Card className="shadow-2xl bg-white backdrop-blur-sm border-0">
@@ -218,10 +216,10 @@ export default function Signin() {
                 />
               </motion.div>
               <CardTitle className="text-2xl font-bold text-main-primary">
-                {t('Welcome Back')}
+                {t("Welcome Back")}
               </CardTitle>
               <CardDescription className="text-main-black text-base font-medium">
-                {t('Sign in to your Se-University account')}
+                {t("Sign in to your Se-University account")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -233,17 +231,17 @@ export default function Signin() {
                   className="flex flex-col gap-4"
                 >
                   <Label htmlFor="email" className="text-base">
-                    {t('Email')}
+                    {t("Email")}
                   </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder={t('Enter your email')}
+                    placeholder={t("Enter your email")}
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`${
-                      errors.email ? 'border-red-500' : ''
+                      errors.email ? "border-red-500" : ""
                     } h-[48px]`}
                   />
                   {errors.email && (
@@ -260,18 +258,18 @@ export default function Signin() {
                   className="flex flex-col gap-4"
                 >
                   <Label htmlFor="password" className="text-base">
-                    {t('Password')}
+                    {t("Password")}
                   </Label>
                   <div className="relative">
                     <Input
                       id="password"
                       name="password"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder={t('Enter your password')}
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("Enter your password")}
                       value={formData.password}
                       onChange={handleInputChange}
                       className={`${
-                        errors.password ? 'border-red-500' : ''
+                        errors.password ? "border-red-500" : ""
                       } h-[48px]`}
                     />
                     <Button
@@ -279,7 +277,7 @@ export default function Signin() {
                       variant="ghost"
                       size="sm"
                       className={`absolute top-0 h-full hover:bg-transparent ${
-                        locale === 'en' ? 'right-0' : 'left-0'
+                        locale === "en" ? "right-0" : "left-0"
                       }`}
                       onClick={() => setShowPassword(!showPassword)}
                     >
@@ -331,7 +329,7 @@ export default function Signin() {
                     className="w-full h-[48px] bg-main-primary hover:bg-p-shades-shade-90 transition-all duration-300 transform "
                     disabled={isLoading}
                   >
-                    {isLoading ? t('Signing In') : t('Sign In')}
+                    {isLoading ? t("Signing In") : t("Sign In")}
                   </Button>
                 </motion.div>
               </form>
