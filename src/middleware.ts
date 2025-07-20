@@ -28,7 +28,7 @@ export default async function middleware(request: NextRequest) {
     }
   } else {
     if (isProtectedRoute) {
-      return NextResponse.redirect(new URL(`/${locale}`, request.url));
+      return NextResponse.redirect(new URL(`/${locale}/signin`, request.url));
     }
   }
 

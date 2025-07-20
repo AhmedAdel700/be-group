@@ -67,5 +67,10 @@
   "registrationFee": "رسوم التسجيل:",
   "currency": "ر.س",
   "proceedToPayment": "المتابعة إلى الدفع",
-  "secureRedirectNotice": "سيتم توجيهك إلى بوابة دفع آمنة"
+  "secureRedirectNotice": "سيتم توجيهك إلى بوابة دفع آمنة",
+  "Registration Complete": "اكتمل التسجيل",
+  "Verify Your Email Address": "التحقق من عنوان بريدك الإلكتروني",
+  "Upload Document": "تحميل المستند",
+  "Personal Information": "معلومات شخصية",
+  "Scholarship Information": "معلومات المنح الدراسية"
 }

@@ -16,6 +16,7 @@ import {
   useVerifyEmailMutation,
   useGenerateCodeMutation,
 } from "@/app/api/signin/emailApiSlice";
+import { useTranslations } from "next-intl";
 
 interface OtpModalProps {
   isOpen: boolean;
@@ -31,6 +32,7 @@ export default function OtpModal({ isOpen, formData, token }: OtpModalProps) {
   const [showPayment, setShowPayment] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
   const [paymentLink, setPaymentLink] = useState("");
+  const t = useTranslations("register")
 
   const [verifyEmail] = useVerifyEmailMutation();
   const [generateCode] = useGenerateCodeMutation();
@@ -100,18 +102,16 @@ export default function OtpModal({ isOpen, formData, token }: OtpModalProps) {
     }
   };
 
-  const handleClose = () => {};
-
   const isOtpComplete = otp.every((digit) => digit !== "");
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
+    <Dialog open={isOpen}>
+      <DialogContent className="sm:max-w-md" hideClose>
         <DialogHeader>
           <DialogTitle className="text-center">
             {showPayment
-              ? "Registration Complete"
-              : "Verify Your Email Address"}
+              ? t("Registration Complete")
+              : t("Verify Your Email Address")}
           </DialogTitle>
         </DialogHeader>
 

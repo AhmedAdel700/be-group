@@ -10,17 +10,6 @@ import { useState } from 'react';
 import MainContent from './MainContent';
 import { useRouter } from '@/navigations';
 
-// type CourseType = {
-//   diploma?: string;
-//   semesters: Array<{ id: number; name: string; price: number }>;
-// };
-
-// function hasDiplomaField(
-//   course: CourseType
-// ): course is CourseType & { diploma: string } {
-//   return course && typeof course.diploma === 'string';
-// }
-
 export default function DiplomaDetails({
   DetailsData: initialData,
 }: {

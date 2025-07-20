@@ -28,16 +28,17 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import type { RegistrationFormData } from "@/lib/validation-schema";
 import { useLocale, useTranslations } from "next-intl";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import SAFlag from '@/app/assets/SAFlag.svg';
 import Image from "next/image";
 import { ChevronDownIcon } from "lucide-react";
+import { DiplomaResponseData } from "@/types/diplomasApiTypes";
 
 interface PersonalInfoSectionProps {
   form: UseFormReturn<RegistrationFormData>;
+  diplomasData: DiplomaResponseData;
 }
 
 const nationalities = [
@@ -56,22 +57,12 @@ const nationalities = [
   "Other",
 ];
 
-export default function PersonalInfoSection({
-  form,
-}: PersonalInfoSectionProps) {
+export default function PersonalInfoSection({ form, diplomasData }: PersonalInfoSectionProps) {
   const t = useTranslations("register");
-  interface Diploma {
-    _id: string;
-    title: string;
-    titleAr: string;
-  }
 
   const locale = useLocale();
 
-  const diplomas: Diploma[] = useSelector(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (state: any) => state.diplomas.diplomas?.data?.diplomas ?? []
-  );
+  const diplomas = diplomasData.data.diplomas;
   const searchParams = useSearchParams();
 
   const diploma = searchParams.get("diploma");
@@ -232,7 +223,9 @@ export default function PersonalInfoSection({
                     <button
                       type="button"
                       tabIndex={-1}
-                      className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none ${locale === "ar" ? "left-3" : "right-3"}`}
+                      className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none ${
+                        locale === "ar" ? "left-3" : "right-3"
+                      }`}
                       onClick={() => setShowPassword((v) => !v)}
                     >
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -269,7 +262,9 @@ export default function PersonalInfoSection({
                     <button
                       type="button"
                       tabIndex={-1}
-                      className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none ${locale === "ar" ? "left-3" : "right-3"}`}
+                      className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none ${
+                        locale === "ar" ? "left-3" : "right-3"
+                      }`}
                       onClick={() => setShowConfirmPassword((v) => !v)}
                     >
                       {showConfirmPassword ? (
@@ -378,7 +373,7 @@ export default function PersonalInfoSection({
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full pl-3 text-left font-normal border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50",
+                          "w-full ps-3 text-start font-normal border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50",
                           !field.value && "text-muted-foreground"
                         )}
                       >
@@ -387,17 +382,18 @@ export default function PersonalInfoSection({
                         ) : (
                           <span>{t("birthdatePlaceholder")}</span>
                         )}
-                        <ChevronDownIcon className="ml-auto h-4 w-4 opacity-50" />
+                        <ChevronDownIcon className="ms-auto h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent
                     className="w-auto p-0"
                     align="start"
-                    dir={locale === "ar" ? "rtl" : "ltr"}
+                    dir={locale == "en" ? "ltr" : "rtl"}
                   >
                     <Calendar
                       mode="single"
+                      dir="ltr"
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
@@ -513,18 +509,17 @@ export default function PersonalInfoSection({
                 </FormLabel>
                 <Select
                   dir={locale === "ar" ? "rtl" : "ltr"}
-                  onValueChange={(value) =>
-                    selectedDiploma
-                      ? field.onChange(selectedDiploma)
-                      : field.onChange(value)
-                  }
+                  onValueChange={(value) => {
+                    setSelectedDiploma(value);
+                    field.onChange(selectedDiploma);
+                  }}
                   value={selectedDiploma || field.value}
-                  disabled={selectedDiploma ? true : false}
+                  disabled={true}
                 >
                   <FormControl>
                     <SelectTrigger
                       dir={locale === "ar" ? "rtl" : "ltr"}
-                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none"
                     >
                       <SelectValue
                         placeholder={t("diplomaChoice1Placeholder")}
@@ -543,6 +538,7 @@ export default function PersonalInfoSection({
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="diplomaChoice2"
@@ -554,12 +550,12 @@ export default function PersonalInfoSection({
                 <Select
                   dir={locale === "ar" ? "rtl" : "ltr"}
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger
                       dir={locale === "ar" ? "rtl" : "ltr"}
-                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none"
                     >
                       <SelectValue
                         placeholder={t("diplomaChoice2Placeholder")}
@@ -567,17 +563,20 @@ export default function PersonalInfoSection({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {diplomas.map((diploma) => (
-                      <SelectItem key={diploma._id} value={diploma._id}>
-                        {locale === "ar" ? diploma.titleAr : diploma.title}
-                      </SelectItem>
-                    ))}
+                    {diplomas
+                      .filter((d) => d._id !== form.watch("diplomaChoice1"))
+                      .map((diploma) => (
+                        <SelectItem key={diploma._id} value={diploma._id}>
+                          {locale === "ar" ? diploma.titleAr : diploma.title}
+                        </SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="diplomaChoice3"
@@ -589,12 +588,12 @@ export default function PersonalInfoSection({
                 <Select
                   dir={locale === "ar" ? "rtl" : "ltr"}
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger
                       dir={locale === "ar" ? "rtl" : "ltr"}
-                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none placeholder:font-medium placeholder:text-sm placeholder:text-black-tint-50"
+                      className="border-s-tints-tint-15 h-12 rounded-[8px] shadow-none"
                     >
                       <SelectValue
                         placeholder={t("diplomaChoice3Placeholder")}
@@ -602,11 +601,17 @@ export default function PersonalInfoSection({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {diplomas.map((diploma) => (
-                      <SelectItem key={diploma._id} value={diploma._id}>
-                        {locale === "ar" ? diploma.titleAr : diploma.title}
-                      </SelectItem>
-                    ))}
+                    {diplomas
+                      .filter(
+                        (d) =>
+                          d._id !== form.watch("diplomaChoice1") &&
+                          d._id !== form.watch("diplomaChoice2")
+                      )
+                      .map((diploma) => (
+                        <SelectItem key={diploma._id} value={diploma._id}>
+                          {locale === "ar" ? diploma.titleAr : diploma.title}
+                        </SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />

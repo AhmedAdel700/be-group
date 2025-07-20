@@ -19,10 +19,11 @@ import ScholarshipSection from "@/components/placeOrder/scholarship-section";
 import UploadSection from "@/components/placeOrder/upload-section";
 import PersonalInfoSection from "@/components/placeOrder/personal-info-section";
 import { useRegisterMutation } from "@/app/api/signin/emailApiSlice";
+import { DiplomaResponseData } from "@/types/diplomasApiTypes";
 
 const steps = [
   {
-    label: "Personal Info",
+    label: "Personal Information",
     fields: [
       "fullName",
       "fullNameAr",
@@ -43,7 +44,7 @@ const steps = [
     ],
   },
   {
-    label: "Uploads",
+    label: "Upload Document",
     fields: [
       "studentPicture",
       "highSchoolCertificate",
@@ -52,12 +53,16 @@ const steps = [
     ],
   },
   {
-    label: "Scholarship",
+    label: "Scholarship Information",
     fields: [],
   },
 ];
 
-export default function RegistrationForm() {
+export default function RegistrationForm({
+  diplomasData,
+}: {
+  diplomasData: DiplomaResponseData;
+}) {
   const locale = useLocale();
   const t = useTranslations("register");
 
@@ -136,8 +141,7 @@ export default function RegistrationForm() {
     let valid = true;
 
     if (fields.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      valid = await form.trigger(fields as any);
+      valid = await form.trigger();
     }
 
     if (valid) {
@@ -190,7 +194,7 @@ export default function RegistrationForm() {
   function renderStep() {
     switch (currentStep) {
       case 0:
-        return <PersonalInfoSection form={form} />;
+        return <PersonalInfoSection form={form} diplomasData={diplomasData} />;
       case 1:
         return <UploadSection form={form} />;
       case 2:
@@ -214,7 +218,10 @@ export default function RegistrationForm() {
           const lineClass = isCompleted ? "bg-[#001C71]" : "bg-[#CCCCCC]";
 
           return (
-            <div key={step.label} className="flex items-center gap-2 sm:gap-4">
+            <div
+              key={step.label}
+              className="flex items-center gap-2 sm:gap-4 relative"
+            >
               <div className="flex flex-col items-center">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold border-2 transition-colors duration-300 ${circleClass}`}
@@ -227,6 +234,17 @@ export default function RegistrationForm() {
                   className={`h-0.5 w-[110px] md:w-[300px] -ms-2 md:-ms-[15px] transition-colors duration-300 ${lineClass}`}
                 />
               )}
+              <div
+                className={`hidden sm:block absolute mx-auto max-w-[100px] xl:min-w-[200px] ${
+                  locale === "en" ? "left-0 " : "right-0 "
+                } bottom-[30px] xl:bottom-[40px] ${
+                  locale === "en"
+                    ? "-translate-x-[12px] xl:-translate-x-[50px]"
+                    : "translate-x-[12px] xl:translate-x-[50px]"
+                } font-bold text-xs xl:text-base text-black-tint-90`}
+              >
+                {t(step.label)}
+              </div>
             </div>
           );
         })}
@@ -236,19 +254,18 @@ export default function RegistrationForm() {
 
   return (
     <>
-      <div className="w-full min-h-screen flex flex-col items-center justify-center py-8 rounded-md">
-        <h1 className="text-2xl text-center mb-8">Registration Information</h1>
+      <div className="w-full min-h-screen flex flex-col items-center justify-center py-8 mt-8 rounded-md">
         <StepIndicator />
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 w-full"
           >
-            <div className="flex items-center justify-center gap-2 max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-2 max-w-3xl mx-auto px-4">
               {renderStep()}
             </div>
 
-            <div className="flex justify-end max-w-3xl mx-auto gap-4">
+            <div className="flex justify-end max-w-3xl mx-auto gap-4 px-4">
               {currentStep > 0 && (
                 <Button
                   type="button"

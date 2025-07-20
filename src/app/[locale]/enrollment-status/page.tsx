@@ -2,6 +2,7 @@ import { fetchStatus } from "@/app/api/enrollmentStatus/enrollmentService";
 import Pending from "./Pending";
 // import Approved from "./Approved";
 // import Rejected from "./Rejected";
+// import OnHold from "./OnHold";
 import { generatePageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata() {
@@ -28,6 +29,7 @@ export default async function page() {
       <Pending enrollmentData={enrollmentData} />
       {/* <Approved enrollmentData={enrollmentData} /> */}
       {/* <Rejected enrollmentData={enrollmentData} /> */}
+      {/* <OnHold enrollmentData={enrollmentData} /> */}
     </>
   );
 }

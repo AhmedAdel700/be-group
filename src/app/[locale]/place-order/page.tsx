@@ -1,5 +1,6 @@
 import { generatePageMetadata } from "@/lib/metadata";
 import RegistrationForm from "./RegistrationForm";
+import { fetchDiplomas } from "@/app/api/diplomas/diplomaService";
 
 export async function generateMetadata() {
   return await generatePageMetadata({
@@ -18,9 +19,11 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
+
+  const diplomasData = await fetchDiplomas();
   return (
     <div className="min-h-screen">
-      <RegistrationForm />
+      <RegistrationForm diplomasData={diplomasData} />
     </div>
   );
 }
