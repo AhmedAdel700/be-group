@@ -22,40 +22,43 @@ import { useRegisterMutation } from "@/app/api/signin/emailApiSlice";
 import { DiplomaResponseData } from "@/types/diplomasApiTypes";
 
 const steps = [
-  {
-    label: "Personal Information",
-    fields: [
-      "fullName",
-      "fullNameAr",
-      "email",
-      "password",
-      "confirmPassword",
-      "phoneNumber",
-      "nationalNumber",
-      "nationality",
-      "city",
-      "birthDate",
-      "gender",
-      "highSchoolDegree",
-      "graduationYear",
-      "diplomaChoice1",
-      "diplomaChoice2",
-      "diplomaChoice3",
-    ],
-  },
-  {
-    label: "Upload Document",
-    fields: [
-      "studentPicture",
-      "highSchoolCertificate",
-      "studentIdentity",
-      "employerApproval",
-    ],
-  },
-  {
-    label: "Scholarship Information",
-    fields: [],
-  },
+  { label: "Personal Information", fields: [] },
+  { label: "Upload Document", fields: [] },
+  { label: "Scholarship Information", fields: [] },
+];
+
+const stepValidationFields: (keyof RegistrationFormData)[][] = [
+  [
+    "fullName",
+    "fullNameAr",
+    "email",
+    "password",
+    "confirmPassword",
+    "phoneNumber",
+    "nationalNumber",
+    "nationality",
+    "city",
+    "birthDate",
+    "gender",
+    "highSchoolDegree",
+    "graduationYear",
+    "diplomaChoice1",
+    "diplomaChoice2",
+    "diplomaChoice3",
+  ],
+  [
+    "studentPicture",
+    "highSchoolCertificate",
+    "studentIdentity",
+    "employerApproval",
+  ],
+  [
+    "applicationAcknowledgment",
+    "computerProvision",
+    "informationAccuracy",
+    "generalConditions",
+    "proctoringAcknowledgment",
+  ],
 ];
 
 export default function RegistrationForm({
@@ -127,8 +130,6 @@ export default function RegistrationForm({
 
       const result = await register(payload).unwrap();
       setToken(result?.data?.token);
-      console.log("Final Submit Result:", result);
-
       setFormData(data);
       setShowOtpModal(true);
     } catch (error) {
@@ -137,11 +138,11 @@ export default function RegistrationForm({
   };
 
   const handleNext = async () => {
-    const fields = steps[currentStep].fields;
+    const fields = stepValidationFields[currentStep];
     let valid = true;
 
     if (fields.length > 0) {
-      valid = await form.trigger();
+      valid = await form.trigger(fields);
     }
 
     if (valid) {
@@ -149,9 +150,8 @@ export default function RegistrationForm({
         try {
           setIsStepLoading(true);
           const allValues = form.getValues();
-          const step1Fields = steps[0].fields;
           const step1DataObject = Object.fromEntries(
-            step1Fields.map((key) => [
+            stepValidationFields[0].map((key) => [
               key,
               allValues[key as keyof typeof allValues],
             ])
@@ -188,6 +188,7 @@ export default function RegistrationForm({
   };
 
   const handleBack = () => {
+    setCompleted((prev) => prev.filter((step) => step !== currentStep - 1));
     setCurrentStep((prev) => prev - 1);
   };
 
@@ -204,58 +205,68 @@ export default function RegistrationForm({
     }
   }
 
-  function StepIndicator() {
-    return (
-      <div className="flex justify-center w-full h-[200px] bg-p-tints-tint-5 mx-auto mb-8">
-        {steps.map((step, idx) => {
-          const isCompleted = completed.includes(idx);
-          const isCurrent = idx === currentStep;
-          const circleClass = isCompleted
-            ? "bg-[#001C71] text-white border-[#001C71]"
-            : isCurrent
-            ? "bg-transparent text-[#001C71] border-[#001C71]"
-            : "bg-transparent text-[#CCCCCC] border-[#CCCCCC]";
-          const lineClass = isCompleted ? "bg-[#001C71]" : "bg-[#CCCCCC]";
+function StepIndicator() {
+  return (
+    <div className="flex justify-between items-start w-full max-w-5xl mx-auto px-4 relative">
+      {steps.map((step, idx) => {
+        const isCompleted = completed.includes(idx);
+        const isCurrent = idx === currentStep;
 
-          return (
-            <div
-              key={step.label}
-              className="flex items-center gap-2 sm:gap-4 relative"
-            >
-              <div className="flex flex-col items-center">
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold border-2 transition-colors duration-300 ${circleClass}`}
-                >
-                  {isCompleted ? <Check className="w-5 h-5" /> : idx + 1}
-                </div>
-              </div>
-              {idx < steps.length - 1 && (
-                <div
-                  className={`h-0.5 w-[110px] md:w-[300px] -ms-2 md:-ms-[15px] transition-colors duration-300 ${lineClass}`}
-                />
-              )}
+        const circleStyle = isCompleted
+          ? "bg-main-primary text-white border-main-primary"
+          : isCurrent
+          ? "bg-p-tints-tint-5 text-main-primary border-main-primary"
+          : "bg-p-tints-tint-5 text-black-tint-20 border-black-tint-20";
+
+        const isLeftLineActive = completed.includes(idx - 1);
+        const isRightLineActive = completed.includes(idx);
+
+        return (
+          <div
+            key={step.label}
+            className="relative flex-1 flex flex-col items-center text-center"
+          >
+            {idx !== 0 && (
               <div
-                className={`hidden sm:block absolute mx-auto max-w-[100px] xl:min-w-[200px] ${
-                  locale === "en" ? "left-0 " : "right-0 "
-                } bottom-[30px] xl:bottom-[40px] ${
-                  locale === "en"
-                    ? "-translate-x-[12px] xl:-translate-x-[50px]"
-                    : "translate-x-[12px] xl:translate-x-[50px]"
-                } font-bold text-xs xl:text-base text-black-tint-90`}
-              >
-                {t(step.label)}
-              </div>
+                className={`absolute top-5 left-0 w-1/2 border-b-2 z-0 ${
+                  isLeftLineActive ? "border-main-primary" : "border-black-tint-20"
+                }`}
+              />
+            )}
+
+            {idx !== steps.length - 1 && (
+              <div
+                className={`absolute top-5 right-0 w-1/2 border-b-2 z-0 ${
+                  isRightLineActive
+                    ? "border-main-primary"
+                    : "border-black-tint-20"
+                }`}
+              />
+            )}
+
+            <div
+              className={`relative z-10 w-10 h-10 flex items-center justify-center rounded-full border-2 font-bold transition-colors duration-300 ${circleStyle}`}
+            >
+              {isCompleted ? <Check className="w-5 h-5" /> : idx + 1}
             </div>
-          );
-        })}
-      </div>
-    );
-  }
+
+            <div className="mt-3 text-xs xl:text-sm font-bold text-black-tint-90 w-24 xl:w-fit leading-tight">
+              {t(step.label)}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 
   return (
     <>
       <div className="w-full min-h-screen flex flex-col items-center justify-center py-8 mt-8 rounded-md">
-        <StepIndicator />
+        <div className="py-12 bg-p-tints-tint-5 w-full my-8">
+          <StepIndicator />
+        </div>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
