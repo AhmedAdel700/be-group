@@ -429,7 +429,7 @@ export default function PersonalInfoSection({ form, diplomasData }: PersonalInfo
                     <RadioGroupItem
                       value="male"
                       id="male"
-                      className="w-5 h-5 border-[#AEAEB2] data-[state=checked]:bg-main-primary data-[state=checked]:border-main-primary"
+                      className="w-5 h-5"
                     />
                     <label htmlFor="male" className="cursor-pointer">
                       {t("male")}
@@ -439,7 +439,7 @@ export default function PersonalInfoSection({ form, diplomasData }: PersonalInfo
                     <RadioGroupItem
                       value="female"
                       id="female"
-                      className="w-5 h-5 border-[#AEAEB2] data-[state=checked]:bg-main-primary data-[state=checked]:border-main-primary"
+                      className="w-5 h-5"
                     />
                     <label htmlFor="female" className="cursor-pointer">
                       {t("female")}
