@@ -1,13 +1,18 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, SaudiRiyal } from "lucide-react";
 import Image from "next/image";
 import imagePlaceholder from "@/app/assets/image-placeholder.svg";
 import { useLocale, useTranslations } from "next-intl";
 import ApprovedIcon from "@/app/assets/Approved.svg";
 import { EnrollmentResponse } from "@/types/enrollmentApiTypes";
+import { Button } from "@/components/ui/button";
 
-export default function Approved({ enrollmentData }: { enrollmentData: EnrollmentResponse }) {
+export default function Approved({
+  enrollmentData,
+}: {
+  enrollmentData: EnrollmentResponse;
+}) {
   const locale = useLocale();
   const t = useTranslations("enroll");
 
@@ -45,6 +50,34 @@ export default function Approved({ enrollmentData }: { enrollmentData: Enrollmen
               locale === "en" ? "left-0 " : "right-0"
             } rounded-s-[8px]`}
           ></div>
+        </div>
+
+        <div className="border border-black-tint-10 rounded-[8px] shadow-none py-4 px-5 h-fit bg-p-tints-tint-3 flex justify-between items-end">
+          <div className="flex flex-col gap-2 w-full">
+            <p className="text-black-tint-80 font-medium text-sm">
+              {t("To start Please pay the first semester fee")}
+            </p>
+
+            <div className="w-full flex justify-between items-end">
+              <div>
+                <h3 className="text-main-primary font-bold text-lg flex gap-[2px] items-center">
+                  {t("Frist Semester Fee:")} 100{" "}
+                  <SaudiRiyal className="w-4 h-4" />
+                </h3>
+                <p className="text-black-tint-80 text-lg font-normal">
+                  {t("Due Date: 25, December 2025")}
+                </p>
+              </div>
+
+              <Button
+                type="button"
+                className="min-w-[80px] h-9 font-bold rounded-[8px] text-sm bg-main-primary hover:bg-p-tints-tint-90 text-primary-foreground"
+                onClick={() => {}}
+              >
+                {t("Pay Now")}
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="border border-black-tint-10 rounded-[8px] shadow-none h-fit flex flex-col">

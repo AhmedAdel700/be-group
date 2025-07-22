@@ -64,32 +64,36 @@ export default function Signin() {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!validateForm()) return;
-  setIsLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+    setIsLoading(true);
 
-  try {
-    const result = await signIn("credentials", {
-      emailOrPhone: formData.email.trim(),
-      password: formData.password.trim(),
-      redirect: false,
-    });
+    try {
+      const result = await signIn("credentials", {
+        emailOrPhone: formData.email.trim(),
+        password: formData.password.trim(),
+        redirect: false,
+      });
 
-    if (!result?.ok) {
-      let errorMessage = "";
-      errorMessage =
-        locale === "ar" ? "بيانات الدخول غير صالحة" : "Invalid Credentials";
-      toast.error(errorMessage, { duration: 5000 });
+      if (!result?.ok) {
+        let errorMessage = "";
+        errorMessage =
+          locale === "ar" ? "بيانات الدخول غير صالحة" : "Invalid Credentials";
+        toast.error(errorMessage, { duration: 5000 });
+      } else {
+        const successMessage =
+          locale === "ar" ? "تم تسجيل الدخول" : "You Are Logged In";
+        toast.success(successMessage, { duration: 5000 });
+      }
+
+      router.push(`/${locale}/enrollment-status`);
+    } catch (error) {
+      console.error("Unexpected error", error);
+    } finally {
+      setIsLoading(false);
     }
-
-    router.push(`/${locale}/enrollment-status`);
-  } catch (error) {
-    console.error("Unexpected error", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
