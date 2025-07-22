@@ -1,17 +1,22 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  XCircle,
-} from "lucide-react";
+import { XCircle } from "lucide-react";
 import Image from "next/image";
 import imagePlaceholder from "@/app/assets/image-placeholder.svg";
 import { useLocale, useTranslations } from "next-intl";
 import RejectedIcon from "@/app/assets/Rejected.svg";
 import { EnrollmentResponse } from "@/types/enrollmentApiTypes";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "@/navigations";
 
-export default function Rejected({ enrollmentData }: { enrollmentData: EnrollmentResponse }) {
+export default function Rejected({
+  enrollmentData,
+}: {
+  enrollmentData: EnrollmentResponse;
+}) {
   const locale = useLocale();
   const t = useTranslations("enroll");
+  const router = useRouter();
 
   const previousApplications = [
     {
@@ -46,6 +51,30 @@ export default function Rejected({ enrollmentData }: { enrollmentData: Enrollmen
               locale === "en" ? "left-0 " : "right-0"
             } rounded-s-[8px]`}
           ></div>
+        </div>
+
+        <div className="border border-black-tint-10 rounded-[8px] shadow-none py-4 px-5 h-fit bg-p-tints-tint-3 flex flex-col gap-4">
+          <p className="text-black-tint-60 font-normal text-base">
+            {t("We’re sorry, your application was not accepted")}{" "}
+            <span className="font-bold text-base text-black-tint-90">
+              {t(
+                "Your academic record does not meet the minimum entry requirements"
+              )}{" "}
+              <span className="text-black-tint-60 font-normal text-base">
+                {t(
+                  "If you believe this was an error or would like to appeal, please contact our admissions team"
+                )}
+              </span>
+            </span>
+          </p>
+
+          <Button
+            type="button"
+            className="min-w-[80px] h-9 font-bold rounded-[8px] text-sm bg-main-primary hover:bg-p-tints-tint-90 text-primary-foreground ms-auto"
+            onClick={() => router.push("/")}
+          >
+            {t("Visit Home Page")}
+          </Button>
         </div>
 
         <div className="border border-black-tint-10 rounded-[8px] shadow-none h-fit flex flex-col">

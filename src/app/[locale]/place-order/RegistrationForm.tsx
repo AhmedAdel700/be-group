@@ -205,61 +205,66 @@ export default function RegistrationForm({
     }
   }
 
-function StepIndicator() {
-  return (
-    <div className="flex justify-between items-start w-full max-w-5xl mx-auto px-4 relative">
-      {steps.map((step, idx) => {
-        const isCompleted = completed.includes(idx);
-        const isCurrent = idx === currentStep;
+  function StepIndicator() {
+    return (
+      <div className="flex justify-between items-start w-full max-w-5xl mx-auto px-4 relative">
+        {steps.map((step, idx) => {
+          const isCompleted = completed.includes(idx);
+          const isCurrent = idx === currentStep;
 
-        const circleStyle = isCompleted
-          ? "bg-main-primary text-white border-main-primary"
-          : isCurrent
-          ? "bg-p-tints-tint-5 text-main-primary border-main-primary"
-          : "bg-p-tints-tint-5 text-black-tint-20 border-black-tint-20";
+          const circleStyle = isCompleted
+            ? "bg-main-primary text-white border-main-primary"
+            : isCurrent
+            ? "bg-p-tints-tint-5 text-main-primary border-main-primary"
+            : "bg-p-tints-tint-5 text-black-tint-20 border-black-tint-20";
 
-        const isLeftLineActive = completed.includes(idx - 1);
-        const isRightLineActive = completed.includes(idx);
+          const isLeftLineActive = completed.includes(idx - 1);
+          const isRightLineActive = completed.includes(idx);
 
-        return (
-          <div
-            key={step.label}
-            className="relative flex-1 flex flex-col items-center text-center"
-          >
-            {idx !== 0 && (
-              <div
-                className={`absolute top-5 left-0 w-1/2 border-b-2 z-0 ${
-                  isLeftLineActive ? "border-main-primary" : "border-black-tint-20"
-                }`}
-              />
-            )}
-
-            {idx !== steps.length - 1 && (
-              <div
-                className={`absolute top-5 right-0 w-1/2 border-b-2 z-0 ${
-                  isRightLineActive
-                    ? "border-main-primary"
-                    : "border-black-tint-20"
-                }`}
-              />
-            )}
-
+          return (
             <div
-              className={`relative z-10 w-10 h-10 flex items-center justify-center rounded-full border-2 font-bold transition-colors duration-300 ${circleStyle}`}
+              key={step.label}
+              className="relative flex-1 flex flex-col items-center text-center"
             >
-              {isCompleted ? <Check className="w-5 h-5" /> : idx + 1}
-            </div>
+              {idx !== 0 && (
+                <div
+                  className={`absolute top-5 ${
+                    locale === "en" ? "left-0" : "right-0"
+                  } w-1/2 border-b-2 z-0 ${
+                    isLeftLineActive
+                      ? "border-main-primary"
+                      : "border-black-tint-20"
+                  }`}
+                />
+              )}
 
-            <div className="mt-3 text-xs xl:text-sm font-bold text-black-tint-90 w-24 xl:w-fit leading-tight">
-              {t(step.label)}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+              {idx !== steps.length - 1 && (
+                <div
+                  className={`absolute top-5 ${
+                    locale === "en" ? "right-0" : "left-0"
+                  } w-1/2 border-b-2 z-0 ${
+                    isRightLineActive
+                      ? "border-main-primary"
+                      : "border-black-tint-20"
+                  }`}
+                />
+              )}
 
+              <div
+                className={`relative z-10 w-10 h-10 flex items-center justify-center rounded-full border-2 font-bold transition-colors duration-300 ${circleStyle}`}
+              >
+                {isCompleted ? <Check className="w-5 h-5" /> : idx + 1}
+              </div>
+
+              <div className="mt-3 text-xs xl:text-sm font-bold text-black-tint-90 w-24 xl:w-fit leading-tight">
+                {t(step.label)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <>
