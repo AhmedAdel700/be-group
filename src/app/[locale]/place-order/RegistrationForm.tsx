@@ -145,6 +145,23 @@ export default function RegistrationForm({
       valid = await form.trigger(fields);
     }
 
+    if (currentStep === 0) {
+      const values = form.getValues();
+      if (values.password !== values.confirmPassword) {
+        const passwordMismatchMessage =
+          locale === "ar"
+            ? "كلمة المرور وتأكيد كلمة المرور غير متطابقين"
+            : "Password and Confirm Password do not match";
+
+        form.setError("confirmPassword", {
+          type: "manual",
+          message: passwordMismatchMessage,
+        });
+
+        return;
+      }
+    }
+
     if (valid) {
       if (currentStep === 0) {
         try {

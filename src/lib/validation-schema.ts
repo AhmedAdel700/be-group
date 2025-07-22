@@ -102,7 +102,7 @@ export const getRegistrationSchema = (lang: string) => {
       }),
       highSchoolDegree: z
         .string()
-        .min(1, t("High school degree is required", "درجة الثانوية مطلوبة")),
+        .min(2, t("High school degree is required", "درجة الثانوية مطلوبة")),
       graduationYear: z
         .string()
         .min(4, t("Graduation year is required", "سنة التخرج مطلوبة")),
