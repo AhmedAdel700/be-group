@@ -56,7 +56,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-[72px] py-2 px-4 lg:px-16 flex justify-between items-center">
+      <header className="h-[72px] py-2 px-4 xl:px-0 container mx-auto flex justify-between items-center">
         <Image
           src={resolvedTheme === "dark" ? LogoDark : LogoLight}
           alt="Robotics Logo"

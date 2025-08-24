@@ -1,4 +1,5 @@
 import About from "@/components/about/About";
+import Explore from "@/components/explore/Explore";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import Hero from "@/components/hero/Hero";
@@ -8,6 +9,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Header />
       <Hero />
+      <Explore />
       <About />
       <Footer />
     </div>

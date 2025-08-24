@@ -1,5 +1,43 @@
+"use client";
+
+import { Button } from "../ui/button";
+import dynamic from "next/dynamic";
+
+const SplineRobot = dynamic(() => import("../SplineRobot"), { ssr: false });
+
 export default function Hero() {
   return (
-    <section className="min-h-screen">Hero</section>
-  )
+    <section
+      className="
+        min-h-fit xl:h-[calc(100vh-85px)]
+        flex flex-col xl:flex-row items-center justify-between
+        gap-10 px-4 lg:px-10 py-10 container mx-auto
+        bg-gradient-to-r from-[#F4F4F4] to-[#FDFDFD] border border-main-white rounded-2xl mb-4
+      "
+    >
+      <div className="flex flex-col gap-6 order-2 xl:order-1 shrink-0">
+        <h1 className="text-main-text font-bold text-5xl max-w-[500px] leading-[64px]">
+          Where Technology Meets Imagination
+        </h1>
+
+        <p className="text-main-text font-medium text-base max-w-[650px]">
+          Immerse yourself in a curated collection of cutting-edge robots that
+          push the limits of your imagination.
+        </p>
+
+        <div className="flex items-center gap-2">
+          <Button className="!bg-main-primary text-main-white font-semibold text-base w-[108px] h-[38px] rounded-[8px]">
+            About Us
+          </Button>
+          <Button className="!bg-main-secondary text-main-white font-semibold text-base w-[108px] h-[38px] rounded-[8px]">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+
+      <div className="w-full h-full rounded-xl overflow-hidden order-1 xl:order-2">
+        <SplineRobot />
+      </div>
+    </section>
+  );
 }
