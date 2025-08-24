@@ -1,233 +1,184 @@
 "use client";
-
-import logo from "@/app/assets/logo.svg";
-import { usePathname, useRouter } from "@/navigations";
-import { AnimatePresence, motion } from "framer-motion";
-import { Globe, LogOut, Menu, X } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import { scrollToSectionWithOffset } from "@/lib/utils";
-import { signOut } from "next-auth/react";
+import ThemeSwitch from "../themeSwitch/ThemeSwitch";
+import LogoLight from "@/app/assets/logoLight.svg";
+import LogoDark from "@/app/assets/logoDark.svg";
+import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "@/navigations";
+import menuDark from "@/app/assets/menuDark.svg";
+import menuLight from "@/app/assets/menuLight.svg";
+import { X } from "lucide-react";
 
-export default function MainHeader() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const t = useTranslations("header");
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
+export default function Header() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  const scrollToSection = (sectionId: string) => {
-    if (pathname !== "/") {
-      sessionStorage.setItem("scrollTarget", sectionId);
-      router.push("/");
-      return;
-    }
+  const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
+  const [anim, setAnim] = useState(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
-    scrollToSectionWithOffset(sectionId, 70);
-    setIsMenuOpen(false);
-  };
-
-  const scrollToTop = () => {
-    if (pathname !== "/") {
-      return router.push("/");
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setIsMenuOpen(false);
-  };
-
-  const toggleLanguage = () => {
-    const newLocale = locale === "en" ? "ar" : "en";
-    // Preserve query parameters when switching locale
-    const search = typeof window !== "undefined" ? window.location.search : "";
-    router.replace(pathname + search, { locale: newLocale });
-  };
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const target = sessionStorage.getItem("scrollTarget");
-    if (pathname === "/" && target) {
-      sessionStorage.removeItem("scrollTarget");
-      setTimeout(() => {
-        scrollToSectionWithOffset(target, 70);
-      }, 100);
-      setIsMenuOpen(false);
+    if (open) {
+      setShow(true);
+      requestAnimationFrame(() => setAnim(true));
+    } else {
+      setAnim(false);
+      const t = setTimeout(() => setShow(false), 200);
+      return () => clearTimeout(t);
     }
-  }, [pathname]);
-
-  // Enrollment-status header logic
-  const [language, setLanguage] = useState(locale);
+  }, [open]);
 
   useEffect(() => {
-    setLanguage(locale);
-  }, [locale]);
+    if (!show) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [show]);
 
-  const handleLogout = async () => {
-    await signOut({ redirect: false });
-    router.replace(`/`);
-  };
+  useEffect(() => {
+    if (show) panelRef.current?.focus();
+  }, [show]);
 
-  const toggleEnrollmentLanguage = () => {
-    const newLocale = language === "en" ? "ar" : "en";
-    setLanguage(newLocale);
-    const search = typeof window !== "undefined" ? window.location.search : "";
-    router.replace(pathname + search, { locale: newLocale });
-  };
-
-  if (pathname.includes("/enrollment-status")) {
-    // Custom header for enrollment-status page
+  if (!mounted) {
     return (
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
-            {/* Logo */}
-            <div className="w-full">
-              <Image src={logo} alt="Logo" width={120} height={120} />{" "}
-              {/* Increased size */}
-            </div>
-            {/* Header Actions */}
-            <div className="flex items-center gap-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={toggleEnrollmentLanguage}
-                className="flex items-center bg-transparent"
-              >
-                <Globe className="w-4 h-4" />
-                <span>{language === "en" ? "العربية" : "English"}</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="flex items-center text-red-600 border-red-200 hover:bg-red-50 bg-transparent"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>{language === "en" ? "Logout" : "تسجيل الخروج"}</span>
-              </Button>
-            </div>
-          </div>
-        </div>
+      <header className="h-[72px] py-2 px-16 flex justify-between items-center">
+        <Image src={LogoLight} alt="Robotics Logo" width={90} height={56} />
+        <ThemeSwitch />
       </header>
     );
   }
 
+  const closeMenu = () => setOpen(false);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-sm border-b border-gray-200">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
-          {/* Logo */}
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="flex items-center focus:outline-none gap-4"
-          >
-            <div className=" w-full flex items-center justify-center">
-              <Image src={logo} alt="Logo" width={120} height={120} />{" "}
-              {/* Increased size */}
-            </div>
-          </button>
+    <>
+      <header className="h-[72px] py-2 px-4 lg:px-16 flex justify-between items-center">
+        <Image
+          src={resolvedTheme === "dark" ? LogoDark : LogoLight}
+          alt="Robotics Logo"
+          width={90}
+          height={56}
+          priority
+        />
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-4 font-medium">
-            <button
-              onClick={() => scrollToSection("courses")}
-              className="text-black-tint-80 hover:text-main-primary transition-colors duration-200"
-            >
-              {t("Diplomas")}
-            </button>
-            <button
-              onClick={() => scrollToSection("footer")}
-              className="text-black-tint-80 hover:text-main-primary transition-colors duration-200"
-            >
-              {t("Contact Us")}
-            </button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleLanguage}
-              className="flex items-center space-x-1 bg-transparent h-9"
-            >
-              <Globe className="w-4 h-4" />
-              <span>{locale === "en" ? t("Arabic") : t("English")}</span>
-            </Button>
-            <Link href={`/${locale}/signin`} prefetch>
-              <Button className="bg-main-primary hover:bg-p-shades-shade-80">
-                {t("Sign In")}
-              </Button>
-            </Link>
-          </nav>
-          {/* <nav className="hidden md:flex items-center gap-4 font-medium"></nav> */}
+        <nav className="hidden lg:flex items-center gap-6">
+          <ul className="flex text-xs font-bold text-main-text">
+            <li className="h-full w-[85px]">
+              <Link href="/">Home</Link>
+            </li>
+            <li className="h-full w-[85px]">
+              <Link href="/courses">Courses</Link>
+            </li>
+            <li className="h-full w-[85px]">
+              <Link href="/market">Market</Link>
+            </li>
+            <li className="h-full w-[85px]">
+              <Link href="/club">Club</Link>
+            </li>
+            <li className="h-full w-[85px]">
+              <Link href="/contact">Contact Us</Link>
+            </li>
+          </ul>
+          <ThemeSwitch />
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+        <button
+          type="button"
+          aria-label="Open menu"
+          onClick={() => setOpen(true)}
+          className="lg:hidden inline-flex items-center justify-center w-10 h-10"
+        >
+          <Image
+            src={resolvedTheme === "dark" ? menuDark : menuLight}
+            alt="Menu"
+            width={24}
+            height={24}
+          />
+        </button>
+      </header>
+
+      {show && (
+        <div
+          aria-modal="true"
+          role="dialog"
+          aria-label="Mobile menu"
+          className="fixed inset-0 z-50 flex items-start justify-center top-16"
+        >
+          <div
+            className={`absolute inset-0 bg-black/50 transition-opacity duration-200 ${
+              anim ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={closeMenu}
+          />
+
+          <div
+            ref={panelRef}
+            tabIndex={-1}
+            className={`
+              relative z-10 w-[92%] max-w-sm
+              rounded-2xl bg-black-tint-2 dark:bg-black-tint-10 text-main-text
+              outline-none p-4 origin-top right-0
+              transition duration-200 ease-out
+              ${anim ? "opacity-100 scale-100" : "opacity-0 scale-95"}
+            `}
           >
-            {isMenuOpen ? (
+            <button
+              onClick={closeMenu}
+              aria-label="Close menu"
+              className="absolute top-3 right-3 inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-black-tint-5 dark:hover:bg-black-tint-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-main-primary"
+            >
               <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </Button>
-        </div>
+            </button>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ ease: "easeOut", duration: 0.3 }}
-              className="md:hidden border-t border-gray-200 py-4 bg-white fixed inset-0 top-[81px] z-40"
-            >
-              <nav className="flex flex-col gap-y-6 p-4 bg-main-white">
-                <button
-                  onClick={() => scrollToSection("courses")}
-                  className="text-black-tint-80 hover:text-main-primary transition-colors duration-200 text-start"
-                >
-                  {t("Diplomas")}
-                </button>
-                <button
-                  onClick={() => scrollToSection("footer")}
-                  className="text-start text-black-tint-80 hover:text-main-primary transition-colors duration-200"
-                >
-                  {t("Contact Us")}
-                </button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    toggleLanguage();
-                    setIsMenuOpen(false);
-                  }}
-                  className="flex items-center gap-1 w-full bg-transparent h-9"
-                >
-                  <Globe className="w-4 h-4" />
-                  <span>{locale === "en" ? t("Arabic") : t("English")}</span>
-                </Button>
-                <Link
-                  href={`/${locale}/signin`}
-                  prefetch
-                  passHref
-                  legacyBehavior
-                >
-                  <Button
-                    className="bg-main-primary hover:bg-p-shades-shade-80 w-full"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {t("Sign In")}
-                  </Button>
-                </Link>
+            <div className="flex flex-col gap-4">
+              <Image
+                src={resolvedTheme === "dark" ? LogoDark : LogoLight}
+                alt="Robotics Logo"
+                width={90}
+                height={56}
+              />
+
+              <nav className="mt-2">
+                <ul className="flex flex-col gap-2 text-sm font-bold">
+                  {[
+                    { href: "/", label: "Home" },
+                    { href: "/courses", label: "Courses" },
+                    { href: "/market", label: "Market" },
+                    { href: "/club", label: "Club" },
+                    { href: "/contact", label: "Contact Us" },
+                  ].map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={closeMenu}
+                        className="
+                          block rounded-xl
+                          px-4 py-3
+                          bg-transparent
+                          hover:bg-black-tint-5 dark:hover:bg-black-tint-20
+                          focus:outline-none focus-visible:ring-2 focus-visible:ring-main-primary
+                          transition
+                        "
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </header>
+
+              <div className="pt-2 border-t border-black-tint-10 dark:border-black-tint-20 flex items-center justify-between">
+                <span className="text-xs opacity-80">Theme</span>
+                <ThemeSwitch />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

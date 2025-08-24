@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { fetchDiplomas } from "@/app/api/diplomas/diplomaService";
 import HeroFrame from "@/app/assets/Section.png";
 import AboutSection from "@/components/about-section";
@@ -25,8 +26,16 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   const diplomasData = await fetchDiplomas();
+=======
+import About from "@/components/about/About";
+import Footer from "@/components/footer/Footer";
+import Header from "@/components/header/Header";
+import Hero from "@/components/hero/Hero";
+>>>>>>> Stashed changes
 
+export default function Home() {
   return (
+<<<<<<< Updated upstream
     <div className="min-h-screen bg-white">
       <main
         style={{
@@ -38,6 +47,12 @@ export default async function HomePage() {
         <AboutSection />
         <DiplomasSection diplomasData={diplomasData} />
       </main>
+=======
+    <div className="flex flex-col">
+      <Header />
+      <Hero />
+      <About />
+>>>>>>> Stashed changes
       <Footer />
     </div>
   );

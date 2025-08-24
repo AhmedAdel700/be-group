@@ -8,11 +8,7 @@ const namespaces = [
   "header",
   "hero",
   "about",
-  "diplomas",
   "footer",
-  "signin",
-  "enroll",
-  "register",
 ]; // Add more as needed
 
 export default getRequestConfig(async ({ locale }) => {
