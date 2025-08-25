@@ -51,7 +51,7 @@ export default function Hero() {
         viewport={{ once: true, amount: 0.2 }}
         className="w-full h-full rounded-xl overflow-hidden order-1 xl:order-2"
       >
-        {/* <SplineRobot /> */}
+        <SplineRobot />
       </motion.div>
     </section>
   );
