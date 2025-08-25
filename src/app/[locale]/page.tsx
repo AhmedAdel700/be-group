@@ -44,7 +44,7 @@ export default function Home() {
       <Image
         src={rightShapeFooter}
         alt="center shape"
-        className="absolute right-0 bottom-0 hidden dark:block -z-50 translate-y-[200px]"
+        className="absolute right-0 bottom-0 hidden dark:block -z-50 sm:translate-y-[200px]"
       />
     </div>
   );

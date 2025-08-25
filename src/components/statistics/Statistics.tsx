@@ -30,11 +30,11 @@ export default function Statistics() {
   ];
 
   return (
-    <section className="w-full bg-white/30 backdrop-blur-[500px] dark:bg-[#1A1A1A] py-10 relative">
+    <section className="w-full bg-white/30 backdrop-blur-[500px] dark:bg-[#1A1A1A] py-10 relative min-h-[80vh] flex justify-center items-center overflow-hidden">
       <Image
         src={centerShape}
         alt="center shape"
-        className="absolute left-1/2 top-1/2 hidden dark:block -translate-x-1/2 -translate-y-1/2 -z-50"
+        className="absolute left-1/2 top-1/2 hidden dark:block -translate-x-1/2 -translate-y-1/4 -z-50"
       />
 
       <div className="container mx-auto px-4 xl:px-0">

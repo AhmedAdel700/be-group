@@ -59,7 +59,7 @@
   --black-tint-8: #EDEDED;
   --black-tint-10: #E8E8E8;
   --black-tint-15: #DDDDDD;
-  --black-tint-20: #D2D1D1;
+  --black-tint-20: #4A4A4A;
   --black-tint-30: #BBBBBB;
   --black-tint-40: #A5A5A5;
   --black-tint-50: #8E8E8E;
@@ -78,4 +78,5 @@
   /* Black (differences) */
   --black-tint-10: #4A4A4A;
   --black-tint-80: #FFFFFF;
+  --black-tint-20: #D2D1D1;
 }

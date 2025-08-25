@@ -84,7 +84,9 @@ export default function Footer() {
               { href: "/contact", label: "Contact Us" },
             ].map((l) => (
               <motion.div key={l.href} variants={linkVar}>
-                <Link href={l.href}>{l.label}</Link>
+                <Link className="text-black-tint-20" href={l.href}>
+                  {l.label}
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -95,7 +97,7 @@ export default function Footer() {
           className="flex flex-col items-start gap-8"
         >
           <h4 className="font-bold text-base text-main-text">Subscribe</h4>
-          <p className="font-bold text-base text-main-text">
+          <p className="font-bold text-base text-black-tint-20">
             Don’t miss our future updates! Get Subscribed Today!
           </p>
 
@@ -121,7 +123,7 @@ export default function Footer() {
 
       <motion.div
         variants={tailVar}
-        className="border-t border-black-tint-10 w-full h-[47px] text-black-tint-70 text-base font-normal leading-[100%] flex items-end"
+        className="border-t border-black-tint-10 w-full h-[60px] sm:h-[47px] text-black-tint-70 text-base font-normal flex items-end leading-normal"
       >
         All Rights Reserved to Robotic © Developed by BeTech 2025
       </motion.div>

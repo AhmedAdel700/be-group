@@ -40,6 +40,7 @@ export default function About() {
         lg:flex flex-col items-center justify-center
         gap-10 xl:gap-6 px-4 xl:px-0 container mx-auto py-10
         xl:flex-row xl:justify-between xl:items-center
+        min-h-[80vh]
       "
     >
       <motion.div

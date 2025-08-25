@@ -56,7 +56,7 @@ export default function Research() {
   ];
 
   return (
-    <section className="w-full bg-main-white dark:bg-[#1A1A1A] py-10">
+    <section className="w-full bg-main-white dark:bg-[#1A1A1A] py-10 min-h-[80vh] flex justify-center items-center">
       <div className="container mx-auto px-4 xl:px-0 flex flex-col gap-14">
         <motion.h2
           variants={headingVar}

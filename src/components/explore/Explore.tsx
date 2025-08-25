@@ -59,7 +59,7 @@ export default function Explore() {
   ];
 
   return (
-    <section className="w-full bg-main-white dark:bg-[#1A1A1A] py-10">
+    <section className="w-full bg-main-white dark:bg-[#1A1A1A] py-10 min-h-[80vh] flex justify-center items-center">
       <div className="container mx-auto px-4 xl:px-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -79,14 +79,14 @@ export default function Explore() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-10 w-full flex flex-wrap justify-center gap-8"
+          className="mt-10 w-full flex flex-wrap justify-between gap-8"
         >
           {cardData.map((card, index) => (
             <motion.div
               key={index}
               variants={fadeCardVar}
               className="
-                relative w-[350px] h-[420px]
+                relative w-full sm:w-[360px] h-[420px]
                 rounded-[8px]
                 border border-black-tint-90
                 bg-black-tint-2 dark:bg-[#232223]
