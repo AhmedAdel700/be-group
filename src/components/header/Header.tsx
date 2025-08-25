@@ -72,7 +72,7 @@ export default function Header() {
         variants={headerVar}
         initial="hidden"
         animate="show"
-        className="h-[72px] py-2 px-4 xl:px-0 container mx-auto flex justify-between items-center z-[100] relative"
+        className="h-[72px] py-2 px-4 lg:px-8 mx-auto flex justify-between items-center z-[100] relative"
       >
         <Image
           src={resolvedTheme === "dark" ? LogoDark : LogoLight}
@@ -83,20 +83,20 @@ export default function Header() {
         />
 
         <nav className="hidden lg:flex items-center gap-6">
-          <ul className="flex text-xs font-bold text-main-text">
-            <li className="h-full w-[85px]">
+          <ul className="flex text-xs font-bold text-main-text gap-[48px]">
+            <li className="h-full">
               <Link href="/">Home</Link>
             </li>
-            <li className="h-full w-[85px]">
+            <li className="h-full">
               <Link href="/courses">Courses</Link>
             </li>
-            <li className="h-full w-[85px]">
+            <li className="h-full">
               <Link href="/market">Market</Link>
             </li>
-            <li className="h-full w-[85px]">
+            <li className="h-full">
               <Link href="/club">Club</Link>
             </li>
-            <li className="h-full w-[85px]">
+            <li className="h-full">
               <Link href="/contact">Contact Us</Link>
             </li>
           </ul>

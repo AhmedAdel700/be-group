@@ -35,25 +35,25 @@ export default function Explore() {
     {
       title: "Educational Resources",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Access a rich library of tutorials, research papers, and practical guides designed to enhance your robotics knowledge at every level.",
       image: coin,
     },
     {
       title: "Networking Opportunities",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Connect with like-minded enthusiasts, industry professionals, and researchers through events, workshops, and our online community.",
       image: futuristic,
     },
     {
-      title: "Educational Resources",
+      title: "Hands-On Learning",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Engage in interactive projects, labs, and simulations that allow you to apply concepts in real-world robotics and AI scenarios.",
       image: book,
     },
     {
-      title: "Reliable certificate",
+      title: "Reliable Certification",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Earn recognized certificates that validate your skills and boost your career prospects in the fields of robotics and technology.",
       image: labtop,
     },
   ];
@@ -68,7 +68,7 @@ export default function Explore() {
           viewport={{ once: true, amount: 0.2 }}
           className="xl:max-w-[567px]"
         >
-          <h2 className="text-main-text font-normal text-[28px]">
+          <h2 className="text-main-text font-normal text-[28px] sm:text-center xl:text-start">
             Explore the World of Robotics{" "}
             <span className="!font-noe">Research & Development</span>
           </h2>
@@ -79,7 +79,7 @@ export default function Explore() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-10 w-full flex flex-wrap justify-between gap-8"
+          className="mt-10 w-full flex flex-wrap justify-center xl:justify-between gap-8"
         >
           {cardData.map((card, index) => (
             <motion.div

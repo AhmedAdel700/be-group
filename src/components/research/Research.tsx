@@ -38,25 +38,25 @@ export default function Research() {
     {
       title: "Artificial Intelligence (AI)",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Explore how AI is transforming robotics through machine learning, computer vision, and natural language processing to create smarter, more adaptive systems.",
       image: AI,
     },
     {
       title: "Development of Technology",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Stay updated with the latest advancements in robotics hardware, software, and automation technologies driving the future of industries and education.",
       image: Tech,
     },
     {
       title: "Technological Innovation",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nisl ultricies tortor tempor sagittis.",
+        "Discover breakthrough innovations in robotics research and product design that push the boundaries of what machines and humans can achieve together.",
       image: Car,
     },
   ];
 
   return (
-    <section className="w-full bg-main-white dark:bg-[#1A1A1A] py-10 min-h-[80vh] flex justify-center items-center">
+    <section className="w-full bg-main-white dark:bg-[#1A1A1A] py-10 min-h-[50vh] xl:min-h-[80vh] flex justify-center items-center">
       <div className="container mx-auto px-4 xl:px-0 flex flex-col gap-14">
         <motion.h2
           variants={headingVar}
@@ -79,7 +79,7 @@ export default function Research() {
             <motion.div
               key={index}
               variants={cardVar}
-              className="w-full h-fit flex flex-col gap-6 shadow-[0_2px_16px_2px_rgba(0,0,0,0.06)] rounded-2xl border border-main-white"
+              className="w-full min-h-fit flex flex-col gap-6 shadow-[0_2px_16px_2px_rgba(0,0,0,0.06)] rounded-2xl dark:border dark:border-main-white"
             >
               <motion.div variants={imageVar}>
                 <Image
@@ -100,7 +100,7 @@ export default function Research() {
                 </p>
 
                 <div className="text-main-primary flex items-center gap-2 font-semibold text-base">
-                  Learn more <ChevronRight color="#D0295D" size={20} />
+                  Learn more <ChevronRight color="#D0295D" size={17} />
                 </div>
               </div>
             </motion.div>

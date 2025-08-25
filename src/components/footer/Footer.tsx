@@ -55,7 +55,7 @@ export default function Footer() {
       viewport={{ once: true, amount: 0.15 }}
       className="px-4 xl:px-0 container mx-auto py-10 flex flex-col gap-[72px]"
     >
-      <div className="grid sm:grid-cols-2 xl:grid-cols-3 items-center gap-y-10">
+      <div className="flex justify-between items-center flex-wrap gap-y-10">
         <motion.div variants={colVar}>
           <Image
             src={!mounted || resolvedTheme === "light" ? LogoLight : LogoDark}

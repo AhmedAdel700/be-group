@@ -30,7 +30,7 @@ export default function Statistics() {
   ];
 
   return (
-    <section className="w-full bg-white/30 backdrop-blur-[500px] dark:bg-[#1A1A1A] py-10 relative min-h-[80vh] flex justify-center items-center overflow-hidden">
+    <section className="w-full bg-white/30 backdrop-blur-[500px] dark:bg-[#1A1A1A] py-10 relative min-h-[50vh] xl:min-h-[80vh] flex justify-center items-center overflow-hidden">
       <Image
         src={centerShape}
         alt="center shape"

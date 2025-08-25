@@ -37,8 +37,12 @@ export default function ThemeSwitch() {
   const iconClass = `cursor-pointer ${rotating ? "rotate-once" : ""}`;
 
   return resolvedTheme === "dark" ? (
-    <Sun onClick={handleClick} className={iconClass} size={20} />
+    <div className="ms-3 w-10 h-10 flex justify-center items-center rounded-full border border-[#343434] bg-[linear-gradient(125deg,#000,#000,#343434,#9A9A9A)] overflow-hidden">
+      <Sun onClick={handleClick} className={iconClass} size={20} />
+    </div>
   ) : (
-    <Moon onClick={handleClick} className={iconClass} size={20} />
+    <div className="w-10 h-10 flex justify-center items-center rounded-full border border-[#E8E8E8]">
+      <Moon onClick={handleClick} className={iconClass} size={20} />
+    </div>
   );
 }
