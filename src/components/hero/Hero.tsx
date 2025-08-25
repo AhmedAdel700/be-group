@@ -3,6 +3,7 @@
 import { Button } from "../ui/button";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import TextType from "../TextType";
 
 const SplineRobot = dynamic(() => import("../SplineRobot"), { ssr: false });
 
@@ -35,9 +36,15 @@ export default function Hero() {
         viewport={{ once: true, amount: 0.2 }}
         className="flex flex-col gap-6 order-2 xl:order-1 shrink-0 relative z-20"
       >
-        <h1 className="text-main-text !font-noe text-5xl max-w-[500px] leading-[64px]">
-          Where Technology Meets Imagination
-        </h1>
+        <TextType
+          text="Where Technology Meets Imagination"
+          as="h1"
+          className="text-main-text !font-noe text-5xl max-w-[500px] leading-[64px] h-[128px]"
+          typingSpeed={75}
+          showCursor={true}
+          cursorCharacter="|"
+          loop={true}
+        />
 
         <p className="text-black-tint-80 dark:text-black-tint-20 font-medium italic text-base max-w-[650px]">
           Immerse yourself in a curated collection of cutting-edge robots that
