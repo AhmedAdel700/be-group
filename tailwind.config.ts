@@ -118,6 +118,11 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      fontFamily: {
+        objektiv: "var(--en-font-family)",
+        tajawal: "var(--ar-font-family)",
+        noe: "var(--noe-font-family)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

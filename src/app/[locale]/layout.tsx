@@ -1,15 +1,73 @@
-import { DM_Sans, Tajawal } from "next/font/google";
+import { Tajawal } from "next/font/google";
+import localFont from "next/font/local";
 import type React from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import "../styles/globals.css";
 import { ThemeProviders } from "@/app/theme/ThemeProvidors";
+import "../styles/globals.css";
 
-const DMSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+const objektiv = localFont({
+  src: [
+    {
+      path: "../fonts/ObjektivMk3_Trial_Hair.ttf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_Th.ttf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_Lt.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_Rg.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_Md.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_SBd.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_Bd.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_XBd.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../fonts/ObjektivMk3_Trial_Blk.ttf",
+      weight: "900",
+      style: "normal",
+    },
+  ],
   variable: "--en-font-family",
+  display: "swap",
+});
+
+const noeDisplay = localFont({
+  src: [
+    {
+      path: "../fonts/fonnts.com-NoeDisplay-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--noe-font-family",
   display: "swap",
 });
 
@@ -38,7 +96,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${locale === "ar" ? Tajwal.variable : DMSans.variable}`}
+      className={`${locale === "ar" ? Tajwal.variable : objektiv.variable} ${noeDisplay.variable}`}
       suppressHydrationWarning
     >
       <body>

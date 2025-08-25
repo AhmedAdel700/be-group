@@ -15,11 +15,11 @@
 }
 
 html[lang='ar'] * {
-  font-family: var(--ar-font-family), sans-serif !important;
+  font-family: var(--ar-font-family), sans-serif;
 }
 
 html[lang='en'] * {
-  font-family: var(--en-font-family), sans-serif !important;
+  font-family: var(--en-font-family), sans-serif;
 }
 
 ::-webkit-scrollbar {
