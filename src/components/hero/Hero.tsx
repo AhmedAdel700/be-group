@@ -15,7 +15,7 @@ export default function Hero() {
         gap-10 px-4 lg:px-10 py-10 container mx-auto
         bg-gradient-to-r from-[#F4F4F4] to-[#FDFDFD]
         dark:bg-gradient-to-r dark:from-[#1A1A1A] dark:to-[#1A1A1A]
-        border border-main-white rounded-2xl mb-4
+        border border-main-white rounded-2xl mb-4 relative
       "
     >
       <motion.div
@@ -29,16 +29,16 @@ export default function Hero() {
           Where Technology Meets Imagination
         </h1>
 
-        <p className="text-main-text font-medium text-base max-w-[650px]">
+        <p className="text-black-tint-80 dark:text-black-tint-20 font-medium italic text-base max-w-[650px]">
           Immerse yourself in a curated collection of cutting-edge robots that
           push the limits of your imagination.
         </p>
 
-        <div className="flex items-center gap-2">
-          <Button className="!bg-main-primary text-main-white font-semibold text-base w-[108px] h-[38px] rounded-[8px]">
+        <div className="flex items-center gap-2 relative z-[60]">
+          <Button className="!bg-main-primary text-white font-semibold text-base w-[108px] h-[38px] rounded-[8px]">
             About Us
           </Button>
-          <Button className="!bg-main-secondary text-main-white font-semibold text-base w-[108px] h-[38px] rounded-[8px]">
+          <Button className="!bg-main-secondary text-white font-semibold text-base w-[108px] h-[38px] rounded-[8px]">
             Contact Us
           </Button>
         </div>
@@ -51,7 +51,7 @@ export default function Hero() {
         viewport={{ once: true, amount: 0.2 }}
         className="w-full h-full rounded-xl overflow-hidden order-1 xl:order-2"
       >
-        <SplineRobot />
+        {/* <SplineRobot /> */}
       </motion.div>
     </section>
   );

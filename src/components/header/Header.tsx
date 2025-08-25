@@ -72,7 +72,7 @@ export default function Header() {
         variants={headerVar}
         initial="hidden"
         animate="show"
-        className="h-[72px] py-2 px-4 xl:px-0 container mx-auto flex justify-between items-center"
+        className="h-[72px] py-2 px-4 xl:px-0 container mx-auto flex justify-between items-center z-[100] relative"
       >
         <Image
           src={resolvedTheme === "dark" ? LogoDark : LogoLight}
@@ -124,7 +124,7 @@ export default function Header() {
             aria-modal="true"
             role="dialog"
             aria-label="Mobile menu"
-            className="fixed inset-0 z-50 flex items-start justify-center top-16"
+            className="fixed inset-0 z-[100] flex items-start justify-center top-16"
           >
             <motion.div
               variants={overlayVar}

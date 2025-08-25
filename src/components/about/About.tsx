@@ -57,7 +57,7 @@ export default function About() {
         </motion.h2>
 
         <motion.p
-          className="font-medium text-base text-main-text"
+          className="font-medium text-base text-black-tint-80"
           variants={fadeVar}
         >
           Robotics.sa is more than just a platform; it’s a community-driven hub
@@ -68,7 +68,7 @@ export default function About() {
         </motion.p>
 
         <motion.p
-          className="font-medium text-base text-main-text"
+          className="font-medium text-base text-black-tint-80"
           variants={fadeVar}
         >
           Embark on a journey with us as we explore the limitless possibilities

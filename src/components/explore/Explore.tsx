@@ -88,8 +88,8 @@ export default function Explore() {
               className="
                 relative w-[350px] h-[420px]
                 rounded-[8px]
-                border border-black-tint-90 dark:border-black-tint-2
-                bg-black-tint-2 dark:bg-black-tint-90
+                border border-black-tint-90
+                bg-black-tint-2 dark:bg-[#232223]
                 overflow-hidden transition hover:shadow-lg
                 flex flex-col justify-start cursor-pointer
               "

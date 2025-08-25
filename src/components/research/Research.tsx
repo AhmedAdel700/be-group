@@ -79,7 +79,7 @@ export default function Research() {
             <motion.div
               key={index}
               variants={cardVar}
-              className="w-full h-fit flex flex-col gap-6 shadow-[0_2px_16px_2px_rgba(0,0,0,0.06)] rounded-2xl"
+              className="w-full h-fit flex flex-col gap-6 shadow-[0_2px_16px_2px_rgba(0,0,0,0.06)] rounded-2xl border border-main-white"
             >
               <motion.div variants={imageVar}>
                 <Image
@@ -95,7 +95,7 @@ export default function Research() {
                 <h3 className="text-main-text font-bold text-lg">
                   {card.title}
                 </h3>
-                <p className="text-main-text text-base font-normal">
+                <p className="text-black-tint-80 text-base font-normal">
                   {card.description}
                 </p>
 
