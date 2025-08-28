@@ -1,207 +1,293 @@
 "use client";
 
-import Image from "next/image";
-import ThemeSwitch from "../themeSwitch/ThemeSwitch";
-import LogoLight from "@/app/assets/logoLight.svg";
-import LogoDark from "@/app/assets/logoDark.svg";
-import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@/navigations";
-import menuDark from "@/app/assets/menuDark.svg";
-import menuLight from "@/app/assets/menuLight.svg";
-import { X } from "lucide-react";
+import clsx from "clsx";
+import { Link, usePathname, useRouter } from "@/navigations";
+import Image from "next/image";
+import logo from "@/app/assets/20879.webp";
+import { ChevronDown, Globe } from "lucide-react";
+import { useLocale } from "next-intl";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
-const headerVar: Variants = {
-  hidden: { opacity: 0, y: -8 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
+const shellVar: Variants = {
+  hidden: { y: -14, opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: easeOut } },
 };
 
-const overlayVar: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.2 } },
-  exit: { opacity: 0, transition: { duration: 0.2 } },
+const navVar: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
 };
 
-const panelVar: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: -8 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.25, ease: easeOut },
-  },
-  exit: { opacity: 0, scale: 0.98, y: -8, transition: { duration: 0.2 } },
+const linkVar: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
 };
+
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Header() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [open, setOpen] = useState(false);
-  const panelRef = useRef<HTMLDivElement | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const isAR = locale === "ar";
+  const langLabel = isAR ? "AR" : "EN";
 
+  const langRef = useRef<HTMLDivElement>(null);
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null); // ✅ added
+  const ticking = useRef(false);
+  const THRESHOLD = 12;
+
+  // Scroll effect
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > THRESHOLD);
+        ticking.current = false;
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
+  // Close popovers on outside click
   useEffect(() => {
-    if (open) panelRef.current?.focus();
-  }, [open]);
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (langRef.current && !langRef.current.contains(target))
+        setLangOpen(false);
+      if (
+        mobileRef.current &&
+        !mobileRef.current.contains(target) &&
+        toggleRef.current &&
+        !toggleRef.current.contains(target) // ✅ ignore clicks on the toggle button
+      ) {
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-  if (!mounted) {
-    return (
-      <header className="h-[72px] py-2 px-16 flex justify-between items-center">
-        <Image src={LogoLight} alt="Robotics Logo" width={90} height={56} />
-        <ThemeSwitch />
-      </header>
-    );
-  }
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
-  const closeMenu = () => setOpen(false);
+  // Switch locale, preserve path
+  const switchLocale = (target: "en" | "ar") => {
+    if (target === locale) return setLangOpen(false);
+    router.replace(pathname, { locale: target });
+    setLangOpen(false);
+  };
 
   return (
-    <>
-      <motion.header
-        variants={headerVar}
+    <motion.header
+      variants={shellVar}
+      initial="hidden"
+      animate="show"
+      className={clsx(
+        "fixed top-0 left-0 w-full z-[100]",
+        "flex items-center justify-between",
+        "px-6 py-4 transition-[padding,background,backdrop-filter,border-color,box-shadow] duration-500",
+        scrolled
+          ? "backdrop-blur-md bg-black/35 border-b border-white/10 shadow-[0_6px_24px_-10px_rgba(0,0,0,0.25)]"
+          : "bg-transparent"
+      )}
+    >
+      {/* Brand */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: easeOut, delay: 0.05 }}
+        className="flex items-center gap-3 cursor-pointer"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <Image src={logo} alt="Be Group Logo" width={90} height={90} priority />
+      </motion.div>
+
+      {/* Desktop nav (xl and up) */}
+      <motion.nav
+        variants={navVar}
         initial="hidden"
         animate="show"
-        className="h-[72px] py-2 px-4 lg:px-8 mx-auto flex justify-between items-center z-[100] relative"
+        className="hidden xl:flex items-center gap-8 uppercase tracking-wide text-main-white"
       >
-        <Image
-          src={resolvedTheme === "dark" ? LogoDark : LogoLight}
-          alt="Robotics Logo"
-          width={90}
-          height={56}
-          priority
-        />
-
-        <nav className="hidden lg:flex items-center gap-6">
-          <ul className="flex text-xs font-bold text-main-text gap-[48px]">
-            <li className="h-full">
-              <Link href="/">Home</Link>
-            </li>
-            <li className="h-full">
-              <Link href="/courses">Courses</Link>
-            </li>
-            <li className="h-full">
-              <Link href="/market">Market</Link>
-            </li>
-            <li className="h-full">
-              <Link href="/club">Club</Link>
-            </li>
-            <li className="h-full">
-              <Link href="/contact">Contact Us</Link>
-            </li>
-          </ul>
-          <ThemeSwitch />
-        </nav>
-
-        <button
-          type="button"
-          aria-label="Open menu"
-          onClick={() => setOpen(true)}
-          className="lg:hidden inline-flex items-center justify-center w-10 h-10"
-        >
-          <Image
-            src={resolvedTheme === "dark" ? menuDark : menuLight}
-            alt="Menu"
-            width={24}
-            height={24}
-          />
-        </button>
-      </motion.header>
-
-      <AnimatePresence>
-        {open && (
-          <div
-            aria-modal="true"
-            role="dialog"
-            aria-label="Mobile menu"
-            className="fixed inset-0 z-[100] flex items-start justify-center top-16"
-          >
-            <motion.div
-              variants={overlayVar}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="absolute inset-0 bg-black/50"
-              onClick={closeMenu}
-            />
-
-            <motion.div
-              ref={panelRef}
-              tabIndex={-1}
-              variants={panelVar}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="
-                relative z-10 w-[92%] max-w-sm
-                rounded-2xl bg-black-tint-2 dark:bg-black-tint-10 text-main-text
-                outline-none p-4 origin-top right-0
-              "
-            >
-              <button
-                onClick={closeMenu}
-                aria-label="Close menu"
-                className="absolute top-3 right-3 inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-black-tint-5 dark:hover:bg-black-tint-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-main-primary"
+        {LINKS.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <motion.div key={item.href} variants={linkVar}>
+              <Link
+                href={item.href}
+                className={clsx(
+                  "group relative text-sm py-1 transition-colors",
+                  isActive && "text-main-primary"
+                )}
               >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="flex flex-col gap-4">
-                <Image
-                  src={resolvedTheme === "dark" ? LogoDark : LogoLight}
-                  alt="Robotics Logo"
-                  width={90}
-                  height={56}
+                <span className="transition-opacity duration-300 group-hover:opacity-90">
+                  {item.label}
+                </span>
+                {/* underline */}
+                <span
+                  className={clsx(
+                    "pointer-events-none absolute -bottom-1 left-0 h-[1.5px] transition-all duration-400 bg-current",
+                    isActive
+                      ? "w-full opacity-80"
+                      : "w-0 opacity-60 group-hover:w-full"
+                  )}
                 />
-
-                <nav className="mt-2">
-                  <ul className="flex flex-col gap-2 text-sm font-bold">
-                    {[
-                      { href: "/", label: "Home" },
-                      { href: "/courses", label: "Courses" },
-                      { href: "/market", label: "Market" },
-                      { href: "/club", label: "Club" },
-                      { href: "/contact", label: "Contact Us" },
-                    ].map((item) => (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          onClick={closeMenu}
-                          className="
-                            block rounded-xl
-                            px-4 py-3
-                            bg-transparent
-                            hover:bg-black-tint-5 dark:hover:bg-black-tint-20
-                            focus:outline-none focus-visible:ring-2 focus-visible:ring-main-primary
-                            transition
-                          "
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-
-                <div className="pt-2 border-t border-black-tint-10 dark:border-black-tint-20 flex items-center justify-between">
-                  <span className="text-xs opacity-80">Theme</span>
-                  <ThemeSwitch />
-                </div>
-              </div>
+              </Link>
             </motion.div>
-          </div>
+          );
+        })}
+      </motion.nav>
+
+      <div className="flex items-center gap-2">
+        {/* Mobile menu toggle (lg & smaller => show; xl hides) */}
+        <motion.button
+          ref={toggleRef} // ✅ added
+          onClick={() => setMobileOpen((v) => !v)}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Toggle menu"
+          className="xl:hidden relative flex flex-col items-center justify-center w-8 h-8"
+        >
+          {/* Top line */}
+          <motion.span
+            animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.3, ease: easeOut }}
+            className="block w-6 h-[2px] rounded bg-main-primary"
+          />
+          {/* Middle line (hidden when open) */}
+          <motion.span
+            animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.3, ease: easeOut }}
+            className="block w-6 h-[2px] rounded bg-main-primary my-1"
+          />
+          {/* Bottom line */}
+          <motion.span
+            animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.3, ease: easeOut }}
+            className="block w-6 h-[2px] rounded bg-main-primary"
+          />
+        </motion.button>
+
+        {/* Language dropdown */}
+        <div className="relative" ref={langRef}>
+          <motion.button
+            onClick={() => setLangOpen((v) => !v)}
+            whileTap={{ scale: 0.96 }}
+            className="flex items-center gap-1 text-sm uppercase tracking-wide px-2 py-1 rounded text-main-white hover:bg-white/10 transition"
+            aria-haspopup="menu"
+            aria-expanded={langOpen}
+          >
+            {langLabel}
+            <ChevronDown
+              className={clsx(
+                "h-4 w-4 transition-transform duration-300 text-main-secondary",
+                langOpen ? "rotate-180" : "rotate-0"
+              )}
+            />
+          </motion.button>
+
+          <AnimatePresence>
+            {langOpen && (
+              <motion.div
+                key="lang-menu"
+                role="menu"
+                initial={{ opacity: 0, scale: 0.96, y: 6 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 6 }}
+                transition={{ duration: 0.18, ease: easeOut }}
+                className={clsx(
+                  "absolute top-full mt-2 w-28 rounded-md shadow-lg border border-white/10",
+                  "bg-black/70 backdrop-blur-md text-main-white overflow-hidden",
+                  locale === "en" ? "right-0" : "left-0"
+                )}
+              >
+                <motion.button
+                  role="menuitem"
+                  onClick={() => switchLocale("en")}
+                  className={clsx(
+                    "w-full text-start px-3 py-2 text-sm hover:bg-white/15 flex items-center justify-between",
+                    locale === "en" && "bg-white/10"
+                  )}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  English
+                  <Globe size={16} className="text-main-secondary" />
+                </motion.button>
+
+                <motion.button
+                  role="menuitem"
+                  onClick={() => switchLocale("ar")}
+                  className={clsx(
+                    "w-full text-start px-3 py-2 text-sm hover:bg-white/15 flex items-center justify-between",
+                    locale === "ar" && "bg-white/10"
+                  )}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Arabic
+                  <Globe size={16} className="text-main-secondary" />
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Mobile menu panel (lg & smaller) */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="mobile-menu"
+            ref={mobileRef}
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: easeOut }}
+            className={clsx(
+              "xl:hidden absolute top-full inset-x-4 mt-2 rounded-md shadow-lg border border-white/10",
+              "bg-black/70 backdrop-blur-md text-main-white overflow-hidden"
+            )}
+          >
+            <nav className="flex flex-col">
+              {LINKS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={clsx(
+                      "px-4 py-3 text-sm uppercase tracking-wide transition text-start border-b border-white/10 flex items-center justify-between",
+                      isActive ? "bg-white/10" : "hover:bg-white/15"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </motion.header>
   );
 }

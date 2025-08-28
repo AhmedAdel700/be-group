@@ -1,132 +1,252 @@
 "use client";
 
-import { Link } from "@/navigations";
 import Image from "next/image";
-import LogoLight from "@/app/assets/logoLight.svg";
-import LogoDark from "@/app/assets/logoDark.svg";
-import Sent from "@/app/assets/sent.svg";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { motion, type Variants } from "motion/react";
+import { Link } from "@/navigations";
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+import clsx from "clsx";
+import { motion } from "motion/react";
 
-const easeOut = [0.22, 1, 0.36, 1] as const;
+import logo from "@/app/assets/20879.webp";
+import partner1 from "@/app/assets/1.png";
+import partner2 from "@/app/assets/02.png";
+import partner3 from "@/app/assets/3.png";
 
-const footerVar: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.16 } },
-};
-
-const colVar: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easeOut } },
-};
-
-const linksVar: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
-};
-
-const linkVar: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
-};
-
-const tailVar: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: easeOut, delay: 0.1 },
-  },
+const SocialIcon: React.FC<{
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}> = ({ href, label, children }) => {
+  return (
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className={clsx(
+        "group relative w-12 h-12 rounded-full flex items-center justify-center",
+        "border border-white/80 text-white overflow-hidden",
+        "transition-transform hover:scale-[1.02] active:scale-[0.98]"
+      )}
+    >
+      {/* White background that expands on hover */}
+      <span
+        className={clsx(
+          "absolute inset-0 rounded-full bg-white",
+          "scale-0 group-hover:scale-100 transition-transform duration-500"
+        )}
+      />
+      {/* Icon */}
+      <span
+        className={clsx(
+          "relative z-[1] transition-colors duration-300 group-hover:text-black"
+        )}
+      >
+        {children}
+      </span>
+    </Link>
+  );
 };
 
 export default function Footer() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   return (
-    <motion.footer
-      variants={footerVar}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
-      className="px-4 xl:px-0 container mx-auto py-10 flex flex-col gap-[72px]"
-    >
-      <div className="flex justify-between items-center flex-wrap gap-y-10">
-        <motion.div variants={colVar}>
-          <Image
-            src={!mounted || resolvedTheme === "light" ? LogoLight : LogoDark}
-            alt="Robotics Logo"
-            width={170}
-            height={106}
-            priority
-          />
-        </motion.div>
+    <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-8 py-6">
+      {/* Logo */}
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="flex justify-center"
+      >
+        <Image
+          src={logo}
+          alt="Be Group Logo"
+          width={150}
+          height={150}
+          className="rounded-md"
+          priority
+        />
+      </motion.div>
 
-        <motion.div
-          variants={colVar}
-          className="flex flex-col items-start gap-8"
-        >
-          <h4 className="font-bold text-base text-main-text">Quick Links</h4>
+      {/* Contact */}
+      <motion.div
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="flex gap-4 flex-col lg:flex-row items-center text-center"
+      >
+        <div className="flex items-center gap-3">
+          <Mail size={18} className="text-main-secondary" />
+          <Link href="mailto:info@begroup.com" className="hover:underline">
+            info@begroup.com
+          </Link>
+        </div>
+        <div className="flex items-center gap-3">
+          <Phone size={18} className="text-main-secondary" />
+          <Link href="tel:+201012345678">+20 101 234 5678</Link>
+        </div>
+        <div className="flex items-start gap-3 justify-center">
+          <MapPin size={18} className="text-main-secondary" />
+          <span>Office 12, Fifth Settlement, New Cairo, Egypt</span>
+        </div>
+      </motion.div>
+
+      {/* Social */}
+      <motion.div
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col gap-4 items-center"
+      >
+        <div className="text-white/90 font-medium">Follow us</div>
+        <div className="flex items-center gap-3">
+          {/* Wrap each icon with motion.div for stagger */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.0 }}
+          >
+            <SocialIcon href="https://youtube.com" label="YouTube">
+              <Youtube size={22} />
+            </SocialIcon>
+          </motion.div>
 
           <motion.div
-            variants={linksVar}
-            className="grid grid-cols-3 gap-8 text-main-text text-base"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.06 }}
           >
-            {[
-              { href: "/", label: "Home" },
-              { href: "/courses", label: "Courses" },
-              { href: "/about", label: "About Us" },
-              { href: "/market", label: "Market" },
-              { href: "/contact", label: "Contact Us" },
-            ].map((l) => (
-              <motion.div key={l.href} variants={linkVar}>
-                <Link className="text-black-tint-20" href={l.href}>
-                  {l.label}
-                </Link>
-              </motion.div>
-            ))}
+            <SocialIcon href="https://facebook.com" label="Facebook">
+              <Facebook size={22} />
+            </SocialIcon>
           </motion.div>
-        </motion.div>
 
-        <motion.div
-          variants={colVar}
-          className="flex flex-col items-start gap-8"
-        >
-          <h4 className="font-bold text-base text-main-text">Subscribe</h4>
-          <p className="font-bold text-base text-black-tint-20">
-            Don’t miss our future updates! Get Subscribed Today!
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.12 }}
+          >
+            <SocialIcon href="https://linkedin.com" label="LinkedIn">
+              <Linkedin size={22} />
+            </SocialIcon>
+          </motion.div>
 
-          <div className="flex items-center gap-2 w-full">
-            <Input
-              type="email"
-              placeholder="example@gmail.com"
-              className="w-[90%] xl:w-[385px] h-[40px] border border-black-tint-10 rounded-[8px] bg-black-tint-3 text-main-text placeholder:text-black-tint-50"
-            />
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.18 }}
+          >
+            <SocialIcon href="https://twitter.com" label="Twitter">
+              <Twitter size={22} />
+            </SocialIcon>
+          </motion.div>
 
-            <Button className="!bg-main-primary text-main-white w-10 h-10 rounded-[8px] !p-0">
-              <Image
-                src={Sent}
-                alt="Sent"
-                width={24}
-                height={24}
-                className="w-6 h-6"
-              />
-            </Button>
-          </div>
-        </motion.div>
-      </div>
-
-      <motion.div
-        variants={tailVar}
-        className="border-t border-black-tint-10 w-full h-[60px] sm:h-[47px] text-black-tint-70 text-base font-normal flex items-end leading-normal"
-      >
-        All Rights Reserved to Robotic © Developed by BeTech 2025
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.24 }}
+          >
+            <SocialIcon href="https://instagram.com" label="Instagram">
+              <Instagram size={22} />
+            </SocialIcon>
+          </motion.div>
+        </div>
       </motion.div>
-    </motion.footer>
+
+      {/* Partners */}
+      <motion.div
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col gap-4 items-center"
+      >
+        <div className="text-white/90 font-medium">Our Partners</div>
+        <div className="flex items-center justify-center gap-10 flex-wrap">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45 }}
+          >
+            <Image
+              src={partner1}
+              alt="Partner 1"
+              width={100}
+              height={40}
+              className="object-cover"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.08 }}
+          >
+            <Image
+              src={partner3}
+              alt="Partner 3"
+              width={100}
+              height={40}
+              className="object-cover"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: 0.16 }}
+          >
+            <Image
+              src={partner2}
+              alt="Partner 2"
+              width={60}
+              height={40}
+              className="object-cover"
+            />
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Bottom Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t border-white/10 pt-6"
+      >
+        <div className="text-white/70 text-sm text-center">
+          Made By <span className="text-main-primary">Be Group</span> © 2025 All
+          rights reserved
+        </div>
+        <div className="flex items-center gap-6 text-white/60 text-sm">
+          <Link href="#" className="hover:underline">
+            Privacy Policy
+          </Link>
+          <Link href="#" className="hover:underline">
+            Terms
+          </Link>
+        </div>
+      </motion.div>
+    </footer>
   );
 }

@@ -4,8 +4,9 @@ import type React from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { ThemeProviders } from "@/app/theme/ThemeProvidors";
 import "../styles/globals.css";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
 
 const objektiv = localFont({
   src: [
@@ -79,8 +80,8 @@ const Tajwal = Tajawal({
 });
 
 export const metadata = {
-  title: "Robotics",
-  description: "Robotics Landing Page",
+  title: "Be Group - Digital Marketing Agency",
+  description: "We Provide Digital Marketing Solutions For Your Business",
 };
 
 export default async function LocaleLayout({
@@ -96,15 +97,17 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${locale === "ar" ? Tajwal.variable : objektiv.variable} ${noeDisplay.variable}`}
+      className={`${locale === "ar" ? Tajwal.variable : objektiv.variable} ${
+        noeDisplay.variable
+      }`}
       suppressHydrationWarning
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProviders>
-            {children}
-            <Toaster position="top-center" />
-          </ThemeProviders>
+          <Header />
+          {children}
+          <Footer />
+          <Toaster position="top-center" />
         </NextIntlClientProvider>
       </body>
     </html>

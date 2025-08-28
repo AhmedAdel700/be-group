@@ -2,23 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'variables.css';
+@import "variables.css";
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    background: var(--body-bg);
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html[lang='ar'] * {
+html[lang="ar"] * {
   font-family: var(--ar-font-family), sans-serif;
 }
 
-html[lang='en'] * {
+html[lang="en"] * {
   font-family: var(--en-font-family), sans-serif;
 }
 
@@ -27,31 +23,45 @@ html[lang='en'] * {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--main-colors-text-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--main-colors-primary);
+  background: var(--main-colors-secondary);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--p-shades-shade-90);
+  background: var(--main-colors-primary);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-@keyframes spin-once {
-  from {
-    transform: rotate(0deg);
+@keyframes growLine {
+  0% {
+    transform: scaleX(0);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: scaleX(1);
   }
 }
 
-.rotate-once {
-  animation: spin-once 0.2s linear forwards;
+.grow-line {
+  height: 2px;
+  background-color: var(--main-colors-white);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: growLine 2s ease-out forwards;
+  animation-delay: 1.5s;
+}
+
+.glass {
+  background: rgba(61, 57, 57, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 0 !important;
 }

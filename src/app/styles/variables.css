@@ -1,82 +1,10 @@
 :root {
   /* Main Colors */
-  --main-colors-primary: #D0295D;
-  --main-colors-secondary: #DFBC28;
-  --main-colors-black: #000000;
+  --main-colors-primary: #F18A1D;
+  --main-colors-secondary: #F18A1D;
+  --main-colors-black: #141415;
+  --main-colors-black-secondary: #16161B;
   --main-colors-white: #ffffff;
   --main-colors-text: #242424;
-  --body-bg: #F8F8F8;
-
-  /* P Tints */
-  --p-tints-tint-2: #D0295D05;
-  --p-tints-tint-3: #D0295D08;
-  --p-tints-tint-5: #D0295D0D;
-  --p-tints-tint-10: #D0295D1A;
-  --p-tints-tint-15: #D0295D26;
-  --p-tints-tint-20: #D0295D33;
-  --p-tints-tint-30: #D0295D4D;
-  --p-tints-tint-40: #D0295D66;
-  --p-tints-tint-50: #D0295D80;
-  --p-tints-tint-60: #D0295D99;
-  --p-tints-tint-70: #D0295DB2;
-  --p-tints-tint-80: #D0295DCC;
-  --p-tints-tint-90: #D0295DE5;
-
-  /* P Tints 2 */
-  --p2-tints-tint-2: #DFBC2805;
-  --p2-tints-tint-3: #DFBC2808;
-  --p2-tints-tint-5: #DFBC280D;
-  --p2-tints-tint-10: #DFBC281A;
-  --p2-tints-tint-15: #DFBC2826;
-  --p2-tints-tint-20: #DFBC2833;
-  --p2-tints-tint-30: #DFBC284D;
-  --p2-tints-tint-40: #DFBC2866;
-  --p2-tints-tint-50: #DFBC2880;
-  --p2-tints-tint-60: #DFBC2899;
-  --p2-tints-tint-70: #DFBC28B2;
-  --p2-tints-tint-80: #DFBC28CC;
-  --p2-tints-tint-90: #DFBC28E5;
-
-  /* P Shades */
-  --p-shades-shade-30: #D0295D4D;
-  --p-shades-shade-50: #D0295D80;
-  --p-shades-shade-60: #D0295D99;
-  --p-shades-shade-70: #D0295DB2;
-  --p-shades-shade-80: #D0295DCC;
-  --p-shades-shade-90: #D0295DE5;
-
-  /* S Tints */
-  --s-tints-tint-50: #DFBC2880;
-  --s-tints-tint-60: #DFBC2899;
-  --s-tints-tint-70: #DFBC28B2;
-  --s-tints-tint-80: #DFBC28CC;
-  --s-tints-tint-90: #DFBC28E5;
-
-  /* Black */
-  --black-tint-2: #FAFAFA;
-  --black-tint-3: #F8F8F8;
-  --black-tint-5: #F4F3F3;
-  --black-tint-8: #EDEDED;
-  --black-tint-10: #E8E8E8;
-  --black-tint-15: #DDDDDD;
-  --black-tint-20: #4A4A4A;
-  --black-tint-30: #BBBBBB;
-  --black-tint-40: #A5A5A5;
-  --black-tint-50: #8E8E8E;
-  --black-tint-60: #777777;
-  --black-tint-70: #616161;
-  --black-tint-80: #4A4A4A;
-  --black-tint-90: #343434;
-}
-
-.dark {
-  /* Overrides only */
-  --main-colors-white: #363636;
-  --main-colors-text: #ffffff;
-  --body-bg: linear-gradient(to right, #1C1C1C, #0C0C0C);
-
-  /* Black (differences) */
-  --black-tint-10: #4A4A4A;
-  --black-tint-80: #FFFFFF;
-  --black-tint-20: #D2D1D1;
+  --main-colors-text-secondary: #6E717E;
 }
