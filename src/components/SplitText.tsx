@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// app/components/SplitText.tsx
 /* eslint-disable @typescript-eslint/no-unused-vars */
-'use client';
+"use client";
 
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
@@ -23,6 +25,9 @@ export interface SplitTextProps {
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
   textAlign?: React.CSSProperties["textAlign"];
   onLetterAnimationComplete?: () => void;
+
+  /** keeps text invisible until the GSAP tween actually starts */
+  initialHidden?: boolean;
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
@@ -39,18 +44,17 @@ const SplitText: React.FC<SplitTextProps> = ({
   tag = "p",
   textAlign = "center",
   onLetterAnimationComplete,
+  initialHidden = true,
 }) => {
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const animationCompletedRef = useRef(false);
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    if (document.fonts.status === "loaded") {
+    if ((document as any).fonts?.status === "loaded") {
       setFontsLoaded(true);
     } else {
-      document.fonts.ready.then(() => {
-        setFontsLoaded(true);
-      });
+      (document as any).fonts?.ready.then(() => setFontsLoaded(true));
     }
   }, []);
 
@@ -61,13 +65,18 @@ const SplitText: React.FC<SplitTextProps> = ({
         _rbsplitInstance?: GSAPSplitText;
       };
 
+      // Clean any previous split
       if (el._rbsplitInstance) {
         try {
           el._rbsplitInstance.revert();
-        } catch (_) {}
+        } catch {}
         el._rbsplitInstance = undefined;
       }
 
+      // Prevent flash of unstyled text; also set inline in render for first paint
+      if (initialHidden) el.style.visibility = "hidden";
+
+      // Compute ScrollTrigger start
       const startPct = (1 - threshold) * 100;
       const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
       const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
@@ -79,19 +88,18 @@ const SplitText: React.FC<SplitTextProps> = ({
           ? `-=${Math.abs(marginValue)}${marginUnit}`
           : `+=${marginValue}${marginUnit}`;
       const start = `top ${startPct}%${sign}`;
+
       let targets: Element[] = [];
       const assignTargets = (self: GSAPSplitText) => {
-        if (
-          splitType.includes("chars") &&
-          (self as GSAPSplitText).chars?.length
-        )
-          targets = (self as GSAPSplitText).chars;
+        if (splitType.includes("chars") && self.chars?.length)
+          targets = self.chars;
         if (!targets.length && splitType.includes("words") && self.words.length)
           targets = self.words;
         if (!targets.length && splitType.includes("lines") && self.lines.length)
           targets = self.lines;
         if (!targets.length) targets = self.chars || self.words || self.lines;
       };
+
       const splitInstance = new GSAPSplitText(el, {
         type: splitType,
         smartWrap: true,
@@ -102,9 +110,19 @@ const SplitText: React.FC<SplitTextProps> = ({
         reduceWhiteSpace: false,
         onSplit: (self: GSAPSplitText) => {
           assignTargets(self);
+
+          // Ensure children start in "from" state before revealing parent
+          if (initialHidden) {
+            gsap.set(targets, {
+              ...from,
+              force3D: true,
+              willChange: "transform, opacity",
+            });
+          }
+
           return gsap.fromTo(
             targets,
-            { ...from },
+            { ...from, force3D: true, willChange: "transform, opacity" },
             {
               ...to,
               duration,
@@ -116,26 +134,36 @@ const SplitText: React.FC<SplitTextProps> = ({
                 once: true,
                 fastScrollEnd: true,
                 anticipatePin: 0.4,
+                onEnter: () => {
+                  if (initialHidden) el.style.visibility = "visible";
+                },
+                onEnterBack: () => {
+                  if (initialHidden) el.style.visibility = "visible";
+                },
+              },
+              onStart: () => {
+                if (initialHidden) el.style.visibility = "visible";
               },
               onComplete: () => {
                 animationCompletedRef.current = true;
                 onLetterAnimationComplete?.();
               },
-              willChange: "transform, opacity",
-              force3D: true,
             }
           );
         },
       });
+
       el._rbsplitInstance = splitInstance;
+
       return () => {
         ScrollTrigger.getAll().forEach((st) => {
           if (st.trigger === el) st.kill();
         });
         try {
           splitInstance.revert();
-        } catch (_) {}
+        } catch {}
         el._rbsplitInstance = undefined;
+        if (initialHidden) el.style.visibility = "";
       };
     },
     {
@@ -151,6 +179,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         rootMargin,
         fontsLoaded,
         onLetterAnimationComplete,
+        initialHidden,
       ],
       scope: ref,
     }
@@ -161,48 +190,56 @@ const SplitText: React.FC<SplitTextProps> = ({
       textAlign,
       wordWrap: "break-word",
       willChange: "transform, opacity",
+      visibility: initialHidden ? "hidden" : undefined,
     };
     const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
+
     switch (tag) {
       case "h1":
         return (
-          <h1 ref={ref} style={style} className={classes}>
+          <h1 ref={ref as any} style={style} className={classes}>
             {text}
           </h1>
         );
       case "h2":
         return (
-          <h2 ref={ref} style={style} className={classes}>
+          <h2 ref={ref as any} style={style} className={classes}>
             {text}
           </h2>
         );
       case "h3":
         return (
-          <h3 ref={ref} style={style} className={classes}>
+          <h3 ref={ref as any} style={style} className={classes}>
             {text}
           </h3>
         );
       case "h4":
         return (
-          <h4 ref={ref} style={style} className={classes}>
+          <h4 ref={ref as any} style={style} className={classes}>
             {text}
           </h4>
         );
       case "h5":
         return (
-          <h5 ref={ref} style={style} className={classes}>
+          <h5 ref={ref as any} style={style} className={classes}>
             {text}
           </h5>
         );
       case "h6":
         return (
-          <h6 ref={ref} style={style} className={classes}>
+          <h6 ref={ref as any} style={style} className={classes}>
             {text}
           </h6>
         );
+      case "span":
+        return (
+          <span ref={ref as any} style={style} className={classes}>
+            {text}
+          </span>
+        );
       default:
         return (
-          <p ref={ref} style={style} className={classes}>
+          <p ref={ref as any} style={style} className={classes}>
             {text}
           </p>
         );

@@ -1,3 +1,4 @@
+// app/components/Hero.tsx
 "use client";
 
 import { useLocale } from "next-intl";
@@ -147,11 +148,7 @@ export default function Hero() {
             <SplitText
               text="Be Group"
               tag="h1"
-              className="
-                font-extrabold leading-[1.2]
-                text-[clamp(44px,10vw,128px)]
-                relative
-              "
+              className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
               delay={80}
               duration={0.6}
               ease="power3.out"
@@ -161,6 +158,7 @@ export default function Hero() {
               threshold={0.1}
               rootMargin="-100px"
               textAlign="center"
+              initialHidden={true}
               onLetterAnimationComplete={handleAnimationComplete}
             />
           </div>
@@ -169,13 +167,10 @@ export default function Hero() {
             <SplitText
               text="We Provide Digital Marketing"
               tag="p"
-              className="
-              mt-5 font-semibold leading-[1.3]
-              text-[clamp(20px,5.5vw,56px)]
-              max-w-[90ch]
-            "
+              className="mt-5 font-semibold leading-[1.3] text-[clamp(20px,5.5vw,56px)] max-w-[90ch]"
               delay={100}
               duration={0.6}
+              initialHidden={true}
               ease="power3.out"
               splitType="chars"
               from={{ opacity: 0, y: 50 }}
@@ -193,18 +188,14 @@ export default function Hero() {
               className="mt-8 flex flex-col lg:flex-row justify-around items-center gap-6"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 2.6,
-                duration: 0.8,
-                ease: "easeOut",
-              }}
+              transition={{ delay: 2.6, duration: 0.8, ease: "easeOut" }}
             >
               <h4 className="uppercase text-main-white text-sm sm:text-lg">
                 Digital Services has never been easier
               </h4>
               <Button
                 className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px]"
-                variant={"default"}
+                variant="default"
               >
                 Discover Now
               </Button>
