@@ -1,5 +1,6 @@
 "use client";
-import { motion } from "framer-motion"; // ← fix
+import { useEffect, useState } from "react";
+import { motion, type Variants } from "framer-motion";
 import { useLocale } from "next-intl";
 import Image, { type StaticImageData } from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -31,8 +32,16 @@ export default function BlogsPage({
   const isRTL = locale === "ar";
   const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
+  // 🔑 mount flag to start animations on load
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    // small timeout ensures SSR/CSR paint before animating
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
+  }, []);
+
   // Card animation variants
-  const cardVar = {
+  const cardVar: Variants = {
     hidden: { opacity: 0, x: isRTL ? 40 : -40, y: 24 },
     show: (i: number) => ({
       opacity: 1,
@@ -43,7 +52,7 @@ export default function BlogsPage({
   };
 
   // Pagination animation variants
-  const paginationVar = {
+  const paginationVar: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: {
       opacity: 1,
@@ -95,6 +104,7 @@ export default function BlogsPage({
     <section className="w-full min-h-screen bg-main-black text-main-white flex flex-col items-center pb-12 border-b border-white/10">
       {/* Hero / Title */}
       <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
+        {/* SplitText already animates when visible; ensure it triggers immediately */}
         <SplitText
           text="Latest News"
           tag="h1"
@@ -105,10 +115,10 @@ export default function BlogsPage({
           splitType="chars"
           from={{ opacity: 0, y: 50 }}
           to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-100px"
+          threshold={0} // fire as soon as it's on screen
+          rootMargin="0px" // no waiting
           textAlign="center"
-          initialHidden
+          initialHidden // start hidden → show on mount
         />
       </div>
 
@@ -116,8 +126,7 @@ export default function BlogsPage({
         {/* Blog Cards Grid */}
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
+          animate={mounted ? "show" : "hidden"} // 👈 animate on load
           className={`w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 ${
             isRTL ? "md:[direction:rtl]" : ""
           }`}
@@ -135,10 +144,9 @@ export default function BlogsPage({
                   {get(index)?.image ? (
                     <Image
                       src={get(index)!.image}
-                      alt={get(index)?.desc ?? `Blog image ${index + 1}`}
+                      alt={get(index)?.desc}
                       fill
                       className="object-cover transition-transform duration-500 md:group-hover:scale-105 rounded-[6px]"
-                      // responsive image hints for better LCP
                       sizes="(min-width:1280px) 33vw, (min-width:640px) 50vw, 100vw"
                       priority={index < 3}
                     />
@@ -162,11 +170,11 @@ export default function BlogsPage({
                       delay={140}
                       rtl={isRTL}
                     >
-                      {get(index)?.desc ?? `Blog Post Title ${index + 1}`}
+                      {get(index)?.desc}
                     </MultiLineUnderline>
                   </h3>
                   <div className="text-sm sm:text-base text-white/90">
-                    {get(index)?.date ?? `January ${index + 1}, 2024`}
+                    {get(index)?.date}
                   </div>
                 </div>
               </div>
@@ -178,8 +186,7 @@ export default function BlogsPage({
         <motion.nav
           aria-label="Pagination"
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          animate={mounted ? "show" : "hidden"} // 👈 animate on load
           variants={paginationVar}
           className={`w-full flex items-center justify-center gap-2 mt-6 sm:mt-8 ${
             isRTL ? "flex-row-reverse" : ""
@@ -206,7 +213,7 @@ export default function BlogsPage({
             </Button>
           </motion.div>
 
-          {/* Page numbers (hidden on very small screens) */}
+          {/* Page numbers */}
           <div className="hidden sm:flex items-center gap-2">
             {generatePaginationNumbers().map((page, index) => (
               <motion.div

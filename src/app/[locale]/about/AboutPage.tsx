@@ -4,7 +4,7 @@ import SplitText from "@/components/SplitText";
 export default function AboutPage() {
   return (
     <div className="flex flex-col bg-main-black">
-      <div className="h-[170px] sm:h-[200px] lg:h-[235px] justify-end py-6 xl:py-0 xl:h-[63vh] flex flex-col items-center xl:justify-center bg-main-black2 text-main-primary">
+      <div className="h-[200px] lg:h-[235px] justify-end py-6 xl:py-0 xl:h-[63vh] flex flex-col items-center xl:justify-center bg-main-black2 text-main-primary">
         <SplitText
           text="About Be Group"
           tag="h1"
