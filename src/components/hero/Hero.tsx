@@ -190,6 +190,12 @@ export default function Hero() {
               <Button
                 className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px]"
                 variant="default"
+                onClick={() => {
+                  document.getElementById("about")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
               >
                 Discover Now
               </Button>

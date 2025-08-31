@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import * as React from "react";
 import Image, { type StaticImageData } from "next/image";
 import MultiLineUnderline from "../MultiLineUnderline";
+import { Link } from "@/navigations";
 
 type BlogItem = {
   id: string | number;
@@ -82,7 +83,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
   const get = (idx: number) => items[idx];
 
   return (
-    <section className="w-full min-h-fit lg:max-h-screen bg-main-black text-main-white flex flex-col gap-6 md:gap-8 xl:gap-0 justify-start items-center py-8 lg:py-12 border-b border-white/10">
+    <section className="w-full min-h-fit lg:max-h-screen bg-main-black text-main-white flex flex-col gap-6 md:gap-8 xl:gap-0 justify-start items-center py-10 xl:pt-16 border-b border-white/10">
       <div className="sm:container mx-auto flex flex-col gap-6">
         <div className="w-full flex flex-col gap-8 items-start px-4 xl:px-6">
           <motion.div
@@ -119,12 +120,17 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
             practical takeaways.
           </motion.p>
 
-          <Button
-            className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] z-50"
-            variant="default"
+          <Link
+            href={"/blog"}
+            className="z-50"
           >
-            VIEW BLOG
-          </Button>
+            <Button
+              className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] z-50"
+              variant="default"
+            >
+              VIEW BLOG
+            </Button>
+          </Link>
         </div>
 
         {/* Ladder cards — first = lowest step (70%), second = 35%, third = 0% */}

@@ -136,6 +136,7 @@ export default function Header() {
             <motion.div key={item.href} variants={linkVar}>
               <Link
                 href={item.href}
+                prefetch
                 className={clsx(
                   "group relative text-sm py-1 transition-colors",
                   isActive && "text-main-primary font-bold"
@@ -274,6 +275,7 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    prefetch
                     onClick={() => setMobileOpen(false)}
                     className={clsx(
                       "px-4 py-3 text-sm uppercase tracking-wide transition text-start border-b border-white/10 flex items-center justify-between",

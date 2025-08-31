@@ -4,6 +4,7 @@ import Hero from "@/components/hero/Hero";
 import Portfolio from "@/components/portfolio/Portfolio";
 
 import blogImage from '@/app/assets/2.png'
+import ContactUs from "@/components/conatct/ContactUs";
 
 export default function Home() {
 const blogs = [
@@ -33,6 +34,7 @@ const blogs = [
       <About />
       <Portfolio />
       <OurBlogs items={blogs}/>
+      <ContactUs />
     </div>
   );
 }

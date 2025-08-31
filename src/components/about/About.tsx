@@ -5,11 +5,19 @@ import about1 from "@/app/assets/9.png";
 import about2 from "@/app/assets/about.webp";
 import about3 from "@/app/assets/6.png";
 import { Button } from "../ui/button";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
+import { Link, usePathname } from "@/navigations";
+
 
 export default function About() {
+  const pathname = usePathname();
+  const isAboutPage = pathname === "/about";
+
   return (
-    <section className="w-full min-h-screen bg-main-black text-main-white flex flex-col gap-6 md:gap-8 xl:gap-12 justify-start items-center py-8 lg:py-12 border-b border-white/10">
+    <section
+      id="about"
+      className="w-full min-h-screen bg-main-black text-main-white flex flex-col gap-6 md:gap-8 xl:gap-12 justify-start items-center py-10 xl:py-24 border-b border-white/10"
+    >
       {/* Label */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -84,9 +92,12 @@ export default function About() {
             <li>Business intelligence & reporting tools</li>
           </ul>
 
-          <Button className="uppercase bg-white text-main-black2 hover:bg-white/90 px-6 py-6 rounded-[4px] w-full sm:w-[200px] xl:w-full">
-            Learn More
-          </Button>
+          {/* Conditional button */}
+          <Link href={isAboutPage ? "/services" : "/about"}>
+            <Button className="uppercase bg-white text-main-black2 hover:bg-white/90 px-6 py-6 rounded-[4px] w-full sm:w-[200px] xl:w-full">
+              {isAboutPage ? "View Services" : "Learn More"}
+            </Button>
+          </Link>
         </motion.div>
 
         {/* Third image */}
