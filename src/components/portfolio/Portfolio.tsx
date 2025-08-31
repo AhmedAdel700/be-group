@@ -1,0 +1,97 @@
+"use client";
+import CarouselComponent from "../carouselComponent/CarouselComponent";
+import { motion } from "motion/react";
+
+import placeHolder from '@/app/assets/6.png';
+
+export default function Portfolio() {
+    const data = [
+      {
+        id: 1,
+        image: placeHolder,
+        title: "E-commerce Redesign",
+        desc: "Faster checkout, modern UI, +27% conv.",
+      },
+      {
+        id: 2,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+      {
+        id: 3,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+      {
+        id: 4,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+      {
+        id: 5,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+      {
+        id: 6,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+      {
+        id: 7,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+      {
+        id: 8,
+        image: placeHolder,
+        title: "Analytics Dashboard",
+        desc: "Real-time KPIs with granular filters.",
+      },
+    ];
+  return (
+    <div className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white  pt-8 lg:pt-12 border-b border-white/10">
+      <div className="flex flex-col gap-6 md:gap-8 xl:gap-12 justify-start items-center container mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="uppercase py-3 px-4 border rounded-full"
+        >
+          Our Portfolio
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
+        >
+          Some of Our Works
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="text-white/70 text-base md:text-lg text-center lg:max-w-[70%] xl:max-w-[50%]"
+        >
+          From high-performance web apps and e-commerce to data dashboards,
+          here’s a quick snapshot of projects we’ve crafted with speed,
+          scalability, and clean design.
+        </motion.p>
+
+        <CarouselComponent items={data} />
+      </div>
+    </div>
+  );
+}

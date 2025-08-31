@@ -48,7 +48,7 @@ export default function Header() {
 
   const langRef = useRef<HTMLDivElement>(null);
   const mobileRef = useRef<HTMLDivElement>(null);
-  const toggleRef = useRef<HTMLButtonElement>(null); // ✅ added
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const ticking = useRef(false);
   const THRESHOLD = 12;
 
@@ -77,7 +77,7 @@ export default function Header() {
         mobileRef.current &&
         !mobileRef.current.contains(target) &&
         toggleRef.current &&
-        !toggleRef.current.contains(target) // ✅ ignore clicks on the toggle button
+        !toggleRef.current.contains(target)
       ) {
         setMobileOpen(false);
       }
@@ -138,7 +138,7 @@ export default function Header() {
                 href={item.href}
                 className={clsx(
                   "group relative text-sm py-1 transition-colors",
-                  isActive && "text-main-primary"
+                  isActive && "text-main-primary font-bold"
                 )}
               >
                 <span className="transition-opacity duration-300 group-hover:opacity-90">
@@ -277,7 +277,7 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={clsx(
                       "px-4 py-3 text-sm uppercase tracking-wide transition text-start border-b border-white/10 flex items-center justify-between",
-                      isActive ? "bg-white/10" : "hover:bg-white/15"
+                      isActive ? "bg-white/10 font-bold text-main-primary" : "hover:bg-white/15"
                     )}
                   >
                     {item.label}

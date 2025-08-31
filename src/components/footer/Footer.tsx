@@ -58,7 +58,7 @@ const SocialIcon: React.FC<{
 
 export default function Footer() {
   return (
-    <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-8 py-6">
+    <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-8 xl:px-20 py-6">
       {/* Logo */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -236,7 +236,7 @@ export default function Footer() {
       >
         <div className="text-white/70 text-sm text-center">
           Made By <span className="text-main-primary">Be Group</span> © 2025 All
-          rights reserved
+          Rights Reserved
         </div>
         <div className="flex items-center gap-6 text-white/60 text-sm">
           <Link href="#" className="hover:underline">
