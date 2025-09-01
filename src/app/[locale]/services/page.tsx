@@ -189,7 +189,7 @@ export default function Page() {
           <>
             <p className="text-lg leading-relaxed opacity-95 font-medium">
               We plan, create, and manage content that grows communities and
-              drives results—tailored for each platform's culture and algorithm.
+              drives results—tailored for each platform is culture and algorithm.
             </p>
             <div className="mt-8">
               <div className="max-w-2xl mx-auto">
@@ -365,7 +365,7 @@ export default function Page() {
             </div>
             <p className="text-lg leading-relaxed opacity-95 mt-8 font-medium">
               We communicate transparently with regular reporting—so you see
-              what's moving the needle.
+              what is moving the needle.
             </p>
           </>
         ),
