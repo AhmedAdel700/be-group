@@ -93,7 +93,7 @@ export default function About() {
           </ul>
 
           {/* Conditional button */}
-          <Link href={isAboutPage ? "/services" : "/about"}>
+          <Link href={isAboutPage ? "/services" : "/about"} className="w-full">
             <Button className="uppercase bg-white text-main-black2 hover:bg-white/90 px-6 py-6 rounded-[4px] w-full sm:w-[200px] xl:w-full">
               {isAboutPage ? "View Services" : "Learn More"}
             </Button>

@@ -5,6 +5,7 @@ import Portfolio from "@/components/portfolio/Portfolio";
 
 import blogImage from '@/app/assets/2.png'
 import ContactUs from "@/components/conatct/ContactUs";
+import WhyChooseUs from "@/components/whyChooseUs/WhyChooseUs";
 
 export default function Home() {
 const blogs = [
@@ -33,6 +34,7 @@ const blogs = [
       <Hero />
       <About />
       <Portfolio />
+      <WhyChooseUs />
       <OurBlogs items={blogs}/>
       <ContactUs />
     </div>
