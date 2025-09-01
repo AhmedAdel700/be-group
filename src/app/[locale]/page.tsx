@@ -7,6 +7,7 @@ import blogImage from '@/app/assets/2.png'
 import ContactUs from "@/components/conatct/ContactUs";
 import WhyChooseUs from "@/components/whyChooseUs/WhyChooseUs";
 import Services from "@/components/services/Services";
+import ClientsSection from "@/components/our clients/page";
 
 export default function Home() {
 const blogs = [
@@ -34,6 +35,7 @@ const blogs = [
     <div className="relative overflow-hidden">
       <Hero />
       <About />
+      <ClientsSection />
       <Services />
       <Portfolio />
       <WhyChooseUs />
