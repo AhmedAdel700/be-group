@@ -6,6 +6,7 @@ import Portfolio from "@/components/portfolio/Portfolio";
 import blogImage from '@/app/assets/2.png'
 import ContactUs from "@/components/conatct/ContactUs";
 import WhyChooseUs from "@/components/whyChooseUs/WhyChooseUs";
+import Services from "@/components/services/Services";
 
 export default function Home() {
 const blogs = [
@@ -33,6 +34,7 @@ const blogs = [
     <div className="relative overflow-hidden">
       <Hero />
       <About />
+      <Services />
       <Portfolio />
       <WhyChooseUs />
       <OurBlogs items={blogs}/>

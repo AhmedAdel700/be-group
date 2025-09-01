@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useMemo, useState, useCallback } from "react";
+import { useLocale } from "next-intl";
 import {
   BadgeCheck,
   Camera,
+  ChevronLeft,
+  ChevronRight,
   Clapperboard,
   Code2,
   MapPin,
@@ -27,141 +29,32 @@ import {
   Palette,
   PenTool,
   Lightbulb,
-  X,
 } from "lucide-react";
-import TiltedCard from "@/components/TittedCard";
-import SplitText from "@/components/SplitText";
+import { motion, AnimatePresence } from "motion/react";
+import { Button } from "../ui/button";
+import { Link } from "@/navigations";
 
-type CardInfo = {
+type Service = {
   id: number;
   title: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   blurb: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   content: React.ReactNode;
+  image?: { src: string; alt: string } | null;
 };
 
-function MotionModal({
-  open,
-  onClose,
-  title,
-  icon: Icon,
-  content,
-}: {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  content: React.ReactNode;
-}) {
-  // ESC close + basic scroll lock
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    if (open) document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+const ACCENT = "text-main-primary";
 
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    return () => {
-      document.documentElement.style.overflow = prev;
-    };
-  }, [open]);
+export default function Services() {
+  const locale = useLocale();
+  const isRTL = locale === "ar";
 
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          {/* Backdrop */}
-          <motion.button
-            aria-label="Close modal"
-            onClick={onClose}
-            className="absolute inset-0 bg-black/70"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-
-          {/* Panel */}
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={title}
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ scale: 0.96, opacity: 0, y: 12 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.98, opacity: 0, y: 8 }}
-            transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          >
-            <div className="w-[92vw] max-w-xl rounded-2xl border border-white/10 bg-neutral-900/80 backdrop-blur-md text-white">
-              {/* header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-main-primary/30 bg-main-primary/10">
-                    <Icon className="h-5 w-5 text-main-primary" />
-                  </span>
-                  <h3 className="text-lg font-semibold">{title}</h3>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-main-primary/60"
-                  autoFocus
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-
-              {/* body */}
-              <div className="px-5 py-5">
-                <div className="prose prose-invert max-w-none">{content}</div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-export default function Page() {
-  // scroll-motion variants (added)
-  const easeOut = [0.22, 1, 0.36, 1] as const;
-  const listVar = useMemo(
-    () => ({
-      hidden: {},
-      show: {
-        transition: { staggerChildren: 0.12, delayChildren: 0.05 },
-      },
-    }),
-    []
-  );
-  const itemVar = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: 24, scale: 0.98 },
-      show: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: { duration: 0.7, ease: easeOut },
-      },
-    }),
-    []
-  );
-
-  const CARDS: CardInfo[] = useMemo(
+  const services: Service[] = useMemo(
     () => [
       {
         id: 1,
         title: "Animation Video",
-        Icon: Clapperboard,
+        icon: Clapperboard,
         blurb: "Tell your story with motion.",
         content: (
           <>
@@ -183,7 +76,7 @@ export default function Page() {
       {
         id: 2,
         title: "Social Media Management",
-        Icon: Share2,
+        icon: Share2,
         blurb: "Strategy, content, growth.",
         content: (
           <>
@@ -204,7 +97,7 @@ export default function Page() {
                     <span className="text-sm font-medium">YouTube</span>
                   </div>
                 </div>
-
+                
                 {/* Second row - 3 items */}
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
@@ -220,7 +113,7 @@ export default function Page() {
                     <span className="text-xs font-medium">LinkedIn</span>
                   </div>
                 </div>
-
+                
                 {/* Third row - 2 items */}
                 <div className="grid grid-cols-2 gap-6">
                   <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
@@ -250,7 +143,7 @@ export default function Page() {
       {
         id: 3,
         title: "Web Development",
-        Icon: Code2,
+        icon: Code2,
         blurb: "Fast, scalable, secure.",
         content: (
           <>
@@ -294,7 +187,7 @@ export default function Page() {
       {
         id: 4,
         title: "Google Ads (AdWords)",
-        Icon: Target,
+        icon: Target,
         blurb: "Premier Partner performance.",
         content: (
           <>
@@ -307,27 +200,19 @@ export default function Page() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <Search className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm font-medium">
-                    Keyword research & bid strategy
-                  </span>
+                  <span className="text-sm font-medium">Keyword research & bid strategy</span>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <BarChart3 className="w-5 h-5 text-green-400" />
-                  <span className="text-sm font-medium">
-                    Quality Score optimization
-                  </span>
+                  <span className="text-sm font-medium">Quality Score optimization</span>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <TrendingUp className="w-5 h-5 text-purple-400" />
-                  <span className="text-sm font-medium">
-                    Performance tracking
-                  </span>
+                  <span className="text-sm font-medium">Performance tracking</span>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <Lightbulb className="w-5 h-5 text-yellow-400" />
-                  <span className="text-sm font-medium">
-                    Campaign optimization
-                  </span>
+                  <span className="text-sm font-medium">Campaign optimization</span>
                 </div>
               </div>
             </div>
@@ -338,7 +223,7 @@ export default function Page() {
       {
         id: 5,
         title: "SEO",
-        Icon: Search,
+        icon: Search,
         blurb: "Visibility that lasts.",
         content: (
           <>
@@ -374,7 +259,7 @@ export default function Page() {
       {
         id: 6,
         title: "Google Maps",
-        Icon: MapPin,
+        icon: MapPin,
         blurb: "Be found locally.",
         content: (
           <>
@@ -391,9 +276,7 @@ export default function Page() {
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
                   <Users className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">
-                    Review optimization
-                  </span>
+                  <span className="text-sm font-medium">Review optimization</span>
                 </div>
               </div>
             </div>
@@ -404,7 +287,7 @@ export default function Page() {
       {
         id: 7,
         title: "Media Production",
-        Icon: Camera,
+        icon: Camera,
         blurb: "Video, audio, motion.",
         content: (
           <>
@@ -436,7 +319,7 @@ export default function Page() {
       {
         id: 8,
         title: "Branding",
-        Icon: BadgeCheck,
+        icon: BadgeCheck,
         blurb: "Identity with purpose.",
         content: (
           <>
@@ -468,7 +351,7 @@ export default function Page() {
       {
         id: 9,
         title: "Consultation",
-        Icon: MessagesSquare,
+        icon: MessagesSquare,
         blurb: "Roadmaps & strategy.",
         content: (
           <>
@@ -497,81 +380,248 @@ export default function Page() {
     []
   );
 
-  const [openKey, setOpenKey] = useState<number | null>(null);
-  const active = CARDS.find((c) => c.id === openKey);
+  const [start, setStart] = useState(0);
+  const [active, setActive] = useState(0);
+
+  // Responsive window size: 2 on mobile, 5 on desktop
+  const windowSize = typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 5;
+  const maxStart = services.length - windowSize;
+
+  const move = useCallback(
+    (dir: -1 | 1) => {
+      setStart((s) => Math.max(0, Math.min(maxStart, s + dir)));
+    },
+    [maxStart]
+  );
+
+  const select = useCallback((i: number) => {
+    setActive(i);
+    // keep selected visible within window
+    setStart((s) => {
+      if (i < s) return i;
+      if (i > s + windowSize - 1) return i - windowSize + 1;
+      return s;
+    });
+  }, [windowSize]);
+
+  // shift in % - responsive based on window size
+  const shiftPct = (isRTL ? start : -start) * (100 / windowSize);
+
+  const ActiveIcon = services[active].icon;
 
   return (
-    <section className="min-h-screen bg-main-black2 text-main-white flex flex-col items-center">
-      <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
-        <SplitText
-          text="Our Services"
-          tag="h1"
-          className="font-extrabold leading-[1.15] text-[clamp(32px,9vw,120px)] px-4 text-center"
-          delay={80}
-          duration={0.6}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 50 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0} // fire as soon as it's on screen
-          rootMargin="0px" // no waiting
-          textAlign="center"
-          initialHidden // start hidden → show on mount
-        />
-      </div>
-
-      {/* scroll-animated cards list (added) */}
-      <motion.div
-        className="flex flex-wrap items-center justify-center gap-10 pb-12"
-        variants={listVar}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.15, margin: "0px 0px -10% 0px" }}
-      >
-        {CARDS.map(({ id, title, blurb, Icon }) => (
-          <motion.div key={id} variants={itemVar}>
-            <TiltedCard
-              altText={title}
-              containerHeight="320px"
-              containerWidth="320px"
-              imageHeight="320px"
-              imageWidth="320px"
-              rotateAmplitude={12}
-              scaleOnHover={1.12}
-              showMobileWarning={false}
-              showTooltip={false}
-              displayOverlayContent
-              onClick={() => setOpenKey(id)}
-              overlayContent={
-                <div className="h-[320px] w-[320px] rounded-[15px] overflow-hidden bg-main-black">
-                  <div className="h-full w-full rounded-[15px] border border-main-secondary bg-white/5 backdrop-blur-sm flex flex-col items-center pt-6 justify-start gap-4 text-center">
-                    <span className="inline-flex items-center justify-center h-20 w-20 rounded-full border border-main-primary/30 bg-main-primary/10">
-                      <Icon className="h-10 w-10 text-main-primary" />
-                    </span>
-                    <div className="flex flex-col items-center gap-2">
-                      <h3 className="text-xl font-semibold">{title}</h3>
-                      <p className="text-sm opacity-80 max-w-[240px]">
-                        {blurb}
-                      </p>
-                    </div>
-                    <div className="text-xs uppercase tracking-wide text-main-primary/80 mt-auto mb-5">
-                      Click for details
-                    </div>
-                  </div>
-                </div>
-              }
-            />
+    <section className="w-full min-h-fit xl:min-h-screen bg-main-black text-main-white py-8 xl:py-20 border-b border-white/10 overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col gap-10 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="uppercase py-3 px-4 border rounded-full w-fit mx-auto"
+          >
+            Our Services
           </motion.div>
-        ))}
-      </motion.div>
 
-      <MotionModal
-        open={!!active}
-        onClose={() => setOpenKey(null)}
-        title={active?.title ?? ""}
-        icon={active?.Icon ?? Clapperboard}
-        content={active?.content ?? null}
-      />
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize mx-auto"
+          >
+            We provide the full stack of creative services
+          </motion.h2>
+        </div>
+
+        {/* Carousel */}
+        <motion.div
+          className="relative"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          {/* arrows */}
+          <button
+            aria-label="Previous"
+            onClick={() => move(isRTL ? 1 : -1)}
+            className={`absolute -left-2 top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+              start === (isRTL ? maxStart : 0)
+                ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
+                : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105"
+            }`}
+            disabled={start === (isRTL ? maxStart : 0)}
+          >
+            <ChevronLeft
+              className={`w-5 h-5 transition-colors ${
+                start === (isRTL ? maxStart : 0)
+                  ? "text-gray-500"
+                  : "text-main-primary"
+              }`}
+            />
+          </button>
+          <button
+            aria-label="Next"
+            onClick={() => move(isRTL ? -1 : 1)}
+            className={`absolute -right-2 top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+              start === (isRTL ? 0 : maxStart)
+                ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
+                : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105"
+            }`}
+            disabled={start === (isRTL ? 0 : maxStart)}
+          >
+            <ChevronRight
+              className={`w-5 h-5 transition-colors ${
+                start === (isRTL ? 0 : maxStart)
+                  ? "text-gray-500"
+                  : "text-main-primary"
+              }`}
+            />
+          </button>
+
+          {/* track */}
+          <div className="overflow-hidden border-b border-white/10">
+            <div
+              className="flex transition-transform duration-500"
+              style={{
+                transform: `translateX(${shiftPct}%)`,
+                direction: isRTL ? "rtl" : "ltr",
+              }}
+            >
+              {services.map((s, i) => {
+                const Icon = s.icon;
+                const activeItem = i === active;
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => select(i)}
+                    className={`group basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none`}
+                    dir="ltr"
+                  >
+                    <Icon
+                      className={`mx-auto mb-4 h-8 w-8 ${
+                        activeItem ? ACCENT : "text-white"
+                      }`}
+                      strokeWidth={1.75}
+                    />
+                    <div
+                      className={`text-sm md:text-base font-medium ${
+                        activeItem
+                          ? "opacity-100"
+                          : "opacity-70 group-hover:opacity-100"
+                      }`}
+                    >
+                      {s.title}
+                    </div>
+
+                    {/* underline */}
+                    <span
+                      className={`pointer-events-none absolute bottom-0 left-0 h-[2px] w-full ${
+                        activeItem
+                          ? "bg-main-primary"
+                          : "bg-transparent group-hover:bg-white/30"
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Content panel */}
+        <motion.div
+          className="mt-12 flex flex-col items-center text-center max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          {/* icon + heading */}
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <div className="flex flex-col items-center gap-4">
+              <motion.span
+                className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-main-primary/30 bg-main-primary/10 backdrop-blur-sm"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <ActiveIcon className={`h-8 w-8 ${ACCENT}`} />
+              </motion.span>
+              <div>
+                <motion.h3
+                  className="text-3xl md:text-4xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 1 }}
+                >
+                  {services[active].title}
+                </motion.h3>
+                <motion.p
+                  className="text-base text-main-primary/80 mt-2 font-medium"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 1.2 }}
+                >
+                  {services[active].blurb}
+                </motion.p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* body */}
+          <motion.div
+            className="w-full"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={services[active].id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="text-center space-y-6"
+              >
+                <motion.div
+                  className="prose prose-invert prose-lg max-w-none mx-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  {services[active].content}
+                </motion.div>
+
+                {/* Enhanced call-to-action area */}
+                <motion.div
+                  className="flex items-center justify-center gap-3 pt-6 border-t border-white/10 max-w-full mx-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <Link href={"/services"} className="w-full">
+                    <Button
+                      className="uppercase bg-main-primary text-main-text hover:bg-main-secondary p-6 !rounded-[4px] w-full sm:w-[20%]"
+                      variant="default"
+                    >
+                      More Details
+                    </Button>
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }
