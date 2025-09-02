@@ -179,7 +179,7 @@ export default function ContactForm() {
               className="flex items-center gap-2 text-sm text-white/70 lg:w-[45%]"
               variants={fadeUpVar}
             >
-              <AlertCircle className="mt-0.5 h-5 w-5 text-white/70 shrink-0" />
+              <AlertCircle className="mt-0.5 h-5 w-5 text-main-primary shrink-0" />
               <p>
                 <span className="font-medium">
                   All the fields are required.
@@ -201,7 +201,7 @@ export default function ContactForm() {
               <motion.div whileTap={{ scale: 0.98 }}>
                 <Button
                   type="submit"
-                  className="cursor-target uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] w-full lg:w-auto"
+                  className="cursor-target uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] w-full lg:w-auto"
                   variant="default"
                   disabled={
                     !form.formState.isValid && form.formState.isSubmitted

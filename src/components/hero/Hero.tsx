@@ -184,7 +184,7 @@ export default function Hero() {
                 Digital Services has never been easier
               </h4>
               <Button
-                className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] cursor-target"
+                className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] cursor-target"
                 variant="default"
                 onClick={() => {
                   document.getElementById("about")?.scrollIntoView({

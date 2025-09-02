@@ -94,7 +94,7 @@ export default function About() {
 
           {/* Conditional button */}
           <Link href={isAboutPage ? "/services" : "/about"} className="w-full">
-            <Button className="uppercase bg-white text-main-black2 hover:bg-white/90 px-6 py-6 rounded-[4px] w-full sm:w-[200px] xl:w-full cursor-target">
+            <Button className="uppercase bg-main-primary text-main-text hover:bg-white/90 px-6 py-6 rounded-[4px] w-full sm:w-[200px] xl:w-full cursor-target">
               {isAboutPage ? "View Services" : "Learn More"}
             </Button>
           </Link>

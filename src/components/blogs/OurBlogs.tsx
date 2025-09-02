@@ -122,7 +122,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
 
           <Link href={"/blog"} className="z-50">
             <Button
-              className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] z-50 cursor-target"
+              className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] z-50 cursor-target"
               variant="default"
             >
               VIEW BLOG

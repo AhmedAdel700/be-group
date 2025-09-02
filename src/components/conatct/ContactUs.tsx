@@ -151,7 +151,7 @@ export default function ContactUs() {
                   }}
                   viewport={{ margin: "-10% 0px -10% 0px" }}
                 >
-                  <MapPin size={28} />
+                  <MapPin size={28} className="text-main-primary" />
                 </motion.div>
               </motion.div>
 
@@ -176,7 +176,7 @@ export default function ContactUs() {
                   }}
                   viewport={{ margin: "-10% 0px -10% 0px" }}
                 >
-                  <Mail size={28} />
+                  <Mail size={28} className="text-main-primary" />
                 </motion.div>
               </motion.div>
 
@@ -201,7 +201,7 @@ export default function ContactUs() {
                   }}
                   viewport={{ margin: "-10% 0px -10% 0px" }}
                 >
-                  <Smartphone size={28} />
+                  <Smartphone size={28} className="text-main-primary" />
                 </motion.div>
               </motion.div>
 
