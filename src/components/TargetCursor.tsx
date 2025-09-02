@@ -1,5 +1,12 @@
-'use client';
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+"use client";
+
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import { gsap } from "gsap";
 
 export interface TargetCursorProps {
@@ -13,6 +20,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   spinDuration = 2,
   hideDefaultCursor = true,
 }) => {
+  const [isLargeScreen, setIsLargeScreen] = useState(false); // Track if the screen is large enough
   const cursorRef = useRef<HTMLDivElement>(null);
   const cornersRef = useRef<NodeListOf<HTMLDivElement>>();
   const spinTl = useRef<gsap.core.Timeline | null>(null);
@@ -26,6 +34,18 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
     []
   );
 
+  // Check screen size on resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 1280); // xl screen and above
+    };
+
+    checkScreenSize(); // Check on initial render
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   const moveCursor = useCallback((x: number, y: number) => {
     if (!cursorRef.current) return;
     gsap.to(cursorRef.current, {
@@ -37,7 +57,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!cursorRef.current) return;
+    if (!cursorRef.current || !isLargeScreen) return; // Only apply if it's large screen
 
     const originalCursor = document.body.style.cursor;
     if (hideDefaultCursor) {
@@ -77,13 +97,11 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
       if (spinTl.current) {
         spinTl.current.kill();
       }
-      spinTl.current = gsap
-        .timeline({ repeat: -1 })
-        .to(cursor, {
-          rotation: "+=360",
-          duration: spinDuration,
-          ease: "none",
-        });
+      spinTl.current = gsap.timeline({ repeat: -1 }).to(cursor, {
+        rotation: "+=360",
+        duration: spinDuration,
+        ease: "none",
+      });
     };
 
     createSpinTimeline();
@@ -333,22 +351,14 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
       spinTl.current?.kill();
       document.body.style.cursor = originalCursor;
     };
-  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor]);
-
-  useEffect(() => {
-    if (!cursorRef.current || !spinTl.current) return;
-
-    if (spinTl.current.isActive()) {
-      spinTl.current.kill();
-      spinTl.current = gsap
-        .timeline({ repeat: -1 })
-        .to(cursorRef.current, {
-          rotation: "+=360",
-          duration: spinDuration,
-          ease: "none",
-        });
-    }
-  }, [spinDuration]);
+  }, [
+    targetSelector,
+    spinDuration,
+    moveCursor,
+    constants,
+    hideDefaultCursor,
+    isLargeScreen,
+  ]);
 
   return (
     <div
