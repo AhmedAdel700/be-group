@@ -101,7 +101,7 @@ export default function CarouselComponent({ items, className }: Props) {
                 "ps-4", // gap between cards (logical start)
                 "basis-full", // sm & below: 1 card
                 "md:basis-[40%]", // md–lg: ~2.5 cards
-                "xl:basis-[30%]", // xl+: ~3.5 cards
+                "xl:basis-[30%] cursor-target", // xl+: ~3.5 cards
               ].join(" ")}
             >
               {/* group enables hover effects on children */}
@@ -154,14 +154,14 @@ export default function CarouselComponent({ items, className }: Props) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <CarouselPrevious className="static translate-y-0 top-auto left-auto" />
+            <CarouselPrevious className="static translate-y-0 top-auto left-auto cursor-target" />
           </motion.div>
           <motion.div
             variants={controlsItemVar}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <CarouselNext className="static translate-y-0 top-auto right-auto" />
+            <CarouselNext className="static translate-y-0 top-auto right-auto cursor-target" />
           </motion.div>
         </motion.div>
       </Carousel>

@@ -117,7 +117,7 @@ export default function Header() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: easeOut, delay: 0.05 }}
-        className="flex items-center gap-3 cursor-pointer"
+        className="flex items-center gap-3 cursor-pointer cursor-target"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         <Image src={logo} alt="Be Group Logo" width={90} height={90} priority />
@@ -138,7 +138,7 @@ export default function Header() {
                 href={item.href}
                 prefetch
                 className={clsx(
-                  "group relative text-sm py-1 transition-colors",
+                  "group relative text-sm py-1 transition-colors cursor-target",
                   isActive && "text-main-primary font-bold"
                 )}
               >
@@ -167,7 +167,7 @@ export default function Header() {
           onClick={() => setMobileOpen((v) => !v)}
           whileTap={{ scale: 0.9 }}
           aria-label="Toggle menu"
-          className="xl:hidden relative flex flex-col items-center justify-center w-8 h-8"
+          className="xl:hidden relative flex flex-col items-center justify-center w-8 h-8 cursor-target"
         >
           {/* Top line */}
           <motion.span
@@ -194,7 +194,7 @@ export default function Header() {
           <motion.button
             onClick={() => setLangOpen((v) => !v)}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-1 text-sm uppercase tracking-wide px-2 py-1 rounded text-main-white hover:bg-white/10 transition"
+            className="flex items-center gap-1 text-sm uppercase tracking-wide px-2 py-1 rounded text-main-white hover:bg-white/10 transition cursor-target"
             aria-haspopup="menu"
             aria-expanded={langOpen}
           >
@@ -226,7 +226,7 @@ export default function Header() {
                   role="menuitem"
                   onClick={() => switchLocale("en")}
                   className={clsx(
-                    "w-full text-start px-3 py-2 text-sm hover:bg-white/15 flex items-center justify-between",
+                    "w-full text-start px-3 py-2 text-sm hover:bg-white/15 flex items-center justify-between cursor-target",
                     locale === "en" && "bg-white/10"
                   )}
                   whileTap={{ scale: 0.98 }}
@@ -239,7 +239,7 @@ export default function Header() {
                   role="menuitem"
                   onClick={() => switchLocale("ar")}
                   className={clsx(
-                    "w-full text-start px-3 py-2 text-sm hover:bg-white/15 flex items-center justify-between",
+                    "w-full text-start px-3 py-2 text-sm hover:bg-white/15 flex items-center justify-between cursor-target",
                     locale === "ar" && "bg-white/10"
                   )}
                   whileTap={{ scale: 0.98 }}
@@ -278,8 +278,10 @@ export default function Header() {
                     prefetch
                     onClick={() => setMobileOpen(false)}
                     className={clsx(
-                      "px-4 py-3 text-sm uppercase tracking-wide transition text-start border-b border-white/10 flex items-center justify-between",
-                      isActive ? "bg-white/10 font-bold text-main-primary" : "hover:bg-white/15"
+                      "px-4 py-3 text-sm uppercase tracking-wide transition text-start border-b border-white/10 flex items-center justify-between cursor-target",
+                      isActive
+                        ? "bg-white/10 font-bold text-main-primary"
+                        : "hover:bg-white/15"
                     )}
                   >
                     {item.label}

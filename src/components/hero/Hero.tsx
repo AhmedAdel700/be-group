@@ -2,12 +2,12 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import Prism from "../Prism";
 import SplitText from "../SplitText";
 import { Button } from "../ui/button";
 import { motion, type Variants, cubicBezier } from "framer-motion";
 import { ArrowDown, Phone } from "lucide-react";
 import { Link } from "@/navigations";
+import Squares from "../Squares";
 
 export default function Hero() {
   const locale = useLocale();
@@ -76,7 +76,7 @@ export default function Hero() {
         <motion.div variants={ctaItem}>
           <Button
             asChild
-            className="!rounded-[6px] h-10 px-3 bg-main-secondary text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="!rounded-[6px] h-10 px-3 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             <Link
               href="https://wa.me/201234567890"
@@ -94,7 +94,7 @@ export default function Hero() {
         <motion.div variants={ctaItem}>
           <Button
             asChild
-            className="!rounded-[6px] h-10 px-3 bg-main-secondary text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="!rounded-[6px] cursor-target h-10 px-3 bg-main-secondary text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             <Link
               href="tel:+201234567890"
@@ -112,13 +112,13 @@ export default function Hero() {
         initial="hidden"
         animate="show"
         onClick={() => {
-          window.scrollTo({
-            top: window.scrollY + window.innerHeight,
+          document.getElementById("about")?.scrollIntoView({
             behavior: "smooth",
+            block: "start",
           });
         }}
         aria-label="Scroll to next section"
-        className={`absolute bottom-16 ${
+        className={`absolute bottom-16 cursor-target ${
           locale === "en" ? "right-5" : "left-5"
         } z-[100] rounded-full border border-main-secondary w-10 h-10 flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]`}
       >
@@ -126,16 +126,12 @@ export default function Hero() {
       </motion.button>
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
-        <Prism
-          animationType="rotate"
-          timeScale={0.5}
-          height={3.5}
-          baseWidth={5.5}
-          scale={3.6}
-          hueShift={0}
-          colorFrequency={1}
-          noise={0}
-          glow={1}
+        <Squares
+          speed={0.5}
+          squareSize={60}
+          direction="diagonal" // up, down, left, right, diagonal
+          borderColor="#79460f"
+          hoverFillColor="#222"
         />
 
         {/* Overlay */}
@@ -188,7 +184,7 @@ export default function Hero() {
                 Digital Services has never been easier
               </h4>
               <Button
-                className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px]"
+                className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] cursor-target"
                 variant="default"
                 onClick={() => {
                   document.getElementById("about")?.scrollIntoView({

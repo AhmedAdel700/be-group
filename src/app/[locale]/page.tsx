@@ -8,6 +8,7 @@ import ContactUs from "@/components/conatct/ContactUs";
 import WhyChooseUs from "@/components/whyChooseUs/WhyChooseUs";
 import Services from "@/components/services/Services";
 import ClientsSection from "@/components/our clients/page";
+import AchievementSection from "@/components/achievements/AchievementSection";
 
 export default function Home() {
 const blogs = [
@@ -39,6 +40,7 @@ const blogs = [
       <Services />
       <Portfolio />
       <WhyChooseUs />
+      <AchievementSection />
       <OurBlogs items={blogs}/>
       <ContactUs />
     </div>

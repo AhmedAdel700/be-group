@@ -7,6 +7,7 @@ import { getMessages } from "next-intl/server";
 import "../styles/globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import TargetCursor from "@/components/TargetCursor";
 
 const objektiv = localFont({
   src: [
@@ -104,6 +105,7 @@ export default async function LocaleLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
+          <TargetCursor spinDuration={2} hideDefaultCursor={true} />
           <Header />
           {children}
           <Footer />

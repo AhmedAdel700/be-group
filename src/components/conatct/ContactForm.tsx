@@ -99,7 +99,7 @@ export default function ContactForm() {
                           placeholder:text-white/40 placeholder:text-base
                           [&::placeholder]:transition-colors [&::placeholder]:duration-500
                           hover:[&::placeholder]:text-white focus:[&::placeholder]:text-white
-                          h-14 rounded-[6px]
+                          h-14 rounded-[6px] cursor-target
                         "
                         {...field}
                       />
@@ -128,7 +128,7 @@ export default function ContactForm() {
                           placeholder:text-white/40 placeholder:text-base
                           [&::placeholder]:transition-colors [&::placeholder]:duration-500
                           hover:[&::placeholder]:text-white focus:[&::placeholder]:text-white
-                          h-14 rounded-[6px]
+                          h-14 rounded-[6px] cursor-target
                         "
                         {...field}
                       />
@@ -159,7 +159,7 @@ export default function ContactForm() {
                         placeholder:text-white/40 placeholder:text-base
                         [&::placeholder]:transition-colors [&::placeholder]:duration-500
                         hover:[&::placeholder]:text-white focus:[&::placeholder]:text-white
-                        resize-y rounded-[6px]
+                        resize-y rounded-[6px] cursor-target
                       "
                       {...field}
                     />
@@ -201,7 +201,7 @@ export default function ContactForm() {
               <motion.div whileTap={{ scale: 0.98 }}>
                 <Button
                   type="submit"
-                  className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] w-full lg:w-auto"
+                  className="cursor-target uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] w-full lg:w-auto"
                   variant="default"
                   disabled={
                     !form.formState.isValid && form.formState.isSubmitted

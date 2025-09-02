@@ -112,7 +112,7 @@ function MotionModal({
                 </div>
                 <button
                   onClick={onClose}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-main-primary/60"
+                  className="inline-flex cursor-target h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-main-primary/60"
                   autoFocus
                 >
                   <X className="h-4 w-4" />

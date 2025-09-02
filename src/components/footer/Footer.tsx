@@ -85,17 +85,17 @@ export default function Footer() {
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className="flex gap-4 flex-col lg:flex-row items-center text-center"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-target">
           <Mail size={18} className="text-main-secondary" />
           <Link href="mailto:info@begroup.com" className="hover:underline">
             info@begroup.com
           </Link>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-target">
           <Phone size={18} className="text-main-secondary" />
           <Link href="tel:+201012345678">+20 101 234 5678</Link>
         </div>
-        <div className="flex items-start gap-3 justify-center">
+        <div className="flex items-start gap-3 justify-center cursor-target">
           <MapPin size={18} className="text-main-secondary" />
           <span>Office 12, Fifth Settlement, New Cairo, Egypt</span>
         </div>
@@ -117,6 +117,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.0 }}
+            className="cursor-target"
           >
             <SocialIcon href="https://youtube.com" label="YouTube">
               <Youtube size={22} />
@@ -128,6 +129,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.06 }}
+            className="cursor-target"
           >
             <SocialIcon href="https://facebook.com" label="Facebook">
               <Facebook size={22} />
@@ -139,6 +141,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.12 }}
+            className="cursor-target"
           >
             <SocialIcon href="https://linkedin.com" label="LinkedIn">
               <Linkedin size={22} />
@@ -150,6 +153,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.18 }}
+            className="cursor-target"
           >
             <SocialIcon href="https://twitter.com" label="Twitter">
               <Twitter size={22} />
@@ -161,6 +165,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.24 }}
+            className="cursor-target"
           >
             <SocialIcon href="https://instagram.com" label="Instagram">
               <Instagram size={22} />
@@ -239,10 +244,10 @@ export default function Footer() {
           Rights Reserved
         </div>
         <div className="flex items-center gap-6 text-white/60 text-sm">
-          <Link href="#" className="hover:underline">
+          <Link href="#" className="hover:underline cursor-target">
             Privacy Policy
           </Link>
-          <Link href="#" className="hover:underline">
+          <Link href="#" className="hover:underline cursor-target">
             Terms
           </Link>
         </div>

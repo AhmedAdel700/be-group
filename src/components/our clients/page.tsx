@@ -51,7 +51,7 @@ export default function ClientsSection() {
       logos={logos}
       locale={locale}
       delayMs={2200}
-      className="bg-main-black2 border-b border-white/10 pb-4"
+      className="bg-main-black2 border-b border-white/10 pb-10"
     />
   );
 }

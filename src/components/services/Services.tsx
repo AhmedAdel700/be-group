@@ -449,7 +449,7 @@ export default function Services() {
             className={`absolute -left-2 top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? maxStart : 0)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
-                : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105"
+                : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
             }`}
             disabled={start === (isRTL ? maxStart : 0)}
           >
@@ -467,7 +467,7 @@ export default function Services() {
             className={`absolute -right-2 top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? 0 : maxStart)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
-                : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105"
+                : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
             }`}
             disabled={start === (isRTL ? 0 : maxStart)}
           >
@@ -496,7 +496,7 @@ export default function Services() {
                   <button
                     key={s.id}
                     onClick={() => select(i)}
-                    className={`group basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none`}
+                    className={`group basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target`}
                     dir="ltr"
                   >
                     <Icon
@@ -610,7 +610,7 @@ export default function Services() {
                 >
                   <Link href={"/services"} className="w-full">
                     <Button
-                      className="uppercase bg-main-primary text-main-text hover:bg-main-secondary p-6 !rounded-[4px] w-full sm:w-[20%]"
+                      className="uppercase bg-main-primary text-main-text hover:bg-main-secondary p-6 !rounded-[4px] w-full sm:w-[20%] cursor-target"
                       variant="default"
                     >
                       More Details

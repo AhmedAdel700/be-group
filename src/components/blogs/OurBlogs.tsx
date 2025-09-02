@@ -120,12 +120,9 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
             practical takeaways.
           </motion.p>
 
-          <Link
-            href={"/blog"}
-            className="z-50"
-          >
+          <Link href={"/blog"} className="z-50">
             <Button
-              className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] z-50"
+              className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] z-50 cursor-target"
               variant="default"
             >
               VIEW BLOG
@@ -158,7 +155,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
               viewport={{ once: true, amount: 0.35 }}
               className="w-full js-card cursor-pointer"
             >
-              <div className="group rounded-[6px] overflow-hidden">
+              <div className="group rounded-[6px] overflow-hidden cursor-target">
                 {/* IMAGE */}
                 <div className="relative aspect-[16/9] overflow-hidden">
                   {get(0)?.image ? (
@@ -204,7 +201,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
               viewport={{ once: true, amount: 0.35 }}
               className="w-full cursor-pointer"
             >
-              <div className="group  rounded-[6px] overflow-hidden">
+              <div className="group  rounded-[6px] overflow-hidden cursor-target cursor-pointer">
                 {/* IMAGE */}
                 <div className="relative aspect-[16/9] overflow-hidden">
                   {get(1)?.image ? (
@@ -249,7 +246,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
               viewport={{ once: true, amount: 0.35 }}
               className="w-full js-card cursor-pointer"
             >
-              <div className="group rounded-[6px] overflow-hidden">
+              <div className="group rounded-[6px] overflow-hidden cursor-target">
                 {/* IMAGE */}
                 <div className="relative aspect-[16/9] overflow-hidden">
                   {get(2)?.image ? (

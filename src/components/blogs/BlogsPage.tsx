@@ -136,7 +136,7 @@ export default function BlogsPage({
               key={get(index)?.id || index}
               custom={index}
               variants={cardVar}
-              className="w-full cursor-pointer"
+              className="w-full cursor-pointer cursor-target"
             >
               <div className="group rounded-[6px] overflow-hidden">
                 {/* IMAGE */}
@@ -197,7 +197,7 @@ export default function BlogsPage({
             <Button
               onClick={handlePrevPage}
               disabled={currentPage <= 1}
-              className="group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
+              className="group cursor-target relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
               size="icon"
             >
               <span
@@ -225,7 +225,7 @@ export default function BlogsPage({
                   <Button
                     onClick={() => handlePageClick(page)}
                     aria-current={page === currentPage ? "page" : undefined}
-                    className={`group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border transition-all duration-200 ${
+                    className={`group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border transition-all duration-200 cursor-target ${
                       page === currentPage
                         ? "border-white bg-white text-black"
                         : "border-white/80 text-white bg-transparent hover:bg-transparent"
@@ -262,7 +262,7 @@ export default function BlogsPage({
             <Button
               onClick={handleNextPage}
               disabled={currentPage >= totalPages}
-              className="group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
+              className="group cursor-target relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
               size="icon"
             >
               <span

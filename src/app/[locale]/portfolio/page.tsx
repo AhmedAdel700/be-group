@@ -37,7 +37,7 @@ export default function page() {
 
             <Link href={"contact"}>
               <Button
-                className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px]"
+                className="uppercase bg-main-white text-main-text hover:bg-white/90 p-6 border !rounded-[4px] cursor-target"
                 variant="default"
               >
                 Start A Project

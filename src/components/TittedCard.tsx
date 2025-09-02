@@ -1,4 +1,3 @@
-// TiltedCard.tsx
 "use client";
 import type { SpringOptions } from "motion/react";
 import { useRef, useState } from "react";
@@ -71,8 +70,21 @@ export default function TiltedCard({
     const offsetX = e.clientX - rect.left - rect.width / 2;
     const offsetY = e.clientY - rect.top - rect.height / 2;
 
-    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
-    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
+    // Apply constraints to prevent full rotation
+    const rotationX = Math.min(
+      Math.max(
+        (offsetY / (rect.height / 2)) * -rotateAmplitude,
+        -rotateAmplitude
+      ),
+      rotateAmplitude
+    );
+    const rotationY = Math.min(
+      Math.max(
+        (offsetX / (rect.width / 2)) * rotateAmplitude,
+        -rotateAmplitude
+      ),
+      rotateAmplitude
+    );
 
     rotateX.set(rotationX);
     rotateY.set(rotationY);
@@ -136,14 +148,14 @@ export default function TiltedCard({
           scale,
         }}
       >
-        {imageSrc ?? (
+        {imageSrc ? (
           <motion.img
             src={imageSrc}
             alt={altText}
             className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
             style={{ width: imageWidth, height: imageHeight }}
           />
-        )}
+        ) : null}
 
         {displayOverlayContent && overlayContent && (
           <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">

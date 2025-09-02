@@ -88,7 +88,7 @@ export default function SelectedWork() {
                       transition: { duration: 0.6, delay: 0.08 },
                     })}
               >
-                <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer shadow-none">
+                <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer shadow-none cursor-target">
                   <CardContent className="p-0 flex flex-col">
                     {/* Image */}
                     <div className="relative w-full overflow-hidden rounded-[4px]">

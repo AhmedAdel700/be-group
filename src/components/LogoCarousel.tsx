@@ -54,7 +54,7 @@ export default function LogoCarousel({
 
   return (
     <section dir={isRTL ? "rtl" : "ltr"} className={className}>
-      <div className="w-full flex justify-center items-center flex-col text-main-white gap-8 py-12">
+      <div className="w-full flex justify-center items-center flex-col text-main-white gap-8 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -88,15 +88,13 @@ export default function LogoCarousel({
         plugins={[autoplay.current]}
         className="w-full"
       >
-        {/* Remove the default left negative margin and item padding */}
         <CarouselContent className="ms-0 gap-2 [&>div]:ps-0">
           {logos.map((logo, idx) => (
             <CarouselItem
               key={`${logo.src}-${idx}`}
-              // smaller basis so items take less width
-              className="ps-0 basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-[12%]"
+              className="ps-0 basis-[55%] md:basis-[30%] lg:basis-[25%] xl:basis-[18%] 2xl:basis-[12%]"
             >
-              <div className="flex min-h-[10rem] w-full items-center justify-center">
+              <div className="flex min-h-[15rem] w-full items-center justify-center">
                 <Link
                   href={logo?.href || "."}
                   target="_blank"
@@ -105,22 +103,16 @@ export default function LogoCarousel({
                   aria-label={logo.alt || "Logo"}
                 >
                   <div className="flex flex-col items-center w-full">
-                    {/* Line aligned to start */}
-                    <div className="flex w-full">
-                      <span className="block w-full h-[2px] rounded-full bg-main-primary mb-1" />
-                    </div>
-
-                    {/* Image */}
-                    <div className="relative flex items-center justify-center w-full">
+                    <div className="relative flex items-center justify-center w-full hover:-translate-y-3 transition-transform cursor-target">
                       <Image
                         src={logo.src}
                         alt={logo.alt || "Logo"}
                         width={logo.width || 120}
-                        height={logo.height || 60}
+                        height={logo.height || 120} // Make sure height equals width for circular effect
                         priority={logo.priority}
-                        className="h-52 w-auto object-contain relative z-10"
+                        className="h-52 w-52 max-w-auto object-cover rounded-full relative z-10" // Ensure it's a circle
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent rounded-lg" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent rounded-full border-t-[3px] border-main-primary" />
                     </div>
                   </div>
                 </Link>
