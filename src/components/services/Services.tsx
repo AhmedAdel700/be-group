@@ -82,7 +82,8 @@ export default function Services() {
           <>
             <p className="text-lg leading-relaxed opacity-95 font-medium">
               We plan, create, and manage content that grows communities and
-              drives results—tailored for each platform is culture and algorithm.
+              drives results—tailored for each platform is culture and
+              algorithm.
             </p>
             <div className="mt-8">
               <div className="max-w-2xl mx-auto">
@@ -97,7 +98,7 @@ export default function Services() {
                     <span className="text-sm font-medium">YouTube</span>
                   </div>
                 </div>
-                
+
                 {/* Second row - 3 items */}
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
@@ -113,7 +114,7 @@ export default function Services() {
                     <span className="text-xs font-medium">LinkedIn</span>
                   </div>
                 </div>
-                
+
                 {/* Third row - 2 items */}
                 <div className="grid grid-cols-2 gap-6">
                   <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
@@ -200,19 +201,27 @@ export default function Services() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <Search className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm font-medium">Keyword research & bid strategy</span>
+                  <span className="text-sm font-medium">
+                    Keyword research & bid strategy
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <BarChart3 className="w-5 h-5 text-green-400" />
-                  <span className="text-sm font-medium">Quality Score optimization</span>
+                  <span className="text-sm font-medium">
+                    Quality Score optimization
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <TrendingUp className="w-5 h-5 text-purple-400" />
-                  <span className="text-sm font-medium">Performance tracking</span>
+                  <span className="text-sm font-medium">
+                    Performance tracking
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
                   <Lightbulb className="w-5 h-5 text-yellow-400" />
-                  <span className="text-sm font-medium">Campaign optimization</span>
+                  <span className="text-sm font-medium">
+                    Campaign optimization
+                  </span>
                 </div>
               </div>
             </div>
@@ -276,7 +285,9 @@ export default function Services() {
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
                   <Users className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">Review optimization</span>
+                  <span className="text-sm font-medium">
+                    Review optimization
+                  </span>
                 </div>
               </div>
             </div>
@@ -380,33 +391,40 @@ export default function Services() {
     []
   );
 
+  const windowSize =
+    typeof window !== "undefined" && window.innerWidth < 768 ? 3 : 5;
+  const maxStart = services.length - windowSize;
+
   const [start, setStart] = useState(0);
   const [active, setActive] = useState(0);
 
-  // Responsive window size: 2 on mobile, 5 on desktop
-  const windowSize = typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 5;
-  const maxStart = services.length - windowSize;
-
+  // Move the carousel
   const move = useCallback(
     (dir: -1 | 1) => {
-      setStart((s) => Math.max(0, Math.min(maxStart, s + dir)));
+      const newStart = start + dir;
+      // Prevent moving past the start or the end
+      if (newStart >= 0 && newStart <= maxStart) {
+        setStart(newStart);
+      }
     },
-    [maxStart]
+    [start, maxStart]
   );
 
-  const select = useCallback((i: number) => {
-    setActive(i);
-    // keep selected visible within window
-    setStart((s) => {
-      if (i < s) return i;
-      if (i > s + windowSize - 1) return i - windowSize + 1;
-      return s;
-    });
-  }, [windowSize]);
+  // Select a specific service
+  const select = useCallback(
+    (i: number) => {
+      setActive(i);
+      setStart((prevStart) => {
+        // Keep selected visible within window
+        if (i < prevStart) return i;
+        if (i > prevStart + windowSize - 1) return i - windowSize + 1;
+        return prevStart;
+      });
+    },
+    [windowSize]
+  );
 
-  // shift in % - responsive based on window size
   const shiftPct = (isRTL ? start : -start) * (100 / windowSize);
-
   const ActiveIcon = services[active].icon;
 
   return (
@@ -446,7 +464,7 @@ export default function Services() {
           <button
             aria-label="Previous"
             onClick={() => move(isRTL ? 1 : -1)}
-            className={`absolute -left-2 top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute left-1/3 sm:-left-2 md:-left-4 top-0 sm:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? maxStart : 0)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
                 : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
@@ -464,7 +482,7 @@ export default function Services() {
           <button
             aria-label="Next"
             onClick={() => move(isRTL ? -1 : 1)}
-            className={`absolute -right-2 top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute right-1/3 sm:-right-4 md:-right-2 top-0 sm:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? 0 : maxStart)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
                 : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
@@ -496,7 +514,7 @@ export default function Services() {
                   <button
                     key={s.id}
                     onClick={() => select(i)}
-                    className={`group basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target`}
+                    className={`group basis-1/3 sm:basis-1/4 md:basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target`}
                     dir="ltr"
                   >
                     <Icon
