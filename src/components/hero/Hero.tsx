@@ -140,7 +140,7 @@ export default function Hero() {
             <SplitText
               text="Be Group"
               tag="h1"
-              className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
+              className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative tracking-tight"
               delay={80}
               duration={0.6}
               ease="power3.out"
