@@ -111,15 +111,15 @@ const SplitText: React.FC<SplitTextProps> = ({
         onSplit: (self: GSAPSplitText) => {
           assignTargets(self);
 
-          targets.forEach((el) => {
-            el.classList.add(
-              "bg-clip-text",
-              "text-transparent",
-              "bg-gradient-to-b",
-              "from-[#F18A1D]",
-              "to-[#6E717E]"
-            );
-          });
+          // targets.forEach((el) => {
+          //   el.classList.add(
+          //     "bg-clip-text",
+          //     "text-transparent",
+          //     "bg-gradient-to-b",
+          //     "from-[#F18A1D]",
+          //     "to-[#6E717E]"
+          //   );
+          // });
 
           // Ensure children start in "from" state before revealing parent
           if (initialHidden) {
