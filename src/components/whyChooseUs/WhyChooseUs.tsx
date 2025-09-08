@@ -241,7 +241,7 @@ function MarqueeGroup({
       {Array.from({ length: count }).map((_, i) => (
         <span
           key={i}
-          className="mx-4 lg:mx-8 xl:mx-12 text-5xl md:text-7xl xl:text-[150px] font-medium whitespace-nowrap"
+          className="mx-4 lg:mx-8 xl:mx-12 text-5xl md:text-7xl xl:text-[150px] font-medium whitespace-nowrap text-main-primary xl:mb-10"
         >
           {text}
         </span>

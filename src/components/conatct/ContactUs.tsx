@@ -84,7 +84,8 @@ export default function ContactUs() {
             variants={leftInSpring}
           >
             <h2 className="text-7xl capitalize text-center sm:text-start">
-              Let’s work <br /> together
+              <span className="text-main-primary">Let’s</span> work <br />{" "}
+              together
             </h2>
 
             <p className="text-lg text-white/80 text-center sm:text-start">

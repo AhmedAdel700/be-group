@@ -24,7 +24,7 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="uppercase py-3 px-4 border rounded-full"
+        className="uppercase py-3 px-4 border rounded-full text-main-primary"
       >
         About Agency
       </motion.div>
@@ -74,7 +74,7 @@ export default function About() {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="h-auto xl:h-full flex flex-col justify-between items-start gap-4 text-start px-4 xl:px-0 xl:ms-16 flex-1 w-full"
         >
-          <h2 className="text-3xl mt-5 lg:mt-0 md:text-4xl font-bold">
+          <h2 className="text-3xl mt-5 lg:mt-0 md:text-4xl font-bold text-main-primary tracking-tight">
             Be Group
           </h2>
           <h3 className="text-xl md:text-2xl font-semibold">
@@ -82,7 +82,7 @@ export default function About() {
           </h3>
 
           <h4 className="font-medium">What We Do?</h4>
-          <ul className="list-disc text-white/80 leading-relaxed flex flex-col gap-4 text-xs md:text-sm lg:text-base ps-4">
+          <ul className="list-disc marker:text-main-primary text-white/80 leading-relaxed flex flex-col gap-4 text-xs md:text-sm lg:text-base ps-4">
             <li>Digital assets audit</li>
             <li>Research & competitive analysis</li>
             <li>Target audience segmentation</li>
