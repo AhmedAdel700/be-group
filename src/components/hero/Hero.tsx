@@ -148,7 +148,7 @@ export default function Hero() {
             <SplitText
               text="We Provide Digital Marketing"
               tag="p"
-              className="font-semibold leading-[1.3] text-[clamp(20px,5.5vw,48px)] max-w-[90ch]"
+              className="font-semibold leading-[1.3] text-[clamp(20px,6.5vw,48px)] max-w-[90ch]"
               delay={100}
               duration={0.6}
               initialHidden
