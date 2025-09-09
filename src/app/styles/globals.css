@@ -39,6 +39,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: black !important;
+}
+
 @keyframes growLine {
   0% {
     transform: scaleX(0);
