@@ -173,9 +173,9 @@ export default function Hero() {
                 Digital Services has never been easier
               </h4>
               <div className="flex items-center gap-4">
-                <Link href={'#about'}>
+                <Link href={"#about"}>
                   <Button
-                    className="uppercase bg-main-primary text-main-text hover:bg-white/90 py-5 !rounded-[4px] !font-semibold cursor-target w-[160px] h-[48px]"
+                    className="uppercase bg-main-primary text-main-text hover:bg-white/90 lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-fit lg:w-[160px] h-[38px] lg:h-[48px]"
                     variant="default"
                   >
                     Discover Now
@@ -184,7 +184,7 @@ export default function Hero() {
 
                 <Link href={"#contact-us"}>
                   <Button
-                    className="uppercase bg-transparent border-2 border-main-primary text-main-primary hover:bg-main-primary hover:text-white py-5 !rounded-[4px] !font-semibold cursor-target w-[160px] h-[48px] transition-colors duration-300 ease-in-out"
+                    className="uppercase bg-transparent border-2 border-main-primary text-main-primary hover:bg-main-primary hover:text-white lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-fit lg:w-[160px] h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out"
                     variant="outline"
                   >
                     Contact Us
