@@ -1,4 +1,3 @@
-// app/components/Hero.tsx
 "use client";
 
 import { useLocale } from "next-intl";
@@ -7,7 +6,6 @@ import { Button } from "../ui/button";
 import { motion, type Variants, cubicBezier } from "framer-motion";
 import { ArrowDown, Phone } from "lucide-react";
 import { Link } from "@/navigations";
-import Squares from "../Squares";
 
 export default function Hero() {
   const locale = useLocale();
@@ -42,27 +40,32 @@ export default function Hero() {
       transition: { staggerChildren: 0.12, delayChildren: 0.2 },
     },
   };
-
   const ctaItem: Variants = {
     hidden: { opacity: 0, x: 28 * dir },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.45, ease: easeOut },
-    },
+    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
   };
-
   const arrowItem: Variants = {
     hidden: { opacity: 0, x: -20 * dir },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.45, ease: easeOut },
-    },
+    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
   };
 
   return (
-    <section className="relative min-h-screen bg-main-black2 text-main-primary">
+    <section className="relative min-h-screen text-main-primary overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <video
+          src="/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover"
+          aria-hidden="true"
+          disableRemotePlayback
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
       {/* Floating CTA buttons */}
       <motion.div
         variants={ctaContainer}
@@ -72,7 +75,6 @@ export default function Hero() {
           locale === "en" ? "left-5" : "right-5"
         } bottom-5 flex flex-col gap-5 z-[100]`}
       >
-        {/* WhatsApp CTA */}
         <motion.div variants={ctaItem}>
           <Button
             asChild
@@ -89,8 +91,6 @@ export default function Hero() {
             </Link>
           </Button>
         </motion.div>
-
-        {/* Phone CTA */}
         <motion.div variants={ctaItem}>
           <Button
             asChild
@@ -112,10 +112,9 @@ export default function Hero() {
         initial="hidden"
         animate="show"
         onClick={() => {
-          document.getElementById("about")?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+          document
+            .getElementById("about")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
         aria-label="Scroll to next section"
         className={`absolute bottom-16 cursor-target ${
@@ -126,15 +125,7 @@ export default function Hero() {
       </motion.button>
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
-        <Squares
-          speed={0.5}
-          squareSize={60}
-          direction="diagonal" // up, down, left, right, diagonal
-          borderColor="#79460f"
-          hoverFillColor="#222"
-        />
 
-        {/* Overlay */}
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
           <div className="inline-block">
             <SplitText
@@ -150,7 +141,7 @@ export default function Hero() {
               threshold={0.1}
               rootMargin="-100px"
               textAlign="center"
-              initialHidden={true}
+              initialHidden
             />
           </div>
 
@@ -161,7 +152,7 @@ export default function Hero() {
               className="mt-5 font-semibold leading-[1.3] text-[clamp(20px,5.5vw,56px)] max-w-[90ch]"
               delay={100}
               duration={0.6}
-              initialHidden={true}
+              initialHidden
               ease="power3.out"
               splitType="chars"
               from={{ opacity: 0, y: 50 }}
@@ -171,7 +162,6 @@ export default function Hero() {
               textAlign="center"
             />
 
-            {/* Progress line */}
             <div className="mt-6 h-[4px] bg-main-primary origin-left scale-x-0 grow-line w-[90%] mx-auto" />
 
             <motion.div
@@ -186,12 +176,11 @@ export default function Hero() {
               <Button
                 className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] cursor-target"
                 variant="default"
-                onClick={() => {
-                  document.getElementById("about")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}
+                onClick={() =>
+                  document
+                    .getElementById("about")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
               >
                 Discover Now
               </Button>
