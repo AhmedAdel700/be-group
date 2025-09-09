@@ -25,8 +25,6 @@ export interface SplitTextProps {
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
   textAlign?: React.CSSProperties["textAlign"];
   onLetterAnimationComplete?: () => void;
-  onRenderComplete?: () => void;
-
   /** keeps text invisible until the GSAP tween actually starts */
   initialHidden?: boolean;
 }
@@ -46,7 +44,6 @@ const SplitText: React.FC<SplitTextProps> = ({
   textAlign = "center",
   onLetterAnimationComplete,
   initialHidden = true,
-  onRenderComplete,
 }) => {
   const ref = useRef<HTMLElement>(null);
   const animationCompletedRef = useRef(false);
@@ -117,7 +114,7 @@ const SplitText: React.FC<SplitTextProps> = ({
               "bg-clip-text",
               "text-transparent",
               "bg-gradient-to-b",
-              "from-orange-400",
+              "from-orange-300",
               "to-[#F18A1D]"
             );
           });
@@ -136,9 +133,9 @@ const SplitText: React.FC<SplitTextProps> = ({
             { ...from, force3D: true, willChange: "transform, opacity" },
             {
               ...to,
-              duration,
+              duration: tag === "p" ? 0.6 : duration, // Apply faster duration for paragraph elements
               ease,
-              stagger: delay / 1000,
+              stagger: 0.05, // Reduce stagger time (optional for faster effect)
               scrollTrigger: {
                 trigger: el,
                 start,
@@ -195,8 +192,6 @@ const SplitText: React.FC<SplitTextProps> = ({
       scope: ref,
     }
   );
-
-  onRenderComplete?.();
 
   const renderTag = () => {
     const style: React.CSSProperties = {

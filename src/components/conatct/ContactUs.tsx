@@ -68,7 +68,7 @@ const popBlurIn: Variants = {
 
 export default function ContactUs() {
   return (
-    <section className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white border-b border-white/10 px-4 py-10 xl:py-24">
+    <section id="contact-us" className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white border-b border-white/10 px-4 py-10 xl:py-24">
       <motion.div
         className="flex flex-col gap-8 xl:gap-20 justify-start items-center container mx-auto"
         variants={containerVar}

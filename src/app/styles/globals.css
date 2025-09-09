@@ -58,7 +58,7 @@ body {
   transform-origin: left;
   transform: scaleX(0);
   animation: growLine 2s ease-out forwards;
-  animation-delay: 1.5s;
+  animation-delay: 2s;
 }
 
 .glass {
@@ -88,6 +88,7 @@ body {
   display: inline-flex;
   align-items: center;
 }
+
 
 @keyframes marquee-ltr-kf {
   from { transform: translate3d(0, 0, 0); }

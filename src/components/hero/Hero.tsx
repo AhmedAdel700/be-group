@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import SplitText from "../SplitText";
 import { Button } from "../ui/button";
 import { motion, type Variants, cubicBezier } from "framer-motion";
-import { ArrowDown, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Link } from "@/navigations";
 
 export default function Hero() {
@@ -44,10 +44,10 @@ export default function Hero() {
     hidden: { opacity: 0, x: 28 * dir },
     show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
   };
-  const arrowItem: Variants = {
-    hidden: { opacity: 0, x: -20 * dir },
-    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
-  };
+  // const arrowItem: Variants = {
+  //   hidden: { opacity: 0, x: -20 * dir },
+  //   show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
+  // };
 
   return (
     <section className="relative min-h-screen text-main-primary overflow-hidden">
@@ -107,7 +107,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.button
+      {/* <motion.button
         variants={arrowItem}
         initial="hidden"
         animate="show"
@@ -117,23 +117,22 @@ export default function Hero() {
             ?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
         aria-label="Scroll to next section"
-        className={`absolute bottom-16 cursor-target ${
+        className={`hidden xl:flex absolute bottom-16 cursor-target ${
           locale === "en" ? "right-5" : "left-5"
         } z-[100] rounded-full border border-main-secondary w-10 h-10 flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]`}
       >
         <ArrowDown size={24} />
-      </motion.button>
+      </motion.button> */}
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
-
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
           <div className="inline-block">
             <SplitText
               text="Be Group"
               tag="h1"
-              className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative tracking-tight"
+              className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,100px)] relative tracking-tight"
               delay={80}
-              duration={0.6}
+              duration={1}
               ease="power3.out"
               splitType="chars"
               from={{ opacity: 0, y: 50 }}
@@ -149,7 +148,7 @@ export default function Hero() {
             <SplitText
               text="We Provide Digital Marketing"
               tag="p"
-              className="mt-5 font-semibold leading-[1.3] text-[clamp(20px,5.5vw,56px)] max-w-[90ch]"
+              className="font-semibold leading-[1.3] text-[clamp(20px,5.5vw,48px)] max-w-[90ch]"
               delay={100}
               duration={0.6}
               initialHidden
@@ -162,28 +161,36 @@ export default function Hero() {
               textAlign="center"
             />
 
-            <div className="mt-6 h-[4px] bg-main-primary origin-left scale-x-0 grow-line w-[90%] mx-auto" />
+            {/* <div className="mt-2 h-[4px] origin-left scale-x-0 grow-line w-full mx-auto" /> */}
 
             <motion.div
-              className="mt-8 flex flex-col lg:flex-row justify-around items-center gap-6"
+              className="mt-2 flex flex-col justify-between items-center gap-4"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.6, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 1.3, duration: 0.8, ease: "easeOut" }}
             >
-              <h4 className="uppercase text-main-white text-sm sm:text-lg">
+              <h4 className="uppercase text-main-white text-sm sm:text-xl font-base">
                 Digital Services has never been easier
               </h4>
-              <Button
-                className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] cursor-target"
-                variant="default"
-                onClick={() =>
-                  document
-                    .getElementById("about")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
-              >
-                Discover Now
-              </Button>
+              <div className="flex items-center gap-4">
+                <Link href={'#about'}>
+                  <Button
+                    className="uppercase bg-main-primary text-main-text hover:bg-white/90 py-5 !rounded-[4px] !font-semibold cursor-target w-[160px] h-[48px]"
+                    variant="default"
+                  >
+                    Discover Now
+                  </Button>
+                </Link>
+
+                <Link href={"#contact-us"}>
+                  <Button
+                    className="uppercase bg-transparent border-2 border-main-primary text-main-primary hover:bg-main-primary hover:text-white py-5 !rounded-[4px] !font-semibold cursor-target w-[160px] h-[48px] transition-colors duration-300 ease-in-out"
+                    variant="outline"
+                  >
+                    Contact Us
+                  </Button>
+                </Link>
+              </div>
             </motion.div>
           </div>
         </div>
