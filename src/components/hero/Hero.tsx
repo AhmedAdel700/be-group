@@ -58,7 +58,7 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           className="h-full w-full object-cover"
           aria-hidden="true"
           disableRemotePlayback
@@ -125,7 +125,6 @@ export default function Hero() {
       </motion.button>
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
-
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
           <div className="inline-block">
             <SplitText
