@@ -58,7 +58,7 @@ const SocialIcon: React.FC<{
 
 export default function Footer() {
   return (
-    <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-8 xl:px-20 py-6">
+    <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-4 md:px-8 xl:px-20 py-8">
       {/* Logo */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -83,21 +83,31 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="flex gap-4 flex-col lg:flex-row items-center text-center"
+        className="flex gap-4 flex-wrap items-center justify-center text-center"
       >
-        <div className="flex items-center gap-3 cursor-target">
-          <Mail size={18} className="text-main-secondary" />
-          <Link href="mailto:info@begroup.com" className="hover:underline">
+        <div className="flex items-center gap-2 cursor-target">
+          <Mail size={18} className="text-main-secondary shrink-0" />
+          <Link
+            href="mailto:info@begroup.com"
+            className="hover:underline text-xs sm:text-sm md:text-base"
+          >
             info@begroup.com
           </Link>
         </div>
-        <div className="flex items-center gap-3 cursor-target">
-          <Phone size={18} className="text-main-secondary" />
-          <Link href="tel:+201012345678">+20 101 234 5678</Link>
+        <div className="flex items-center gap-2 cursor-target">
+          <Phone size={18} className="text-main-secondary shrink-0" />
+          <Link
+            href="tel:+201012345678"
+            className="text-xs sm:text-sm md:text-base"
+          >
+            +20 101 234 5678
+          </Link>
         </div>
-        <div className="flex items-start gap-3 justify-center cursor-target">
-          <MapPin size={18} className="text-main-secondary" />
-          <span>Office 12, Fifth Settlement, New Cairo, Egypt</span>
+        <div className="flex items-start gap-2 justify-center cursor-target">
+          <MapPin size={18} className="text-main-secondary shrink-0" />
+          <span className="text-xs sm:text-sm md:text-base">
+            Office 12, Fifth Settlement, New Cairo, Egypt
+          </span>
         </div>
       </motion.div>
 
@@ -183,7 +193,7 @@ export default function Footer() {
         className="flex flex-col gap-4 items-center"
       >
         <div className="text-white/90 font-medium">Our Partners</div>
-        <div className="flex items-center justify-center gap-10 flex-wrap">
+        <div className="flex items-center justify-center gap-4 lg:gap-10 flex-wrap">
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 10 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -239,11 +249,11 @@ export default function Footer() {
         transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t border-white/10 pt-6"
       >
-        <div className="text-white/70 text-sm text-center">
+        <div className="text-white/70 text-xs sm:text-sm text-center">
           Made By <span className="text-main-primary">Be Group</span> © 2025 All
           Rights Reserved
         </div>
-        <div className="flex items-center gap-6 text-white/60 text-sm">
+        <div className="flex items-center gap-6 text-white/60 text-xs sm:text-sm">
           <Link href="#" className="hover:underline cursor-target">
             Privacy Policy
           </Link>

@@ -81,7 +81,7 @@ export default function WhyChooseUs() {
                   </div>
                 </div>
 
-                <div className="flex mt-12">
+                <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
                   <div className="hidden sm:block w-12"></div>
                   <p className="w-full sm:w-full leading-relaxed">
                     We create designs that are more than just visuals — they are
@@ -123,7 +123,7 @@ export default function WhyChooseUs() {
                   </div>
                 </div>
 
-                <div className="flex mt-12">
+                <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
                   <div className="hidden sm:block w-12"></div>
                   <p className="w-full sm:w-full leading-relaxed">
                     Great products start with great code. We write clean,
@@ -168,7 +168,7 @@ export default function WhyChooseUs() {
                   </div>
                 </div>
 
-                <div className="flex mt-12">
+                <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
                   <div className="hidden sm:block w-12"></div>
                   <p className="w-full sm:w-full leading-relaxed">
                     We believe simplicity is the ultimate sophistication. Our
@@ -209,7 +209,7 @@ export default function WhyChooseUs() {
                   </div>
                 </div>
 
-                <div className="flex mt-12">
+                <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
                   <div className="hidden sm:block w-12"></div>
                   <p className="w-full sm:w-full leading-relaxed">
                     Our commitment doesn’t stop at delivery — we stand by you

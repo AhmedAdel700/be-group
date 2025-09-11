@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useMemo, useState } from "react";
+import { motion } from "motion/react";
 import {
   BadgeCheck,
   Camera,
@@ -27,10 +27,10 @@ import {
   Palette,
   PenTool,
   Lightbulb,
-  X,
 } from "lucide-react";
 import TiltedCard from "@/components/TittedCard";
 import SplitText from "@/components/SplitText";
+import MotionModal from "./MotionModal";
 
 type CardInfo = {
   id: number;
@@ -40,96 +40,6 @@ type CardInfo = {
   content: React.ReactNode;
 };
 
-function MotionModal({
-  open,
-  onClose,
-  title,
-  icon: Icon,
-  content,
-}: {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  content: React.ReactNode;
-}) {
-  // ESC close + basic scroll lock
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    if (open) document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    return () => {
-      document.documentElement.style.overflow = prev;
-    };
-  }, [open]);
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          {/* Backdrop */}
-          <motion.button
-            aria-label="Close modal"
-            onClick={onClose}
-            className="absolute inset-0 bg-black/70"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-
-          {/* Panel */}
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={title}
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ scale: 0.96, opacity: 0, y: 12 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.98, opacity: 0, y: 8 }}
-            transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          >
-            <div className="w-[92vw] max-w-xl rounded-2xl border border-white/10 bg-neutral-900/80 backdrop-blur-md text-white">
-              {/* header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-main-primary/30 bg-main-primary/10">
-                    <Icon className="h-5 w-5 text-main-primary" />
-                  </span>
-                  <h3 className="text-lg font-semibold">{title}</h3>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="inline-flex cursor-target h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-main-primary/60"
-                  autoFocus
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-
-              {/* body */}
-              <div className="px-5 py-5">
-                <div className="prose prose-invert max-w-none">{content}</div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
 
 export default function Page() {
   // scroll-motion variants (added)
@@ -189,7 +99,8 @@ export default function Page() {
           <>
             <p className="text-lg leading-relaxed opacity-95 font-medium">
               We plan, create, and manage content that grows communities and
-              drives results—tailored for each platform is culture and algorithm.
+              drives results—tailored for each platform is culture and
+              algorithm.
             </p>
             <div className="mt-8">
               <div className="max-w-2xl mx-auto">
@@ -506,7 +417,7 @@ export default function Page() {
         <SplitText
           text="Our Services"
           tag="h1"
-          className="font-extrabold leading-[1.15] text-[clamp(32px,9vw,120px)] px-4 text-center"
+          className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
           delay={80}
           duration={0.6}
           ease="power3.out"
@@ -526,7 +437,7 @@ export default function Page() {
         variants={listVar}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.15, margin: "0px 0px -10% 0px" }}
+        viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       >
         {CARDS.map(({ id, title, blurb, Icon }) => (
           <motion.div key={id} variants={itemVar}>

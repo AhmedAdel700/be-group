@@ -108,7 +108,7 @@ export default function BlogsPage({
         <SplitText
           text="Latest News"
           tag="h1"
-          className="font-extrabold leading-[1.15] text-[clamp(32px,9vw,120px)] px-4 text-center"
+          className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
           delay={80}
           duration={0.6}
           ease="power3.out"
