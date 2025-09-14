@@ -2,55 +2,62 @@
 import CarouselComponent from "../carouselComponent/CarouselComponent";
 import { motion } from "motion/react";
 
-import placeHolder from '@/app/assets/6.png';
+import p1 from '@/app/assets/p1.jpg';
+import p2 from '@/app/assets/p2.jpg';
+import p3 from '@/app/assets/p3.jpg';
+import p4 from '@/app/assets/p4.jpg';
+import p5 from '@/app/assets/p5.jpg';
+import p6 from '@/app/assets/p6.jpg';
+import p7 from '@/app/assets/p7.jpg';
+import p8 from '@/app/assets/p8.jpg';
 
 export default function Portfolio() {
     const data = [
       {
         id: 1,
-        image: placeHolder,
+        image: p1,
         title: "E-commerce Redesign",
         desc: "Faster checkout, modern UI, +27% conv.",
       },
       {
         id: 2,
-        image: placeHolder,
+        image: p2,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },
       {
         id: 3,
-        image: placeHolder,
+        image: p3,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },
       {
         id: 4,
-        image: placeHolder,
+        image: p4,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },
       {
         id: 5,
-        image: placeHolder,
+        image: p5,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },
       {
         id: 6,
-        image: placeHolder,
+        image: p6,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },
       {
         id: 7,
-        image: placeHolder,
+        image: p7,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },
       {
         id: 8,
-        image: placeHolder,
+        image: p8,
         title: "Analytics Dashboard",
         desc: "Real-time KPIs with granular filters.",
       },

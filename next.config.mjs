@@ -4,18 +4,7 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: [
-            "koala.nbg1.your-objectstorage.com", // Add the allowed domain here
-        ],
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "koala.nbg1.your-objectstorage.com",
-                pathname: "/**",
-            },
-        ],
-    },
+    images: {},
 };
 
 export default withNextIntl(nextConfig);

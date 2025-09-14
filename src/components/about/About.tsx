@@ -3,7 +3,7 @@
 import Image from "next/image";
 import about1 from "@/app/assets/9.png";
 import about2 from "@/app/assets/about.webp";
-import about3 from "@/app/assets/6.png";
+import about3 from "@/app/assets/about1.jpg";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/navigations";

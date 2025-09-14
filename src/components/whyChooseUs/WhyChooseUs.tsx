@@ -1,36 +1,34 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import Image from "next/image";
-import whyUsImage from "@/app/assets/whyUs.jpg";
+import whyUsImage from "@/app/assets/whyUs.avif";
 import { Gem, Palette, Pencil, Star } from "lucide-react";
 import { motion } from "motion/react";
 
-type MarqueeGroupProps = {
-  text: string;
-  count?: number;
-  ariaHidden?: boolean;
-};
-
 export default function WhyChooseUs() {
-  const locale = useLocale();
-  const isRTL = locale === "ar";
-
-  const text = isRTL ? "لماذا تختارنا؟" : "Why Choose Us?";
-
   return (
     <section className="w-full min-h-fit xl:min-h-screen bg-main-black text-main-white py-8 xl:py-20 border-b border-white/10 overflow-hidden">
-      <div
-        className={`relative h-[100px] md:h-[200px] flex items-center marquee-mask select-none`}
-        dir={isRTL ? "rtl" : "ltr"}
-      >
-        <div
-          className={`marquee-track ${isRTL ? "marquee-rtl" : "marquee-ltr"}`}
-          aria-hidden="false"
+      <div className="flex flex-col justify-center items-center text-main-white gap-6 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          <MarqueeGroup text={text} count={8} />
-          <MarqueeGroup text={text} ariaHidden count={8} />
-        </div>
+          Why Choose Us
+        </motion.div>
+
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
+        >
+          Built for excellence
+        </motion.h2>
       </div>
 
       <div className="px-4 sm:px-0 sm:container pt-10 flex flex-col gap-24 mx-auto xl:ps-20">
@@ -45,7 +43,7 @@ export default function WhyChooseUs() {
           <Image
             src={whyUsImage}
             alt="why choose us image"
-            className="rounded-[150px] sm:max-w-[50%] lg:max-w-full"
+            className="rounded-[150px] sm:max-w-[50%] max-h-[120px] lg:max-h-[180px] lg:max-w-full object-cover"
             width={525}
           />
         </motion.div>
@@ -228,24 +226,5 @@ export default function WhyChooseUs() {
         </div>
       </div>
     </section>
-  );
-}
-
-function MarqueeGroup({
-  text,
-  count = 5,
-  ariaHidden = false,
-}: MarqueeGroupProps) {
-  return (
-    <div className="marquee-group" aria-hidden={ariaHidden ? "true" : "false"}>
-      {Array.from({ length: count }).map((_, i) => (
-        <span
-          key={i}
-          className="mx-4 lg:mx-8 xl:mx-12 text-5xl md:text-7xl xl:text-[150px] font-medium whitespace-nowrap text-main-primary xl:mb-10"
-        >
-          {text}
-        </span>
-      ))}
-    </div>
   );
 }
