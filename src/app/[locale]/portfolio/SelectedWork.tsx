@@ -99,7 +99,7 @@ export default function SelectedWork() {
               key={filter}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onClick={() => setActiveFilter(filter as any)}
-              className={`px-6 py-2 rounded-full text-sm font-medium border border-main-primary transition-colors duration-200 ${
+              className={`px-6 py-2 rounded-full text-sm font-medium border border-main-primary transition-colors duration-200 cursor-target ${
                 activeFilter === filter
                   ? "bg-main-primary text-black"
                   : "border-white text-white hover:bg-white/10"
