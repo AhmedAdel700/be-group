@@ -44,10 +44,6 @@ export default function Hero() {
     hidden: { opacity: 0, x: 28 * dir },
     show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
   };
-  // const arrowItem: Variants = {
-  //   hidden: { opacity: 0, x: -20 * dir },
-  //   show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
-  // };
 
   return (
     <section className="relative min-h-screen text-main-primary overflow-hidden">
@@ -107,23 +103,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* <motion.button
-        variants={arrowItem}
-        initial="hidden"
-        animate="show"
-        onClick={() => {
-          document
-            .getElementById("about")
-            ?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
-        aria-label="Scroll to next section"
-        className={`hidden xl:flex absolute bottom-16 cursor-target ${
-          locale === "en" ? "right-5" : "left-5"
-        } z-[100] rounded-full border border-main-secondary w-10 h-10 flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]`}
-      >
-        <ArrowDown size={24} />
-      </motion.button> */}
-
       <div className="relative w-full h-[100vh] flex items-center justify-center">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
           <div className="inline-block">
@@ -160,8 +139,6 @@ export default function Hero() {
               rootMargin="-100px"
               textAlign="center"
             />
-
-            {/* <div className="mt-2 h-[4px] origin-left scale-x-0 grow-line w-full mx-auto" /> */}
 
             <motion.div
               className="mt-2 flex flex-col justify-between items-center gap-4"
