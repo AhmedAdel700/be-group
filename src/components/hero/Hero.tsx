@@ -49,7 +49,7 @@ export default function Hero() {
     <section className="relative min-h-screen text-main-primary overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <video
-          src="/hero.mp4"
+          src="/hero2.mp4"
           autoPlay
           loop
           muted
