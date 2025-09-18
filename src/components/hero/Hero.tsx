@@ -102,8 +102,7 @@ export default function Hero() {
             style={{ pointerEvents: isExpanded ? "auto" : "none" }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <Button
-              asChild
+            <button
               className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0"
             >
               <Link
@@ -115,7 +114,7 @@ export default function Hero() {
               >
                 <WhatsAppIcon size={20} className="text-black" />
               </Link>
-            </Button>
+            </button>
           </motion.div>
 
           {/* Phone button – up-right (LTR) / up-left (RTL) */}
@@ -136,8 +135,7 @@ export default function Hero() {
             style={{ pointerEvents: isExpanded ? "auto" : "none" }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <Button
-              asChild
+            <button
               className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0"
             >
               <Link
@@ -147,7 +145,7 @@ export default function Hero() {
               >
                 <Phone size={20} className="text-black" />
               </Link>
-            </Button>
+            </button>
           </motion.div>
 
           {/* Main toggle button */}
