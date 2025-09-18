@@ -120,7 +120,7 @@ export default function Header() {
         className="flex items-center gap-3 cursor-pointer cursor-target"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <Image src={logo} alt="Be Group Logo" width={90} height={90} priority />
+        <Image src={logo} alt="Be Group Logo" width={120} height={120} priority />
       </motion.div>
 
       {/* Desktop nav (xl and up) */}

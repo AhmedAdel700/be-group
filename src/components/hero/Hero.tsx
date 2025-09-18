@@ -4,14 +4,16 @@ import { useLocale } from "next-intl";
 import SplitText from "../SplitText";
 import { Button } from "../ui/button";
 import { motion, type Variants, cubicBezier } from "framer-motion";
-import { Phone } from "lucide-react";
+import { Phone, UserRound } from "lucide-react";
 import { Link } from "@/navigations";
+import { useState } from "react";
 
 export default function Hero() {
   const locale = useLocale();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const WhatsAppIcon = ({
-    size = 26,
+    size = 22,
     className = "",
   }: {
     size?: number;
@@ -33,23 +35,32 @@ export default function Hero() {
   const dir = locale === "ar" ? 1 : -1;
   const easeOut = cubicBezier(0.22, 1, 0.36, 1);
 
+  // tighter radius for a close semicircle cluster
+  const R = 80; // px
+  const DIAG = 40; // ≈ R / √2
+
   const ctaContainer: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.15 },
     },
   };
   const ctaItem: Variants = {
-    hidden: { opacity: 0, x: 28 * dir },
-    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
+    hidden: { opacity: 0, x: 20 * dir, y: 20 },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: { duration: 0.4, ease: easeOut },
+    },
   };
 
   return (
     <section className="relative min-h-screen text-main-primary overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <video
-          src="/hero3.mp4"
+          src="/hero4.mp4"
           autoPlay
           loop
           muted
@@ -68,62 +79,95 @@ export default function Hero() {
         initial="hidden"
         animate="show"
         className={`fixed ${
-          locale === "en" ? "left-5" : "right-5"
-        } bottom-5 flex flex-col gap-5 z-[100]`}
+          locale === "en" ? "left-8" : "right-8"
+        } bottom-10 z-[100]`}
       >
-        <motion.div variants={ctaItem}>
-          <Button
-            asChild
-            className="!rounded-[6px] h-10 px-3 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
+        {/* wrapper to anchor the semicircle around main button */}
+        <div className="relative w-[48px] h-[48px]">
+          {/* WhatsApp button – straight up */}
+          <motion.div
+            variants={ctaItem}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: isExpanded ? 1 : 0,
+              scale: isExpanded ? 1 : 0,
+              x: 0,
+              y: isExpanded ? -R : 0,
+            }}
+            transition={{
+              duration: 0.28,
+              ease: "easeOut",
+              delay: isExpanded ? 0.03 : 0,
+            }}
+            style={{ pointerEvents: isExpanded ? "auto" : "none" }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <Link
-              href="https://wa.me/201234567890"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat on WhatsApp"
-              className="flex items-center gap-2"
+            <Button
+              asChild
+              className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0"
             >
-              <WhatsAppIcon size={24} className="text-black" />
-            </Link>
-          </Button>
-        </motion.div>
-        <motion.div variants={ctaItem}>
-          <Button
-            asChild
-            className="!rounded-[6px] cursor-target h-10 px-3 bg-main-secondary text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              <Link
+                href="https://wa.me/201234567890"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat on WhatsApp"
+                className="flex items-center justify-center w-full h-full"
+              >
+                <WhatsAppIcon size={20} className="text-black" />
+              </Link>
+            </Button>
+          </motion.div>
+
+          {/* Phone button – up-right (LTR) / up-left (RTL) */}
+          <motion.div
+            variants={ctaItem}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: isExpanded ? 1 : 0,
+              scale: isExpanded ? 1 : 0,
+              x: isExpanded ? DIAG * -dir : 0, // dir=-1 => +DIAG to the right in LTR
+              y: isExpanded ? -DIAG : 0,
+            }}
+            transition={{
+              duration: 0.28,
+              ease: "easeOut",
+              delay: isExpanded ? 0.08 : 0,
+            }}
+            style={{ pointerEvents: isExpanded ? "auto" : "none" }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <Link
-              href="tel:+201234567890"
-              aria-label="Call us"
-              className="flex items-center gap-2"
+            <Button
+              asChild
+              className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0"
             >
-              <Phone size={24} className="text-black" />
-            </Link>
-          </Button>
-        </motion.div>
+              <Link
+                href="tel:+201234567890"
+                aria-label="Call us"
+                className="flex items-center justify-center w-full h-full"
+              >
+                <Phone size={20} className="text-black" />
+              </Link>
+            </Button>
+          </motion.div>
+
+          {/* Main toggle button */}
+          <motion.div variants={ctaItem} className="absolute inset-0">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex justify-center items-center !rounded-full w-12 h-12 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] p-0"
+              aria-label={
+                isExpanded ? "Close quick actions" : "Open quick actions"
+              }
+            >
+              <UserRound size={24} className="text-black" />
+            </button>
+          </motion.div>
+        </div>
       </motion.div>
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
-          <div className="inline-block">
-            <SplitText
-              text="Be Group"
-              tag="h1"
-              className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,100px)] relative tracking-tight"
-              delay={80}
-              duration={1}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 50 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-100px"
-              textAlign="center"
-              initialHidden
-            />
-          </div>
-
-          <div className="inline-block">
+          <div className="inline-block xl:mt-36">
             <SplitText
               text="We Provide Digital Marketing"
               tag="p"
@@ -141,7 +185,7 @@ export default function Hero() {
             />
 
             <motion.div
-              className="mt-2 flex flex-col justify-between items-center gap-4"
+              className="flex flex-col justify-between items-center gap-4"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3, duration: 0.8, ease: "easeOut" }}
@@ -150,18 +194,9 @@ export default function Hero() {
                 Digital Services has never been easier
               </h4>
               <div className="flex items-center gap-4">
-                <Link href={"#about"}>
+                <Link href={"/contact"} prefetch>
                   <Button
-                    className="uppercase bg-main-primary text-main-text hover:bg-white/90 lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-fit lg:w-[160px] h-[38px] lg:h-[48px]"
-                    variant="default"
-                  >
-                    Discover Now
-                  </Button>
-                </Link>
-
-                <Link href={"#contact-us"}>
-                  <Button
-                    className="uppercase bg-transparent border-2 border-main-primary text-main-primary hover:bg-main-primary hover:text-white lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-fit lg:w-[160px] h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out"
+                    className="uppercase bg-transparent border-2 border-main-primary text-main-primary hover:bg-main-primary hover:text-white lg:py-5 lg:px-8 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-full h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out"
                     variant="outline"
                   >
                     Contact Us
