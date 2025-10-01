@@ -7,18 +7,22 @@ import about3 from "@/app/assets/about1.jpg";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/navigations";
+import { useState } from "react";
 
-
-export default function About() {
+export default function About({
+  aboutArray,
+}: {
+  aboutArray: { id: number; title: string; desc: string }[];
+}) {
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
+  const [openId, setOpenId] = useState<number | null>(null);
 
   return (
     <section
       id="about"
       className="w-full min-h-screen bg-main-black text-main-white flex flex-col gap-6 md:gap-8 xl:gap-12 justify-start items-center py-10 xl:py-24 border-b border-white/10"
     >
-      {/* Label */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -116,6 +120,125 @@ export default function About() {
           />
         </motion.div>
       </div>
+
+      {/* Values Section */}
+      {isAboutPage && (
+        <div className="container mx-auto px-4 mt-12 lg:mt-20 text-white w-full">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-3">
+              Our Core <span className="text-main-primary">Values</span>
+            </h2>
+          </motion.div>
+
+          {/* Values Accordion/Grid */}
+          <div className="flex flex-col gap-4 max-w-6xl mx-auto">
+            {aboutArray.map(({ id, title, desc }, index) => {
+              const isOpen = openId === id;
+
+              return (
+                <motion.div
+                  key={id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  onClick={() => setOpenId(isOpen ? null : id)}
+                  className={`group relative ${
+                    isOpen ? "bg-white/5" : "bg-main-black2"
+                  }  border border-white/10 rounded-xl overflow-hidden hover:border-main-primary/30 transition-all duration-300 cursor-pointer`}
+                >
+                  {/* Header - Always Visible */}
+                  <div className="flex items-center justify-between p-6">
+                    <div className="flex items-center gap-4 flex-1">
+                      {/* Number Badge */}
+                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-main-primary/10 border border-main-primary/20 flex items-center justify-center text-main-primary font-bold">
+                        {String(index + 1).padStart(2, "0")}
+                      </div>
+
+                      {/* Title */}
+                      <h3
+                        className={`text-lg md:text-xl font-semibold text-white ${
+                          isOpen && "!text-main-primary"
+                        } group-hover:text-main-primary transition-colors duration-300`}
+                      >
+                        {title}
+                      </h3>
+                    </div>
+
+                    {/* Expand Icon */}
+                    <div
+                      className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    >
+                      <svg
+                        className="w-5 h-5 text-main-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Expandable Content */}
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: isOpen ? "auto" : 0,
+                      opacity: isOpen ? 1 : 0,
+                    }}
+                    transition={{
+                      height: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                      opacity: { duration: 0.3, delay: isOpen ? 0.15 : 0 },
+                    }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6">
+                      {/* Description with fade-in animation */}
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          opacity: isOpen ? 1 : 0,
+                          y: isOpen ? 0 : -10,
+                        }}
+                        transition={{
+                          duration: 0.3,
+                          delay: isOpen ? 0.2 : 0,
+                        }}
+                      >
+                        <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                          {desc}
+                        </p>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Hover Accent */}
+                  <div
+                    className={`absolute bottom-0 left-0 w-0 h-0.5 bg-main-primary ${
+                      isOpen && "w-full"
+                    } group-hover:w-full transition-all duration-500`}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

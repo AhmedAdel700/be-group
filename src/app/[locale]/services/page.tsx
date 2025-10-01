@@ -14,7 +14,6 @@ import {
   Target,
   Facebook,
   Instagram,
-  Twitter,
   Linkedin,
   Youtube,
   Smartphone,
@@ -31,6 +30,8 @@ import {
 import TiltedCard from "@/components/TittedCard";
 import SplitText from "@/components/SplitText";
 import MotionModal from "./MotionModal";
+import Image from "next/image";
+import xLogo from "@/app/assets/x-logo.svg";
 
 type CardInfo = {
   id: number;
@@ -39,7 +40,6 @@ type CardInfo = {
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   content: React.ReactNode;
 };
-
 
 export default function Page() {
   // scroll-motion variants (added)
@@ -119,7 +119,13 @@ export default function Page() {
                 {/* Second row - 3 items */}
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <Twitter className="w-4 h-4 text-blue-400" />
+                    <Image
+                      src={xLogo}
+                      alt={"X Logo"}
+                      width={26}
+                      height={26}
+                      className="shrink-0 object-contain"
+                    />
                     <span className="text-xs font-medium">Twitter/X</span>
                   </div>
                   <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Link } from "@/navigations";
 import {
   Facebook,
-  Twitter,
   Linkedin,
   Instagram,
   Youtube,
@@ -19,6 +18,9 @@ import logo from "@/app/assets/20879.webp";
 import partner1 from "@/app/assets/1.png";
 import partner2 from "@/app/assets/02.png";
 import partner3 from "@/app/assets/3.png";
+import xLogoWhite from "@/app/assets/x-logo-white.svg";
+import xLogo from "@/app/assets/x-logo.svg";
+import { useState } from "react";
 
 const SocialIcon: React.FC<{
   href: string;
@@ -57,6 +59,7 @@ const SocialIcon: React.FC<{
 };
 
 export default function Footer() {
+  const [isHoveringLogo, setIsHoveringLogo] = useState(false);
   return (
     <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-4 md:px-8 xl:px-20 py-8">
       {/* Logo */}
@@ -164,9 +167,18 @@ export default function Footer() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.18 }}
             className="cursor-target"
+            onMouseEnter={() => setIsHoveringLogo(true)}
+            onMouseLeave={() => setIsHoveringLogo(false)}
           >
             <SocialIcon href="https://twitter.com" label="Twitter">
-              <Twitter size={22} />
+              <Image
+                src={isHoveringLogo ? xLogo : xLogoWhite}
+                alt="Be Group Logo"
+                width={23}
+                height={23}
+                className="rounded-md transition-opacity duration-300 object-contain"
+                priority
+              />
             </SocialIcon>
           </motion.div>
 
