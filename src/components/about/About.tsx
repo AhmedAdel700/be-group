@@ -12,7 +12,7 @@ import { useState } from "react";
 export default function About({
   aboutArray,
 }: {
-  aboutArray: { id: number; title: string; desc: string }[];
+  aboutArray?: { id: number; title: string; desc: string }[];
 }) {
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
@@ -139,7 +139,7 @@ export default function About({
 
           {/* Values Accordion/Grid */}
           <div className="flex flex-col gap-4 max-w-6xl mx-auto">
-            {aboutArray.map(({ id, title, desc }, index) => {
+            {aboutArray?.map(({ id, title, desc }, index) => {
               const isOpen = openId === id;
 
               return (
