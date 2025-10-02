@@ -16,7 +16,7 @@ export default function BlogDetails() {
   };
 
   return (
-    <section className="min-h-screen text-white px-4 py-8 mx-auto container mt-[120px]">
+    <section className="min-h-screen text-white px-4 py-8 mx-auto container mt-[75px]">
       <motion.div
         className="max-w-4xl mx-auto"
         initial="hidden"
