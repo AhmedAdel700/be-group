@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 import MultiLineUnderline from "../MultiLineUnderline";
 import SplitText from "@/components/SplitText";
+import { Link } from "@/navigations";
 
 type BlogItem = {
   id: string | number;
@@ -122,163 +123,165 @@ export default function BlogsPage({
         />
       </div>
 
-      <div className="w-full sm:container mx-auto flex flex-col gap-8 px-4 md:px-6">
-        {/* Blog Cards Grid */}
-        <motion.div
-          initial="hidden"
-          animate={mounted ? "show" : "hidden"} // 👈 animate on load
-          className={`w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 ${
-            isRTL ? "md:[direction:rtl]" : ""
-          }`}
-        >
-          {Array.from({ length: 9 }, (_, index) => (
-            <motion.article
-              key={get(index)?.id || index}
-              custom={index}
-              variants={cardVar}
-              className="w-full cursor-pointer cursor-target"
-            >
-              <div className="group rounded-[6px] overflow-hidden">
-                {/* IMAGE */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  {get(index)?.image ? (
-                    <Image
-                      src={get(index)!.image}
-                      alt={get(index)?.desc}
-                      fill
-                      className="object-cover transition-transform duration-500 md:group-hover:scale-105 rounded-[6px]"
-                      sizes="(min-width:1280px) 33vw, (min-width:640px) 50vw, 100vw"
-                      priority={index < 3}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-white/10 flex items-center justify-center">
-                      <span className="text-white/50 text-sm">
-                        Blog Image {index + 1}
-                      </span>
-                    </div>
-                  )}
-                </div>
+      <Link href={"blog/blog-details"}>
+        <div className="w-full sm:container mx-auto flex flex-col gap-8 px-4 md:px-6">
+          {/* Blog Cards Grid */}
+          <motion.div
+            initial="hidden"
+            animate={mounted ? "show" : "hidden"}
+            className={`w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 ${
+              isRTL ? "md:[direction:rtl]" : ""
+            }`}
+          >
+            {Array.from({ length: 9 }, (_, index) => (
+              <motion.article
+                key={get(index)?.id || index}
+                custom={index}
+                variants={cardVar}
+                className="w-full cursor-pointer cursor-target"
+              >
+                <div className="group rounded-[6px] overflow-hidden">
+                  {/* IMAGE */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    {get(index)?.image ? (
+                      <Image
+                        src={get(index)!.image}
+                        alt={get(index)?.desc}
+                        fill
+                        className="object-cover transition-transform duration-500 md:group-hover:scale-105 rounded-[6px]"
+                        sizes="(min-width:1280px) 33vw, (min-width:640px) 50vw, 100vw"
+                        priority={index < 3}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-white/10 flex items-center justify-center">
+                        <span className="text-white/50 text-sm">
+                          Blog Image {index + 1}
+                        </span>
+                      </div>
+                    )}
+                  </div>
 
-                {/* CONTENT */}
-                <div className="py-4 sm:py-5 flex flex-col gap-2 sm:gap-3 mt-2">
-                  <h3 className="text-lg sm:text-xl font-semibold leading-tight">
-                    <MultiLineUnderline
-                      color="#fff"
-                      thickness={1}
-                      gap={6}
-                      duration={500}
-                      delay={140}
-                      rtl={isRTL}
-                    >
-                      {get(index)?.desc}
-                    </MultiLineUnderline>
-                  </h3>
-                  <div className="text-sm sm:text-base text-white/90">
-                    {get(index)?.date}
+                  {/* CONTENT */}
+                  <div className="py-4 sm:py-5 flex flex-col gap-2 sm:gap-3 mt-2">
+                    <h3 className="text-lg sm:text-xl font-semibold leading-tight">
+                      <MultiLineUnderline
+                        color="#fff"
+                        thickness={1}
+                        gap={6}
+                        duration={500}
+                        delay={140}
+                        rtl={isRTL}
+                      >
+                        {get(index)?.desc}
+                      </MultiLineUnderline>
+                    </h3>
+                    <div className="text-sm sm:text-base text-white/90">
+                      {get(index)?.date}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
-
-        {/* Pagination */}
-        <motion.nav
-          aria-label="Pagination"
-          initial="hidden"
-          animate={mounted ? "show" : "hidden"} // 👈 animate on load
-          variants={paginationVar}
-          className={`w-full flex items-center justify-center gap-2 mt-6 sm:mt-8 ${
-            isRTL ? "flex-row-reverse" : ""
-          }`}
-        >
-          {/* Prev */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              onClick={handlePrevPage}
-              disabled={currentPage <= 1}
-              className="group cursor-target relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
-              size="icon"
-            >
-              <span
-                aria-hidden
-                className="absolute inset-0 rounded-[4px] bg-white scale-0 transition-transform duration-500 group-hover:scale-100"
-              />
-              {isRTL ? (
-                <ArrowRight className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
-              ) : (
-                <ArrowLeft className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
-              )}
-              <span className="sr-only">Previous page</span>
-            </Button>
+              </motion.article>
+            ))}
           </motion.div>
 
-          {/* Page numbers */}
-          <div className="hidden sm:flex items-center gap-2">
-            {generatePaginationNumbers().map((page, index) => (
-              <motion.div
-                key={`${page}-${index}`}
-                whileHover={typeof page === "number" ? { scale: 1.05 } : {}}
-                whileTap={typeof page === "number" ? { scale: 0.95 } : {}}
+          {/* Pagination */}
+          <motion.nav
+            aria-label="Pagination"
+            initial="hidden"
+            animate={mounted ? "show" : "hidden"} // 👈 animate on load
+            variants={paginationVar}
+            className={`w-full flex items-center justify-center gap-2 mt-6 sm:mt-8 ${
+              isRTL ? "flex-row-reverse" : ""
+            }`}
+          >
+            {/* Prev */}
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                onClick={handlePrevPage}
+                disabled={currentPage <= 1}
+                className="group cursor-target relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
+                size="icon"
               >
-                {typeof page === "number" ? (
-                  <Button
-                    onClick={() => handlePageClick(page)}
-                    aria-current={page === currentPage ? "page" : undefined}
-                    className={`group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border transition-all duration-200 cursor-target ${
-                      page === currentPage
-                        ? "border-white bg-white text-black"
-                        : "border-white/80 text-white bg-transparent hover:bg-transparent"
-                    }`}
-                    size="icon"
-                  >
-                    {page !== currentPage && (
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 rounded-[4px] bg-white scale-0 transition-transform duration-500 group-hover:scale-100"
-                      />
-                    )}
-                    <span
-                      className={`relative z-[1] font-medium transition-colors duration-300 ${
+                <span
+                  aria-hidden
+                  className="absolute inset-0 rounded-[4px] bg-white scale-0 transition-transform duration-500 group-hover:scale-100"
+                />
+                {isRTL ? (
+                  <ArrowRight className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
+                ) : (
+                  <ArrowLeft className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
+                )}
+                <span className="sr-only">Previous page</span>
+              </Button>
+            </motion.div>
+
+            {/* Page numbers */}
+            <div className="hidden sm:flex items-center gap-2">
+              {generatePaginationNumbers().map((page, index) => (
+                <motion.div
+                  key={`${page}-${index}`}
+                  whileHover={typeof page === "number" ? { scale: 1.05 } : {}}
+                  whileTap={typeof page === "number" ? { scale: 0.95 } : {}}
+                >
+                  {typeof page === "number" ? (
+                    <Button
+                      onClick={() => handlePageClick(page)}
+                      aria-current={page === currentPage ? "page" : undefined}
+                      className={`group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border transition-all duration-200 cursor-target ${
                         page === currentPage
-                          ? "text-black"
-                          : "group-hover:text-black"
+                          ? "border-white bg-white text-black"
+                          : "border-white/80 text-white bg-transparent hover:bg-transparent"
                       }`}
+                      size="icon"
                     >
+                      {page !== currentPage && (
+                        <span
+                          aria-hidden
+                          className="absolute inset-0 rounded-[4px] bg-white scale-0 transition-transform duration-500 group-hover:scale-100"
+                        />
+                      )}
+                      <span
+                        className={`relative z-[1] font-medium transition-colors duration-300 ${
+                          page === currentPage
+                            ? "text-black"
+                            : "group-hover:text-black"
+                        }`}
+                      >
+                        {page}
+                      </span>
+                    </Button>
+                  ) : (
+                    <span className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center text-white/50 font-medium">
                       {page}
                     </span>
-                  </Button>
-                ) : (
-                  <span className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center text-white/50 font-medium">
-                    {page}
-                  </span>
-                )}
-              </motion.div>
-            ))}
-          </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
 
-          {/* Next */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              onClick={handleNextPage}
-              disabled={currentPage >= totalPages}
-              className="group cursor-target relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
-              size="icon"
-            >
-              <span
-                aria-hidden
-                className="absolute inset-0 rounded-[4px] bg-white scale-0 transition-transform duration-500 group-hover:scale-100"
-              />
-              {isRTL ? (
-                <ArrowLeft className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
-              ) : (
-                <ArrowRight className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
-              )}
-              <span className="sr-only">Next page</span>
-            </Button>
-          </motion.div>
-        </motion.nav>
-      </div>
+            {/* Next */}
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                onClick={handleNextPage}
+                disabled={currentPage >= totalPages}
+                className="group cursor-target relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border border-white/80 text-white bg-transparent hover:bg-transparent focus-visible:ring-2 focus-visible:ring-white disabled:opacity-40 transition-transform duration-200"
+                size="icon"
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-0 rounded-[4px] bg-white scale-0 transition-transform duration-500 group-hover:scale-100"
+                />
+                {isRTL ? (
+                  <ArrowLeft className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
+                ) : (
+                  <ArrowRight className="relative z-[1] h-5 w-5 sm:h-6 sm:w-6 transition-colors duration-300 group-hover:text-black" />
+                )}
+                <span className="sr-only">Next page</span>
+              </Button>
+            </motion.div>
+          </motion.nav>
+        </div>
+      </Link>
     </section>
   );
 }
