@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, CheckCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigations";
-import { servicesData, getServiceBySlug, type Service } from "@/data/servicesData";
+import { getServiceBySlug } from "@/data/servicesData";
 import SplitText from "@/components/SplitText";
 
 interface ServiceDetailPageProps {
@@ -182,7 +182,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
               Ready to Get Started?
             </h3>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Let's discuss how our {service.title.toLowerCase()} service can help your business grow and achieve its goals.
+              Let is discuss how our {service.title.toLowerCase()} service can help your business grow and achieve its goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">

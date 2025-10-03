@@ -64,7 +64,7 @@ export const servicesData: Service[] = [
     content: (
       <>
         <p className="leading-relaxed opacity-90">
-          Embark on a journey of creativity and excellence with Be Group's
+          Embark on a journey of creativity and excellence with Be Group is
           Animation Video service. We turn ideas into mesmerizing visuals
           that captivate minds and hearts—perfect for explainers, product
           demos, or unforgettable brand stories.
@@ -72,7 +72,7 @@ export const servicesData: Service[] = [
         <p className="leading-relaxed opacity-90 mt-4">
           Our creative team crafts standout videos with striking style,
           meticulous detail, and emotional pull—leaving a lasting impact.
-          Let's turn your vision into a magical reality.
+          Let is turn your vision into a magical reality.
         </p>
       </>
     ),
@@ -103,7 +103,7 @@ export const servicesData: Service[] = [
       <>
         <p className="text-lg leading-relaxed opacity-95 font-medium">
           We plan, create, and manage content that grows communities and
-          drives results—tailored for each platform's culture and
+          drives results—tailored for each platform is culture and
           algorithm.
         </p>
         <div className="mt-8">
