@@ -33,7 +33,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="inline-flex items-center justify-center h-20 w-20 rounded-full border border-main-primary/30 bg-main-primary/10 backdrop-blur-sm mb-6"
+            className="inline-flex items-center justify-center h-20 w-20 rounded-full border border-main-primary/30 bg-main-primary/10 backdrop-blur-sm"
           >
             <Icon className="h-10 w-10 text-main-primary" />
           </motion.div>
