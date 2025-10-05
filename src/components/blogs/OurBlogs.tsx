@@ -93,7 +93,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            Our Blog
+            Our Blogs
           </motion.div>
 
           {/* Heading */}
