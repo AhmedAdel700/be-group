@@ -2,7 +2,7 @@
 
 import { notFound } from "next/navigation";
 import { motion } from "motion/react";
-import { ArrowLeft, CheckCircle, Star } from "lucide-react";
+import { CheckCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigations";
 import { getServiceBySlug } from "@/data/servicesData";
@@ -27,26 +27,8 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
   return (
     <section className="min-h-screen bg-main-black2 text-main-white">
       {/* Header Section */}
-      <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[50vh] relative overflow-hidden">
-        {/* Background gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-main-black2/50 to-main-black2" />
-        
-        <div className="relative z-10 text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-4"
-          >
-            <Link 
-              href="/services"
-              className="inline-flex items-center gap-2 text-main-primary/80 hover:text-main-primary transition-colors duration-300 group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
-              <span className="text-sm font-medium">Back to Services</span>
-            </Link>
-          </motion.div>
-          
+      <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center pt-[70px] pb-6 lg:pt-[120px] min-h-fit relative overflow-hidden">
+        <div className="flex flex-col items-center relative z-10 text-center px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -76,7 +58,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl text-main-primary/90 font-medium max-w-2xl mx-auto"
+            className="text-xl text-white font-medium max-w-2xl mx-auto capitalize"
           >
             {service.blurb}
           </motion.p>
@@ -84,7 +66,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12 lg:py-20">
+      <div className="container mx-auto px-4 py-12 lg:py-20 -mt-10">
         <div className="max-w-6xl mx-auto">
           {/* Description Section */}
           <motion.div
@@ -92,25 +74,25 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="mb-16"
+            className="mb-8"
           >
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 About This Service
               </h2>
-              <p className="text-lg leading-relaxed opacity-90 mb-6">
+              <p className="text-lg leading-relaxed opacity-90">
                 {service.description}
               </p>
               
               {/* Dynamic content from the original modal */}
-              <div className="prose prose-invert prose-lg max-w-none">
+              <div className="prose prose-invert prose-lg max-w-none mt-2">
                 {service.content}
               </div>
             </div>
           </motion.div>
 
           {/* Features and Benefits Grid */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          <div className="grid lg:grid-cols-2 gap-8 mb-8">
             {/* Features */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -186,14 +168,14 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <Button className="bg-main-primary text-main-text hover:bg-main-secondary px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105">
+                <Button className="bg-main-primary text-main-text hover:bg-main-secondary px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 rounded-[6px]">
                   Get in Touch
                 </Button>
               </Link>
               <Link href="/services">
                 <Button 
                   variant="outline" 
-                  className="border-main-primary/50 text-main-primary hover:bg-main-primary/10 px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+                  className="border-main-primary/50 text-main-primary hover:bg-main-primary/10 px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 rounded-[6px]"
                 >
                   View All Services
                 </Button>
