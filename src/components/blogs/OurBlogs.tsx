@@ -125,7 +125,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
               className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] z-50 cursor-target"
               variant="default"
             >
-              VIEW BLOG
+              VIEW BLOGS
             </Button>
           </Link>
         </div>
