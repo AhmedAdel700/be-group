@@ -147,138 +147,150 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
         >
           {/* Step 1 — lowest (70%) */}
           <div style={stepStyle(2)}>
-            <motion.article
-              custom={0}
-              variants={cardVar}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.35 }}
-              className="w-full js-card cursor-pointer"
-            >
-              <div className="group rounded-[6px] overflow-hidden cursor-target">
-                {/* IMAGE */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  {get(0)?.image ? (
-                    <Image
-                      src={get(0)!.image}
-                      alt={get(0)?.desc ?? "Blog image"}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
-                      sizes="(min-width:1024px) 33vw, 100vw"
-                      priority
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-white/10" />
-                  )}
-                </div>
+            <Link href={"/blog/blog-details"}>
+              <motion.article
+                custom={0}
+                variants={cardVar}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.35 }}
+                className="w-full js-card cursor-pointer"
+              >
+                <div className="group rounded-[6px] overflow-hidden cursor-target">
+                  {/* IMAGE */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    {get(0)?.image ? (
+                      <Image
+                        src={get(0)!.image}
+                        alt={get(0)?.desc ?? "Blog image"}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
+                        sizes="(min-width:1024px) 33vw, 100vw"
+                        priority
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-white/10" />
+                    )}
+                  </div>
 
-                <div className="py-5 flex flex-col gap-4 mt-2">
-                  <h3 className="text-xl font-semibold leading-tight cursor-pointer">
-                    <MultiLineUnderline
-                      color="#fff"
-                      thickness={1}
-                      gap={6}
-                      duration={500}
-                      delay={140}
-                      rtl={isRTL}
-                    >
-                      {get(0)?.desc}
-                    </MultiLineUnderline>
-                  </h3>
-                  <div className="text-base text-white/90">{get(0)?.date}</div>
+                  <div className="py-5 flex flex-col gap-4 mt-2">
+                    <h3 className="text-xl font-semibold leading-tight cursor-pointer">
+                      <MultiLineUnderline
+                        color="#fff"
+                        thickness={1}
+                        gap={6}
+                        duration={500}
+                        delay={140}
+                        rtl={isRTL}
+                      >
+                        {get(0)?.desc}
+                      </MultiLineUnderline>
+                    </h3>
+                    <div className="text-base text-white/90">
+                      {get(0)?.date}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.article>
+              </motion.article>
+            </Link>
           </div>
 
           {/* Step 2 — middle (35%) */}
           <div style={stepStyle(1)}>
-            <motion.article
-              custom={1}
-              variants={cardVar}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.35 }}
-              className="w-full cursor-pointer"
-            >
-              <div className="group  rounded-[6px] overflow-hidden cursor-target cursor-pointer">
-                {/* IMAGE */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  {get(1)?.image ? (
-                    <Image
-                      src={get(1)!.image}
-                      alt={get(1)?.desc ?? "Blog image"}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105  rounded-[6px]"
-                      sizes="(min-width:1024px) 33vw, 100vw"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-white/10" />
-                  )}
-                </div>
+            <Link href={"/blog/blog-details"}>
+              <motion.article
+                custom={1}
+                variants={cardVar}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.35 }}
+                className="w-full cursor-pointer"
+              >
+                <div className="group  rounded-[6px] overflow-hidden cursor-target cursor-pointer">
+                  {/* IMAGE */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    {get(1)?.image ? (
+                      <Image
+                        src={get(1)!.image}
+                        alt={get(1)?.desc ?? "Blog image"}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105  rounded-[6px]"
+                        sizes="(min-width:1024px) 33vw, 100vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-white/10" />
+                    )}
+                  </div>
 
-                <div className="py-5 flex flex-col gap-4 mt-2">
-                  <h3 className="text-xl font-semibold leading-tight cursor-pointer">
-                    <MultiLineUnderline
-                      color="#fff"
-                      thickness={1}
-                      gap={6}
-                      duration={500}
-                      delay={140}
-                      rtl={isRTL}
-                    >
-                      {get(1)?.desc}
-                    </MultiLineUnderline>
-                  </h3>
-                  <div className="text-base text-white/90">{get(1)?.date}</div>
+                  <div className="py-5 flex flex-col gap-4 mt-2">
+                    <h3 className="text-xl font-semibold leading-tight cursor-pointer">
+                      <MultiLineUnderline
+                        color="#fff"
+                        thickness={1}
+                        gap={6}
+                        duration={500}
+                        delay={140}
+                        rtl={isRTL}
+                      >
+                        {get(1)?.desc}
+                      </MultiLineUnderline>
+                    </h3>
+                    <div className="text-base text-white/90">
+                      {get(1)?.date}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.article>
+              </motion.article>
+            </Link>
           </div>
 
           {/* Step 3 — highest (0%) */}
           <div style={stepStyle(0)}>
-            <motion.article
-              custom={2}
-              variants={cardVar}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.35 }}
-              className="w-full js-card cursor-pointer"
-            >
-              <div className="group rounded-[6px] overflow-hidden cursor-target">
-                {/* IMAGE */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  {get(2)?.image ? (
-                    <Image
-                      src={get(2)!.image}
-                      alt={get(2)?.desc ?? "Blog image"}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
-                      sizes="(min-width:1024px) 33vw, 100vw"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-white/10" />
-                  )}
-                </div>
+            <Link href={"/blog/blog-details"}>
+              <motion.article
+                custom={2}
+                variants={cardVar}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.35 }}
+                className="w-full js-card cursor-pointer"
+              >
+                <div className="group rounded-[6px] overflow-hidden cursor-target">
+                  {/* IMAGE */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    {get(2)?.image ? (
+                      <Image
+                        src={get(2)!.image}
+                        alt={get(2)?.desc ?? "Blog image"}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
+                        sizes="(min-width:1024px) 33vw, 100vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-white/10" />
+                    )}
+                  </div>
 
-                <div className="py-5 flex flex-col gap-4 mt-2">
-                  <h3 className="text-xl font-semibold leading-tight cursor-pointer">
-                    <MultiLineUnderline
-                      color="#fff"
-                      thickness={1}
-                      gap={6}
-                      duration={500}
-                      delay={140}
-                      rtl={isRTL}
-                    >
-                      {get(2)?.desc}
-                    </MultiLineUnderline>
-                  </h3>
-                  <div className="text-base text-white/90">{get(2)?.date}</div>
+                  <div className="py-5 flex flex-col gap-4 mt-2">
+                    <h3 className="text-xl font-semibold leading-tight cursor-pointer">
+                      <MultiLineUnderline
+                        color="#fff"
+                        thickness={1}
+                        gap={6}
+                        duration={500}
+                        delay={140}
+                        rtl={isRTL}
+                      >
+                        {get(2)?.desc}
+                      </MultiLineUnderline>
+                    </h3>
+                    <div className="text-base text-white/90">
+                      {get(2)?.date}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.article>
+              </motion.article>
+            </Link>
           </div>
 
           {/* Spacer to ensure the lowest stepped card is fully scrollable/visible */}
