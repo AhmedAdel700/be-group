@@ -4,8 +4,9 @@ import About from "@/components/about/About";
 import SplitText from "@/components/SplitText";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import { AboutType } from "@/types/apiDataTypes";
 
-export default function AboutPage() {
+export default function AboutPage({ aboutData }: { aboutData: AboutType }) {
   const locale = useLocale();
   const t = useTranslations("about");
   const aboutArray = [
@@ -75,7 +76,7 @@ export default function AboutPage() {
       </div>
 
       {/* About Section */}
-      <About aboutArray={aboutArray} />
+      <About aboutArray={aboutArray} aboutData={aboutData} />
     </div>
   );
 }

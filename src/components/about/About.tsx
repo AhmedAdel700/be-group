@@ -2,18 +2,21 @@
 
 import Image from "next/image";
 import about1 from "@/app/assets/9.png";
-import about2 from "@/app/assets/about.webp";
-import about3 from "@/app/assets/about1.jpg";
+// import about2 from "@/app/assets/about.webp";
+// import about3 from "@/app/assets/about1.jpg";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/navigations";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import type { AboutType } from "@/types/apiDataTypes";
 
 export default function About({
   aboutArray,
+  aboutData,
 }: {
   aboutArray?: { id: number; title: string; desc: string }[];
+  aboutData?: AboutType;
 }) {
   const t = useTranslations("about");
   const locale = useLocale();
@@ -33,7 +36,7 @@ export default function About({
         transition={{ duration: 0.6 }}
         className="uppercase py-3 px-4 border rounded-full text-main-primary"
       >
-        {t("About Agency")}
+        {aboutData?.title}
       </motion.div>
 
       {/* Heading */}
@@ -44,7 +47,7 @@ export default function About({
         transition={{ duration: 0.7, delay: 0.2 }}
         className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
       >
-        {t("Group of Creators and Minimalism Lovers")}
+        {aboutData?.title2}
       </motion.h2>
 
       {/* Grid */}
@@ -65,8 +68,8 @@ export default function About({
               className="object-cover rounded-[8px] -translate-x-[20px] md:translate-x-[-50px] xl:translate-x-[0px]"
             />
             <Image
-              src={about2}
-              alt="about image 2"
+              src={aboutData?.image ?? ""}
+              alt={aboutData?.alt_image ?? "about image 2"}
               fill
               className="object-cover rounded-[8px] translate-x-[20px] md:translate-x-[50px] translate-y-[40px] md:translate-y-[100px] xl:translate-y-[50px] z-10"
             />
@@ -120,8 +123,8 @@ export default function About({
           className="hidden xl:block relative w-full max-w-[200px] mx-auto aspect-[3/4] xl:aspect-auto xl:h-full"
         >
           <Image
-            src={about3}
-            alt="about image 3"
+            src={aboutData?.banner ?? ""}
+            alt={aboutData?.alt_banner ?? "about image 2"}
             fill
             className="object-cover rounded-[8px]"
           />

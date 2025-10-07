@@ -1,0 +1,184 @@
+// types/home.ts
+
+export interface HomeData {
+  banner: Banner;
+  about: AboutType;
+  clients: ClientTypes[];
+  services: ServiceTypes[];
+  projects: ProjectTypes[];
+  benefits: BenefitTypes[];
+  achievements: AchievementTypes[];
+  blogs: BlogTypes[];
+  contact_section: ContactSectionTypes;
+  contact_data: ContactDataTypes;
+  social_media: SocialMediaTypes;
+  partners: PartnerTypes[];
+  seo: SEOTypes;
+}
+
+// --- Individual Sections ---
+
+export interface Banner {
+  title: string;
+  title2?: string | null;
+  text?: string | null;
+  second_text?: string | null;
+  image: string;
+  alt_image?: string | null;
+}
+
+export interface AboutType {
+  title: string;
+  title2?: string | null;
+  short_desc: string;
+  text: string;
+  image: string;
+  alt_image?: string | null;
+  banner?: string | null;
+  alt_banner?: string | null;
+}
+
+export interface ClientTypes {
+  name: string;
+  description?: string | null;
+  logo: string;
+}
+
+export interface ServiceTypes {
+  name: string;
+  order: number;
+  short_desc: string;
+  long_desc: string;
+  image: string;
+  alt_image?: string | null;
+  icon: string;
+  alt_icon?: string | null;
+  slug: string;
+  meta_title: string;
+  meta_description?: string | null;
+  index: number;
+}
+
+export interface ProjectTypes {
+  name: string;
+  order: number;
+  short_desc: string;
+  long_desc: string;
+  image: string;
+  alt_image: string;
+  icon: string;
+  alt_icon: string;
+  slug: string;
+  meta_title: string | null;
+  meta_description: string | null;
+  index: number;
+}
+
+export interface BenefitTypes {
+  title: string;
+  order: number;
+  short_desc: string;
+  long_desc: string;
+  image: string;
+  alt_image?: string | null;
+  icon: string;
+  alt_icon?: string | null;
+}
+
+export interface AchievementTypes {
+  title: string;
+  number: string;
+  text: string;
+}
+
+export interface BlogTypes {
+  name: string;
+  date?: string;
+  short_desc: string;
+  long_desc: string;
+  image: string;
+  alt_image?: string | null;
+  slug: string;
+  meta_title: string;
+  meta_description?: string | null;
+  index: number;
+}
+
+export interface ContactSectionTypes {
+  title: string;
+  second_title?: string | null;
+  short_desc?: string | null;
+  long_desc?: string | null;
+  image: string;
+  alt_image?: string | null;
+}
+
+export interface ContactDataTypes {
+  email: string;
+  phone: string;
+  address: string;
+}
+
+export interface SocialMediaTypes {
+  facebook?: string;
+  twitter?: string;
+  linkedin?: string;
+  instagram?: string;
+  youtube?: string;
+  tiktok?: string;
+  pinterest?: string;
+  snapchat?: string;
+  whatsapp?: string;
+}
+
+export interface PartnerTypes {
+  name: string;
+  logo: string;
+  alt_logo?: string | null;
+  description?: string | null;
+}
+
+export interface SEOTypes {
+  meta_tags: MetaTags;
+  open_graph: OpenGraph;
+  twitter_card: TwitterCard;
+  hreflang_tags: HreflangTags;
+  schema: Schema[];
+}
+
+export interface MetaTags {
+  content_type: string;
+  title: string;
+  author: string;
+  description: string;
+  canonical: string;
+  robots: string;
+}
+
+export interface OpenGraph {
+  "og:title": string;
+  "og:description": string;
+  "og:url": string;
+  "og:image": string;
+  "og:type": string;
+}
+
+export interface TwitterCard {
+  "twitter:card": string;
+  "twitter:title": string;
+  "twitter:description": string;
+  "twitter:image": string;
+}
+
+export interface HreflangTags {
+  en: string;
+  ar: string;
+  "x-default": string;
+}
+
+export interface Schema {
+  "@context": string;
+  "@type": string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}

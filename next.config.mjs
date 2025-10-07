@@ -4,7 +4,11 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {},
+    images: {
+        domains: [
+            "newapi.be-group.com"
+        ], // Add the allowed domain here
+    },
 };
 
 export default withNextIntl(nextConfig);

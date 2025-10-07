@@ -1,69 +1,15 @@
 "use client";
 import CarouselComponent from "../carouselComponent/CarouselComponent";
 import { motion } from "motion/react";
-
-import p1 from "@/app/assets/p1.jpg";
-import p2 from "@/app/assets/p2.jpg";
-import p3 from "@/app/assets/p3.jpg";
-import p4 from "@/app/assets/p4.jpg";
-import p5 from "@/app/assets/p5.jpg";
-import p6 from "@/app/assets/p6.jpg";
-import p7 from "@/app/assets/p7.jpg";
-import p8 from "@/app/assets/p8.jpg";
 import { useTranslations } from "next-intl";
+import { ProjectTypes } from "@/types/apiDataTypes";
 
-export default function Portfolio() {
+export default function Portfolio({
+  projectsData,
+}: {
+  projectsData: ProjectTypes[];
+}) {
   const t = useTranslations("portfolio");
-  const data = [
-    {
-      id: 1,
-      image: p1,
-      title: "E-commerce Redesign",
-      desc: "Faster checkout, modern UI, +27% conv.",
-    },
-    {
-      id: 2,
-      image: p2,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-    {
-      id: 3,
-      image: p3,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-    {
-      id: 4,
-      image: p4,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-    {
-      id: 5,
-      image: p5,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-    {
-      id: 6,
-      image: p6,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-    {
-      id: 7,
-      image: p7,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-    {
-      id: 8,
-      image: p8,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-    },
-  ];
   return (
     <div className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white pt-8 xl:pt-20 border-b border-white/10">
       <div className="flex flex-col gap-6 md:gap-8 xl:gap-12 justify-start items-center container mx-auto">
@@ -99,7 +45,7 @@ export default function Portfolio() {
           )}
         </motion.p>
 
-        <CarouselComponent items={data} />
+        <CarouselComponent projectsData={projectsData} />
       </div>
     </div>
   );

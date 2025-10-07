@@ -3,48 +3,39 @@ import OurBlogs from "@/components/blogs/OurBlogs";
 import Hero from "@/components/hero/Hero";
 import Portfolio from "@/components/portfolio/Portfolio";
 
-import blogImage1 from '@/app/assets/blog1.jpg'
-import blogImage2 from '@/app/assets/blog2.jpg'
-import blogImage3 from '@/app/assets/blog3.jpg'
 import ContactUs from "@/components/conatct/ContactUs";
 import WhyChooseUs from "@/components/whyChooseUs/WhyChooseUs";
 import Services from "@/components/services/Services";
 import ClientsSection from "@/components/our clients/page";
 import AchievementSection from "@/components/achievements/AchievementSection";
+import { fetchHomeData } from "@/api/homeService";
 
-export default function Home() {
-const blogs = [
-  {
-    id: 1,
-    image: blogImage1,
-    desc: "How we prototype faster, validate earlier, and ship with confidence.",
-    date: "December 2, 2023",
-  },
-  {
-    id: 2,
-    image: blogImage2,
-    desc: "Caching, edge, and build strategies that keep things blazing fast.",
-    date: "January 15, 2024",
-  },
-  {
-    id: 3,
-    image: blogImage3,
-    desc: "Small UI tweaks that drove big conversion lifts across funnels.",
-    date: "March 3, 2024",
-  },
-];
+export default async function Home({ params }: { params: { locale: string } }) {
+  const homeData = await fetchHomeData(params.locale);
+  const {
+    about,
+    clients,
+    services,
+    projects,
+    benefits,
+    achievements,
+    blogs,
+    contact_section,
+    contact_data,
+  } = homeData;
+  console.log(homeData);
 
   return (
     <div className="relative overflow-hidden">
       <Hero />
-      <About />
-      <ClientsSection />
-      <Services />
-      <Portfolio />
-      <WhyChooseUs />
-      <AchievementSection />
-      <OurBlogs items={blogs}/>
-      <ContactUs />
+      <About aboutData={about} />
+      <ClientsSection clients={clients} />
+      <Services servicesData={services} benefitsData={benefits} />
+      <Portfolio projectsData={projects} />
+      <WhyChooseUs benefitsData={benefits} />
+      <AchievementSection achievementsData={achievements} />
+      <OurBlogs blogsData={blogs} />
+      <ContactUs contactData={contact_data} contactSection={contact_section} />
     </div>
   );
 }

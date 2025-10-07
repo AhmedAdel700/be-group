@@ -8,6 +8,7 @@ import "../styles/globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import TargetCursor from "@/components/TargetCursor";
+import { fetchHomeData } from "@/api/homeService";
 
 const objektiv = localFont({
   src: [
@@ -94,6 +95,9 @@ export default async function LocaleLayout({
 }) {
   const messages = await getMessages();
 
+  const homeData = await fetchHomeData(locale);
+  const { contact_data, social_media, partners } = homeData;
+
   return (
     <html
       lang={locale}
@@ -108,7 +112,11 @@ export default async function LocaleLayout({
           <TargetCursor spinDuration={2} hideDefaultCursor={true} />
           <Header />
           {children}
-          <Footer />
+          <Footer
+            socialMediaData={social_media}
+            partnersData={partners}
+            contactData={contact_data}
+          />
           <Toaster position="top-center" />
         </NextIntlClientProvider>
       </body>

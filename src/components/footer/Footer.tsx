@@ -15,13 +15,15 @@ import clsx from "clsx";
 import { motion } from "motion/react";
 
 import logo from "@/app/assets/20879.webp";
-import partner1 from "@/app/assets/1.png";
-import partner2 from "@/app/assets/02.png";
-import partner3 from "@/app/assets/3.png";
 import xLogoWhite from "@/app/assets/x-logo-white.svg";
 import xLogo from "@/app/assets/x-logo.svg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import {
+  ContactDataTypes,
+  PartnerTypes,
+  SocialMediaTypes,
+} from "@/types/apiDataTypes";
 
 const SocialIcon: React.FC<{
   href: string;
@@ -57,9 +59,18 @@ const SocialIcon: React.FC<{
   );
 };
 
-export default function Footer() {
+export default function Footer({
+  contactData,
+  socialMediaData,
+  partnersData,
+}: {
+  contactData: ContactDataTypes;
+  socialMediaData: SocialMediaTypes;
+  partnersData: PartnerTypes[];
+}) {
   const t = useTranslations("footer");
   const [isHoveringLogo, setIsHoveringLogo] = useState(false);
+
   return (
     <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-4 md:px-8 xl:px-20 py-8">
       {/* Logo */}
@@ -91,26 +102,26 @@ export default function Footer() {
         <div className="flex items-center gap-2 cursor-target">
           <Mail size={18} className="text-main-secondary shrink-0" />
           <Link
-            href="mailto:info@begroup.com"
+            href={`mailto:${contactData.email}`}
             className="hover:underline text-xs sm:text-sm md:text-base"
           >
-            info@begroup.com
+            {contactData.email}
           </Link>
         </div>
         <div className="flex items-center gap-2 cursor-target">
           <Phone size={18} className="text-main-secondary shrink-0" />
           <Link
-            href="tel:+201012345678"
+            href={`tel:${contactData.phone}`}
             className="text-xs sm:text-sm md:text-base"
             dir="ltr"
           >
-            +20 100 995 7000
+            {contactData.phone}
           </Link>
         </div>
-        <div className="flex items-start gap-2 justify-center cursor-target">
+        <div className="flex items-center gap-2 justify-center cursor-target">
           <MapPin size={18} className="text-main-secondary shrink-0" />
-          <span className="text-xs sm:text-sm md:text-base">
-            {t("Office Address")}
+          <span className="text-xs sm:text-sm md:text-base whitespace-pre-line">
+            {contactData.address}
           </span>
         </div>
       </motion.div>
@@ -125,76 +136,43 @@ export default function Footer() {
       >
         <div className="text-white/90 font-medium">{t("Follow us")}</div>
         <div className="flex items-center gap-3">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-          >
-            <SocialIcon
-              href="https://www.youtube.com/@Be4emarketing"
-              label="YouTube"
-            >
+          {socialMediaData.youtube && (
+            <SocialIcon href={socialMediaData.youtube} label="YouTube">
               <Youtube size={22} />
             </SocialIcon>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.06 }}
-          >
-            <SocialIcon
-              href="https://www.facebook.com/be4emarketing"
-              label="Facebook"
-            >
+          )}
+          {socialMediaData.facebook && (
+            <SocialIcon href={socialMediaData.facebook} label="Facebook">
               <Facebook size={22} />
             </SocialIcon>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.12 }}
-          >
-            <SocialIcon
-              href="https://www.linkedin.com/company/be4emarketing"
-              label="LinkedIn"
-            >
+          )}
+          {socialMediaData.linkedin && (
+            <SocialIcon href={socialMediaData.linkedin} label="LinkedIn">
               <Linkedin size={22} />
             </SocialIcon>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.18 }}
-            onMouseEnter={() => setIsHoveringLogo(true)}
-            onMouseLeave={() => setIsHoveringLogo(false)}
-          >
-            <SocialIcon href="https://x.com/be4emarketing" label="Twitter">
-              <Image
-                src={isHoveringLogo ? xLogo : xLogoWhite}
-                alt="Be Group Logo"
-                width={23}
-                height={23}
-                className="rounded-md transition-opacity duration-300 object-contain"
-                priority
-              />
-            </SocialIcon>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.24 }}
-          >
-            <SocialIcon
-              href="https://www.instagram.com/be4emarketing"
-              label="Instagram"
+          )}
+          {socialMediaData.twitter && (
+            <div
+              onMouseEnter={() => setIsHoveringLogo(true)}
+              onMouseLeave={() => setIsHoveringLogo(false)}
             >
+              <SocialIcon href={socialMediaData.twitter} label="Twitter">
+                <Image
+                  src={isHoveringLogo ? xLogo : xLogoWhite}
+                  alt="Twitter"
+                  width={23}
+                  height={23}
+                  className="rounded-md transition-opacity duration-300 object-contain"
+                  priority
+                />
+              </SocialIcon>
+            </div>
+          )}
+          {socialMediaData.instagram && (
+            <SocialIcon href={socialMediaData.instagram} label="Instagram">
               <Instagram size={22} />
             </SocialIcon>
-          </motion.div>
+          )}
         </div>
       </motion.div>
 
@@ -206,34 +184,18 @@ export default function Footer() {
         className="flex flex-col gap-4 items-center"
       >
         <div className="text-white/90 font-medium">{t("Our Partners")}</div>
-        <div className="flex items-center justify-center gap-4 lg:gap-10 flex-wrap">
-          <motion.div>
-            <Image
-              src={partner1}
-              alt="Partner 1"
-              width={100}
-              height={40}
-              className="object-cover"
-            />
-          </motion.div>
-          <motion.div>
-            <Image
-              src={partner3}
-              alt="Partner 3"
-              width={100}
-              height={40}
-              className="object-cover"
-            />
-          </motion.div>
-          <motion.div>
-            <Image
-              src={partner2}
-              alt="Partner 2"
-              width={60}
-              height={40}
-              className="object-cover"
-            />
-          </motion.div>
+        <div className="flex items-center justify-center gap-4 lg:gap-5 flex-wrap">
+          {partnersData.map((partner, index) => (
+            <motion.div key={index}>
+              <Image
+                src={partner.logo}
+                alt={partner.alt_logo || partner.name}
+                width={100}
+                height={40}
+                className="object-cover rounded-full"
+              />
+            </motion.div>
+          ))}
         </div>
       </motion.div>
 

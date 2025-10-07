@@ -9,15 +9,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useLocale } from "next-intl";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import { motion, type Variants } from "motion/react";
-
-type CarouselEntry = {
-  id: string | number;
-  image: string | StaticImageData;
-  title: string;
-  desc: string;
-};
+import { ProjectTypes } from "@/types/apiDataTypes";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -64,11 +58,11 @@ const controlsItemVar: Variants = {
 };
 
 type Props = {
-  items: CarouselEntry[];
+  projectsData: ProjectTypes[];
   className?: string;
 };
 
-export default function CarouselComponent({ items, className }: Props) {
+export default function CarouselComponent({ projectsData, className }: Props) {
   const locale = useLocale();
   const isRTL = locale === "ar";
 
@@ -94,9 +88,9 @@ export default function CarouselComponent({ items, className }: Props) {
       >
         {/* logical start margin so two full cards are visible with 40% width */}
         <CarouselContent className="-ms-4">
-          {items.map((item, index) => (
+          {projectsData.map((project, index) => (
             <CarouselItem
-              key={item.id}
+              key={project.index}
               className={[
                 "ps-4", // gap between cards (logical start)
                 "basis-full", // sm & below: 1 card
@@ -112,8 +106,8 @@ export default function CarouselComponent({ items, className }: Props) {
                     {/* slightly shorter aspect */}
                     <div className="relative w-full aspect-[16/10]">
                       <Image
-                        src={item.image}
-                        alt={item.title || `Card ${index + 1}`}
+                        src={project.image}
+                        alt={project.name || `Card ${index + 1}`}
                         fill
                         className="object-fill transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
                         sizes="(min-width:1280px) 40vw, (min-width:768px) 40vw, 100vw"
@@ -131,10 +125,10 @@ export default function CarouselComponent({ items, className }: Props) {
                     }`}
                   >
                     <h3 className="text-white text-base sm:text-xl font-semibold leading-tight">
-                      {item.title}
+                      {project.name}
                     </h3>
                     <p className="text-white/70 text-sm sm:text-base leading-relaxed line-clamp-2">
-                      {item.desc}
+                      {project.short_desc}
                     </p>
                   </div>
                 </CardContent>

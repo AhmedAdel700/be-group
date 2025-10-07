@@ -1,27 +1,18 @@
 "use client";
 import { motion } from "motion/react";
 import * as React from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Link } from "@/navigations";
 import { useTranslations } from "next-intl";
-
-type LogoItem = {
-  src: string | StaticImageData;
-  alt?: string;
-  href?: string;
-  width?: number;
-  height?: number;
-  priority?: boolean;
-};
+import { ClientTypes } from "@/types/apiDataTypes";
 
 type LogoCarouselProps = {
-  logos: LogoItem[];
+  clients: ClientTypes[];
   locale?: "ar" | "en" | string;
   delayMs?: number;
   className?: string;
@@ -29,7 +20,7 @@ type LogoCarouselProps = {
 };
 
 export default function LogoCarousel({
-  logos,
+  clients,
   locale = typeof window !== "undefined"
     ? document.documentElement.lang || "en"
     : "en",
@@ -91,33 +82,28 @@ export default function LogoCarousel({
         className="w-full"
       >
         <CarouselContent className="ms-0 gap-2 [&>div]:ps-0">
-          {logos.map((logo, idx) => (
+          {clients?.map((client) => (
             <CarouselItem
-              key={`${logo.src}-${idx}`}
+              key={`${client.name}`}
               className="ps-0 basis-[55%] md:basis-[30%] lg:basis-[25%] xl:basis-[18%] 2xl:basis-[12%]"
             >
               <div className="flex min-h-[15rem] w-full items-center justify-center">
-                <Link
-                  href={logo?.href || "."}
-                  target="_blank"
-                  rel="noreferrer noopener"
+                <div
                   className="flex items-center justify-center"
-                  aria-label={logo.alt || "Logo"}
                 >
                   <div className="flex flex-col items-center w-full">
-                    <div className="relative flex items-center justify-center w-full hover:-translate-y-3 transition-transform cursor-target">
+                    <div className="relative flex items-center justify-center w-full hover:-translate-y-3 transition-transform">
                       <Image
-                        src={logo.src}
-                        alt={logo.alt || "Logo"}
-                        width={logo.width || 120}
-                        height={logo.height || 120} // Make sure height equals width for circular effect
-                        priority={logo.priority}
-                        className="h-52 w-52 max-w-auto object-cover rounded-full relative z-10" // Ensure it's a circle
+                        src={client.logo}
+                        alt={"Logo"}
+                        width={120}
+                        height={120} // Make sure height equals width for circular effect
+                        className="h-52 w-52 max-w-auto object-cover rounded-full relative z-10 p-4" // Ensure it's a circle
                       />
                       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent rounded-full border-t-[3px] border-main-primary" />
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
             </CarouselItem>
           ))}

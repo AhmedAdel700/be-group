@@ -1,9 +1,15 @@
 "use client";
+import { AchievementTypes } from "@/types/apiDataTypes";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-export default function AchievementSection() {
+export default function AchievementSection({
+  achievementsData,
+}: {
+  achievementsData: AchievementTypes[];
+}) {
   const t = useTranslations("achievements");
+
   return (
     <section className="bg-main-black2 min-h-[45vh] w-full flex justify-center items-center border-b border-white/10 py-8">
       <div className="w-full mx-auto px-4">
@@ -30,58 +36,24 @@ export default function AchievementSection() {
           </motion.h2>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-evenly items-center gap-4 xl:gap-0 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="py-4 xl:py-8 flex flex-col gap-2 justify-center items-center text-center"
-          >
-            <h3 className="text-4xl text-main-primary font-bold">3000+</h3>
-            <p className="text-gray-600 text-lg sm:text-base lg:text-lg">
-              Successful Projects
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="py-4 xl:py-8 flex flex-col gap-2 justify-center items-center text-center"
-          >
-            <h3 className="text-4xl text-main-primary font-bold">95%</h3>
-            <p className="text-gray-600 text-lg sm:text-base lg:text-lg">
-              Customer Satisfaction Rate
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="py-4 xl:py-8 flex flex-col gap-2 justify-center items-center text-center"
-          >
-            <h3 className="text-4xl text-main-primary font-bold">200+</h3>
-            <p className="text-gray-600 text-lg sm:text-base lg:text-lg">
-              Employees
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="py-4 xl:py-8 flex flex-col gap-2 justify-center items-center text-center"
-          >
-            <h3 className="text-4xl text-main-primary font-bold">3</h3>
-            <p className="text-gray-600 text-lg sm:text-base lg:text-lg">
-              Countries of Operation
-            </p>
-          </motion.div>
+        <div className="flex flex-col md:flex-row justify-evenly items-center gap-4 xl:gap-0 w-full flex-wrap">
+          {achievementsData?.map((achievement, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              className="py-4 xl:py-8 flex flex-col gap-2 justify-center items-center text-center"
+            >
+              <h3 className="text-4xl text-main-primary font-bold">
+                {achievement.number}
+              </h3>
+              <p className="text-gray-600 text-lg sm:text-base lg:text-lg">
+                {achievement.title}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

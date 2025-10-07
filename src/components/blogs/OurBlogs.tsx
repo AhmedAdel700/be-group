@@ -3,24 +3,18 @@ import { motion } from "motion/react";
 import { Button } from "../ui/button";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import MultiLineUnderline from "../MultiLineUnderline";
 import { Link } from "@/navigations";
+import { BlogTypes } from "@/types/apiDataTypes";
 
-type BlogItem = {
-  id: string | number;
-  image: string | StaticImageData;
-  desc: string;
-  date: string;
-};
-
-export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
+export default function OurBlogs({ blogsData }: { blogsData?: BlogTypes[] }) {
   const t = useTranslations("blogs");
   const locale = useLocale();
   const isRTL = locale === "ar";
   const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-  // cards enter from logical "start" + up
+  // cards enter animation
   const cardVar = {
     hidden: { opacity: 0, x: isRTL ? 40 : -40, y: 24 },
     show: (i: number) => ({
@@ -31,13 +25,13 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
     }),
   };
 
-  // Measure card height and enable step transforms only on lg+ to keep smaller screens clean
+  // Measure card height for step transform
   const gridRef = React.useRef<HTMLDivElement | null>(null);
   const [cardH, setCardH] = React.useState(0);
   const [isLg, setIsLg] = React.useState(false);
 
   React.useEffect(() => {
-    const mql = window.matchMedia("(min-width: 1024px)"); // lg
+    const mql = window.matchMedia("(min-width: 1024px)");
     const updateIsLg = () => setIsLg(mql.matches);
     updateIsLg();
     mql.addEventListener("change", updateIsLg);
@@ -57,7 +51,6 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
     };
 
     measure();
-
     const ro = new ResizeObserver(measure);
     ro.observe(gridRef.current);
     window.addEventListener("resize", measure);
@@ -70,18 +63,17 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
     };
   }, []);
 
-  // Helper: style object for step wrapper
+  // Helper for step positioning
   const stepStyle = (step: 0 | 1 | 2): React.CSSProperties =>
     isLg && cardH
       ? {
-          // step = 2 => 70%, step = 1 => 35%, step = 0 => 0%
           transform: `translateY(${cardH * 0.35 * step}px)`,
           willChange: "transform",
         }
       : {};
 
-  // Helper to safely read item fields
-  const get = (idx: number) => items[idx];
+  // Helper to safely read blog fields
+  const get = (idx: number) => blogsData?.[idx];
 
   return (
     <section className="w-full min-h-fit lg:max-h-screen bg-main-black text-main-white flex flex-col gap-6 md:gap-8 xl:gap-0 justify-start items-center py-10 xl:pt-16 border-b border-white/10">
@@ -131,7 +123,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
           </Link>
         </div>
 
-        {/* Ladder cards — first = lowest step (70%), second = 35%, third = 0% */}
+        {/* Blog cards */}
         <div
           ref={gridRef}
           className={`w-full px-4 xl:px-6 lg:-mt-32 xl:-mt-48 grid grid-cols-1 md:grid-cols-3 gap-6 ${
@@ -146,160 +138,61 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
               : undefined
           }
         >
-          {/* Step 1 — lowest (70%) */}
-          <div style={stepStyle(2)}>
-            <Link href={"/blog/blog-details"}>
-              <motion.article
-                custom={0}
-                variants={cardVar}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.35 }}
-                className="w-full js-card cursor-pointer"
-              >
-                <div className="group rounded-[6px] overflow-hidden cursor-target">
-                  {/* IMAGE */}
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    {get(0)?.image ? (
-                      <Image
-                        src={get(0)!.image}
-                        alt={get(0)?.desc ?? "Blog image"}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
-                        sizes="(min-width:1024px) 33vw, 100vw"
-                        priority
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-white/10" />
-                    )}
-                  </div>
+          {[0, 1, 2].map((i) => (
+            <div key={i} style={stepStyle((2 - i) as 0 | 1 | 2)}>
+              <Link href={`/blog/${get(i)?.slug || "blog-details"}`}>
+                <motion.article
+                  custom={i}
+                  variants={cardVar}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.35 }}
+                  className="w-full js-card cursor-pointer"
+                >
+                  <div className="group rounded-[6px] overflow-hidden cursor-target">
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      {get(i)?.image ? (
+                        <Image
+                          src={get(i)!.image}
+                          alt={get(i)?.name ?? "Blog image"}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
+                          sizes="(min-width:1024px) 33vw, 100vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-white/10" />
+                      )}
+                    </div>
 
-                  <div className="py-5 flex flex-col gap-4 mt-2">
-                    <h3 className="text-xl font-semibold leading-tight cursor-pointer">
-                      <MultiLineUnderline
-                        color="#fff"
-                        thickness={1}
-                        gap={6}
-                        duration={500}
-                        delay={140}
-                        rtl={isRTL}
-                      >
-                        {get(0)?.desc}
-                      </MultiLineUnderline>
-                    </h3>
-                    <div className="text-base text-white/90">
-                      {get(0)?.date}
+                    <div className="py-5 flex flex-col gap-4 mt-2">
+                      <h3 className="text-xl font-semibold leading-tight cursor-pointer">
+                        <MultiLineUnderline
+                          color="#fff"
+                          thickness={1}
+                          gap={6}
+                          duration={500}
+                          delay={140}
+                          rtl={isRTL}
+                        >
+                          {get(i)?.name}
+                        </MultiLineUnderline>
+                      </h3>
+                      <div className="text-base text-white/90">
+                        {get(i)?.date || ""}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.article>
-            </Link>
-          </div>
+                </motion.article>
+              </Link>
+            </div>
+          ))}
 
-          {/* Step 2 — middle (35%) */}
-          <div style={stepStyle(1)}>
-            <Link href={"/blog/blog-details"}>
-              <motion.article
-                custom={1}
-                variants={cardVar}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.35 }}
-                className="w-full cursor-pointer"
-              >
-                <div className="group  rounded-[6px] overflow-hidden cursor-target cursor-pointer">
-                  {/* IMAGE */}
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    {get(1)?.image ? (
-                      <Image
-                        src={get(1)!.image}
-                        alt={get(1)?.desc ?? "Blog image"}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105  rounded-[6px]"
-                        sizes="(min-width:1024px) 33vw, 100vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-white/10" />
-                    )}
-                  </div>
-
-                  <div className="py-5 flex flex-col gap-4 mt-2">
-                    <h3 className="text-xl font-semibold leading-tight cursor-pointer">
-                      <MultiLineUnderline
-                        color="#fff"
-                        thickness={1}
-                        gap={6}
-                        duration={500}
-                        delay={140}
-                        rtl={isRTL}
-                      >
-                        {get(1)?.desc}
-                      </MultiLineUnderline>
-                    </h3>
-                    <div className="text-base text-white/90">
-                      {get(1)?.date}
-                    </div>
-                  </div>
-                </div>
-              </motion.article>
-            </Link>
-          </div>
-
-          {/* Step 3 — highest (0%) */}
-          <div style={stepStyle(0)}>
-            <Link href={"/blog/blog-details"}>
-              <motion.article
-                custom={2}
-                variants={cardVar}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.35 }}
-                className="w-full js-card cursor-pointer"
-              >
-                <div className="group rounded-[6px] overflow-hidden cursor-target">
-                  {/* IMAGE */}
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    {get(2)?.image ? (
-                      <Image
-                        src={get(2)!.image}
-                        alt={get(2)?.desc ?? "Blog image"}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-[6px]"
-                        sizes="(min-width:1024px) 33vw, 100vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-white/10" />
-                    )}
-                  </div>
-
-                  <div className="py-5 flex flex-col gap-4 mt-2">
-                    <h3 className="text-xl font-semibold leading-tight cursor-pointer">
-                      <MultiLineUnderline
-                        color="#fff"
-                        thickness={1}
-                        gap={6}
-                        duration={500}
-                        delay={140}
-                        rtl={isRTL}
-                      >
-                        {get(2)?.desc}
-                      </MultiLineUnderline>
-                    </h3>
-                    <div className="text-base text-white/90">
-                      {get(2)?.date}
-                    </div>
-                  </div>
-                </div>
-              </motion.article>
-            </Link>
-          </div>
-
-          {/* Spacer to ensure the lowest stepped card is fully scrollable/visible */}
+          {/* Spacer for last stepped card */}
           {isLg && cardH > 0 && (
             <div
               aria-hidden
               className="col-span-full"
-              style={{ height: `${cardH * 0.7}px` }} // 70% of card height (max drop)
+              style={{ height: `${cardH * 0.7}px` }}
             />
           )}
         </div>

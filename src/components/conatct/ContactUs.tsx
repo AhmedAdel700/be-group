@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import conactImage from "@/app/assets/contact.jpg";
 import { MapPin, Mail, Smartphone } from "lucide-react";
 import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
-import { useTranslations, useLocale } from "next-intl"; // ✅ added useLocale
+import { useTranslations, useLocale } from "next-intl";
+import { ContactDataTypes, ContactSectionTypes } from "@/types/apiDataTypes";
 
 // ===== Easing / shared timing =====
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -64,7 +64,13 @@ const popBlurIn: Variants = {
   },
 };
 
-export default function ContactUs() {
+export default function ContactUs({
+  contactData,
+  contactSection,
+}: {
+  contactData: ContactDataTypes;
+  contactSection: ContactSectionTypes;
+}) {
   const t = useTranslations("contact");
   const locale = useLocale();
 
@@ -92,13 +98,25 @@ export default function ContactUs() {
               {t("work")} <br /> {t("together")}
             </h2>
 
-            <p className="text-lg text-white/80 text-center sm:text-start">
-              {t("Our team is ready to discuss your project requirements")}
-            </p>
-
-            <p className="text-lg text-white/80 text-center sm:text-start">
-              {t("Please fill in the quick form and we will be in touch")}
-            </p>
+            {contactSection?.long_desc && contactSection.short_desc ? (
+              <>
+                <p className="text-lg text-white/80 text-center sm:text-start">
+                  {contactSection.long_desc}
+                </p>
+                <p className="text-lg text-white/80 text-center sm:text-start">
+                  {contactSection.short_desc}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-lg text-white/80 text-center sm:text-start">
+                  {t("Our team is ready to discuss your project requirements")}
+                </p>
+                <p className="text-lg text-white/80 text-center sm:text-start">
+                  {t("Please fill in the quick form and we will be in touch")}
+                </p>
+              </>
+            )}
           </motion.div>
 
           {/* Image column */}
@@ -110,9 +128,14 @@ export default function ContactUs() {
             <motion.div variants={maskReveal}>
               <motion.div variants={scaleIn}>
                 <Image
-                  src={conactImage}
-                  alt={t("Contact us image")}
-                  className="w-full h-auto object-cover rounded-[8px]"
+                  src={
+                    contactSection?.image ||
+                    "https://newapi.be-group.com/assets/dashboard/images/noimage.png"
+                  }
+                  alt={contactSection?.alt_image || t("Contact us image")}
+                  width={380}
+                  height={800}
+                  className="max-w-full h-auto object-cover rounded-[8px]"
                   priority
                 />
               </motion.div>
@@ -135,13 +158,14 @@ export default function ContactUs() {
             viewport={{ once: true, amount: 0.4 }}
           >
             <div className="grid grid-rows-3 grid-cols-[30%_70%] divide-x divide-y divide-white/30 text-white relative h-full min-h-[240px]">
-              {/* ✅ show divider only for English (LTR) to avoid double line in Arabic */}
+              {/* Divider (LTR/RTL) */}
               {locale === "en" ? (
                 <span className="pointer-events-none absolute top-0 bottom-0 left-[30%] w-px bg-white/30" />
               ) : (
                 <span className="pointer-events-none absolute top-0 bottom-0 right-[30%] w-px bg-white/30" />
               )}
 
+              {/* Address */}
               <motion.div
                 className="flex justify-center items-center p-4"
                 variants={popBlurIn}
@@ -161,9 +185,11 @@ export default function ContactUs() {
                 className="flex items-center p-4 text-lg"
                 variants={popBlurIn}
               >
-                {t("25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt")}
+                {contactData?.address ||
+                  t("25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt")}
               </motion.div>
 
+              {/* Email */}
               <motion.div
                 className="flex justify-center items-center p-4"
                 variants={popBlurIn}
@@ -184,9 +210,10 @@ export default function ContactUs() {
                 className="flex items-center p-4 text-lg"
                 variants={popBlurIn}
               >
-                info@begroup.com
+                {contactData?.email || "info@begroup.com"}
               </motion.div>
 
+              {/* Phone */}
               <motion.div
                 className="flex justify-center items-center p-4"
                 variants={popBlurIn}
@@ -207,7 +234,9 @@ export default function ContactUs() {
                 className="flex items-center p-4 text-lg"
                 variants={popBlurIn}
               >
-                <span dir="ltr">+20 100 995 7000</span>
+                <span dir="ltr">
+                  {contactData?.phone || "+20 100 995 7000"}
+                </span>
               </motion.div>
             </div>
           </motion.div>
