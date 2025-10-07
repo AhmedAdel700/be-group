@@ -28,7 +28,12 @@
         "Product Demos"
       ],
       "technologies": ["After Effects", "Cinema 4D", "Blender", "Premiere Pro"],
-      "deliverables": ["Storyboard", "Animation Assets", "Final Video", "Source Files"],
+      "deliverables": [
+        "Storyboard",
+        "Animation Assets",
+        "Final Video",
+        "Source Files"
+      ],
       "timeline": "2-6 weeks",
       "starting_price": "Contact for quote"
     },
@@ -46,8 +51,21 @@
         "Analytics & Reporting",
         "Influencer Partnerships"
       ],
-      "platforms": ["Instagram", "Facebook", "Twitter/X", "LinkedIn", "TikTok", "YouTube", "Snapchat"],
-      "deliverables": ["Content Calendar", "Creative Assets", "Performance Reports", "Strategy Guide"],
+      "platforms": [
+        "Instagram",
+        "Facebook",
+        "Twitter/X",
+        "LinkedIn",
+        "TikTok",
+        "YouTube",
+        "Snapchat"
+      ],
+      "deliverables": [
+        "Content Calendar",
+        "Creative Assets",
+        "Performance Reports",
+        "Strategy Guide"
+      ],
       "timeline": "Ongoing monthly",
       "starting_price": "$1,500/month"
     },
@@ -65,8 +83,20 @@
         "Cloud Infrastructure",
         "Performance Optimization"
       ],
-      "technologies": ["React", "Next.js", "Node.js", "TypeScript", "AWS", "MongoDB"],
-      "deliverables": ["Responsive Website", "Admin Panel", "Documentation", "Hosting Setup"],
+      "technologies": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "TypeScript",
+        "AWS",
+        "MongoDB"
+      ],
+      "deliverables": [
+        "Responsive Website",
+        "Admin Panel",
+        "Documentation",
+        "Hosting Setup"
+      ],
       "timeline": "4-12 weeks",
       "starting_price": "$5,000"
     },
@@ -84,8 +114,17 @@
         "Quality Score Optimization",
         "Conversion Tracking"
       ],
-      "certifications": ["Google Premier Partner", "Google Ads Certified", "Analytics Certified"],
-      "deliverables": ["Campaign Setup", "Ad Creative", "Performance Reports", "Optimization Recommendations"],
+      "certifications": [
+        "Google Premier Partner",
+        "Google Ads Certified",
+        "Analytics Certified"
+      ],
+      "deliverables": [
+        "Campaign Setup",
+        "Ad Creative",
+        "Performance Reports",
+        "Optimization Recommendations"
+      ],
       "timeline": "1-2 weeks setup + ongoing",
       "starting_price": "$2,000 + ad spend"
     },
@@ -104,13 +143,18 @@
         "Performance Tracking"
       ],
       "tools": ["SEMrush", "Ahrefs", "Google Analytics", "Search Console"],
-      "deliverables": ["SEO Audit", "Optimization Plan", "Content Calendar", "Monthly Reports"],
+      "deliverables": [
+        "SEO Audit",
+        "Optimization Plan",
+        "Content Calendar",
+        "Monthly Reports"
+      ],
       "timeline": "3-6 months",
       "starting_price": "$1,200/month"
     },
     "google_maps": {
       "title": "Google Maps Optimization",
-      "category": "digital_marketing", 
+      "category": "digital_marketing",
       "blurb": "Be found locally",
       "short_description": "Local SEO and Google Business Profile optimization",
       "description": "Optimize your Business Profile to win local intent across Search and Maps. We manage photos, posts, offers, reviews, and messaging to convert discovery into visits and calls. Perfect for businesses with physical locations or local service areas.",
@@ -122,8 +166,18 @@
         "Posts & Updates",
         "Messaging Setup"
       ],
-      "benefits": ["Increased Local Visibility", "More Store Visits", "Higher Review Ratings", "Better Local Rankings"],
-      "deliverables": ["Optimized Profile", "Photo Library", "Review Strategy", "Monthly Reports"],
+      "benefits": [
+        "Increased Local Visibility",
+        "More Store Visits",
+        "Higher Review Ratings",
+        "Better Local Rankings"
+      ],
+      "deliverables": [
+        "Optimized Profile",
+        "Photo Library",
+        "Review Strategy",
+        "Monthly Reports"
+      ],
       "timeline": "2-4 weeks",
       "starting_price": "$800/month"
     },
@@ -141,8 +195,18 @@
         "Sound Design",
         "Post-Production"
       ],
-      "equipment": ["4K Cameras", "Professional Audio", "Lighting Kits", "Drone Footage"],
-      "deliverables": ["Raw Footage", "Edited Videos", "Audio Files", "Graphics Package"],
+      "equipment": [
+        "4K Cameras",
+        "Professional Audio",
+        "Lighting Kits",
+        "Drone Footage"
+      ],
+      "deliverables": [
+        "Raw Footage",
+        "Edited Videos",
+        "Audio Files",
+        "Graphics Package"
+      ],
       "timeline": "3-8 weeks",
       "starting_price": "$3,000"
     },
@@ -160,7 +224,12 @@
         "Visual Assets",
         "Brand Strategy"
       ],
-      "deliverables": ["Logo Package", "Brand Guidelines", "Asset Library", "Style Guide"],
+      "deliverables": [
+        "Logo Package",
+        "Brand Guidelines",
+        "Asset Library",
+        "Style Guide"
+      ],
       "timeline": "4-8 weeks",
       "starting_price": "$2,500"
     },
@@ -178,10 +247,24 @@
         "Go-to-Market Plans",
         "Performance Metrics"
       ],
-      "expertise": ["Digital Transformation", "Market Research", "Business Strategy", "Growth Planning"],
-      "deliverables": ["Strategy Document", "Action Plan", "Market Research", "Roadmap"],
+      "expertise": [
+        "Digital Transformation",
+        "Market Research",
+        "Business Strategy",
+        "Growth Planning"
+      ],
+      "deliverables": [
+        "Strategy Document",
+        "Action Plan",
+        "Market Research",
+        "Roadmap"
+      ],
       "timeline": "2-4 weeks",
       "starting_price": "$150/hour"
     }
-  }
+  },
+  "Animation Video": "Animation Video",
+  "Tell your story with motion": "Tell your story with motion",
+  "Our Services": "Our Services",
+  "We provide the full stack of creative services": "We provide the full stack of creative services"
 }

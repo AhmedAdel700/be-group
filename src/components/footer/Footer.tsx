@@ -21,6 +21,7 @@ import partner3 from "@/app/assets/3.png";
 import xLogoWhite from "@/app/assets/x-logo-white.svg";
 import xLogo from "@/app/assets/x-logo.svg";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const SocialIcon: React.FC<{
   href: string;
@@ -39,14 +40,12 @@ const SocialIcon: React.FC<{
         "transition-transform hover:scale-[1.02] active:scale-[0.98]"
       )}
     >
-      {/* White background that expands on hover */}
       <span
         className={clsx(
           "absolute inset-0 rounded-full bg-white",
           "scale-0 group-hover:scale-100 transition-transform duration-500"
         )}
       />
-      {/* Icon */}
       <span
         className={clsx(
           "relative z-[1] transition-colors duration-300 group-hover:text-black"
@@ -59,6 +58,7 @@ const SocialIcon: React.FC<{
 };
 
 export default function Footer() {
+  const t = useTranslations("footer");
   const [isHoveringLogo, setIsHoveringLogo] = useState(false);
   return (
     <footer className="w-full flex flex-col justify-center items-center gap-5 bg-main-black text-white px-4 md:px-8 xl:px-20 py-8">
@@ -102,14 +102,15 @@ export default function Footer() {
           <Link
             href="tel:+201012345678"
             className="text-xs sm:text-sm md:text-base"
+            dir="ltr"
           >
-            +20 101 234 5678
+            +20 100 995 7000
           </Link>
         </div>
         <div className="flex items-start gap-2 justify-center cursor-target">
           <MapPin size={18} className="text-main-secondary shrink-0" />
           <span className="text-xs sm:text-sm md:text-base">
-            Office 12, Fifth Settlement, New Cairo, Egypt
+            {t("Office Address")}
           </span>
         </div>
       </motion.div>
@@ -122,17 +123,17 @@ export default function Footer() {
         transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         className="flex flex-col gap-4 items-center"
       >
-        <div className="text-white/90 font-medium">Follow us</div>
+        <div className="text-white/90 font-medium">{t("Follow us")}</div>
         <div className="flex items-center gap-3">
-          {/* Wrap each icon with motion.div for stagger */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45, delay: 0.0 }}
-            className="cursor-target"
+            transition={{ duration: 0.45 }}
           >
-            <SocialIcon href="https://youtube.com" label="YouTube">
+            <SocialIcon
+              href="https://www.youtube.com/@Be4emarketing"
+              label="YouTube"
+            >
               <Youtube size={22} />
             </SocialIcon>
           </motion.div>
@@ -140,11 +141,12 @@ export default function Footer() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.06 }}
-            className="cursor-target"
           >
-            <SocialIcon href="https://facebook.com" label="Facebook">
+            <SocialIcon
+              href="https://www.facebook.com/be4emarketing"
+              label="Facebook"
+            >
               <Facebook size={22} />
             </SocialIcon>
           </motion.div>
@@ -152,11 +154,12 @@ export default function Footer() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.12 }}
-            className="cursor-target"
           >
-            <SocialIcon href="https://linkedin.com" label="LinkedIn">
+            <SocialIcon
+              href="https://www.linkedin.com/company/be4emarketing"
+              label="LinkedIn"
+            >
               <Linkedin size={22} />
             </SocialIcon>
           </motion.div>
@@ -164,13 +167,11 @@ export default function Footer() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.18 }}
-            className="cursor-target"
             onMouseEnter={() => setIsHoveringLogo(true)}
             onMouseLeave={() => setIsHoveringLogo(false)}
           >
-            <SocialIcon href="https://twitter.com" label="Twitter">
+            <SocialIcon href="https://x.com/be4emarketing" label="Twitter">
               <Image
                 src={isHoveringLogo ? xLogo : xLogoWhite}
                 alt="Be Group Logo"
@@ -185,11 +186,12 @@ export default function Footer() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.45, delay: 0.24 }}
-            className="cursor-target"
           >
-            <SocialIcon href="https://instagram.com" label="Instagram">
+            <SocialIcon
+              href="https://www.instagram.com/be4emarketing"
+              label="Instagram"
+            >
               <Instagram size={22} />
             </SocialIcon>
           </motion.div>
@@ -200,18 +202,12 @@ export default function Footer() {
       <motion.div
         initial={{ opacity: 0, y: 22 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, delay: 0.2 }}
         className="flex flex-col gap-4 items-center"
       >
-        <div className="text-white/90 font-medium">Our Partners</div>
+        <div className="text-white/90 font-medium">{t("Our Partners")}</div>
         <div className="flex items-center justify-center gap-4 lg:gap-10 flex-wrap">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45 }}
-          >
+          <motion.div>
             <Image
               src={partner1}
               alt="Partner 1"
@@ -220,13 +216,7 @@ export default function Footer() {
               className="object-cover"
             />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45, delay: 0.08 }}
-          >
+          <motion.div>
             <Image
               src={partner3}
               alt="Partner 3"
@@ -235,13 +225,7 @@ export default function Footer() {
               className="object-cover"
             />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45, delay: 0.16 }}
-          >
+          <motion.div>
             <Image
               src={partner2}
               alt="Partner 2"
@@ -257,20 +241,19 @@ export default function Footer() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.55, delay: 0.1 }}
         className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t border-white/10 pt-6"
       >
         <div className="text-white/70 text-xs sm:text-sm text-center">
-          Made By <span className="text-main-primary">Be Group</span> © 2025 All
-          Rights Reserved
+          {t("Made By")} <span className="text-main-primary">Be Group</span> ©
+          2025 {t("All Rights Reserved")}
         </div>
         <div className="flex items-center gap-6 text-white/60 text-xs sm:text-sm">
           <Link href="#" className="hover:underline cursor-target">
-            Privacy Policy
+            {t("Privacy Policy")}
           </Link>
           <Link href="#" className="hover:underline cursor-target">
-            Terms
+            {t("Terms")}
           </Link>
         </div>
       </motion.div>

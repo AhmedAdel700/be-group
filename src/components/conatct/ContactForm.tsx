@@ -17,6 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigations";
 
 const ContactSchema = z.object({
   name: z.string().min(3, "Please Enter Your Full Name"),
@@ -43,6 +45,7 @@ const fadeUpVar: Variants = {
 };
 
 export default function ContactForm() {
+  const t = useTranslations("contact");
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(ContactSchema),
     defaultValues: { name: "", email: "", message: "" },
@@ -89,11 +92,11 @@ export default function ContactForm() {
                 <FormItem>
                   <motion.div variants={fadeUpVar}>
                     <FormLabel className="text-white/90 text-base sm:text-lg">
-                      Name
+                      {t("Name")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter Your Name"
+                        placeholder={t("Enter Your Name")}
                         className="
                           bg-transparent border-white/70 text-white
                           placeholder:text-white/40 placeholder:text-base
@@ -117,12 +120,12 @@ export default function ContactForm() {
                 <FormItem>
                   <motion.div variants={fadeUpVar}>
                     <FormLabel className="text-white/90 text-base sm:text-lg">
-                      Email
+                      {t("Email")}
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="Enter Your Email"
+                        placeholder={t("Enter Your Email")}
                         className="
                           bg-transparent border-white/70 text-white
                           placeholder:text-white/40 placeholder:text-base
@@ -148,12 +151,12 @@ export default function ContactForm() {
               <FormItem>
                 <motion.div variants={fadeUpVar}>
                   <FormLabel className="text-white/90 text-base sm:text-lg">
-                    Message
+                    {t("Message")}
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       rows={7}
-                      placeholder="Enter Your Message"
+                      placeholder={t("Enter Your Message")}
                       className="
                         bg-transparent border-white/70 text-white
                         placeholder:text-white/40 placeholder:text-base
@@ -182,16 +185,16 @@ export default function ContactForm() {
               <AlertCircle className="mt-0.5 h-5 w-5 text-main-primary shrink-0" />
               <p>
                 <span className="font-medium">
-                  All the fields are required.
+                  {t("All the fields are required")}
                 </span>{" "}
-                By sending the form you agree to the{" "}
-                <a href="/terms" className="underline hover:opacity-80">
-                  Terms &amp; Conditions
-                </a>{" "}
-                and{" "}
-                <a href="/privacy" className="underline hover:opacity-80">
-                  Privacy Policy
-                </a>
+                {t("By sending the form you agree to the")}{" "}
+                <Link href="/terms" className="underline hover:opacity-80">
+                  {t("Terms")} &amp; {t("Conditions")}
+                </Link>{" "}
+                {t("and")}{" "}
+                <Link href="/privacy" className="underline hover:opacity-80">
+                  {t("Privacy Policy")}
+                </Link>
                 .
               </p>
             </motion.div>
@@ -207,7 +210,7 @@ export default function ContactForm() {
                     !form.formState.isValid && form.formState.isSubmitted
                   }
                 >
-                  Send Message
+                  {t("Send Message")}
                 </Button>
               </motion.div>
             </motion.div>

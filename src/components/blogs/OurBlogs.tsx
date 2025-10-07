@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { Button } from "../ui/button";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
 import Image, { type StaticImageData } from "next/image";
 import MultiLineUnderline from "../MultiLineUnderline";
@@ -15,6 +15,7 @@ type BlogItem = {
 };
 
 export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
+  const t = useTranslations("blogs");
   const locale = useLocale();
   const isRTL = locale === "ar";
   const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -93,7 +94,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            Our Blogs
+            {t("Our Blogs")}
           </motion.div>
 
           {/* Heading */}
@@ -104,7 +105,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
           >
-            Latest News
+            {t("Latest News")}
           </motion.h2>
 
           {/* Short description */}
@@ -115,9 +116,9 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="text-white/70 text-base md:text-lg text-start lg:max-w-[60%] xl:max-w-[50%]"
           >
-            Insights, tips, and updates from our team—covering design,
-            development, and product growth. Dive in for quick reads and
-            practical takeaways.
+            {t(
+              "Insights, tips, and updates from our team covering design, development, and product growth Dive in for quick reads and practical take aways"
+            )}
           </motion.p>
 
           <Link href={"/blog"} className="z-50">
@@ -125,7 +126,7 @@ export default function OurBlogs({ items = [] }: { items?: BlogItem[] }) {
               className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] z-50 cursor-target"
               variant="default"
             >
-              VIEW BLOGS
+              {t("VIEW BLOGS")}
             </Button>
           </Link>
         </div>

@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function AchievementSection() {
+  const t = useTranslations("achievements");
   return (
     <section className="bg-main-black2 min-h-[45vh] w-full flex justify-center items-center border-b border-white/10 py-8">
       <div className="w-full mx-auto px-4">
@@ -13,7 +15,7 @@ export default function AchievementSection() {
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            Achievements
+            {t("Achievements")}
           </motion.div>
 
           {/* Heading */}
@@ -24,7 +26,7 @@ export default function AchievementSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
           >
-            Achievements of company
+            {t("Achievements of company")}
           </motion.h2>
         </div>
 

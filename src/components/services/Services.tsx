@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useCallback } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   BadgeCheck,
   Camera,
@@ -47,15 +47,16 @@ const ACCENT = "text-main-primary";
 
 export default function Services() {
   const locale = useLocale();
+  const t = useTranslations("services");
   const isRTL = locale === "ar";
 
   const services: Service[] = useMemo(
     () => [
       {
         id: 1,
-        title: "Animation Video",
+        title: t("Animation Video"),
         icon: Clapperboard,
-        blurb: "Tell your story with motion.",
+        blurb: t("Tell your story with motion"),
         content: (
           <>
             <p className="leading-relaxed opacity-90">
@@ -438,7 +439,7 @@ export default function Services() {
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full w-fit mx-auto text-main-primary"
           >
-            Our Services
+            {t("Our Services")}
           </motion.div>
 
           <motion.h2
@@ -446,9 +447,11 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize mx-auto"
+            className={`text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize mx-auto ${
+              locale === "ar" && "!leading-[1.2]"
+            }`}
           >
-            We provide the full stack of creative services
+            {t("We provide the full stack of creative services")}
           </motion.h2>
         </div>
 

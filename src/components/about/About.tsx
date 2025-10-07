@@ -8,12 +8,15 @@ import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/navigations";
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function About({
   aboutArray,
 }: {
   aboutArray?: { id: number; title: string; desc: string }[];
 }) {
+  const t = useTranslations("about");
+  const locale = useLocale();
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
   const [openId, setOpenId] = useState<number | null>(null);
@@ -30,7 +33,7 @@ export default function About({
         transition={{ duration: 0.6 }}
         className="uppercase py-3 px-4 border rounded-full text-main-primary"
       >
-        About Agency
+        {t("About Agency")}
       </motion.div>
 
       {/* Heading */}
@@ -41,7 +44,7 @@ export default function About({
         transition={{ duration: 0.7, delay: 0.2 }}
         className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
       >
-        Group of Creators and Minimalism Lovers
+        {t("Group of Creators and Minimalism Lovers")}
       </motion.h2>
 
       {/* Grid */}
@@ -76,30 +79,34 @@ export default function About({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="h-auto xl:h-full flex flex-col justify-between items-start gap-4 text-start px-4 xl:px-0 xl:ms-16 flex-1 w-full"
+          className={`h-auto xl:h-full flex flex-col justify-between items-start gap-4 text-start px-4 xl:px-0 ${
+            locale === "en" ? "xl:ms-16" : "xl:ms-10"
+          } flex-1 w-full`}
         >
           <h2 className="text-3xl mt-5 lg:mt-0 md:text-4xl font-bold text-main-primary tracking-tight">
-            Be Group
+            {t("Be Group")}
           </h2>
           <h3 className="text-xl md:text-2xl font-semibold">
-            Digital Services has never been easier.
+            {t("Digital Services has never been easier")}
           </h3>
 
-          <h4 className="font-medium">What We Do?</h4>
+          <h4 className="font-medium text-2xl">{t("What We Do ?")}</h4>
           <ul className="list-disc marker:text-main-primary text-white/80 leading-relaxed flex flex-col gap-4 text-xs md:text-sm lg:text-base ps-4">
-            <li>Digital assets audit</li>
-            <li>Research & competitive analysis</li>
-            <li>Target audience segmentation</li>
-            <li>Customer persona & content personalization strategy</li>
-            <li>Digital communications strategy</li>
-            <li>Creative, social media & digital advertising strategy</li>
-            <li>Business intelligence & reporting tools</li>
+            <li>{t("Digital assets audit")}</li>
+            <li>{t("Research & competitive analysis")}</li>
+            <li>{t("Target audience segmentation")}</li>
+            <li>{t("Customer persona & content personalization strategy")}</li>
+            <li>{t("Digital communications strategy")}</li>
+            <li>
+              {t("Creative, social media & digital advertising strategy")}
+            </li>
+            <li>{t("Business intelligence & reporting tools")}</li>
           </ul>
 
           {/* Conditional button */}
           <Link href={isAboutPage ? "/services" : "/about"} className="w-full">
             <Button className="uppercase bg-main-primary text-main-text hover:bg-white/90 px-6 py-6 rounded-[4px] w-full sm:w-[200px] xl:w-full cursor-target">
-              {isAboutPage ? "View Services" : "Learn More"}
+              {isAboutPage ? t("View Services") : t("Learn More")}
             </Button>
           </Link>
         </motion.div>
@@ -133,7 +140,8 @@ export default function About({
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-3">
-              Our Core <span className="text-main-primary">Values</span>
+              {t("Our Core")}{" "}
+              <span className="text-main-primary">{t("Values")}</span>
             </h2>
           </motion.div>
 

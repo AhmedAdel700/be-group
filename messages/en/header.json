@@ -1,1 +1,10 @@
-{}
+{
+  "Home": "Home",
+  "About": "About",
+  "Services": "Services",
+  "Portfolio": "Portfolio",
+  "Blog": "Blog",
+  "Contact": "Contact",
+  "English": "English",
+  "Arabic": "Arabic"
+}

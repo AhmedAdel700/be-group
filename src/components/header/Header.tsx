@@ -6,7 +6,7 @@ import { Link, usePathname, useRouter } from "@/navigations";
 import Image from "next/image";
 import logo from "@/app/assets/20879.webp";
 import { ChevronDown, Globe } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -26,16 +26,8 @@ const linkVar: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
 };
 
-const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
-];
-
 export default function Header() {
+  const t = useTranslations("header");
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -51,6 +43,15 @@ export default function Header() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const ticking = useRef(false);
   const THRESHOLD = 12;
+
+  const LINKS = [
+    { href: "/", label: t("Home") },
+    { href: "/about", label: t("About") },
+    { href: "/services", label: t("Services") },
+    { href: "/portfolio", label: t("Portfolio") },
+    { href: "/blog", label: t("Blog") },
+    { href: "/contact", label: t("Contact") },
+  ];
 
   // Scroll effect
   useEffect(() => {
@@ -120,7 +121,13 @@ export default function Header() {
         className="flex items-center gap-3 cursor-pointer cursor-target"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <Image src={logo} alt="Be Group Logo" width={120} height={120} priority />
+        <Image
+          src={logo}
+          alt="Be Group Logo"
+          width={120}
+          height={120}
+          priority
+        />
       </motion.div>
 
       {/* Desktop nav (xl and up) */}
@@ -231,7 +238,7 @@ export default function Header() {
                   )}
                   whileTap={{ scale: 0.98 }}
                 >
-                  English
+                  {t("English")}
                   <Globe size={16} className="text-main-secondary" />
                 </motion.button>
 
@@ -244,7 +251,7 @@ export default function Header() {
                   )}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Arabic
+                  {t("Arabic")}
                   <Globe size={16} className="text-main-secondary" />
                 </motion.button>
               </motion.div>

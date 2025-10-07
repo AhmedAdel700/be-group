@@ -4,10 +4,14 @@ import Image from "next/image";
 import whyUsImage from "@/app/assets/whyUs.avif";
 import { Gem, Palette, Pencil, Star } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 
 export default function WhyChooseUs() {
+  const t = useTranslations("whyus");
+
   return (
     <section className="w-full min-h-fit xl:min-h-screen bg-main-black text-main-white py-8 xl:py-20 border-b border-white/10 overflow-hidden">
+      {/* Section Header */}
       <div className="flex flex-col justify-center items-center text-main-white gap-6 mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -16,10 +20,9 @@ export default function WhyChooseUs() {
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          Why Choose Us
+          {t("Why Choose Us")}
         </motion.div>
 
-        {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,12 +30,12 @@ export default function WhyChooseUs() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
         >
-          Built for excellence
+          {t("Built for excellence")}
         </motion.h2>
       </div>
 
       <div className="px-4 sm:px-0 sm:container pt-10 flex flex-col gap-24 mx-auto xl:ps-20">
-        {/* image (fade-in only) */}
+        {/* Image */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -50,9 +53,9 @@ export default function WhyChooseUs() {
 
         <div className="w-full flex justify-center">
           <div className="w-full max-w-6xl sm:px-6 lg:px-8">
-            {/* first row */}
+            {/* First Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-24 sm:gap-16 lg:gap-32">
-              {/* 01 (fade-in only) */}
+              {/* 01 */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -70,31 +73,24 @@ export default function WhyChooseUs() {
                 </div>
 
                 <div className="flex">
-                  <div className="hidden sm:block w-12"></div>
+                  <div className="hidden sm:block w-12" />
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-5xl font-bold">Unique</h3>
+                    <h3 className="text-5xl font-bold">{t("Unique")}</h3>
                     <h3 className="text-5xl font-normal text-main-primary">
-                      Design
+                      {t("Design")}
                     </h3>
                   </div>
                 </div>
 
                 <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
-                  <div className="hidden sm:block w-12"></div>
-                  <p className="w-full sm:w-full leading-relaxed">
-                    We create designs that are more than just visuals — they are
-                    experiences carefully crafted to stand out. Every detail is
-                    thoughtfully considered, from colors and typography to
-                    layout and user interaction, ensuring originality and
-                    elegance in every project. Our focus on individuality means
-                    that what you receive is not only functional but also
-                    visually distinctive, leaving a strong and lasting
-                    impression.
+                  <div className="hidden sm:block w-12" />
+                  <p className="w-full leading-relaxed">
+                    {t("Unique Description")}
                   </p>
                 </div>
               </motion.div>
 
-              {/* 02 (keeps md:translate-y-[-150px], fade-in only) */}
+              {/* 02 */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -112,34 +108,27 @@ export default function WhyChooseUs() {
                 </div>
 
                 <div className="flex">
-                  <div className="hidden sm:block w-12"></div>
+                  <div className="hidden sm:block w-12" />
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-5xl font-bold">Quality</h3>
+                    <h3 className="text-5xl font-bold">{t("Quality")}</h3>
                     <h3 className="text-5xl font-normal text-main-primary">
-                      Code
+                      {t("Code")}
                     </h3>
                   </div>
                 </div>
 
                 <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
-                  <div className="hidden sm:block w-12"></div>
-                  <p className="w-full sm:w-full leading-relaxed">
-                    Great products start with great code. We write clean,
-                    reliable, and scalable code that follows industry best
-                    practices and modern standards. By focusing on performance,
-                    security, and maintainability, we ensure your solution is
-                    built for today’s needs and ready for tomorrow’s growth.
-                    Every line is written with care to minimize errors, maximize
-                    efficiency, and create a foundation that can handle
-                    complexity with ease.
+                  <div className="hidden sm:block w-12" />
+                  <p className="w-full leading-relaxed">
+                    {t("Quality Description")}
                   </p>
                 </div>
               </motion.div>
             </div>
 
-            {/* second row */}
+            {/* Second Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-24 sm:gap-16 lg:gap-32 mt-24">
-              {/* 03 (fade-in only) */}
+              {/* 03 */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -157,30 +146,24 @@ export default function WhyChooseUs() {
                 </div>
 
                 <div className="flex">
-                  <div className="hidden sm:block w-12"></div>
+                  <div className="hidden sm:block w-12" />
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-5xl font-bold">Clean and</h3>
+                    <h3 className="text-5xl font-bold">{t("Clean and")}</h3>
                     <h3 className="text-5xl font-normal text-main-primary">
-                      Minimal
+                      {t("Minimal")}
                     </h3>
                   </div>
                 </div>
 
                 <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
-                  <div className="hidden sm:block w-12"></div>
-                  <p className="w-full sm:w-full leading-relaxed">
-                    We believe simplicity is the ultimate sophistication. Our
-                    designs follow a clean and minimal philosophy, stripping
-                    away unnecessary clutter and focusing on what truly matters.
-                    This approach ensures clarity, elegance, and ease of use,
-                    allowing your brand’s identity to shine. By combining
-                    minimal aesthetics with powerful functionality, we create
-                    solutions that feel modern, refined, and timeless.
+                  <div className="hidden sm:block w-12" />
+                  <p className="w-full leading-relaxed">
+                    {t("Clean Description")}
                   </p>
                 </div>
               </motion.div>
 
-              {/* 04 (keeps md:translate-y-[-150px], fade-in only) */}
+              {/* 04 */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -198,26 +181,19 @@ export default function WhyChooseUs() {
                 </div>
 
                 <div className="flex">
-                  <div className="hidden sm:block w-12"></div>
+                  <div className="hidden sm:block w-12" />
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-5xl font-bold">Premium</h3>
+                    <h3 className="text-5xl font-bold">{t("Premium")}</h3>
                     <h3 className="text-5xl font-normal text-main-primary">
-                      Support
+                      {t("Support")}
                     </h3>
                   </div>
                 </div>
 
                 <div className="flex mt-6 sm:mt-8 lg:mt-10 xl:mt-12">
-                  <div className="hidden sm:block w-12"></div>
-                  <p className="w-full sm:w-full leading-relaxed">
-                    Our commitment doesn’t stop at delivery — we stand by you
-                    with premium support whenever you need it. From quick
-                    responses to complex problem-solving, our team is dedicated
-                    to keeping your project running smoothly. We value
-                    relationships and strive to provide guidance, updates, and
-                    assistance that make your experience worry-free. With us,
-                    you gain a reliable partner who ensures your journey is as
-                    seamless as the final result.
+                  <div className="hidden sm:block w-12" />
+                  <p className="w-full leading-relaxed">
+                    {t("Premium Description")}
                   </p>
                 </div>
               </motion.div>

@@ -5,11 +5,12 @@ import conactImage from "@/app/assets/contact.jpg";
 import { MapPin, Mail, Smartphone } from "lucide-react";
 import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
+import { useTranslations, useLocale } from "next-intl"; // ✅ added useLocale
 
 // ===== Easing / shared timing =====
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
-// ===== Variants (different from fade-up) =====
+// ===== Variants =====
 const containerVar: Variants = {
   hidden: { opacity: 0 },
   show: {
@@ -36,7 +37,6 @@ const rightInSpring: Variants = {
   },
 };
 
-// Clip-mask "wipe" reveal
 const maskReveal: Variants = {
   hidden: { clipPath: "inset(0 0 100% 0 round 8px)" },
   show: {
@@ -45,7 +45,6 @@ const maskReveal: Variants = {
   },
 };
 
-// Subtle scale-in for media
 const scaleIn: Variants = {
   hidden: { scale: 1.06, opacity: 0.8 },
   show: {
@@ -55,7 +54,6 @@ const scaleIn: Variants = {
   },
 };
 
-// Pop + blur reveal for cards/items
 const popBlurIn: Variants = {
   hidden: { opacity: 0, y: 12, filter: "blur(8px)" },
   show: {
@@ -67,8 +65,14 @@ const popBlurIn: Variants = {
 };
 
 export default function ContactUs() {
+  const t = useTranslations("contact");
+  const locale = useLocale(); // ✅ get current language (en/ar)
+
   return (
-    <section id="contact-us" className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white border-b border-white/10 px-4 py-10 xl:py-24">
+    <section
+      id="contact-us"
+      className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white border-b border-white/10 px-4 py-10 xl:py-24"
+    >
       <motion.div
         className="flex flex-col gap-8 xl:gap-20 justify-start items-center container mx-auto"
         variants={containerVar}
@@ -84,24 +88,20 @@ export default function ContactUs() {
             variants={leftInSpring}
           >
             <h2 className="text-7xl capitalize text-center sm:text-start">
-              <span className="text-main-primary">Let’s</span> work <br />{" "}
-              together
+              <span className="text-main-primary">{t("Let’s")}</span>{" "}
+              {t("work")} <br /> {t("together")}
             </h2>
 
             <p className="text-lg text-white/80 text-center sm:text-start">
-              Our team is ready to discuss your project requirements, explore
-              collaboration opportunities, and answer any questions you may
-              have. We value transparency and responsiveness. Expect a reply
-              within 24–48 hours from our dedicated support team.
+              {t("Our team is ready to discuss your project requirements")}
             </p>
 
             <p className="text-lg text-white/80 text-center sm:text-start">
-              Please fill in the quick form and we will be in touch with you as
-              soon as possible.
+              {t("Please fill in the quick form and we will be in touch")}
             </p>
           </motion.div>
 
-          {/* Image column (mask reveal + scale-in) */}
+          {/* Image column */}
           <motion.div
             className="w-full xl:w-[70%] rounded-[8px] overflow-hidden will-change-[clip-path]"
             variants={rightInSpring}
@@ -111,7 +111,7 @@ export default function ContactUs() {
               <motion.div variants={scaleIn}>
                 <Image
                   src={conactImage}
-                  alt="Contact us image"
+                  alt={t("Contact us image")}
                   className="w-full h-auto object-cover rounded-[8px]"
                   priority
                 />
@@ -125,24 +125,27 @@ export default function ContactUs() {
           className="flex flex-col xl:flex-row gap-8 xl:gap-28 w-full items-stretch"
           variants={containerVar}
         >
-          {/* Contact Info — self-scoped animation */}
+          {/* Contact Info */}
           <motion.div
             className="w-full xl:w-[30%] border border-white/30 rounded-lg overflow-hidden"
             variants={popBlurIn}
-            inherit={false} // ⬅️ stop parent variant propagation
-            initial="hidden" // ⬅️ only this block controls itself
+            inherit={false}
+            initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }} // ⬅️ fire when ~40% in view
+            viewport={{ once: true, amount: 0.4 }}
           >
             <div className="grid grid-rows-3 grid-cols-[30%_70%] divide-x divide-y divide-white/30 text-white relative h-full min-h-[240px]">
-              <span className="pointer-events-none absolute top-0 bottom-0 left-[30%] w-px bg-white/30" />
+              {/* ✅ show divider only for English (LTR) to avoid double line in Arabic */}
+              {locale === "en" ? (
+                <span className="pointer-events-none absolute top-0 bottom-0 left-[30%] w-px bg-white/30" />
+              ) : (
+                <span className="pointer-events-none absolute top-0 bottom-0 right-[30%] w-px bg-white/30" />
+              )}
 
-              {/* Icon cell */}
               <motion.div
                 className="flex justify-center items-center p-4"
                 variants={popBlurIn}
               >
-                {/* float only while in view */}
                 <motion.div
                   whileInView={{ y: [0, -4, 0] }}
                   transition={{
@@ -150,17 +153,15 @@ export default function ContactUs() {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  viewport={{ margin: "-10% 0px -10% 0px" }}
                 >
                   <MapPin size={28} className="text-main-primary" />
                 </motion.div>
               </motion.div>
-
               <motion.div
                 className="flex items-center p-4 text-lg"
                 variants={popBlurIn}
               >
-                123 Main Street, Cairo, Egypt
+                {t("25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt")}
               </motion.div>
 
               <motion.div
@@ -175,17 +176,15 @@ export default function ContactUs() {
                     ease: "easeInOut",
                     delay: 0.2,
                   }}
-                  viewport={{ margin: "-10% 0px -10% 0px" }}
                 >
                   <Mail size={28} className="text-main-primary" />
                 </motion.div>
               </motion.div>
-
               <motion.div
                 className="flex items-center p-4 text-lg"
                 variants={popBlurIn}
               >
-                contact@company.com
+                info@begroup.com
               </motion.div>
 
               <motion.div
@@ -200,22 +199,20 @@ export default function ContactUs() {
                     ease: "easeInOut",
                     delay: 0.4,
                   }}
-                  viewport={{ margin: "-10% 0px -10% 0px" }}
                 >
                   <Smartphone size={28} className="text-main-primary" />
                 </motion.div>
               </motion.div>
-
               <motion.div
                 className="flex items-center p-4 text-lg"
                 variants={popBlurIn}
               >
-                +20 100 123 4567
+                <span dir="ltr">+20 100 995 7000</span>
               </motion.div>
             </div>
           </motion.div>
 
-          {/* Contact Form (unchanged) */}
+          {/* Contact Form */}
           <motion.div className="w-full xl:w-[70%]" variants={popBlurIn}>
             <ContactForm />
           </motion.div>

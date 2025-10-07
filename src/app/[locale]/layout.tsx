@@ -1,4 +1,4 @@
-import { Tajawal } from "next/font/google";
+import { Almarai } from "next/font/google";
 import localFont from "next/font/local";
 import type React from "react";
 import { Toaster } from "@/components/ui/sonner";
@@ -73,9 +73,9 @@ const noeDisplay = localFont({
   display: "swap",
 });
 
-const Tajwal = Tajawal({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "700", "800", "900"],
+const almarai = Almarai({
+  subsets: ["arabic"],
+  weight: ["300", "400", "700", "800"],
   variable: "--ar-font-family",
   display: "swap",
 });
@@ -98,7 +98,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${locale === "ar" ? Tajwal.variable : objektiv.variable} ${
+      className={`${locale === "ar" ? almarai.variable : objektiv.variable} ${
         noeDisplay.variable
       }`}
       suppressHydrationWarning

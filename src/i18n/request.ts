@@ -9,6 +9,13 @@ const namespaces = [
   "hero",
   "about",
   "footer",
+  "clients",
+  "services",
+  "portfolio",
+  "whyus",
+  "achievements",
+  "blogs",
+  "contact",
 ]; // Add more as needed
 
 export default getRequestConfig(async ({ locale }) => {

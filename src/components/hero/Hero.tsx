@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import SplitText from "../SplitText";
 import { Button } from "../ui/button";
 import { motion, type Variants, cubicBezier } from "framer-motion";
@@ -9,6 +9,7 @@ import { Link } from "@/navigations";
 import { useState } from "react";
 
 export default function Hero() {
+  const t = useTranslations("hero");
   const locale = useLocale();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -85,14 +86,20 @@ export default function Hero() {
         {/* wrapper to anchor the semicircle around main button */}
         <div className="relative w-[48px] h-[48px]">
           {/* WhatsApp button – straight up */}
+          {/* WhatsApp button – straight up (with Arabic offset) */}
           <motion.div
             variants={ctaItem}
             initial={{ opacity: 0, scale: 0 }}
             animate={{
               opacity: isExpanded ? 1 : 0,
               scale: isExpanded ? 1 : 0,
-              x: 0,
-              y: isExpanded ? -R : 0,
+              x:
+                locale === "ar"
+                  ? isExpanded
+                    ? 30 * dir - 70
+                    : 0 // ✅ only for Arabic
+                  : 0, // normal for English
+              y: isExpanded ? -R - 5 : 0,
             }}
             transition={{
               duration: 0.28,
@@ -102,11 +109,9 @@ export default function Hero() {
             style={{ pointerEvents: isExpanded ? "auto" : "none" }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <button
-              className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0"
-            >
+            <button className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0">
               <Link
-                href="https://wa.me/201234567890"
+                href="https://wa.me/201009957000"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat on WhatsApp"
@@ -124,7 +129,14 @@ export default function Hero() {
             animate={{
               opacity: isExpanded ? 1 : 0,
               scale: isExpanded ? 1 : 0,
-              x: isExpanded ? DIAG * -dir : 0, // dir=-1 => +DIAG to the right in LTR
+              x:
+                locale === "ar"
+                  ? isExpanded
+                    ? DIAG * -dir - 45
+                    : 0
+                  : isExpanded
+                  ? DIAG * dir + 85
+                  : 0,
               y: isExpanded ? -DIAG : 0,
             }}
             transition={{
@@ -135,11 +147,9 @@ export default function Hero() {
             style={{ pointerEvents: isExpanded ? "auto" : "none" }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <button
-              className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0"
-            >
+            <button className="!rounded-full w-11 h-11 bg-main-secondary cursor-target text-black hover:bg-[#F18A1D]/90 shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98] p-0">
               <Link
-                href="tel:+201234567890"
+                href="tel:+201009957000"
                 aria-label="Call us"
                 className="flex items-center justify-center w-full h-full"
               >
@@ -166,30 +176,46 @@ export default function Hero() {
       <div className="relative w-full h-[100vh] flex items-center justify-center">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
           <div className="inline-block xl:mt-36">
-            <SplitText
-              text="We Provide Digital Marketing"
-              tag="p"
-              className="font-semibold leading-[1.3] text-[clamp(20px,6.5vw,48px)] max-w-[90ch]"
-              delay={100}
-              duration={0.6}
-              initialHidden
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 50 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-100px"
-              textAlign="center"
-            />
+            {locale === "en" ? (
+              <SplitText
+                text={t("We Provide Digital Marketing")}
+                tag="p"
+                className="font-semibold leading-[1.3] text-[clamp(20px,6.5vw,48px)] max-w-[90ch]"
+                delay={100}
+                duration={0.6}
+                initialHidden
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 50 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="center"
+              />
+            ) : (
+              <motion.h1
+                dir="rtl"
+                className="font-semibold text-[clamp(20px,6.5vw,48px)] max-w-[90ch] bg-clip-text text-transparent bg-gradient-to-b from-orange-300 to-[#F18A1D]"
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                {t("We Provide Digital Marketing")}
+              </motion.h1>
+            )}
 
             <motion.div
               className="flex flex-col justify-between items-center gap-4"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.8, ease: "easeOut" }}
+              transition={{
+                delay: locale === "en" ? 1.3 : 0,
+                duration: 0.8,
+                ease: "easeOut",
+              }}
             >
               <h4 className="uppercase text-main-white text-sm sm:text-xl font-base">
-                Digital Services has never been easier
+                {t("Digital Services has never been easier")}
               </h4>
               <div className="flex items-center gap-4">
                 <Link href={"/contact"} prefetch>
@@ -197,7 +223,7 @@ export default function Hero() {
                     className="uppercase bg-transparent border-2 border-main-primary text-main-primary hover:bg-main-primary hover:text-white lg:py-5 lg:px-8 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-full h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out"
                     variant="outline"
                   >
-                    Contact Us
+                    {t("Contact Us")}
                   </Button>
                 </Link>
               </div>

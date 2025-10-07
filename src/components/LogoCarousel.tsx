@@ -9,6 +9,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Link } from "@/navigations";
+import { useTranslations } from "next-intl";
 
 type LogoItem = {
   src: string | StaticImageData;
@@ -37,6 +38,7 @@ export default function LogoCarousel({
   pauseOnHover = true,
 }: LogoCarouselProps) {
   const isRTL = locale?.toLowerCase().startsWith("ar");
+  const t = useTranslations("clients");
 
   const autoplay = React.useRef(
     Autoplay({
@@ -62,7 +64,7 @@ export default function LogoCarousel({
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          Our Clients
+          {t("Our Clients")}
         </motion.div>
 
         <motion.h2
@@ -72,7 +74,7 @@ export default function LogoCarousel({
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
         >
-          Some Our Clients
+          {t("Some Our Clients")}
         </motion.h2>
       </div>
 
