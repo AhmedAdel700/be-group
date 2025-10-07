@@ -66,7 +66,7 @@ const popBlurIn: Variants = {
 
 export default function ContactUs() {
   const t = useTranslations("contact");
-  const locale = useLocale(); // ✅ get current language (en/ar)
+  const locale = useLocale();
 
   return (
     <section

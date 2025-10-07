@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image, { type StaticImageData } from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
@@ -30,6 +30,7 @@ export default function BlogsPage({
   onPageChange,
 }: BlogsPageProps) {
   const locale = useLocale();
+  const t = useTranslations("blogs");
   const isRTL = locale === "ar";
   const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -106,21 +107,33 @@ export default function BlogsPage({
       {/* Hero / Title */}
       <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
         {/* SplitText already animates when visible; ensure it triggers immediately */}
-        <SplitText
-          text="Latest News"
-          tag="h1"
-          className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
-          delay={80}
-          duration={0.6}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 50 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0} // fire as soon as it's on screen
-          rootMargin="0px" // no waiting
-          textAlign="center"
-          initialHidden // start hidden → show on mount
-        />
+        {locale === "en" ? (
+          <SplitText
+            text={t("Latest News")}
+            tag="h1"
+            className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
+            delay={80}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 50 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0} // fire as soon as it's on screen
+            rootMargin="0px" // no waiting
+            textAlign="center"
+            initialHidden // start hidden → show on mount
+          />
+        ) : (
+          <motion.h1
+            dir="rtl"
+            className="font-extrabold text-[clamp(44px,10vw,128px)] relative bg-clip-text text-transparent bg-gradient-to-b from-orange-300 to-[#F18A1D]"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {t("Latest News")}
+          </motion.h1>
+        )}
       </div>
 
       <div className="w-full sm:container mx-auto flex flex-col gap-8 px-4 md:px-6">
