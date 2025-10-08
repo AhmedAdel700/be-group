@@ -16,7 +16,7 @@ export default function About({
   aboutData,
 }: {
   aboutArray?: { id: number; title: string; desc: string }[];
-  aboutData?: AboutType;
+  aboutData?: AboutType ;
 }) {
   const t = useTranslations("about");
   const locale = useLocale();
