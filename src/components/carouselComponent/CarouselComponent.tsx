@@ -12,6 +12,7 @@ import { useLocale } from "next-intl";
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { CategoryResponse } from "@/types/apiDataTypes";
+import { Link } from "@/navigations";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -101,40 +102,42 @@ export default function CarouselComponent({ projectsData, className }: Props) {
                 ].join(" ")}
               >
                 {/* group enables hover effects on children */}
-                <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer">
-                  <CardContent className="p-0 flex flex-col">
-                    {/* Image (full-width) with hover scale */}
-                    <div className="relative w-full overflow-hidden rounded-[4px]">
-                      {/* slightly shorter aspect */}
-                      <div className="relative w-full aspect-[16/10]">
-                        <Image
-                          src={project.image}
-                          alt={project.name || `Card ${index + 1}`}
-                          fill
-                          className="object-fill transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
-                          sizes="(min-width:1280px) 40vw, (min-width:768px) 40vw, 100vw"
-                          priority={index < 2}
-                        />
+                <Link href={project.slug} target="_blank">
+                  <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer">
+                    <CardContent className="p-0 flex flex-col">
+                      {/* Image (full-width) with hover scale */}
+                      <div className="relative w-full overflow-hidden rounded-[4px]">
+                        {/* slightly shorter aspect */}
+                        <div className="relative w-full aspect-[16/10]">
+                          <Image
+                            src={project.image}
+                            alt={project.name || `Card ${index + 1}`}
+                            fill
+                            className="object-fill transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
+                            sizes="(min-width:1280px) 40vw, (min-width:768px) 40vw, 100vw"
+                            priority={index < 2}
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Text slides smoothly on card hover (dir-aware) */}
-                    <div
-                      className={`py-4 flex flex-col gap-2 mt-2 transform transition-transform duration-500 ease-out ${
-                        locale === "en"
-                          ? "group-hover:translate-x-3"
-                          : "group-hover:-translate-x-3"
-                      }`}
-                    >
-                      <h3 className="text-white text-base sm:text-xl font-semibold leading-tight">
-                        {project.name}
-                      </h3>
-                      <p className="text-white/70 text-sm sm:text-base leading-relaxed line-clamp-2">
-                        {project.short_desc}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
+                      {/* Text slides smoothly on card hover (dir-aware) */}
+                      <div
+                        className={`py-4 flex flex-col gap-2 mt-2 transform transition-transform duration-500 ease-out ${
+                          locale === "en"
+                            ? "group-hover:translate-x-3"
+                            : "group-hover:-translate-x-3"
+                        }`}
+                      >
+                        <h3 className="text-white text-base sm:text-xl font-semibold leading-tight">
+                          {project.name}
+                        </h3>
+                        <p className="text-white/70 text-sm sm:text-base leading-relaxed line-clamp-2">
+                          {project.short_desc}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </CarouselItem>
             ))}
         </CarouselContent>
