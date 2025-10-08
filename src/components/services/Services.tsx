@@ -33,7 +33,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../ui/button";
 import { Link } from "@/navigations";
-import { BenefitTypes, ServiceTypes } from "@/types/apiDataTypes";
+import { BenefitTypes, ServicesResponse } from "@/types/apiDataTypes";
 
 type Service = {
   id: number;
@@ -50,7 +50,7 @@ export default function Services({
   servicesData,
   benefitsData,
 }: {
-  servicesData: ServiceTypes[];
+  servicesData: ServicesResponse[];
   benefitsData: BenefitTypes[];
 }) {
   const locale = useLocale();
