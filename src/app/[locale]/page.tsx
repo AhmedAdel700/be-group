@@ -9,6 +9,7 @@ import Services from "@/components/services/Services";
 import ClientsSection from "@/components/our clients/page";
 import AchievementSection from "@/components/achievements/AchievementSection";
 import { fetchHomeData } from "@/api/homeService";
+import { fetchProjectsData } from "@/api/projectsService";
 
 export default async function Home({ params }: { params: { locale: string } }) {
   const homeData = await fetchHomeData(params.locale);
@@ -16,14 +17,14 @@ export default async function Home({ params }: { params: { locale: string } }) {
     about,
     clients,
     services,
-    projects,
     benefits,
     achievements,
     blogs,
     contact_section,
     contact_data,
   } = homeData;
-  console.log(homeData);
+
+  const projectsApiData = await fetchProjectsData(params.locale);
 
   return (
     <div className="relative overflow-hidden">
@@ -31,7 +32,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
       <About aboutData={about} />
       <ClientsSection clients={clients} />
       <Services servicesData={services} benefitsData={benefits} />
-      <Portfolio projectsData={projects} />
+      <Portfolio projectsData={projectsApiData} />
       <WhyChooseUs benefitsData={benefits} />
       <AchievementSection achievementsData={achievements} />
       <OurBlogs blogsData={blogs} />

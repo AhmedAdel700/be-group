@@ -49,7 +49,7 @@ export default function Header() {
     { href: "/about", label: t("About") },
     { href: "/services", label: t("Services") },
     { href: "/portfolio", label: t("Portfolio") },
-    { href: "/blog", label: t("Blog") },
+    { href: "/blogs", label: t("Blogs") },
     { href: "/contact", label: t("Contact") },
   ];
 
@@ -138,7 +138,11 @@ export default function Header() {
         className="hidden xl:flex items-center gap-8 uppercase tracking-wide text-main-white"
       >
         {LINKS.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+
           return (
             <motion.div key={item.href} variants={linkVar}>
               <Link

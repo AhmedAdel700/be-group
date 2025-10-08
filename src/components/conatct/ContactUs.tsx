@@ -94,26 +94,24 @@ export default function ContactUs({
             variants={leftInSpring}
           >
             <h2 className="text-7xl capitalize text-center sm:text-start">
-              <span className="text-main-primary">{t("Let’s")}</span>{" "}
-              {t("work")} <br /> {t("together")}
+              {(() => {
+                const [firstWord, ...rest] = contactSection.title.split(" ");
+                return (
+                  <>
+                    <span className="text-main-primary">{firstWord}</span>{" "}
+                    {rest.join(" ")}
+                  </>
+                );
+              })()}
             </h2>
 
-            {contactSection?.long_desc && contactSection.short_desc ? (
+            {contactSection?.long_desc && contactSection.short_desc && (
               <>
                 <p className="text-lg text-white/80 text-center sm:text-start">
                   {contactSection.long_desc}
                 </p>
                 <p className="text-lg text-white/80 text-center sm:text-start">
                   {contactSection.short_desc}
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="text-lg text-white/80 text-center sm:text-start">
-                  {t("Our team is ready to discuss your project requirements")}
-                </p>
-                <p className="text-lg text-white/80 text-center sm:text-start">
-                  {t("Please fill in the quick form and we will be in touch")}
                 </p>
               </>
             )}

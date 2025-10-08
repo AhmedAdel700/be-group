@@ -1,9 +1,17 @@
 "use client";
 import { motion } from "framer-motion";
-import blogImage from "@/app/assets/blog3.jpg";
 import Image from "next/image";
+import { BlogDetailsResponse } from "@/types/apiDataTypes";
 
-export default function BlogDetails() {
+export default function BlogDetails({
+  blogDetalisData,
+}: {
+  blogDetalisData: BlogDetailsResponse;
+}) {
+  const {
+    blog: { name, date, short_desc, long_desc, image, alt_image },
+  } = blogDetalisData.data;
+
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -14,6 +22,13 @@ export default function BlogDetails() {
       },
     },
   };
+
+  // Format date nicely (optional)
+  const formattedDate = new Date(date).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <section className="min-h-screen text-white px-4 py-8 mx-auto container mt-[75px]">
@@ -31,9 +46,10 @@ export default function BlogDetails() {
           className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl mb-8"
         >
           <Image
-            src={blogImage}
-            alt="UX Design workspace with sketches and devices"
+            src={image}
+            alt={alt_image ?? name}
             className="w-full h-full object-cover"
+            fill
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#141415] via-transparent to-transparent opacity-60" />
         </motion.div>
@@ -49,7 +65,7 @@ export default function BlogDetails() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
             style={{ color: "var(--main-colors-white)" }}
           >
-            UX Design Principles For Better User Engagement
+            {name}
           </motion.h1>
           <motion.div
             className="flex items-center gap-4 text-sm"
@@ -63,9 +79,10 @@ export default function BlogDetails() {
                   clipRule="evenodd"
                 />
               </svg>
-              March 12, 2024
+              {formattedDate}
             </span>
             <span className="w-1 h-1 rounded-full bg-[#6E717E]" />
+            {/* Assuming 8 min read is static, keep as is */}
             <span>8 min read</span>
           </motion.div>
         </motion.div>
@@ -81,13 +98,8 @@ export default function BlogDetails() {
             className="space-y-6 leading-relaxed"
             style={{ color: "var(--main-colors-text-secondary)" }}
           >
-            <p className="text-xl leading-relaxed">
-              Creating engaging user experiences is not just about aesthetics it
-              is about understanding human behavior and designing interfaces
-              that feel intuitive, responsive, and delightful. In this
-              comprehensive guide, we will explore the fundamental UX design
-              principles that can transform your digital products.
-            </p>
+            {/* Use short_desc or long_desc dynamically, plus keep static text */}
+            <p className="text-xl leading-relaxed">{short_desc}</p>
 
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -200,13 +212,7 @@ export default function BlogDetails() {
             >
               Final Thoughts
             </h2>
-            <p className="text-lg">
-              Great UX design is invisible—it simply works. By focusing on
-              clarity, consistency, feedback, accessibility, and simplicity, you
-              create experiences that users do not just tolerate, but genuinely
-              enjoy. Remember: you are not designing for yourself; you are
-              designing for humans with real needs, frustrations, and goals.
-            </p>
+            <p className="text-lg">{long_desc}</p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

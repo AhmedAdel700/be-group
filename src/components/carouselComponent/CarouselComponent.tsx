@@ -11,7 +11,7 @@ import {
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
-import { ProjectTypes } from "@/types/apiDataTypes";
+import { CategoryResponse } from "@/types/apiDataTypes";
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -58,7 +58,7 @@ const controlsItemVar: Variants = {
 };
 
 type Props = {
-  projectsData: ProjectTypes[];
+  projectsData: CategoryResponse;
   className?: string;
 };
 
@@ -88,53 +88,55 @@ export default function CarouselComponent({ projectsData, className }: Props) {
       >
         {/* logical start margin so two full cards are visible with 40% width */}
         <CarouselContent className="-ms-4">
-          {projectsData.map((project, index) => (
-            <CarouselItem
-              key={project.index}
-              className={[
-                "ps-4", // gap between cards (logical start)
-                "basis-full", // sm & below: 1 card
-                "md:basis-[40%]", // md–lg: ~2.5 cards
-                "xl:basis-[30%] cursor-target", // xl+: ~3.5 cards
-              ].join(" ")}
-            >
-              {/* group enables hover effects on children */}
-              <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer">
-                <CardContent className="p-0 flex flex-col">
-                  {/* Image (full-width) with hover scale */}
-                  <div className="relative w-full overflow-hidden rounded-[4px]">
-                    {/* slightly shorter aspect */}
-                    <div className="relative w-full aspect-[16/10]">
-                      <Image
-                        src={project.image}
-                        alt={project.name || `Card ${index + 1}`}
-                        fill
-                        className="object-fill transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
-                        sizes="(min-width:1280px) 40vw, (min-width:768px) 40vw, 100vw"
-                        priority={index < 2}
-                      />
+          {projectsData.data.categories
+            .flatMap((category) => category.projects)
+            .map((project, index) => (
+              <CarouselItem
+                key={project.index}
+                className={[
+                  "ps-4", // gap between cards (logical start)
+                  "basis-full", // sm & below: 1 card
+                  "md:basis-[40%]", // md–lg: ~2.5 cards
+                  "xl:basis-[30%] cursor-target", // xl+: ~3.5 cards
+                ].join(" ")}
+              >
+                {/* group enables hover effects on children */}
+                <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer">
+                  <CardContent className="p-0 flex flex-col">
+                    {/* Image (full-width) with hover scale */}
+                    <div className="relative w-full overflow-hidden rounded-[4px]">
+                      {/* slightly shorter aspect */}
+                      <div className="relative w-full aspect-[16/10]">
+                        <Image
+                          src={project.image}
+                          alt={project.name || `Card ${index + 1}`}
+                          fill
+                          className="object-fill transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
+                          sizes="(min-width:1280px) 40vw, (min-width:768px) 40vw, 100vw"
+                          priority={index < 2}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Text slides smoothly on card hover (dir-aware) */}
-                  <div
-                    className={`py-4 flex flex-col gap-2 mt-2 transform transition-transform duration-500 ease-out ${
-                      locale === "en"
-                        ? "group-hover:translate-x-3"
-                        : "group-hover:-translate-x-3"
-                    }`}
-                  >
-                    <h3 className="text-white text-base sm:text-xl font-semibold leading-tight">
-                      {project.name}
-                    </h3>
-                    <p className="text-white/70 text-sm sm:text-base leading-relaxed line-clamp-2">
-                      {project.short_desc}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </CarouselItem>
-          ))}
+                    {/* Text slides smoothly on card hover (dir-aware) */}
+                    <div
+                      className={`py-4 flex flex-col gap-2 mt-2 transform transition-transform duration-500 ease-out ${
+                        locale === "en"
+                          ? "group-hover:translate-x-3"
+                          : "group-hover:-translate-x-3"
+                      }`}
+                    >
+                      <h3 className="text-white text-base sm:text-xl font-semibold leading-tight">
+                        {project.name}
+                      </h3>
+                      <p className="text-white/70 text-sm sm:text-base leading-relaxed line-clamp-2">
+                        {project.short_desc}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
         </CarouselContent>
 
         {/* Controls BELOW (inside Carousel for context) */}

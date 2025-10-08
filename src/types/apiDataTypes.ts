@@ -4,7 +4,7 @@ export interface HomeData {
   banner: Banner;
   about: AboutType;
   clients: ClientTypes[];
-  services: ServiceTypes[];
+  services: ServicesResponse;
   projects: ProjectTypes[];
   benefits: BenefitTypes[];
   achievements: AchievementTypes[];
@@ -44,19 +44,36 @@ export interface ClientTypes {
   logo: string;
 }
 
-export interface ServiceTypes {
+export interface ServicesResponse {
+  services: Service[];
+}
+
+export interface Service {
+  id: number;
   name: string;
   order: number;
   short_desc: string;
   long_desc: string;
   image: string;
-  alt_image?: string | null;
+  alt_image: string | null;
   icon: string;
-  alt_icon?: string | null;
+  alt_icon: string | null;
   slug: string;
   meta_title: string;
-  meta_description?: string | null;
+  meta_description: string | null;
   index: number;
+  tabs: ServiceTab[];
+}
+
+export interface ServiceTab {
+  id: number;
+  name: string;
+  short_desc: string;
+  long_desc: string;
+  icon: string;
+  alt_icon: string;
+  status: boolean;
+  order: number;
 }
 
 export interface ProjectTypes {
@@ -181,4 +198,228 @@ export interface Schema {
   "@type": string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
+}
+
+
+export interface CategoryResponse {
+  data: {
+    categories: {
+      id: number;
+      name: string;
+      order: number | null;
+      short_desc: string | null;
+      long_desc: string | null;
+      image: string;
+      alt_image: string | null;
+      icon: string;
+      alt_icon: string | null;
+      slug: string;
+      meta_title: string | null;
+      meta_description: string | null;
+      index: number;
+      projects: {
+        id: number;
+        name: string;
+        order: number;
+        short_desc: string;
+        long_desc: string;
+        image: string;
+        alt_image: string;
+        icon: string;
+        alt_icon: string;
+        slug: string;
+        meta_title: string | null;
+        meta_description: string | null;
+        index: number;
+      }[];
+    }[];
+    seo: {
+      meta: {
+        meta_tags: {
+          content_type: string;
+          title: string;
+          author: string;
+          description: string;
+          canonical: string;
+          robots: string;
+        };
+        open_graph: {
+          "og:title": string;
+          "og:description": string;
+          "og:url": string;
+          "og:image": string;
+          "og:type": string;
+        };
+        twitter_card: {
+          "twitter:card": string;
+          "twitter:title": string;
+          "twitter:description": string;
+          "twitter:image": string;
+        };
+        hreflang_tags: {
+          en: string;
+          ar: string;
+          "x-default": string;
+        };
+      };
+      schema: {
+        "@context": string;
+        "@type": string;
+        name: string;
+        url: string;
+      }[];
+    };
+  };
+}
+
+
+export interface BlogDetailsResponse {
+  data: {
+    blog: {
+      id: number;
+      name: string;
+      date: string;
+      order: number;
+      short_desc: string;
+      long_desc: string;
+      image: string;
+      alt_image: string | null;
+      icon: string;
+      alt_icon: string | null;
+      slug: string;
+      meta_title: string;
+      meta_description: string;
+      index: number;
+      category_id: number | null;
+      author_id: number | null;
+    };
+    seo: {
+      meta: {
+        meta_tags: {
+          content_type: string;
+          title: string;
+          description: string;
+          canonical: string;
+          robots: string;
+        };
+        open_graph: {
+          "og:title": string;
+          "og:description": string;
+          "og:url": string;
+          "og:image": string;
+          "og:type": string;
+        };
+        twitter_card: {
+          "twitter:card": string;
+          "twitter:title": string;
+          "twitter:description": string;
+          "twitter:image": string;
+        };
+        hreflang_tags: {
+          en: string;
+          ar: string;
+          "x-default": string;
+        };
+      };
+      schema: Array<{
+        "@context": string;
+        "@type": string;
+        name?: string;
+        url: string;
+        headline?: string;
+        description?: string;
+        image?: string;
+        datePublished?: string;
+      }>;
+    };
+  };
+}
+
+
+export interface BlogsListResponse {
+  data: BlogItem[];
+  links: PaginationLinks;
+  meta: PaginationMeta;
+  seo: SEOBlogsData;
+}
+
+export interface BlogItem {
+  id: number;
+  name: string;
+  date: string;
+  order: number;
+  short_desc: string;
+  long_desc: string;
+  image: string;
+  alt_image: string | null;
+  icon: string;
+  alt_icon: string | null;
+  slug: string;
+  meta_title: string;
+  meta_description: string;
+  index: number;
+  category_id: number | null;
+  author_id: number | null;
+  author: unknown | null; // Use a proper type if author data is expected later
+}
+
+export interface PaginationLinks {
+  first: string;
+  last: string;
+  prev: string | null;
+  next: string | null;
+}
+
+export interface PaginationMeta {
+  current_page: number;
+  from: number;
+  last_page: number;
+  links: PaginationLink[];
+  path: string;
+  per_page: number;
+  to: number;
+  total: number;
+}
+
+export interface PaginationLink {
+  url: string | null;
+  label: string;
+  active: boolean;
+}
+
+export interface SEOBlogsData {
+  meta: {
+    meta_tags: {
+      content_type: string;
+      title: string;
+      author: string;
+      description: string;
+      canonical: string;
+      robots: string;
+    };
+    open_graph: {
+      "og:title": string;
+      "og:description": string;
+      "og:url": string;
+      "og:image": string;
+      "og:type": string;
+    };
+    twitter_card: {
+      "twitter:card": string;
+      "twitter:title": string;
+      "twitter:description": string;
+      "twitter:image": string;
+    };
+    hreflang_tags: {
+      en: string;
+      ar: string;
+      "x-default": string;
+    };
+  };
+  schema: Array<{
+    "@context": string;
+    "@type": string;
+    name?: string;
+    url: string;
+  }>;
 }

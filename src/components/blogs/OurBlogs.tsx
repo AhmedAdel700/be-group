@@ -113,7 +113,7 @@ export default function OurBlogs({ blogsData }: { blogsData?: BlogTypes[] }) {
             )}
           </motion.p>
 
-          <Link href={"/blog"} className="z-50">
+          <Link href={"/blogs"} className="z-50">
             <Button
               className="uppercase bg-main-primary text-main-text hover:bg-white/90 p-6 !rounded-[4px] z-50 cursor-target"
               variant="default"
@@ -140,7 +140,7 @@ export default function OurBlogs({ blogsData }: { blogsData?: BlogTypes[] }) {
         >
           {[0, 1, 2].map((i) => (
             <div key={i} style={stepStyle((2 - i) as 0 | 1 | 2)}>
-              <Link href={`/blog/${get(i)?.slug || "blog-details"}`}>
+              <Link href={`/blogs/${get(i)?.slug || "blog-details"}`}>
                 <motion.article
                   custom={i}
                   variants={cardVar}

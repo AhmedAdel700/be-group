@@ -2,13 +2,9 @@
 import CarouselComponent from "../carouselComponent/CarouselComponent";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { ProjectTypes } from "@/types/apiDataTypes";
+import { CategoryResponse } from "@/types/apiDataTypes";
 
-export default function Portfolio({
-  projectsData,
-}: {
-  projectsData: ProjectTypes[];
-}) {
+export default function Portfolio({ projectsData }: { projectsData: CategoryResponse}) {
   const t = useTranslations("portfolio");
   return (
     <div className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white pt-8 xl:pt-20 border-b border-white/10">

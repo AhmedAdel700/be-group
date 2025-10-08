@@ -14,6 +14,7 @@ type BlogItem = {
   image: string | StaticImageData;
   desc: string;
   date: string;
+  slug: string;
 };
 
 type BlogsPageProps = {
@@ -34,15 +35,12 @@ export default function BlogsPage({
   const isRTL = locale === "ar";
   const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-  // 🔑 mount flag to start animations on load
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    // small timeout ensures SSR/CSR paint before animating
     const t = setTimeout(() => setMounted(true), 0);
     return () => clearTimeout(t);
   }, []);
 
-  // Card animation variants
   const cardVar: Variants = {
     hidden: { opacity: 0, x: isRTL ? 40 : -40, y: 24 },
     show: (i: number) => ({
@@ -53,7 +51,6 @@ export default function BlogsPage({
     }),
   };
 
-  // Pagination animation variants
   const paginationVar: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: {
@@ -66,14 +63,15 @@ export default function BlogsPage({
   const handlePrevPage = () => {
     if (currentPage > 1 && onPageChange) onPageChange(currentPage - 1);
   };
+
   const handleNextPage = () => {
     if (currentPage < totalPages && onPageChange) onPageChange(currentPage + 1);
   };
+
   const handlePageClick = (page: number) => {
     if (onPageChange) onPageChange(page);
   };
 
-  // Generate pagination numbers with ellipsis logic
   const generatePaginationNumbers = () => {
     const pages: (number | "...")[] = [];
     if (totalPages <= 7) {
@@ -100,13 +98,10 @@ export default function BlogsPage({
     return pages;
   };
 
-  const get = (idx: number) => items[idx];
-
   return (
     <section className="w-full min-h-screen bg-main-black text-main-white flex flex-col items-center pb-12 border-b border-white/10">
       {/* Hero / Title */}
       <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
-        {/* SplitText already animates when visible; ensure it triggers immediately */}
         {locale === "en" ? (
           <SplitText
             text={t("Latest News")}
@@ -118,10 +113,10 @@ export default function BlogsPage({
             splitType="chars"
             from={{ opacity: 0, y: 50 }}
             to={{ opacity: 1, y: 0 }}
-            threshold={0} // fire as soon as it's on screen
-            rootMargin="0px" // no waiting
+            threshold={0}
+            rootMargin="0px"
             textAlign="center"
-            initialHidden // start hidden → show on mount
+            initialHidden
           />
         ) : (
           <motion.h1
@@ -145,8 +140,8 @@ export default function BlogsPage({
             isRTL ? "md:[direction:rtl]" : ""
           }`}
         >
-          {Array.from({ length: 9 }, (_, index) => (
-            <Link href={"blog/blog-details"} key={get(index)?.id || index}>
+          {items.map((item, index) => (
+            <Link href={`/blogs/${item.slug}`} key={item.id + item.slug}>
               <motion.article
                 custom={index}
                 variants={cardVar}
@@ -155,10 +150,10 @@ export default function BlogsPage({
                 <div className="group rounded-[6px] overflow-hidden">
                   {/* IMAGE */}
                   <div className="relative aspect-[16/9] overflow-hidden">
-                    {get(index)?.image ? (
+                    {item.image ? (
                       <Image
-                        src={get(index)!.image}
-                        alt={get(index)?.desc}
+                        src={item.image}
+                        alt={item.desc}
                         fill
                         className="object-cover transition-transform duration-500 md:group-hover:scale-105 rounded-[6px]"
                         sizes="(min-width:1280px) 33vw, (min-width:640px) 50vw, 100vw"
@@ -184,11 +179,11 @@ export default function BlogsPage({
                         delay={140}
                         rtl={isRTL}
                       >
-                        {get(index)?.desc}
+                        {item.desc}
                       </MultiLineUnderline>
                     </h3>
                     <div className="text-sm sm:text-base text-white/90">
-                      {get(index)?.date}
+                      {item.date}
                     </div>
                   </div>
                 </div>
@@ -201,7 +196,7 @@ export default function BlogsPage({
         <motion.nav
           aria-label="Pagination"
           initial="hidden"
-          animate={mounted ? "show" : "hidden"} // 👈 animate on load
+          animate={mounted ? "show" : "hidden"}
           variants={paginationVar}
           className={`w-full flex items-center justify-center gap-2 mt-6 sm:mt-8 ${
             isRTL ? "flex-row-reverse" : ""
@@ -243,7 +238,7 @@ export default function BlogsPage({
                     className={`group relative overflow-hidden h-10 w-10 sm:h-12 sm:w-12 rounded-[4px] border transition-all duration-200 cursor-target ${
                       page === currentPage
                         ? "border-white bg-white text-black"
-                        : "border-white/80 text-white bg-transparent hover:bg-transparent"
+                        : "border-white/80 !text-white bg-transparent hover:bg-transparent"
                     }`}
                     size="icon"
                   >

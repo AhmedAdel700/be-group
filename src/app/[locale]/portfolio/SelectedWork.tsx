@@ -1,79 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
+import { CategoryResponse } from "@/types/apiDataTypes";
 
-// Images
-import p1 from "@/app/assets/p1.jpg";
-import p2 from "@/app/assets/p2.jpg";
-import p3 from "@/app/assets/p3.jpg";
-import p4 from "@/app/assets/p4.jpg";
-import p5 from "@/app/assets/p5.jpg";
-import p6 from "@/app/assets/p6.jpg";
-
-// Types
 type WorkItem = {
-  id: string | number;
-  image: string | StaticImageData;
+  id: number;
+  image: string;
   title: string;
   desc: string;
-  type: "development" | "dashboard" | "branding"; // Add more if needed
+  type: string; // derived from category name or slug
 };
 
-export default function SelectedWork() {
+export default function SelectedWork({
+  projectsApiData,
+}: {
+  projectsApiData: CategoryResponse;
+}) {
   const locale = useLocale();
-  const [activeFilter, setActiveFilter] = useState<"all" | WorkItem["type"]>(
-    "all"
-  );
+  const [activeFilter, setActiveFilter] = useState<"all" | string>("all");
 
-  const selectedWorks: WorkItem[] = [
-    {
-      id: 1,
-      image: p1,
-      title: "E-commerce Redesign",
-      desc: "Faster checkout, modern UI, +27% conv.",
-      type: "development",
-    },
-    {
-      id: 2,
-      image: p2,
-      title: "Analytics Dashboard",
-      desc: "Real-time KPIs with granular filters.",
-      type: "dashboard",
-    },
-    {
-      id: 3,
-      image: p3,
-      title: "Mobile App Development",
-      desc: "Cross-platform solution with native performance.",
-      type: "development",
-    },
-    {
-      id: 4,
-      image: p4,
-      title: "Brand Identity System",
-      desc: "Complete visual identity and design system.",
-      type: "branding",
-    },
-    {
-      id: 5,
-      image: p5,
-      title: "Brand Identity System",
-      desc: "Complete visual identity and design system.",
-      type: "branding",
-    },
-    {
-      id: 6,
-      image: p6,
-      title: "Brand Identity System",
-      desc: "Complete visual identity and design system.",
-      type: "branding",
-    },
-  ];
+  // Flatten and normalize project data
+  const selectedWorks: WorkItem[] = useMemo(() => {
+    const categories = projectsApiData?.data?.categories ?? [];
 
+    return categories.flatMap((category) =>
+      category.projects.map((project) => ({
+        id: project.id,
+        image: project.image,
+        title: project.name,
+        desc: project.short_desc ?? "",
+        type: category.slug ?? "unknown",
+      }))
+    );
+  }, [projectsApiData]);
+
+  // Generate unique types for filters
+  const uniqueTypes = useMemo(() => {
+    const allTypes = selectedWorks.map((item) => item.type);
+    return Array.from(new Set(allTypes));
+  }, [selectedWorks]);
+
+  // Filter projects by type
   const filteredWorks =
     activeFilter === "all"
       ? selectedWorks
@@ -94,11 +65,10 @@ export default function SelectedWork() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          {["all", "development", "dashboard", "branding"].map((filter) => (
+          {["all", ...uniqueTypes].map((filter) => (
             <button
               key={filter}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              onClick={() => setActiveFilter(filter as any)}
+              onClick={() => setActiveFilter(filter)}
               className={`px-6 py-2 rounded-full text-sm font-medium border border-main-primary transition-colors duration-200 cursor-target ${
                 activeFilter === filter
                   ? "bg-main-primary text-black"
@@ -138,7 +108,7 @@ export default function SelectedWork() {
                       <div className="relative w-full aspect-[16/10]">
                         <Image
                           src={item.image}
-                          alt={item.title || `Work ${index + 1}`}
+                          alt={item.title}
                           fill
                           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
                           sizes="(min-width:768px) 50vw, 100vw"
