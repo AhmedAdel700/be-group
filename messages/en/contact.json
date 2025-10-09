@@ -19,5 +19,14 @@
   "Enter Your Message": "Enter Your Message",
   "Enter Your Email": "Enter Your Email",
   "Enter Your Name": "Enter Your Name",
-  "Contact Us": "Contact Us"
+  "Contact Us": "Contact Us",
+  "Enter Your Phone": "Enter Your Phone",
+  "Phone": "Phone",
+  "Sending": "Sending...",
+  "Message Should Be At Least 50 Characters": "Message Should Be At Least 50 Characters",
+  "Enter A Valid Phone Number": "Enter A Valid Phone Number",
+  "Enter A Valid Email": "Enter A Valid Email",
+  "Please Enter Your Full Name": "Please Enter Your Full Name",
+  "Your Message Has Been Sent Successfully": "✅ Your Message Has Been Sent Successfully!",
+  "Something Went Wrong Please Try Again Later": "⚠️ Something Went Wrong. Please Try Again Later."
 }

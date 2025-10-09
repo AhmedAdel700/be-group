@@ -103,6 +103,8 @@ export default function Footer({
           <Mail size={18} className="text-main-secondary shrink-0" />
           <Link
             href={`mailto:${contactData.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hover:underline text-xs sm:text-sm md:text-base"
           >
             {contactData.email}
@@ -120,9 +122,16 @@ export default function Footer({
         </div>
         <div className="flex items-center gap-2 justify-center cursor-target">
           <MapPin size={18} className="text-main-secondary shrink-0" />
-          <span className="text-xs sm:text-sm md:text-base whitespace-pre-line">
+          <Link
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              contactData.address
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs sm:text-sm md:text-base whitespace-pre-line hover:underline"
+          >
             {contactData.address}
-          </span>
+          </Link>
         </div>
       </motion.div>
 

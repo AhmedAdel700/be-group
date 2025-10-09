@@ -1,6 +1,6 @@
 import { fetchHomeData } from "@/api/homeService";
 import AboutPage from "./AboutPage";
-import { fetchAboutData } from "@/api/aboutServices";
+import { fetchAboutData } from "@/api/aboutService";
 import { Metadata } from "next";
 
 // 1. ✅ Generate metadata dynamically

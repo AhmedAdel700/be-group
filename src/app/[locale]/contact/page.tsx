@@ -1,4 +1,4 @@
-import { fetchContactData } from "@/api/contactServices";
+import { fetchContactData } from "@/api/contactService";
 import ContactUsPage from "./ContactUsPage";
 import { fetchHomeData } from "@/api/homeService";
 
