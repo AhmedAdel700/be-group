@@ -16,7 +16,7 @@ export default function About({
   aboutData,
 }: {
   aboutArray?: { id: number; title: string; desc: string }[];
-  aboutData?: AboutType ;
+  aboutData?: AboutType;
 }) {
   const t = useTranslations("about");
   const locale = useLocale();
@@ -94,17 +94,21 @@ export default function About({
           </h3>
 
           <h4 className="font-medium text-2xl">{t("What We Do ?")}</h4>
-          <ul className="list-disc marker:text-main-primary text-white/80 leading-relaxed flex flex-col gap-4 text-xs md:text-sm lg:text-base ps-4">
-            <li>{t("Digital assets audit")}</li>
-            <li>{t("Research & competitive analysis")}</li>
-            <li>{t("Target audience segmentation")}</li>
-            <li>{t("Customer persona & content personalization strategy")}</li>
-            <li>{t("Digital communications strategy")}</li>
-            <li>
-              {t("Creative, social media & digital advertising strategy")}
-            </li>
-            <li>{t("Business intelligence & reporting tools")}</li>
-          </ul>
+          {/* Dynamic list from API with same styling */}
+          <div
+            className="text-white/80 leading-relaxed text-xs md:text-sm lg:text-base ps-4"
+            dangerouslySetInnerHTML={{
+              __html: `
+      <ul class='list-disc marker:text-main-primary flex flex-col gap-4'>
+        ${
+          aboutData?.text
+            ?.replace(/<ul>|<\/ul>/g, "") // Remove outer <ul> to reapply Tailwind classes
+            ?.trim() || ""
+        }
+      </ul>
+    `,
+            }}
+          />
 
           {/* Conditional button */}
           <Link href={isAboutPage ? "/services" : "/about"} className="w-full">

@@ -1,4 +1,3 @@
-import { fetchHomeData } from "@/api/homeService";
 import AboutPage from "./AboutPage";
 import { fetchAboutData } from "@/api/aboutService";
 import { Metadata } from "next";
@@ -54,8 +53,7 @@ export async function generateMetadata({
 
 // 2. ✅ Page Component (already correct)
 export default async function Page({ params }: { params: { locale: string } }) {
-  const homeData = await fetchHomeData(params.locale);
-  const { about } = homeData;
+  const aboutApiData = await fetchAboutData(params.locale);
 
-  return <AboutPage aboutData={about} />;
+  return <AboutPage aboutData={aboutApiData} />;
 }
