@@ -201,7 +201,7 @@ export default function Footer({
                 alt={partner.alt_logo || partner.name}
                 width={100}
                 height={40}
-                className="object-cover rounded-full"
+                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full"
               />
             </motion.div>
           ))}

@@ -2,113 +2,12 @@
 
 import { useMemo, useState, useCallback } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import {
-  BadgeCheck,
-  Camera,
-  ChevronLeft,
-  ChevronRight,
-  Clapperboard,
-  Code2,
-  MapPin,
-  MessagesSquare,
-  Search,
-  Share2,
-  Target,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
-  Youtube,
-  Smartphone,
-  Globe,
-  Database,
-  Zap,
-  TrendingUp,
-  BarChart3,
-  Users,
-  Palette,
-  PenTool,
-  Lightbulb,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../ui/button";
 import { Link } from "@/navigations";
 import { ServicesResponse, Service, ServiceTab } from "@/types/apiDataTypes";
 import Image from "next/image";
-
-const ACCENT = "text-main-primary";
-
-// Icon mapping helper
-const iconMap: Record<
-  string,
-  React.ComponentType<React.SVGProps<SVGSVGElement>>
-> = {
-  Clapperboard,
-  Share2,
-  Code2,
-  Target,
-  Search,
-  MapPin,
-  Camera,
-  BadgeCheck,
-  MessagesSquare,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
-  Youtube,
-  Smartphone,
-  Globe,
-  Database,
-  Zap,
-  TrendingUp,
-  BarChart3,
-  Users,
-  Palette,
-  PenTool,
-  Lightbulb,
-};
-
-const getIconComponent = (iconName: string) => {
-  // If it's a URL (image path), return null to render img tag instead
-  if (iconName?.startsWith("http") || iconName?.startsWith("/")) {
-    return null;
-  }
-  return iconMap[iconName] || MessagesSquare;
-};
-
-const renderIcon = (
-  iconName: string,
-  className: string,
-  altIcon?: string | null
-) => {
-  // If no icon or it's the noIcon placeholder, use a fallback Lucide icon
-  if (!iconName || iconName.includes("noIcon.png")) {
-    const FallbackIcon = MessagesSquare;
-    return <FallbackIcon className={className} strokeWidth={1.75} />;
-  }
-
-  const IconComponent = getIconComponent(iconName);
-
-  if (!IconComponent) {
-    // Render image if it's a URL
-    return (
-      <Image
-        width={50}
-        height={50}
-        src={iconName}
-        alt={altIcon || "icon"}
-        className={className}
-        onError={(e) => {
-          // If image fails to load, hide it and show fallback
-          e.currentTarget.style.display = "none";
-        }}
-      />
-    );
-  }
-
-  return <IconComponent className={className} strokeWidth={1.75} />;
-};
 
 export default function Services({
   servicesData,
@@ -180,7 +79,6 @@ export default function Services({
   if (!services.length) return null;
 
   const activeService = services[active];
-  const ActiveIcon = getIconComponent(activeService?.icon || "MessagesSquare");
 
   // Render tabs content with icons
   const renderTabsContent = (tabs: ServiceTab[]) => {
@@ -202,23 +100,18 @@ export default function Services({
           } gap-4 mx-auto`}
         >
           {sortedTabs.map((tab) => {
-            const TabIcon = getIconComponent(tab.icon);
             return (
               <div
                 key={tab.id}
                 className="flex items-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10"
               >
-                {TabIcon ? (
-                  <TabIcon className={`w-4 h-4 ${ACCENT}`} />
-                ) : (
-                  <Image
-                    width={32}
-                    height={32}
-                    src={tab.icon}
-                    alt={tab.name}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                )}
+                <Image
+                  width={32}
+                  height={32}
+                  src={tab.icon}
+                  alt={tab.name}
+                  className="max-w-full max-h-full object-contain"
+                />
                 <span className="text-sm font-medium">{tab.name}</span>
               </div>
             );
@@ -267,7 +160,7 @@ export default function Services({
           <button
             aria-label="Previous"
             onClick={() => move(isRTL ? 1 : -1)}
-            className={`absolute left-1/3 sm:-left-2 md:-left-4 top-0 sm:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute left-1/3 xl:-left-4 top-0 xl:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? maxStart : 0)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
                 : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
@@ -285,7 +178,7 @@ export default function Services({
           <button
             aria-label="Next"
             onClick={() => move(isRTL ? -1 : 1)}
-            className={`absolute right-1/3 sm:-right-4 md:-right-2 top-0 sm:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute right-1/3 xl:-right-2 top-0 xl:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? 0 : maxStart)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
                 : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
@@ -316,16 +209,18 @@ export default function Services({
                   <button
                     key={s.id}
                     onClick={() => select(i)}
-                    className={`group basis-1/3 sm:basis-1/4 md:basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target`}
+                    className={`group basis-1/3 sm:basis-1/4 md:basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target flex items-center justify-center gap-3 md:gap-6`}
                     dir="ltr"
                   >
-                    {renderIcon(
-                      s.icon,
-                      `mx-auto mb-4 h-8 w-8 ${
-                        activeItem ? ACCENT : "text-white"
-                      }`,
-                      s.alt_icon
-                    )}
+                    <div>
+                      <Image
+                        width={50}
+                        height={50}
+                        src={s.icon}
+                        alt={s.alt_icon || "icon"}
+                        className="h-16 w-16 object-contain shrink-0"
+                      />
+                    </div>
                     <div
                       className={`text-sm md:text-base font-medium ${
                         activeItem
@@ -373,22 +268,16 @@ export default function Services({
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                {ActiveIcon ? (
-                  <ActiveIcon className={`h-8 w-8 ${ACCENT}`} />
-                ) : !activeService.icon.includes("noIcon.png") ? (
-                  <Image
-                    src={activeService.icon}
-                    alt={activeService.alt_icon || "icon"}
-                    width={32}
-                    height={32}
-                    className={`max-h-full max-w-full object-contain`}
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                    }}
-                  />
-                ) : (
-                  <MessagesSquare className={`h-8 w-8 ${ACCENT}`} />
-                )}
+                <Image
+                  src={activeService.icon}
+                  alt={activeService.alt_icon || "icon"}
+                  width={32}
+                  height={32}
+                  className={`max-h-full max-w-full object-contain`}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
               </motion.span>
               <div>
                 <motion.h3
