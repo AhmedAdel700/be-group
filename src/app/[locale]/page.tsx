@@ -80,7 +80,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
       <Hero />
       <About aboutData={about} />
       <ClientsSection clients={clients} />
-      <Services servicesData={services} benefitsData={benefits} />
+      <Services servicesData={services} />
       <Portfolio projectsData={projectsApiData} />
       <WhyChooseUs benefitsData={benefits} />
       <AchievementSection achievementsData={achievements} />

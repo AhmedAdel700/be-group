@@ -33,373 +33,118 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../ui/button";
 import { Link } from "@/navigations";
-import { BenefitTypes, ServicesResponse } from "@/types/apiDataTypes";
-
-type Service = {
-  id: number;
-  title: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  blurb: string;
-  content: React.ReactNode;
-  image?: { src: string; alt: string } | null;
-};
+import { ServicesResponse, Service, ServiceTab } from "@/types/apiDataTypes";
+import Image from "next/image";
 
 const ACCENT = "text-main-primary";
 
+// Icon mapping helper
+const iconMap: Record<
+  string,
+  React.ComponentType<React.SVGProps<SVGSVGElement>>
+> = {
+  Clapperboard,
+  Share2,
+  Code2,
+  Target,
+  Search,
+  MapPin,
+  Camera,
+  BadgeCheck,
+  MessagesSquare,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Youtube,
+  Smartphone,
+  Globe,
+  Database,
+  Zap,
+  TrendingUp,
+  BarChart3,
+  Users,
+  Palette,
+  PenTool,
+  Lightbulb,
+};
+
+const getIconComponent = (iconName: string) => {
+  // If it's a URL (image path), return null to render img tag instead
+  if (iconName?.startsWith("http") || iconName?.startsWith("/")) {
+    return null;
+  }
+  return iconMap[iconName] || MessagesSquare;
+};
+
+const renderIcon = (
+  iconName: string,
+  className: string,
+  altIcon?: string | null
+) => {
+  // If no icon or it's the noIcon placeholder, use a fallback Lucide icon
+  if (!iconName || iconName.includes("noIcon.png")) {
+    const FallbackIcon = MessagesSquare;
+    return <FallbackIcon className={className} strokeWidth={1.75} />;
+  }
+
+  const IconComponent = getIconComponent(iconName);
+
+  if (!IconComponent) {
+    // Render image if it's a URL
+    return (
+      <Image
+        width={50}
+        height={50}
+        src={iconName}
+        alt={altIcon || "icon"}
+        className={className}
+        onError={(e) => {
+          // If image fails to load, hide it and show fallback
+          e.currentTarget.style.display = "none";
+        }}
+      />
+    );
+  }
+
+  return <IconComponent className={className} strokeWidth={1.75} />;
+};
+
 export default function Services({
   servicesData,
-  benefitsData,
 }: {
-  servicesData: ServicesResponse[];
-  benefitsData: BenefitTypes[];
+  servicesData: Service[] | ServicesResponse | ServicesResponse[];
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
   const isRTL = locale === "ar";
-  console.log(`####################`, benefitsData);
-  console.log(`$$$$$$$$$$$$$$$$$$$$`, servicesData);
 
-  const services: Service[] = useMemo(
-    () => [
-      {
-        id: 1,
-        title: t("Animation Video"),
-        icon: Clapperboard,
-        blurb: t("Tell your story with motion"),
-        content: (
-          <>
-            <p className="leading-relaxed opacity-90">
-              Embark on a journey of creativity and excellence with Be Group’s
-              Animation Video service. We turn ideas into mesmerizing visuals
-              that captivate minds and hearts—perfect for explainers, product
-              demos, or unforgettable brand stories.
-            </p>
-            <p className="leading-relaxed opacity-90 mt-4">
-              Our creative team crafts standout videos with striking style,
-              meticulous detail, and emotional pull—leaving a lasting impact.
-              Let’s turn your vision into a magical reality.
-            </p>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 2,
-        title: "Social Media Management",
-        icon: Share2,
-        blurb: "Strategy, content, growth.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              We plan, create, and manage content that grows communities and
-              drives results—tailored for each platform is culture and
-              algorithm.
-            </p>
-            <div className="mt-8">
-              <div className="max-w-2xl mx-auto">
-                {/* First row - 2 items */}
-                <div className="grid grid-cols-2 gap-6 mb-4">
-                  <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <Instagram className="w-5 h-5 text-pink-400" />
-                    <span className="text-sm font-medium">Instagram</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <Youtube className="w-5 h-5 text-red-500" />
-                    <span className="text-sm font-medium">YouTube</span>
-                  </div>
-                </div>
+  const services: Service[] = useMemo(() => {
+    if (!servicesData) return [];
 
-                {/* Second row - 3 items */}
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <Twitter className="w-4 h-4 text-blue-400" />
-                    <span className="text-xs font-medium">Twitter/X</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <Facebook className="w-4 h-4 text-blue-600" />
-                    <span className="text-xs font-medium">Facebook</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <Linkedin className="w-4 h-4 text-blue-500" />
-                    <span className="text-xs font-medium">LinkedIn</span>
-                  </div>
-                </div>
+    // If it's an array
+    if (Array.isArray(servicesData)) {
+      if (servicesData.length === 0) return [];
 
-                {/* Third row - 2 items */}
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <div className="w-4 h-4 rounded bg-black flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">T</span>
-                    </div>
-                    <span className="text-sm font-medium">TikTok</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <div className="w-4 h-4 rounded-full bg-yellow-400 flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">S</span>
-                    </div>
-                    <span className="text-sm font-medium">Snapchat</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="text-lg leading-relaxed opacity-95 mt-8 font-medium">
-              We handle calendars, copy, design, posting, moderation, and
-              performance analytics—so your brand stays consistent and
-              conversion-focused.
-            </p>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 3,
-        title: "Web Development",
-        icon: Code2,
-        blurb: "Fast, scalable, secure.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              Since 2009, Be Group has delivered high-impact web and e-commerce
-              solutions across MENA. We use modern stacks and Agile/Scrum to
-              ship robust, maintainable products—on time.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Globe className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">Custom websites</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Database className="w-4 h-4 text-green-400" />
-                  <span className="text-sm font-medium">E-commerce</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Smartphone className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm font-medium">Mobile apps</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Zap className="w-4 h-4 text-yellow-400" />
-                  <span className="text-sm font-medium">APIs</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <TrendingUp className="w-4 h-4 text-cyan-400" />
-                  <span className="text-sm font-medium">Cloud hosting</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <BarChart3 className="w-4 h-4 text-orange-400" />
-                  <span className="text-sm font-medium">Analytics</span>
-                </div>
-              </div>
-            </div>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 4,
-        title: "Google Ads (AdWords)",
-        icon: Target,
-        blurb: "Premier Partner performance.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              Be Group is a 2023 Google Premier Partner with certified
-              strategists, strong optimization scores, and proven spend
-              management. We build data-driven campaigns that scale.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <Search className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm font-medium">
-                    Keyword research & bid strategy
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <BarChart3 className="w-5 h-5 text-green-400" />
-                  <span className="text-sm font-medium">
-                    Quality Score optimization
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <TrendingUp className="w-5 h-5 text-purple-400" />
-                  <span className="text-sm font-medium">
-                    Performance tracking
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-                  <Lightbulb className="w-5 h-5 text-yellow-400" />
-                  <span className="text-sm font-medium">
-                    Campaign optimization
-                  </span>
-                </div>
-              </div>
-            </div>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 5,
-        title: "SEO",
-        icon: Search,
-        blurb: "Visibility that lasts.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              Full-stack SEO: technical audits, on-page optimization, content
-              strategy, and high-quality link building. We pair research with
-              clean IA and UX to grow qualified traffic sustainably.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Search className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">Technical audits</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <PenTool className="w-4 h-4 text-green-400" />
-                  <span className="text-sm font-medium">Content strategy</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <TrendingUp className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm font-medium">Link building</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-lg leading-relaxed opacity-95 mt-8 font-medium">
-              We communicate transparently with regular reporting—so you see
-              what is moving the needle.
-            </p>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 6,
-        title: "Google Maps",
-        icon: MapPin,
-        blurb: "Be found locally.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              Optimize your Business Profile to win local intent across Search
-              and Maps. We manage photos, posts, offers, reviews, and messaging
-              to convert discovery into visits and calls.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Camera className="w-4 h-4 text-pink-400" />
-                  <span className="text-sm font-medium">Photo management</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Users className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">
-                    Review optimization
-                  </span>
-                </div>
-              </div>
-            </div>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 7,
-        title: "Media Production",
-        icon: Camera,
-        blurb: "Video, audio, motion.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              End-to-end production: scripting, directing, shooting, editing,
-              motion graphics, VFX, and sound design. We deliver broadcast-grade
-              results tailored to your brand voice.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Camera className="w-4 h-4 text-red-400" />
-                  <span className="text-sm font-medium">Video production</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Zap className="w-4 h-4 text-yellow-400" />
-                  <span className="text-sm font-medium">Motion graphics</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <PenTool className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm font-medium">Sound design</span>
-                </div>
-              </div>
-            </div>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 8,
-        title: "Branding",
-        icon: BadgeCheck,
-        blurb: "Identity with purpose.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              Research-backed visual identities—logos, palettes, typography,
-              guidelines, and assets—that align with your positioning and scale
-              across print and digital touchpoints.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Palette className="w-4 h-4 text-pink-400" />
-                  <span className="text-sm font-medium">Logo design</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <PenTool className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">Typography</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <BadgeCheck className="w-4 h-4 text-green-400" />
-                  <span className="text-sm font-medium">Brand guidelines</span>
-                </div>
-              </div>
-            </div>
-          </>
-        ),
-        image: null,
-      },
-      {
-        id: 9,
-        title: "Consultation",
-        icon: MessagesSquare,
-        blurb: "Roadmaps & strategy.",
-        content: (
-          <>
-            <p className="text-lg leading-relaxed opacity-95 font-medium">
-              Marketing and product consulting: market analysis, opportunity
-              mapping, brand development, CX/CRM improvements, and measurable
-              go-to-market plans.
-            </p>
-            <div className="mt-8">
-              <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <Lightbulb className="w-4 h-4 text-yellow-400" />
-                  <span className="text-sm font-medium">Strategy planning</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <BarChart3 className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm font-medium">Market analysis</span>
-                </div>
-              </div>
-            </div>
-          </>
-        ),
-        image: null,
-      },
-    ],
-    []
-  );
+      // Check if first item has a 'services' property (ServicesResponse[])
+      if ("services" in servicesData[0]) {
+        const data = servicesData[0] as ServicesResponse;
+        return [...data.services].sort((a, b) => a.order - b.order);
+      }
+
+      // Otherwise it's Service[] directly
+      return [...(servicesData as Service[])].sort((a, b) => a.order - b.order);
+    }
+
+    // If it's a single ServicesResponse object
+    if ("services" in servicesData) {
+      return [...(servicesData as ServicesResponse).services].sort(
+        (a, b) => a.order - b.order
+      );
+    }
+
+    return [];
+  }, [servicesData]);
 
   const windowSize =
     typeof window !== "undefined" && window.innerWidth < 768 ? 3 : 5;
@@ -408,11 +153,9 @@ export default function Services({
   const [start, setStart] = useState(0);
   const [active, setActive] = useState(0);
 
-  // Move the carousel
   const move = useCallback(
     (dir: -1 | 1) => {
       const newStart = start + dir;
-      // Prevent moving past the start or the end
       if (newStart >= 0 && newStart <= maxStart) {
         setStart(newStart);
       }
@@ -420,12 +163,10 @@ export default function Services({
     [start, maxStart]
   );
 
-  // Select a specific service
   const select = useCallback(
     (i: number) => {
       setActive(i);
       setStart((prevStart) => {
-        // Keep selected visible within window
         if (i < prevStart) return i;
         if (i > prevStart + windowSize - 1) return i - windowSize + 1;
         return prevStart;
@@ -435,7 +176,57 @@ export default function Services({
   );
 
   const shiftPct = (isRTL ? start : -start) * (100 / windowSize);
-  const ActiveIcon = services[active].icon;
+
+  if (!services.length) return null;
+
+  const activeService = services[active];
+  const ActiveIcon = getIconComponent(activeService?.icon || "MessagesSquare");
+
+  // Render tabs content with icons
+  const renderTabsContent = (tabs: ServiceTab[]) => {
+    if (!tabs || tabs.length === 0) return null;
+
+    const sortedTabs = [...tabs]
+      .sort((a, b) => a.order - b.order)
+      .filter((tab) => tab.status);
+
+    return (
+      <div className="mt-8">
+        <div
+          className={`grid ${
+            sortedTabs.length <= 2
+              ? "md:grid-cols-2 max-w-lg"
+              : sortedTabs.length === 3
+              ? "md:grid-cols-3 max-w-3xl"
+              : "grid-cols-1 md:grid-cols-3 max-w-3xl"
+          } gap-4 mx-auto`}
+        >
+          {sortedTabs.map((tab) => {
+            const TabIcon = getIconComponent(tab.icon);
+            return (
+              <div
+                key={tab.id}
+                className="flex items-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10"
+              >
+                {TabIcon ? (
+                  <TabIcon className={`w-4 h-4 ${ACCENT}`} />
+                ) : (
+                  <Image
+                    width={32}
+                    height={32}
+                    src={tab.icon}
+                    alt={tab.name}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                )}
+                <span className="text-sm font-medium">{tab.name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section className="w-full min-h-fit xl:min-h-screen bg-main-black text-main-white py-8 xl:py-20 border-b border-white/10 overflow-hidden">
@@ -520,7 +311,6 @@ export default function Services({
               }}
             >
               {services.map((s, i) => {
-                const Icon = s.icon;
                 const activeItem = i === active;
                 return (
                   <button
@@ -529,12 +319,13 @@ export default function Services({
                     className={`group basis-1/3 sm:basis-1/4 md:basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target`}
                     dir="ltr"
                   >
-                    <Icon
-                      className={`mx-auto mb-4 h-8 w-8 ${
+                    {renderIcon(
+                      s.icon,
+                      `mx-auto mb-4 h-8 w-8 ${
                         activeItem ? ACCENT : "text-white"
-                      }`}
-                      strokeWidth={1.75}
-                    />
+                      }`,
+                      s.alt_icon
+                    )}
                     <div
                       className={`text-sm md:text-base font-medium ${
                         activeItem
@@ -542,7 +333,7 @@ export default function Services({
                           : "opacity-70 group-hover:opacity-100"
                       }`}
                     >
-                      {s.title}
+                      {s.name}
                     </div>
 
                     {/* underline */}
@@ -582,7 +373,22 @@ export default function Services({
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <ActiveIcon className={`h-8 w-8 ${ACCENT}`} />
+                {ActiveIcon ? (
+                  <ActiveIcon className={`h-8 w-8 ${ACCENT}`} />
+                ) : !activeService.icon.includes("noIcon.png") ? (
+                  <Image
+                    src={activeService.icon}
+                    alt={activeService.alt_icon || "icon"}
+                    width={32}
+                    height={32}
+                    className={`max-h-full max-w-full object-contain`}
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
+                  />
+                ) : (
+                  <MessagesSquare className={`h-8 w-8 ${ACCENT}`} />
+                )}
               </motion.span>
               <div>
                 <motion.h3
@@ -591,7 +397,7 @@ export default function Services({
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 1 }}
                 >
-                  {services[active].title}
+                  {activeService.name}
                 </motion.h3>
                 <motion.p
                   className="text-base text-main-primary/80 mt-2 font-medium"
@@ -599,7 +405,7 @@ export default function Services({
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 1.2 }}
                 >
-                  {services[active].blurb}
+                  {activeService.short_desc}
                 </motion.p>
               </div>
             </div>
@@ -615,7 +421,7 @@ export default function Services({
           >
             <AnimatePresence mode="wait">
               <motion.div
-                key={services[active].id}
+                key={activeService.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -628,7 +434,14 @@ export default function Services({
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  {services[active].content}
+                  <div
+                    className="text-lg leading-relaxed opacity-95 font-medium"
+                    dangerouslySetInnerHTML={{
+                      __html: activeService.long_desc,
+                    }}
+                  />
+
+                  {renderTabsContent(activeService.tabs)}
                 </motion.div>
 
                 {/* Enhanced call-to-action area */}
@@ -638,7 +451,10 @@ export default function Services({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <Link href={"/services"} className="w-full">
+                  <Link
+                    href={`/services/${activeService.slug}`}
+                    className="w-full"
+                  >
                     <Button
                       className="uppercase bg-main-primary text-main-text hover:bg-main-secondary p-6 !rounded-[4px] w-full sm:w-[20%] cursor-target"
                       variant="default"

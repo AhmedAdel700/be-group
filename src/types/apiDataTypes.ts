@@ -44,9 +44,38 @@ export interface ClientTypes {
   logo: string;
 }
 
+export interface ServiceTab {
+  id: number;
+  name: string;
+  short_desc: string;
+  long_desc: string; // HTML content as string
+  icon: string;
+  alt_icon: string | null;
+  status: boolean;
+  order: number;
+}
+
+export interface Service {
+  id: number;
+  name: string;
+  order: number;
+  short_desc: string;
+  long_desc: string;
+  image: string;
+  alt_image: string | null;
+  icon: string;
+  alt_icon: string | null;
+  slug: string;
+  meta_title: string;
+  meta_description: string | null;
+  index: number;
+  tabs: ServiceTab[];
+}
+
 export interface ServicesResponse {
   services: Service[];
 }
+
 
 export interface Service {
   id: number;
@@ -71,7 +100,7 @@ export interface ServiceTab {
   short_desc: string;
   long_desc: string;
   icon: string;
-  alt_icon: string;
+  alt_icon: string | null;
   status: boolean;
   order: number;
 }
