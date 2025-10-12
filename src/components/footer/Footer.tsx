@@ -213,20 +213,20 @@ export default function Footer({
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.1 }}
-        className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t border-white/10 pt-6"
+        className="w-full flex flex-col lg:flex-row justify-center items-center gap-2 border-t border-white/10 pt-6"
       >
         <div className="text-white/70 text-xs sm:text-sm text-center">
           {t("Made By")} <span className="text-main-primary">Be Group</span> ©
           2025 {t("All Rights Reserved")}
         </div>
-        <div className="flex items-center gap-6 text-white/60 text-xs sm:text-sm">
+        {/* <div className="flex items-center gap-6 text-white/60 text-xs sm:text-sm">
           <Link href="#" className="hover:underline cursor-target">
             {t("Privacy Policy")}
           </Link>
           <Link href="#" className="hover:underline cursor-target">
             {t("Terms")}
           </Link>
-        </div>
+        </div> */}
       </motion.div>
     </footer>
   );
