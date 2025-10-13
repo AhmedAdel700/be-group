@@ -76,7 +76,6 @@ export interface ServicesResponse {
   services: Service[];
 }
 
-
 export interface Service {
   id: number;
   name: string;
@@ -229,7 +228,6 @@ export interface Schema {
   [key: string]: any;
 }
 
-
 export interface CategoryResponse {
   data: {
     categories: {
@@ -301,7 +299,6 @@ export interface CategoryResponse {
   };
 }
 
-
 export interface BlogDetailsResponse {
   data: {
     blog: {
@@ -316,6 +313,10 @@ export interface BlogDetailsResponse {
       icon: string;
       alt_icon: string | null;
       slug: string;
+      slugs: {
+        en: string;
+        ar: string;
+      };
       meta_title: string;
       meta_description: string;
       index: number;
@@ -363,7 +364,6 @@ export interface BlogDetailsResponse {
     };
   };
 }
-
 
 export interface BlogsListResponse {
   data: BlogItem[];
