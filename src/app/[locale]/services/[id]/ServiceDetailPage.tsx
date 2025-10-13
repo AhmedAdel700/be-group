@@ -201,14 +201,14 @@ export default function ServiceDetailPage({
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <Button className="bg-main-primary text-main-text hover:bg-main-secondary w-full md:w-fit px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 rounded-[6px]">
+                <Button className="bg-main-primary text-main-text hover:bg-main-secondary w-full md:w-fit px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 rounded-[6px]">
                   {t("Get in Touch")}
                 </Button>
               </Link>
               <Link href="/services">
                 <Button
                   variant="outline"
-                  className="border-main-primary/50 text-main-primary hover:bg-main-primary/10 w-full md:w-fit px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 rounded-[6px]"
+                  className="border-main-primary/50 text-main-primary hover:bg-main-primary/10 w-full md:w-fit px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 rounded-[6px]"
                 >
                   {t("View All Services")}
                 </Button>
