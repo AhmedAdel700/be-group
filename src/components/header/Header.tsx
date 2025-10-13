@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { Link, usePathname, useRouter } from "@/navigations";
+import { fetchServiceDetailsData } from "@/api/ServicesService";
+import { fetchBlogsDetailsData } from "@/api/blogsService";
 import Image from "next/image";
 import logo from "@/app/assets/20879.webp";
 import { ChevronDown, Globe } from "lucide-react";
@@ -92,9 +94,45 @@ export default function Header() {
     setMobileOpen(false);
   }, [pathname]);
 
-  // Switch locale, preserve path
-  const switchLocale = (target: "en" | "ar") => {
+  // Switch locale and translate slug on detail pages
+  const switchLocale = async (target: "en" | "ar") => {
     if (target === locale) return setLangOpen(false);
+
+    try {
+      // Try to detect detail routes and translate slug using hreflang
+      const detailMatch = pathname.match(/^\/(services|blogs)\/([^\/]+)$/);
+      if (detailMatch) {
+        const [, type, currentSlug] = detailMatch;
+
+        if (type === "services") {
+          const res = await fetchServiceDetailsData(locale, currentSlug);
+          const href = res?.data?.seo?.meta?.hreflang_tags?.[target];
+          if (href) {
+            // Extract pathname and remove the locale prefix
+            const fullPath = new URL(href).pathname; // e.g. /ar/services/خدمة
+            const pathWithoutLocale = fullPath.replace(/^\/(en|ar)/, ""); // e.g. /services/خدمة
+            router.replace(pathWithoutLocale, { locale: target });
+            setLangOpen(false);
+            return;
+          }
+        } else if (type === "blogs") {
+          const res = await fetchBlogsDetailsData(locale, currentSlug);
+          const href = res?.data?.seo?.meta?.hreflang_tags?.[target];
+          if (href) {
+            const fullPath = new URL(href).pathname;
+            const pathWithoutLocale = fullPath.replace(/^\/(en|ar)/, "");
+            router.replace(pathWithoutLocale, { locale: target });
+            setLangOpen(false);
+            return;
+          }
+        }
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      // Fall through to default behavior if translation fails
+    }
+
+    // Fallback: keep same path and just change locale prefix
     router.replace(pathname, { locale: target });
     setLangOpen(false);
   };

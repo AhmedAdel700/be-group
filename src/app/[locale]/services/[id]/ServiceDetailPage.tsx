@@ -17,6 +17,7 @@ export default function ServiceDetailPage({
   const service = serviceDetailsApiData.data.service;
   const t = useTranslations("services");
   const locale = useLocale();
+  console.log(serviceDetailsApiData);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white">
