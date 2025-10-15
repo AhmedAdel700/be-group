@@ -9,6 +9,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import TargetCursor from "@/components/TargetCursor";
 import { fetchHomeData } from "@/api/homeService";
+import FloatingCTA from "@/components/FloatingCTA";
 
 const objektiv = localFont({
   src: [
@@ -112,6 +113,7 @@ export default async function LocaleLayout({
           <TargetCursor spinDuration={2} hideDefaultCursor={true} />
           <Header />
           {children}
+          <FloatingCTA />
           <Footer
             socialMediaData={social_media}
             partnersData={partners}

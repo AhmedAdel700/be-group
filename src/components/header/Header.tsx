@@ -157,15 +157,28 @@ export default function Header() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: easeOut, delay: 0.05 }}
         className="flex items-center gap-3 cursor-pointer cursor-target"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <Image
-          src={logo}
-          alt="Be Group Logo"
-          width={120}
-          height={120}
-          priority
-        />
+        {pathname === "/" ? (
+          <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <Image
+              src={logo}
+              alt="Be Group Logo"
+              width={120}
+              height={120}
+              priority
+            />
+          </div>
+        ) : (
+          <Link href="/" prefetch>
+            <Image
+              src={logo}
+              alt="Be Group Logo"
+              width={120}
+              height={120}
+              priority
+            />
+          </Link>
+        )}
       </motion.div>
 
       {/* Desktop nav (xl and up) */}
