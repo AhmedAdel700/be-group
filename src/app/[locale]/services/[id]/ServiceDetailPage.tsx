@@ -94,9 +94,12 @@ export default function ServiceDetailPage({
               <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 {t("About This Service")}
               </h2>
-              <p className="text-lg leading-relaxed opacity-90">
-                {service.long_desc}
-              </p>
+              <div
+                className="text-lg leading-relaxed opacity-90 text-white/80 [text-justify:inter-word]"
+                dangerouslySetInnerHTML={{
+                  __html: service?.long_desc,
+                }}
+              />
 
               {/* Dynamic Tabs content */}
               <div className="prose prose-invert prose-lg max-w-none mt-6 space-y-6">
@@ -143,7 +146,10 @@ export default function ServiceDetailPage({
                       <p className="font-semibold text-main-primary">
                         {tab.name}
                       </p>
-                      <p className="opacity-80">{tab.short_desc}</p>
+                      <div
+                        className="opacity-80"
+                        dangerouslySetInnerHTML={{ __html: tab.long_desc }}
+                      />
                     </div>
                   </motion.li>
                 ))}
@@ -174,11 +180,15 @@ export default function ServiceDetailPage({
                     className="flex items-center gap-3"
                   >
                     <div className="w-2 h-2 rounded-full bg-main-primary flex-shrink-0" />
-                    <span className="opacity-90">
-                      {typeof benefit === "string"
-                        ? benefit
-                        : benefit.title || ""}
-                    </span>
+                    <div
+                      className="opacity-90 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          typeof benefit === "string"
+                            ? benefit
+                            : benefit.title || "",
+                      }}
+                    />
                   </motion.li>
                 ))}
               </ul>

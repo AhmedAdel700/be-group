@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import about1 from "@/app/assets/9.png";
+import about1 from "@/app/assets/bg-about3.jpg";
 // import about2 from "@/app/assets/about.webp";
 // import about3 from "@/app/assets/about1.jpg";
 import { Button } from "../ui/button";
@@ -94,19 +94,13 @@ export default function About({
           </h3>
 
           <h4 className="font-medium text-2xl">{t("What We Do ?")}</h4>
-          {/* Dynamic list from API with same styling */}
           <div
-            className="text-white/80 leading-relaxed text-xs md:text-sm lg:text-base ps-4"
+            className="text-white/80 leading-relaxed text-xs md:text-sm lg:text-base text-justify [word-spacing:0.02em] [text-justify:inter-word]"
             dangerouslySetInnerHTML={{
-              __html: `
-      <ul class='list-disc marker:text-main-primary flex flex-col gap-4'>
-        ${
-          aboutData?.text
-            ?.replace(/<ul>|<\/ul>/g, "") // Remove outer <ul> to reapply Tailwind classes
-            ?.trim() || ""
-        }
-      </ul>
-    `,
+              __html: (aboutData?.text ?? "").replace(
+                /style="text-align:\s*justify;?"/g,
+                ""
+              ),
             }}
           />
 
@@ -130,7 +124,7 @@ export default function About({
             src={aboutData?.banner ?? ""}
             alt={aboutData?.alt_banner ?? "about image 2"}
             fill
-            className="object-cover rounded-[8px]"
+            className="object-cover object-center rounded-[8px]"
           />
         </motion.div>
       </div>
@@ -235,9 +229,15 @@ export default function About({
                           delay: isOpen ? 0.2 : 0,
                         }}
                       >
-                        <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                          {desc}
-                        </p>
+                        <div
+                          className="text-white/80 text-sm md:text-base leading-relaxed [text-justify:inter-word]"
+                          dangerouslySetInnerHTML={{
+                            __html: desc?.replace(
+                              /style="text-align:\s*justify;?"/g,
+                              ""
+                            ),
+                          }}
+                        />
                       </motion.div>
                     </div>
                   </motion.div>
