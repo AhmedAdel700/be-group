@@ -1,9 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import about1 from "@/app/assets/bg-about3.jpg";
-// import about2 from "@/app/assets/about.webp";
-// import about3 from "@/app/assets/about1.jpg";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/navigations";
@@ -62,14 +59,14 @@ export default function About({
         >
           <div className="relative w-[75%] mb-12 sm:w-full xl:mb-0 max-w-[450px] xl:max-w-[350px] mx-auto aspect-[3/4] xl:aspect-auto xl:h-[90%]">
             <Image
-              src={about1}
-              alt="about image 1"
+              src={aboutData?.banner2 ?? ""}
+              alt={aboutData?.alt_banner2 ?? "about banner 2"}
               fill
               className="object-cover rounded-[8px] -translate-x-[20px] md:translate-x-[-50px] xl:translate-x-[0px]"
             />
             <Image
               src={aboutData?.image ?? ""}
-              alt={aboutData?.alt_image ?? "about image 2"}
+              alt={aboutData?.alt_image ?? "about image"}
               fill
               className="object-cover rounded-[8px] translate-x-[20px] md:translate-x-[50px] translate-y-[40px] md:translate-y-[100px] xl:translate-y-[50px] z-10"
             />
@@ -122,7 +119,7 @@ export default function About({
         >
           <Image
             src={aboutData?.banner ?? ""}
-            alt={aboutData?.alt_banner ?? "about image 2"}
+            alt={aboutData?.alt_banner ?? "about image"}
             fill
             className="object-cover object-center rounded-[8px]"
           />

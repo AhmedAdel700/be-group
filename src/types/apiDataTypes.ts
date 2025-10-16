@@ -36,6 +36,8 @@ export interface AboutType {
   alt_image?: string | null;
   banner?: string | null;
   alt_banner?: string | null;
+  banner2?: string;
+  alt_banner2?: string | null;
 }
 
 export interface ClientTypes {

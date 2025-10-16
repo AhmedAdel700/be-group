@@ -24,6 +24,8 @@ export default function AboutPage({
     alt_image: "",
     banner: "",
     alt_banner: "",
+    banner2: "",
+    alt_banner2: "",
   };
 
   const aboutStructs = aboutData?.data?.about_structs ?? [];

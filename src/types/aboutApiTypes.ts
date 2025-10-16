@@ -15,6 +15,8 @@ export interface About {
   alt_image: string | null;
   banner: string;
   alt_banner: string | null;
+  banner2: string;
+  alt_banner2: string | null;
 }
 
 export interface AboutStruct {
