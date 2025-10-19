@@ -119,23 +119,25 @@ export default function ContactUs({
 
           {/* Image column */}
           <motion.div
-            className="w-full xl:w-[70%] rounded-[8px] overflow-hidden will-change-[clip-path]"
+            className="w-full xl:w-[70%] h-[450px] rounded-[8px] overflow-hidden will-change-[clip-path]"
             variants={rightInSpring}
             style={{ contain: "paint" }}
           >
             <motion.div variants={maskReveal}>
               <motion.div variants={scaleIn}>
-                <Image
-                  src={
-                    contactSection?.image ||
-                    "https://newapi.be-group.com/assets/dashboard/images/noimage.png"
-                  }
-                  alt={contactSection?.alt_image || t("Contact us image")}
-                  width={380}
-                  height={800}
-                  className="max-w-full h-auto object-cover rounded-[8px]"
-                  priority
-                />
+                <div className="relative w-full h-[450px] rounded-[8px] overflow-hidden">
+                  <Image
+                    src={
+                      contactSection?.image ||
+                      "https://newapi.be-group.com/assets/dashboard/images/noimage.png"
+                    }
+                    alt={contactSection?.alt_image || t("Contact us image")}
+                    fill
+                    style={{ objectFit: "cover" }} // fills width, crops height if needed
+                    className="rounded-[8px]"
+                    priority
+                  />
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>

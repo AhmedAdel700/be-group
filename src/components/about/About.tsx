@@ -48,7 +48,7 @@ export default function About({
       </motion.h2>
 
       {/* Grid */}
-      <div className="container mx-auto grid xl:grid-cols-3 gap-6 place-items-stretch h-auto xl:h-[550px]">
+      <div className="container mx-auto grid xl:grid-cols-3 gap-6 place-items-stretch h-auto xl:h-[550px] xl:ps-28 2xl:ps-0">
         {/* Images block */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}

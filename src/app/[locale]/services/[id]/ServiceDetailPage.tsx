@@ -59,7 +59,7 @@ export default function ServiceDetailPage({
           ) : (
             <motion.h1
               dir="rtl"
-              className="font-extrabold leading-[1.2] text-[clamp(32px,8vw,80px)] relative bg-clip-text text-transparent bg-gradient-to-b from-orange-300 to-[#F18A1D]"
+              className="font-extrabold leading-[1.5] text-[clamp(32px,8vw,80px)] relative bg-clip-text text-transparent bg-gradient-to-b from-orange-300 to-[#F18A1D]"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -90,29 +90,47 @@ export default function ServiceDetailPage({
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                {t("About This Service")}
-              </h2>
-              <div
-                className="text-lg leading-relaxed opacity-90 text-white/80 [text-justify:inter-word]"
-                dangerouslySetInnerHTML={{
-                  __html: service?.long_desc,
-                }}
-              />
+            <div className="flex flex-col lg:flex-row gap-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12">
+              {/* Text Column */}
+              <div className="flex-1">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  {t("About This Service")}
+                </h2>
+                <div
+                  className="text-lg leading-relaxed opacity-90 text-white/80 [text-justify:inter-word]"
+                  dangerouslySetInnerHTML={{ __html: service?.long_desc }}
+                />
 
-              {/* Dynamic Tabs content */}
-              <div className="prose prose-invert prose-lg max-w-none mt-6 space-y-6">
-                {service.tabs.map((tab) => (
-                  <div key={tab.id}>
-                    <h3 className="text-2xl font-semibold mb-2">{tab.name}</h3>
-                    <p className="opacity-90 mb-2">{tab.short_desc}</p>
-                    <div
-                      className="opacity-80 text-base"
-                      dangerouslySetInnerHTML={{ __html: tab.long_desc }}
-                    />
-                  </div>
-                ))}
+                {/* Dynamic Tabs content */}
+                <div className="prose prose-invert prose-lg max-w-none mt-6 space-y-6">
+                  {service.tabs.map((tab) => (
+                    <div key={tab.id}>
+                      <h3 className="text-2xl font-semibold mb-2">
+                        {tab.name}
+                      </h3>
+                      <p className="opacity-90 mb-2">{tab.short_desc}</p>
+                      <div
+                        className="opacity-80 text-base"
+                        dangerouslySetInnerHTML={{ __html: tab.long_desc }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Image Column inside the same container */}
+              <div className="flex-1 relative h-[450px] rounded-2xl overflow-hidden">
+                <Image
+                  src={
+                    service?.image ||
+                    "https://newapi.be-group.com/assets/dashboard/images/noimage.png"
+                  }
+                  alt={service?.alt_image || t("Service image")}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="rounded-2xl"
+                  priority
+                />
               </div>
             </div>
           </motion.div>
