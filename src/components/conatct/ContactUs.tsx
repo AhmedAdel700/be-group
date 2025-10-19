@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { MapPin, Mail, Smartphone } from "lucide-react";
 import ContactForm from "./ContactForm";
@@ -74,6 +75,10 @@ export default function ContactUs({
   const t = useTranslations("contact");
   const locale = useLocale();
 
+  // ===== Client mount check for hydration-safe HTML =====
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <section
       id="contact-us"
@@ -105,15 +110,18 @@ export default function ContactUs({
               })()}
             </h2>
 
-            {contactSection?.long_desc && contactSection.short_desc && (
-              <>
-                <p className="text-lg text-white/80 text-center sm:text-start">
-                  {contactSection.long_desc}
-                </p>
-                <p className="text-lg text-white/80 text-center sm:text-start">
-                  {contactSection.short_desc}
-                </p>
-              </>
+            {mounted && contactSection?.long_desc && (
+              <p
+                className="text-lg text-white/80 text-center sm:text-start"
+                dangerouslySetInnerHTML={{ __html: contactSection.long_desc }}
+              />
+            )}
+
+            {mounted && contactSection?.short_desc && (
+              <p
+                className="text-lg text-white/80 text-center sm:text-start"
+                dangerouslySetInnerHTML={{ __html: contactSection.short_desc }}
+              />
             )}
           </motion.div>
 
@@ -133,7 +141,7 @@ export default function ContactUs({
                     }
                     alt={contactSection?.alt_image || t("Contact us image")}
                     fill
-                    style={{ objectFit: "cover" }} // fills width, crops height if needed
+                    style={{ objectFit: "cover" }}
                     className="rounded-[8px]"
                     priority
                   />

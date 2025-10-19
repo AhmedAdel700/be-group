@@ -24,22 +24,6 @@ export default function ServiceDetailPage({
       {/* Header Section */}
       <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center pt-[70px] pb-6 lg:pt-[120px] min-h-fit relative overflow-hidden">
         <div className="flex flex-col items-center relative z-10 text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="inline-flex items-center justify-center h-20 w-20 rounded-full border border-main-primary/30 bg-main-primary/10 backdrop-blur-sm"
-          >
-            {/* Dynamic service icon */}
-            <Image
-              src={service.icon}
-              alt={service.alt_icon || service.name}
-              className="h-10 w-10 object-contain text-main-primary"
-              width={50}
-              height={50}
-            />
-          </motion.div>
-
           {locale === "en" ? (
             <SplitText
               text={service.name}
