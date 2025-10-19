@@ -348,7 +348,7 @@ export default function Services({
                       className="uppercase bg-main-primary text-main-text hover:bg-main-secondary p-6 !rounded-[4px] w-full sm:w-[20%] cursor-target"
                       variant="default"
                     >
-                      More Details
+                      {t("More Details")}
                     </Button>
                   </Link>
                 </motion.div>
