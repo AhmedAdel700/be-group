@@ -6,8 +6,9 @@ import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link } from "@/navigations";
 import { Download } from "lucide-react";
+import { Banner } from "@/types/apiDataTypes";
 
-export default function Hero() {
+export default function Hero({ banner }: { banner: Banner }) {
   const t = useTranslations("hero");
   const locale = useLocale();
 
@@ -82,7 +83,22 @@ export default function Hero() {
                   </Button>
                 </Link>
 
-                <Button className="uppercase bg-main-primary text-main-text hover:bg-white/90 border-2 border-main-primary hover:text-main-black lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-full h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out">
+                <Button
+                  onClick={() => {
+                    if (banner.company_profile) {
+                      const link = document.createElement("a");
+                      link.href = banner.company_profile;
+                      link.target = "_blank";
+                      link.download =
+                        banner.company_profile.split("/").pop() ||
+                        "company-profile.pdf";
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }
+                  }}
+                  className="uppercase bg-main-primary text-main-text hover:bg-white/90 border-2 border-main-primary hover:text-main-black lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-full h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out"
+                >
                   {t("Company Profile")}
                   <Download size={24} className="w-10 h-10 -mt-1" />
                 </Button>
