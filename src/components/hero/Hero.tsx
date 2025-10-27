@@ -5,6 +5,7 @@ import SplitText from "../SplitText";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Link } from "@/navigations";
+import { Download } from "lucide-react";
 
 export default function Hero() {
   const t = useTranslations("hero");
@@ -14,7 +15,7 @@ export default function Hero() {
     <section className="relative min-h-screen text-main-primary overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <video
-          src="/hero.mp4"
+          src="/hero1.mp4"
           autoPlay
           loop
           muted
@@ -24,12 +25,12 @@ export default function Hero() {
           aria-hidden="true"
           disableRemotePlayback
         />
-        <div className="absolute inset-0 bg-black/40" />
+        {/* <div className="absolute inset-0 bg-black/40" /> */}
       </div>
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
-          <div className="inline-block xl:mt-36">
+          <div className="inline-block">
             {locale === "en" ? (
               <SplitText
                 text={t("We Provide Digital Marketing")}
@@ -80,6 +81,11 @@ export default function Hero() {
                     {t("Contact Us")}
                   </Button>
                 </Link>
+
+                <Button className="uppercase bg-main-primary text-main-text hover:bg-white/90 border-2 border-main-primary hover:text-main-black lg:py-5 !rounded-[4px] !font-semibold cursor-target text-xs lg:text-sm w-full h-[38px] lg:h-[48px] transition-colors duration-300 ease-in-out">
+                  {t("Company Profile")}
+                  <Download size={24} className="w-10 h-10 -mt-1" />
+                </Button>
               </div>
             </motion.div>
           </div>

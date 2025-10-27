@@ -69,7 +69,7 @@ export default function About({
               className={`object-cover rounded-[8px] -translate-x-[20px] md:translate-x-[-50px] ${
                 locale === "en"
                   ? "xl:translate-x-[0px]"
-                  : "xl:translate-x-[50px]"
+                  : "xl:translate-x-[50px] scale-x-[-1]"
               }`}
             />
             <Image
