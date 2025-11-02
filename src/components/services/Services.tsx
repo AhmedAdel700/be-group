@@ -160,7 +160,7 @@ export default function Services({
           <button
             aria-label="Previous"
             onClick={() => move(isRTL ? 1 : -1)}
-            className={`absolute left-1/3 xl:-left-4 top-0 xl:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute left-1/3 xl:-left-2 2xl:-left-10 top-0 xl:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? maxStart : 0)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
                 : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
@@ -178,7 +178,7 @@ export default function Services({
           <button
             aria-label="Next"
             onClick={() => move(isRTL ? -1 : 1)}
-            className={`absolute right-1/3 xl:-right-2 top-0 xl:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute right-1/3 xl:-right-2 2xl:-right-10 top-0 xl:top-1/2 -translate-y-1/2 z-10 rounded-full border p-3 backdrop-blur-sm transition-all duration-300 ${
               start === (isRTL ? 0 : maxStart)
                 ? "border-gray-600 bg-gray-800/50 cursor-not-allowed"
                 : "border-main-primary/50 hover:border-main-primary bg-main-primary/10 hover:bg-main-primary/20 hover:scale-105 cursor-target"
@@ -209,8 +209,8 @@ export default function Services({
                   <button
                     key={s.id}
                     onClick={() => select(i)}
-                    className={`group basis-1/3 sm:basis-1/4 md:basis-1/5 shrink-0 px-4 py-8 text-center relative focus:outline-none cursor-target flex items-center justify-center gap-3 md:gap-6`}
-                    dir="ltr"
+                    className={`group basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/5 shrink-0 px-4 py-4 text-center relative focus:outline-none cursor-target flex items-center justify-center`}
+                    dir={locale === "en" ? "ltr" : "rtl"}
                   >
                     <div>
                       <Image
@@ -281,7 +281,7 @@ export default function Services({
               </motion.span>
               <div>
                 <motion.h3
-                  className="text-3xl md:text-4xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                  className="text-3xl md:text-4xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent !leading-[1.5]"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 1 }}

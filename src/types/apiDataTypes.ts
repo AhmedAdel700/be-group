@@ -25,6 +25,7 @@ export interface Banner {
   second_text?: string | null;
   image: string;
   alt_image?: string | null;
+  company_profile: string | null;
 }
 
 export interface AboutType {

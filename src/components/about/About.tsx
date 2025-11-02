@@ -48,7 +48,11 @@ export default function About({
       </motion.h2>
 
       {/* Grid */}
-      <div className="container mx-auto grid xl:grid-cols-3 gap-6 place-items-stretch h-auto xl:h-[550px] xl:ps-28 2xl:ps-0">
+      <div
+        className={`container mx-auto grid xl:grid-cols-3 gap-6 place-items-stretch h-auto xl:h-[550px] ${
+          locale === "en" ? "xl:ps-20" : "xl:ps-28"
+        } 2xl:ps-0`}
+      >
         {/* Images block */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -62,13 +66,21 @@ export default function About({
               src={aboutData?.banner2 ?? ""}
               alt={aboutData?.alt_banner2 ?? "about banner 2"}
               fill
-              className="object-cover rounded-[8px] -translate-x-[20px] md:translate-x-[-50px] xl:translate-x-[0px]"
+              className={`object-cover rounded-[8px] -translate-x-[20px] md:translate-x-[-50px] ${
+                locale === "en"
+                  ? "xl:translate-x-[0px]"
+                  : "xl:translate-x-[50px] scale-x-[-1]"
+              }`}
             />
             <Image
               src={aboutData?.image ?? ""}
               alt={aboutData?.alt_image ?? "about image"}
               fill
-              className="object-cover rounded-[8px] translate-x-[20px] md:translate-x-[50px] translate-y-[40px] md:translate-y-[100px] xl:translate-y-[50px] z-10"
+              className={`object-cover rounded-[8px] translate-x-[20px] ${
+                locale === "en"
+                  ? "md:translate-x-[50px]"
+                  : "md:translate-x-[0px]"
+              } translate-y-[40px] md:translate-y-[100px] xl:translate-y-[50px] z-10`}
             />
           </div>
         </motion.div>

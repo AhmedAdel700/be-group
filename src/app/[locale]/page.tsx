@@ -63,6 +63,7 @@ export async function generateMetadata({
 export default async function Home({ params }: { params: { locale: string } }) {
   const homeData = await fetchHomeData(params.locale);
   const {
+    banner,
     about,
     clients,
     services,
@@ -77,7 +78,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
 
   return (
     <div className="relative overflow-hidden">
-      <Hero />
+      <Hero banner={banner} />
       <About aboutData={about} />
       <ClientsSection clients={clients} />
       <Services servicesData={services} />
