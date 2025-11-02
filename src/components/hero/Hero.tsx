@@ -26,7 +26,7 @@ export default function Hero({ banner }: { banner: Banner }) {
           aria-hidden="true"
           disableRemotePlayback
         />
-        {/* <div className="absolute inset-0 bg-black/40" /> */}
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div className="relative w-full h-[100vh] flex items-center justify-center">
