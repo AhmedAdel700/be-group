@@ -105,7 +105,7 @@ export default function ServiceDetailPage({
               <div className="w-full lg:w-1/2 relative h-64 sm:h-80 md:h-96 lg:h-[450px] rounded-2xl border-[2px] border-main-secondary overflow-hidden">
                 <Image
                   src={service?.image}
-                  alt={service?.alt_image || t("Service image")}
+                  alt={service?.alt_image ?? ""}
                   fill
                   style={{ objectFit: "cover" }}
                   className="rounded-2xl"

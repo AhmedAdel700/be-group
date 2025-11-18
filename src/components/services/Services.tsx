@@ -261,7 +261,7 @@ export default function Services({
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Image
-                  src={activeService.icon}
+                  src={activeService.icon!}
                   alt={activeService.alt_icon || "icon"}
                   width={208}
                   height={208}
