@@ -7,7 +7,6 @@ import SplitText from "@/components/SplitText";
 import { Link } from "@/navigations";
 import { useLocale, useTranslations } from "next-intl";
 import { ServicesApiResponse } from "@/types/servicesApiTypes";
-import Image from "next/image";
 
 export default function ServicesPage({
   ServicesApiData,
@@ -16,8 +15,6 @@ export default function ServicesPage({
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
-  console.log(`################`, ServicesApiData);
-  
 
   // scroll-motion variants
   const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -119,11 +116,10 @@ export default function ServicesPage({
                 displayOverlayContent
                 overlayContent={
                   <div className="relative h-[320px] w-[320px] rounded-[15px] overflow-hidden">
-                    <Image
+                    <img
                       src={icon}
                       alt={title}
-                      fill
-                      className="object-cover"
+                      className="absolute inset-0 h-full w-full object-cover rounded-[15px]"
                     />
 
                     <div className="relative z-10 h-full w-full rounded-[15px] border-[2px] border-main-secondary flex flex-col items-center pt-6 justify-start gap-4 text-center">
