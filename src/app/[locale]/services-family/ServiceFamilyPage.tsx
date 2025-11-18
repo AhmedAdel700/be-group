@@ -9,7 +9,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ServicesApiResponse } from "@/types/servicesApiTypes";
 import Image from "next/image";
 
-export default function ServicesPage({
+export default function ServiceFamilyPage({
   ServicesApiData,
 }: {
   ServicesApiData: ServicesApiResponse;
@@ -17,8 +17,8 @@ export default function ServicesPage({
   const locale = useLocale();
   const t = useTranslations("services");
 
-  // scroll-motion variants
   const easeOut = [0.22, 1, 0.36, 1] as const;
+
   const listVar = useMemo(
     () => ({
       hidden: {},
@@ -28,6 +28,7 @@ export default function ServicesPage({
     }),
     []
   );
+
   const itemVar = useMemo(
     () => ({
       hidden: { opacity: 0, y: 24, scale: 0.98 },
@@ -41,29 +42,37 @@ export default function ServicesPage({
     []
   );
 
-  // ✅ Map API data dynamically
-  const CARDS = useMemo(
-    () =>
-      ServicesApiData.data.services.map((service) => ({
-        id: service.id,
-        title: service.name,
-        blurb: service.short_desc,
-        image: service.image,
-        icon: service.icon,
-        slug: service.slug,
-        sub_services: service.sub_services,
-      })),
-    [ServicesApiData]
-  );
+  const CARDS = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const list: any[] = [];
+
+    ServicesApiData.data.services.forEach((service) => {
+      if (service.sub_services && service.sub_services.length > 0) {
+        service.sub_services.forEach((sub) => {
+          list.push({
+            id: sub.id,
+            title: sub.name,
+            blurb: sub.short_desc,
+            image: sub.image,
+            icon: sub.icon,
+            slug: sub.slug,
+            parentSlug: service.slug,
+          });
+        });
+      }
+    });
+
+    return list;
+  }, [ServicesApiData]);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white flex flex-col items-center">
       <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
         {locale === "en" ? (
           <SplitText
-            text={t("Our Services")}
+            text={t("Service Family")}
             tag="h1"
-            className="font-extrabold leading-[1.2] text-[clamp(44px,10vw,128px)] relative"
+            className="font-extrabold leading-[1.3] text-[clamp(44px,10vw,128px)] relative"
             delay={80}
             duration={0.6}
             ease="power3.out"
@@ -83,7 +92,7 @@ export default function ServicesPage({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {t("Our Services")}
+            {t("Service Family")}
           </motion.h1>
         )}
       </div>
@@ -95,15 +104,9 @@ export default function ServicesPage({
         whileInView="show"
         viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       >
-        {CARDS.map(({ id, title, icon, slug, sub_services }) => (
+        {CARDS.map(({ id, title, icon, slug }) => (
           <motion.div key={id} variants={itemVar}>
-            <Link
-              href={
-                sub_services && sub_services.length > 0
-                  ? `/services-family`
-                  : `/services/${slug}`
-              }
-            >
+            <Link href={`/services/${slug}`}>
               <TiltedCard
                 altText={title}
                 containerHeight="320px"

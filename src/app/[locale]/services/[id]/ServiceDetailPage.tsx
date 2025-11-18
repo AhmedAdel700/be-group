@@ -17,7 +17,6 @@ export default function ServiceDetailPage({
   const service = serviceDetailsApiData.data.service;
   const t = useTranslations("services");
   const locale = useLocale();
-  console.log(serviceDetailsApiData);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white">
@@ -103,12 +102,9 @@ export default function ServiceDetailPage({
               </div>
 
               {/* Image Column inside the same container */}
-              <div className="flex-1 relative h-[450px] rounded-2xl overflow-hidden">
+              <div className="w-full lg:w-1/2 relative h-64 sm:h-80 md:h-96 lg:h-[450px] rounded-2xl border-[2px] border-main-secondary overflow-hidden">
                 <Image
-                  src={
-                    service?.image ||
-                    "https://newapi.be-group.com/assets/dashboard/images/noimage.png"
-                  }
+                  src={service?.image}
                   alt={service?.alt_image || t("Service image")}
                   fill
                   style={{ objectFit: "cover" }}
@@ -203,7 +199,7 @@ export default function ServiceDetailPage({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-center bg-gradient-to-r from-main-primary/10 to-main-secondary/10 backdrop-blur-sm border border-main-primary/20 rounded-2xl p-8 lg:p-12"
+            className="text-center bg-gradient-to-r from-main-primary/10 to-main-secondary/10 backdrop-blur-sm border-[2px] border-main-secondary rounded-2xl p-8 lg:p-12"
           >
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-main-primary to-main-secondary bg-clip-text text-transparent">
               {t("Ready to Get Started?")}

@@ -209,18 +209,10 @@ export default function Services({
                   <button
                     key={s.id}
                     onClick={() => select(i)}
-                    className={`group basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/5 shrink-0 px-4 py-4 text-center relative focus:outline-none cursor-target flex items-center justify-center`}
+                    className={`group basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/5 shrink-0 px-4 pt-6 pb-4 text-center relative focus:outline-none cursor-target flex items-center justify-center`}
                     dir={locale === "en" ? "ltr" : "rtl"}
                   >
-                    <div>
-                      <Image
-                        width={50}
-                        height={50}
-                        src={s.icon}
-                        alt={s.alt_icon || "icon"}
-                        className="h-16 w-16 object-contain shrink-0"
-                      />
-                    </div>
+                    <div></div>
                     <div
                       className={`text-sm md:text-base font-medium ${
                         activeItem
@@ -264,21 +256,22 @@ export default function Services({
           >
             <div className="flex flex-col items-center gap-4">
               <motion.span
-                className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-main-primary/30 bg-main-primary/10 backdrop-blur-sm"
+                className="inline-flex h-52 w-52 items-center justify-center rounded-full border-[2px] border-main-secondary bg-main-primary/10"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Image
                   src={activeService.icon}
                   alt={activeService.alt_icon || "icon"}
-                  width={32}
-                  height={32}
-                  className={`max-h-full max-w-full object-contain`}
+                  width={208}
+                  height={208}
+                  className="h-full w-full object-cover rounded-full"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                   }}
                 />
               </motion.span>
+
               <div>
                 <motion.h3
                   className="text-3xl md:text-4xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent !leading-[1.5]"
@@ -288,6 +281,7 @@ export default function Services({
                 >
                   {activeService.name}
                 </motion.h3>
+
                 <motion.p
                   className="text-base text-main-primary/80 mt-2 font-medium"
                   initial={{ opacity: 0 }}
@@ -341,7 +335,11 @@ export default function Services({
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   <Link
-                    href={`/services/${activeService.slug}`}
+                    href={
+                      activeService.sub_services && activeService.sub_services.length > 0
+                        ? `/services-family`
+                        : `/services`
+                    }
                     className="w-full"
                   >
                     <Button

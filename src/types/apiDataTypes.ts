@@ -94,6 +94,7 @@ export interface Service {
   meta_description: string | null;
   index: number;
   tabs: ServiceTab[];
+  sub_services?: SubService[];
 }
 
 export interface ServiceTab {
@@ -454,4 +455,25 @@ export interface SEOBlogsData {
     name?: string;
     url: string;
   }>;
+}
+
+export interface SubService {
+  id: number;
+  name: string;
+  slug: string;
+  slugs: {
+    en: string;
+    ar: string;
+  };
+  alt_icon: string | null;
+  alt_image: string | null;
+  icon: string;
+  image: string;
+  index: number;
+  order: number;
+  parent_id: number;
+  short_desc: string | null;
+  long_desc: string;
+  meta_title: string | null;
+  meta_description: string | null;
 }

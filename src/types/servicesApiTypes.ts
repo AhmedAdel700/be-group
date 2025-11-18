@@ -21,6 +21,7 @@ export interface Service {
   meta_title: string;
   meta_description: string | null;
   index: number;
+  sub_services?: SubService[];
 }
 
 export interface SEO {
@@ -105,6 +106,7 @@ export interface ServiceDetailsApiResponse {
         en: string;
         ar: string;
       };
+      sub_services?: SubService[];
       meta_title: string;
       meta_description: string | null;
       index: number;
@@ -163,4 +165,25 @@ export interface ServiceDetailsApiResponse {
       }[];
     };
   };
+}
+
+export interface SubService {
+  id: number;
+  name: string;
+  slug: string;
+  slugs: {
+    en: string;
+    ar: string;
+  };
+  alt_icon: string | null;
+  alt_image: string | null;
+  icon: string;
+  image: string;
+  index: number;
+  order: number;
+  parent_id: number;
+  short_desc: string | null;
+  long_desc: string;
+  meta_title: string | null;
+  meta_description: string | null;
 }
