@@ -260,11 +260,9 @@ export default function Services({
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <Image
+                <img
                   src={activeService.image!}
                   alt={activeService.alt_icon || "icon"}
-                  width={208}
-                  height={208}
                   className="h-full w-full object-cover rounded-full"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
