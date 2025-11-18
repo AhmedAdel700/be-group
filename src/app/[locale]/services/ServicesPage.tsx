@@ -87,7 +87,6 @@ export default function ServicesPage({
         )}
       </div>
 
-      {/* ✅ Scroll-animated cards list */}
       <motion.div
         className="flex flex-wrap items-center justify-center gap-10 pb-12"
         variants={listVar}
@@ -111,24 +110,18 @@ export default function ServicesPage({
                 displayOverlayContent
                 overlayContent={
                   <div className="relative h-[320px] w-[320px] rounded-[15px] overflow-hidden">
-                    {/* 👉 Background Image (FULL CARD) */}
                     <Image
-                      src={icon} // or the card background image source
+                      src={icon}
                       alt={title}
                       fill
                       className="object-cover"
                     />
 
-                    {/* 👉 Foreground Content */}
-                    <div className="relative z-10 h-full w-full rounded-[15px] border border-main-secondary flex flex-col items-center pt-6 justify-start gap-4 text-center">
-                      <div className="flex flex-col items-center gap-2">
-                        <h3 className="text-xl font-semibold text-main-primary bg-black/85 p-2 rounded">
-                          {title}
-                        </h3>
-                      </div>
+                    <div className="relative z-10 h-full w-full rounded-[15px] border-[2px] border-main-secondary flex flex-col items-center pt-6 justify-start gap-4 text-center">
+                      <div className="flex flex-col items-center gap-2"></div>
 
-                      <div className="text-xs uppercase tracking-wide text-main-primary mt-auto mb-5  bg-black/85 p-2 rounded">
-                        {t("Click for details")}
+                      <div className="text-base uppercase w-full tracking-wide text-main-primary mt-auto mb-5 bg-black/85 p-2">
+                        {title}
                       </div>
                     </div>
                   </div>
