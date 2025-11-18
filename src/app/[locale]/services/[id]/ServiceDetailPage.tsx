@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/navigations";
 import SplitText from "@/components/SplitText";
 import { ServiceDetailsApiResponse } from "@/types/servicesApiTypes";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function ServiceDetailPage({
@@ -103,13 +102,10 @@ export default function ServiceDetailPage({
 
               {/* Image Column inside the same container */}
               <div className="w-full lg:w-1/2 relative h-64 sm:h-80 md:h-96 lg:h-[450px] rounded-2xl border-[2px] border-main-secondary overflow-hidden">
-                <Image
+                <img
                   src={service?.image}
                   alt={service?.alt_image ?? ""}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="rounded-2xl"
-                  priority
+                  className="absolute inset-0 h-full w-full object-cover rounded-2xl"
                 />
               </div>
             </div>
