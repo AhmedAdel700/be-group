@@ -95,7 +95,7 @@ export default function ServicesPage({
         whileInView="show"
         viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       >
-        {CARDS.map(({ id, title, blurb, icon, slug }) => (
+        {CARDS.map(({ id, title, icon, slug }) => (
           <motion.div key={id} variants={itemVar}>
             <Link href={`/services/${slug}`}>
               <TiltedCard
@@ -110,27 +110,24 @@ export default function ServicesPage({
                 showTooltip={false}
                 displayOverlayContent
                 overlayContent={
-                  <div className="h-[320px] w-[320px] rounded-[15px] overflow-hidden bg-main-black">
-                    <div className="h-full w-full rounded-[15px] border border-main-secondary bg-white/5 backdrop-blur-sm flex flex-col items-center pt-6 justify-start gap-4 text-center">
-                      {/* ✅ Dynamic icon as image */}
-                      <span className="inline-flex items-center justify-center h-20 w-20 rounded-full border border-main-primary/30 bg-main-primary/10">
-                        <Image
-                          src={icon}
-                          alt={`${title} icon`}
-                          className="h-10 w-10 object-contain"
-                          width={50}
-                          height={50}
-                        />
-                      </span>
+                  <div className="relative h-[320px] w-[320px] rounded-[15px] overflow-hidden">
+                    {/* 👉 Background Image (FULL CARD) */}
+                    <Image
+                      src={icon} // or the card background image source
+                      alt={title}
+                      fill
+                      className="object-cover"
+                    />
 
+                    {/* 👉 Foreground Content */}
+                    <div className="relative z-10 h-full w-full rounded-[15px] border border-main-secondary flex flex-col items-center pt-6 justify-start gap-4 text-center">
                       <div className="flex flex-col items-center gap-2">
-                        <h3 className="text-xl font-semibold">{title}</h3>
-                        <p className="text-sm opacity-80 max-w-[240px]">
-                          {blurb}
-                        </p>
+                        <h3 className="text-xl font-semibold text-main-primary bg-black/85 p-2 rounded">
+                          {title}
+                        </h3>
                       </div>
 
-                      <div className="text-xs uppercase tracking-wide text-main-primary/80 mt-auto mb-5">
+                      <div className="text-xs uppercase tracking-wide text-main-primary mt-auto mb-5  bg-black/85 p-2 rounded">
                         {t("Click for details")}
                       </div>
                     </div>
