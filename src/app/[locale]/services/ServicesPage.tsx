@@ -16,6 +16,8 @@ export default function ServicesPage({
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
+  console.log(`################`, ServicesApiData);
+  
 
   // scroll-motion variants
   const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -49,7 +51,7 @@ export default function ServicesPage({
         title: service.name,
         blurb: service.short_desc,
         image: service.image,
-        icon: service.icon,
+        icon: service.image,
         slug: service.slug,
         sub_services: service.sub_services,
       })),

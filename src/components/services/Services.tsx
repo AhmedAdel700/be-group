@@ -108,7 +108,7 @@ export default function Services({
                 <Image
                   width={32}
                   height={32}
-                  src={tab.icon}
+                  src={tab.image}
                   alt={tab.name}
                   className="max-w-full max-h-full object-contain"
                 />
@@ -261,7 +261,7 @@ export default function Services({
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Image
-                  src={activeService.icon!}
+                  src={activeService.image!}
                   alt={activeService.alt_icon || "icon"}
                   width={208}
                   height={208}

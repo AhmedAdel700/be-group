@@ -106,6 +106,7 @@ export interface ServiceTab {
   alt_icon: string | null;
   status: boolean;
   order: number;
+  image: string;
 }
 
 export interface ProjectTypes {
