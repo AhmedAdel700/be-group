@@ -16,6 +16,7 @@ export default function ServiceDetailPage({
   const service = serviceDetailsApiData.data.service;
   const t = useTranslations("services");
   const locale = useLocale();
+  console.log(`##############################`, service);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white">
@@ -111,82 +112,35 @@ export default function ServiceDetailPage({
             </div>
           </motion.div>
 
-          {/* Features and Benefits Grid */}
+          {/* Features and Benefits Grid - Dynamic from Tabs */}
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
-            {/* Tabs as Features */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
-            >
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <CheckCircle className="w-6 h-6 text-main-primary" />
-                {t("What We Offer")}
-              </h3>
-              <ul className="space-y-4">
-                {service.tabs.map((tab, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
-                    className="flex items-start gap-3"
-                  >
-                    <div className="w-2 h-2 mt-2 rounded-full bg-main-primary flex-shrink-0" />
-                    <div>
-                      <p className="font-semibold text-main-primary">
-                        {tab.name}
-                      </p>
-                      <div
-                        className="opacity-80"
-                        dangerouslySetInnerHTML={{ __html: tab.long_desc }}
-                      />
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+            {service.tabs
+              .sort((a, b) => a.order - b.order)
+              .map((tab, index) => (
+                <motion.div
+                  key={tab.id}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.2 * index }}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+                >
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                    {index === 0 ? (
+                      <CheckCircle className="w-6 h-6 text-main-primary" />
+                    ) : (
+                      <Star className="w-6 h-6 text-main-primary" />
+                    )}
+                    {tab.name}
+                  </h3>
 
-            {/* Benefits */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
-            >
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Star className="w-6 h-6 text-main-primary" />
-                {t("Key Benefits")}
-              </h3>
-              <ul className="space-y-4">
-                {/*  eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {service.benefits.map((benefit: any, index: number) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-main-primary flex-shrink-0" />
-                    <div
-                      className="opacity-90 leading-relaxed"
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          typeof benefit === "string"
-                            ? benefit
-                            : benefit.title || "",
-                      }}
-                    />
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+                  {/* Render long_desc <ul><li>...</li></ul> the same style as cards */}
+                  <div
+                    className="space-y-4"
+                    dangerouslySetInnerHTML={{ __html: tab.long_desc }}
+                  />
+                </motion.div>
+              ))}
           </div>
 
           {/* Call to Action */}
