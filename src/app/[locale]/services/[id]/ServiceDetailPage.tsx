@@ -83,22 +83,6 @@ export default function ServiceDetailPage({
                   className="text-lg leading-relaxed opacity-90 text-white/80 [text-justify:inter-word]"
                   dangerouslySetInnerHTML={{ __html: service?.long_desc }}
                 />
-
-                {/* Dynamic Tabs content */}
-                <div className="prose prose-invert prose-lg max-w-none mt-6 space-y-6">
-                  {service.tabs.map((tab) => (
-                    <div key={tab.id}>
-                      <h3 className="text-2xl font-semibold mb-2">
-                        {tab.name}
-                      </h3>
-                      <p className="opacity-90 mb-2">{tab.short_desc}</p>
-                      <div
-                        className="opacity-80 text-base"
-                        dangerouslySetInnerHTML={{ __html: tab.long_desc }}
-                      />
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Image Column inside the same container */}
