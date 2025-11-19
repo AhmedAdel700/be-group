@@ -16,7 +16,6 @@ export default function ServiceDetailPage({
   const service = serviceDetailsApiData.data.service;
   const t = useTranslations("services");
   const locale = useLocale();
-  console.log(`##############################`, service);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white">
@@ -118,9 +117,9 @@ export default function ServiceDetailPage({
                     {tab.name}
                   </h3>
 
-                  {/* Render long_desc <ul><li>...</li></ul> the same style as cards */}
+                  {/* Render long_desc <ul><li>...</li></ul> the same style as cards with primary-colored markers */}
                   <div
-                    className="space-y-4"
+                    className="space-y-4 service-tab-content [&_ul]:list-disc [&_ul]:pl-6 [&_ul_li]:marker:text-main-primary"
                     dangerouslySetInnerHTML={{ __html: tab.long_desc }}
                   />
                 </motion.div>
