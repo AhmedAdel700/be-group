@@ -72,7 +72,7 @@ export default function ServiceDetailPage({
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <div className="flex flex-col lg:flex-row gap-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12">
+            <div className="flex flex-col lg:flex-row gap-8 items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12">
               {/* Text Column */}
               <div className="flex-1">
                 <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
