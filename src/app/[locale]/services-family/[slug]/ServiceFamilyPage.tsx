@@ -20,8 +20,6 @@ export default function ServiceFamilyPage({
 
   const easeOut = [0.22, 1, 0.36, 1] as const;
 
-  console.log(`###########################`, ServicesApiData);
-
   const listVar = useMemo(
     () => ({
       hidden: {},
@@ -45,23 +43,39 @@ export default function ServiceFamilyPage({
     []
   );
 
-  const CARDS = useMemo(() => {
-    const targetService = ServicesApiData.data.services.find(
-      (service) => service.slug === slug
-    );
+  const targetService = useMemo(() => {
+    return ServicesApiData.data.services.find((service) => {
+      const slugs =
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (service as any)?.slugs as { en?: string; ar?: string } | undefined;
 
+      return service.slug === slug || slugs?.en === slug || slugs?.ar === slug;
+    });
+  }, [ServicesApiData, slug]);
+
+  const CARDS = useMemo(() => {
     if (!targetService?.sub_services?.length) return [];
 
-    return targetService.sub_services.map((sub) => ({
-      id: sub.id,
-      title: sub.name,
-      blurb: sub.short_desc,
-      image: sub.image,
-      icon: sub.icon,
-      slug: sub.slug,
-      parentSlug: targetService.slug,
-    }));
-  }, [ServicesApiData, slug]);
+    const parentSlug =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((targetService as any)?.slugs?.[locale as "en" | "ar"]) ??
+      targetService.slug;
+
+    return targetService.sub_services.map((sub) => {
+      const localizedSlug =
+        sub.slugs?.[locale as "en" | "ar"] ?? sub.slug ?? slug;
+
+      return {
+        id: sub.id,
+        title: sub.name,
+        blurb: sub.short_desc,
+        image: sub.image,
+        icon: sub.icon,
+        slug: localizedSlug,
+        parentSlug,
+      };
+    });
+  }, [locale, slug, targetService]);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white flex flex-col items-center">

@@ -15,7 +15,6 @@ export default function ServicesPage({
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
-  console.log(`%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%`, ServicesApiData);
 
   // scroll-motion variants
   const easeOut = [0.22, 1, 0.36, 1] as const;
