@@ -15,6 +15,7 @@ export default function ServicesPage({
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
+  console.log(`%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%`, ServicesApiData);
 
   // scroll-motion variants
   const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -40,7 +41,6 @@ export default function ServicesPage({
     []
   );
 
-  // ✅ Map API data dynamically
   const CARDS = useMemo(
     () =>
       ServicesApiData.data.services.map((service) => ({
@@ -99,7 +99,7 @@ export default function ServicesPage({
             <Link
               href={
                 sub_services && sub_services.length > 0
-                  ? `/services-family`
+                  ? `/services-family/${slug}`
                   : `/services/${slug}`
               }
             >

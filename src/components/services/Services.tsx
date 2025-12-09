@@ -335,7 +335,7 @@ export default function Services({
                   <Link
                     href={
                       activeService.sub_services && activeService.sub_services.length > 0
-                        ? `/services-family`
+                        ? `/services-family/${activeService.slug}`
                         : `/services`
                     }
                     className="w-full"

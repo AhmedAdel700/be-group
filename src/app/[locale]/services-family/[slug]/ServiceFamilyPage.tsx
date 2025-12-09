@@ -10,13 +10,17 @@ import { ServicesApiResponse } from "@/types/servicesApiTypes";
 
 export default function ServiceFamilyPage({
   ServicesApiData,
+  slug,
 }: {
   ServicesApiData: ServicesApiResponse;
+  slug: string;
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
 
   const easeOut = [0.22, 1, 0.36, 1] as const;
+
+  console.log(`###########################`, ServicesApiData);
 
   const listVar = useMemo(
     () => ({
@@ -42,27 +46,22 @@ export default function ServiceFamilyPage({
   );
 
   const CARDS = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const list: any[] = [];
+    const targetService = ServicesApiData.data.services.find(
+      (service) => service.slug === slug
+    );
 
-    ServicesApiData.data.services.forEach((service) => {
-      if (service.sub_services && service.sub_services.length > 0) {
-        service.sub_services.forEach((sub) => {
-          list.push({
-            id: sub.id,
-            title: sub.name,
-            blurb: sub.short_desc,
-            image: sub.image,
-            icon: sub.icon,
-            slug: sub.slug,
-            parentSlug: service.slug,
-          });
-        });
-      }
-    });
+    if (!targetService?.sub_services?.length) return [];
 
-    return list;
-  }, [ServicesApiData]);
+    return targetService.sub_services.map((sub) => ({
+      id: sub.id,
+      title: sub.name,
+      blurb: sub.short_desc,
+      image: sub.image,
+      icon: sub.icon,
+      slug: sub.slug,
+      parentSlug: targetService.slug,
+    }));
+  }, [ServicesApiData, slug]);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white flex flex-col items-center">
