@@ -18,6 +18,11 @@ export interface Service {
   icon: string;
   alt_icon: string | null;
   slug: string;
+  slugs?: {
+    en?: string;
+    ar?: string;
+    [key: string]: string | undefined;
+  };
   meta_title: string;
   meta_description: string | null;
   index: number;

@@ -42,16 +42,22 @@ export default function ServicesPage({
 
   const CARDS = useMemo(
     () =>
-      ServicesApiData.data.services.map((service) => ({
-        id: service.id,
-        title: service.name,
-        blurb: service.short_desc,
-        image: service.image,
-        icon: service.image,
-        slug: service.slug,
-        sub_services: service.sub_services,
-      })),
-    [ServicesApiData]
+      ServicesApiData.data.services.map((service) => {
+        const localizedSlug =
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ((service as any)?.slugs?.[locale as "en" | "ar"]) ?? service.slug;
+
+        return {
+          id: service.id,
+          title: service.name,
+          blurb: service.short_desc,
+          image: service.image,
+          icon: service.image,
+          slug: localizedSlug,
+          sub_services: service.sub_services,
+        };
+      }),
+    [ServicesApiData, locale]
   );
 
   return (

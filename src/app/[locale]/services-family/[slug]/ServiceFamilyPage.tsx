@@ -17,6 +17,7 @@ export default function ServiceFamilyPage({
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
+  const normalizedSlug = decodeURIComponent(slug);
 
   const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -43,15 +44,26 @@ export default function ServiceFamilyPage({
     []
   );
 
+  const normalize = (value?: string) =>
+    (value ? decodeURIComponent(value) : "").toLowerCase();
+
   const targetService = useMemo(() => {
+    const needle = normalize(normalizedSlug);
+
     return ServicesApiData.data.services.find((service) => {
       const slugs =
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (service as any)?.slugs as { en?: string; ar?: string } | undefined;
+        (service as any)?.slugs as { [key: string]: string | undefined } | undefined;
 
-      return service.slug === slug || slugs?.en === slug || slugs?.ar === slug;
+      const candidates = [
+        service.slug,
+        ...(slugs ? Object.values(slugs) : []),
+        service.name,
+      ].filter(Boolean);
+
+      return candidates.some((candidate) => normalize(candidate) === needle);
     });
-  }, [ServicesApiData, slug]);
+  }, [ServicesApiData, normalizedSlug]);
 
   const CARDS = useMemo(() => {
     if (!targetService?.sub_services?.length) return [];
@@ -75,7 +87,7 @@ export default function ServiceFamilyPage({
         parentSlug,
       };
     });
-  }, [locale, slug, targetService]);
+  }, [locale, normalizedSlug, targetService]);
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white flex flex-col items-center">
