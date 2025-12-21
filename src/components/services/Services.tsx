@@ -248,7 +248,7 @@ export default function Services({
         >
           {/* icon + heading */}
           <motion.div
-            className="mb-8"
+            className="mb-0"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -256,8 +256,8 @@ export default function Services({
           >
             <div className="flex flex-col items-center gap-4">
               <motion.span
-                className="inline-flex h-52 w-52 items-center justify-center rounded-full border-[2px] border-main-secondary bg-main-primary/10"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                className="inline-flex h-[300px] w-full lg:w-[600px] items-center justify-center border border-[2px] rounded-[12px] border-main-secondary bg-main-primary/10"
+                // whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <img
