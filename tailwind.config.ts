@@ -61,7 +61,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        objektiv: "var(--en-font-family)",
+        inter: "var(--en-font-family)",
         tajawal: "var(--ar-font-family)",
         noe: "var(--noe-font-family)",
       },

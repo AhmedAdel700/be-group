@@ -1,4 +1,4 @@
-import { Almarai } from "next/font/google";
+import { Almarai, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import type React from "react";
 import { Toaster } from "@/components/ui/sonner";
@@ -11,57 +11,57 @@ import TargetCursor from "@/components/TargetCursor";
 import { fetchHomeData } from "@/api/homeService";
 import FloatingCTA from "@/components/FloatingCTA";
 
-const objektiv = localFont({
-  src: [
-    {
-      path: "../fonts/ObjektivMk3_Trial_Hair.ttf",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_Th.ttf",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_Lt.ttf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_Rg.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_Md.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_SBd.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_Bd.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_XBd.ttf",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../fonts/ObjektivMk3_Trial_Blk.ttf",
-      weight: "900",
-      style: "normal",
-    },
-  ],
-  variable: "--en-font-family",
-  display: "swap",
-});
+// const objektiv = localFont({
+//   src: [
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Hair.ttf",
+//       weight: "100",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Th.ttf",
+//       weight: "200",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Lt.ttf",
+//       weight: "300",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Rg.ttf",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Md.ttf",
+//       weight: "500",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_SBd.ttf",
+//       weight: "600",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Bd.ttf",
+//       weight: "700",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_XBd.ttf",
+//       weight: "800",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ObjektivMk3_Trial_Blk.ttf",
+//       weight: "900",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--en-font-family",
+//   display: "swap",
+// });
 
 const noeDisplay = localFont({
   src: [
@@ -74,6 +74,14 @@ const noeDisplay = localFont({
   variable: "--noe-font-family",
   display: "swap",
 });
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--en-font-family",
+  display: "swap",
+});
+
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -103,7 +111,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${locale === "ar" ? almarai.variable : objektiv.variable} ${
+      className={`${locale === "ar" ? almarai.variable : inter.variable} ${
         noeDisplay.variable
       }`}
       suppressHydrationWarning
