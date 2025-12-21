@@ -256,7 +256,8 @@ export default function Services({
           >
             <div className="flex flex-col items-center gap-4">
               <motion.span
-                className="inline-flex h-[300px] w-full lg:w-[600px] items-center justify-center border border-[2px] rounded-[12px] border-main-secondary bg-main-primary/10"
+                className="inline-flex h-[300px] w-full lg:w-[600px] items-center justify-center border border-[2px] rounded-[12px] border-none bg-main-primary/10"
+                //border-main-secondary
                 // whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
@@ -334,7 +335,8 @@ export default function Services({
                 >
                   <Link
                     href={
-                      activeService.sub_services && activeService.sub_services.length > 0
+                      activeService.sub_services &&
+                      activeService.sub_services.length > 0
                         ? `/services-family/${activeService.slug}`
                         : `/services`
                     }
