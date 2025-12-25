@@ -11,6 +11,7 @@ import AchievementSection from "@/components/achievements/AchievementSection";
 import { fetchHomeData } from "@/api/homeService";
 import { fetchProjectsData } from "@/api/projectsService";
 import { Metadata } from "next";
+import { Section, SectionsByKey } from "@/types/apiDataTypes";
 
 export async function generateMetadata({
   params,
@@ -62,6 +63,14 @@ export async function generateMetadata({
 
 export default async function Home({ params }: { params: { locale: string } }) {
   const homeData = await fetchHomeData(params.locale);
+
+  function mapSectionsByKey(sections: Section[]): SectionsByKey {
+    return sections.reduce((acc, section) => {
+      acc[section.key] = section;
+      return acc;
+    }, {} as SectionsByKey);
+  }
+
   const {
     banner,
     about,
@@ -72,21 +81,48 @@ export default async function Home({ params }: { params: { locale: string } }) {
     blogs,
     contact_section,
     contact_data,
+    sections,
   } = homeData;
+
+  const sectionsByKey = mapSectionsByKey(sections);
 
   const projectsApiData = await fetchProjectsData(params.locale);
 
   return (
     <div className="relative overflow-hidden">
-      <Hero banner={banner} />
+      <Hero
+        banner={banner}
+        // section={sectionsByKey.banner}
+      />
+
       <About aboutData={about} />
-      <ClientsSection clients={clients} />
-      <Services servicesData={services} />
-      <Portfolio projectsData={projectsApiData} />
-      <WhyChooseUs benefitsData={benefits} />
-      <AchievementSection achievementsData={achievements} />
-      <OurBlogs blogsData={blogs} />
-      <ContactUs contactData={contact_data} contactSection={contact_section} />
+
+      <ClientsSection clients={clients} section={sectionsByKey.clients} />
+
+      <Services servicesData={services} section={sectionsByKey.services} />
+
+      <Portfolio
+        projectsData={projectsApiData}
+        section={sectionsByKey.projects}
+      />
+
+      <WhyChooseUs
+        benefitsData={benefits}
+        section={sectionsByKey.why_choose_us}
+      />
+
+      <AchievementSection
+        achievementsData={achievements}
+        section={sectionsByKey.achievements}
+      />
+
+      <OurBlogs blogsData={blogs} section={sectionsByKey.blogs} />
+
+      <ContactUs
+        contactData={contact_data}
+        contactSection={contact_section}
+        // section={sectionsByKey.contact_section}
+      />
     </div>
   );
 }

@@ -8,8 +8,8 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { useTranslations } from "next-intl";
-import { ClientTypes } from "@/types/apiDataTypes";
+// import { useTranslations } from "next-intl";
+import { ClientTypes, Section } from "@/types/apiDataTypes";
 
 type LogoCarouselProps = {
   clients: ClientTypes[];
@@ -17,10 +17,12 @@ type LogoCarouselProps = {
   delayMs?: number;
   className?: string;
   pauseOnHover?: boolean;
+  section: Section;
 };
 
 export default function LogoCarousel({
   clients,
+  section,
   locale = typeof window !== "undefined"
     ? document.documentElement.lang || "en"
     : "en",
@@ -29,7 +31,7 @@ export default function LogoCarousel({
   pauseOnHover = true,
 }: LogoCarouselProps) {
   const isRTL = locale?.toLowerCase().startsWith("ar");
-  const t = useTranslations("clients");
+  // const t = useTranslations("clients");
 
   const autoplay = React.useRef(
     Autoplay({
@@ -55,7 +57,7 @@ export default function LogoCarousel({
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          {t("Our Clients")}
+          {section.title}
         </motion.div>
 
         <motion.h2
@@ -65,7 +67,7 @@ export default function LogoCarousel({
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
         >
-          {t("Some Our Clients")}
+          {section.second_title}
         </motion.h2>
       </div>
 
@@ -88,9 +90,7 @@ export default function LogoCarousel({
               className="ps-0 basis-[55%] md:basis-[30%] lg:basis-[25%] xl:basis-[18%] 2xl:basis-[12%]"
             >
               <div className="flex min-h-[15rem] w-full items-center justify-center">
-                <div
-                  className="flex items-center justify-center"
-                >
+                <div className="flex items-center justify-center">
                   <div className="flex flex-col items-center w-full">
                     <div className="relative flex items-center justify-center w-full hover:-translate-y-3 transition-transform">
                       <Image

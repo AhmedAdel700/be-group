@@ -4,16 +4,18 @@ import Image from "next/image";
 import whyUsImage from "@/app/assets/whyUs.avif";
 import { Gem, Palette, Pencil, Star } from "lucide-react";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { BenefitTypes } from "@/types/apiDataTypes";
+import { BenefitTypes, Section } from "@/types/apiDataTypes";
 
 export default function WhyChooseUs({
   benefitsData,
+  section,
 }: {
   benefitsData: BenefitTypes[];
+  section: Section;
 }) {
-  const t = useTranslations("whyus");
+  // const t = useTranslations("whyus");
   const [isClient, setIsClient] = useState(false);
 
   // Ensure we only render after hydration
@@ -58,7 +60,7 @@ export default function WhyChooseUs({
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          {t("Why Choose Us")}
+          {section.title}
         </motion.div>
 
         <motion.h2
@@ -68,7 +70,7 @@ export default function WhyChooseUs({
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
         >
-          {t("Built for excellence")}
+          {section.second_title}
         </motion.h2>
       </div>
 

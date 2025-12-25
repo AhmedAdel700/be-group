@@ -1,14 +1,16 @@
 "use client";
-import { AchievementTypes } from "@/types/apiDataTypes";
+import { AchievementTypes, Section } from "@/types/apiDataTypes";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 
 export default function AchievementSection({
   achievementsData,
+  section,
 }: {
   achievementsData: AchievementTypes[];
+  section: Section;
 }) {
-  const t = useTranslations("achievements");
+  // const t = useTranslations("achievements");
 
   return (
     <section className="bg-main-black2 min-h-[45vh] w-full flex justify-center items-center border-b border-white/10 py-8">
@@ -21,7 +23,7 @@ export default function AchievementSection({
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            {t("Achievements")}
+            {section.title}
           </motion.div>
 
           {/* Heading */}
@@ -32,7 +34,7 @@ export default function AchievementSection({
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
           >
-            {t("Achievements of company")}
+            {section.second_title}
           </motion.h2>
         </div>
 

@@ -2,9 +2,15 @@
 import CarouselComponent from "../carouselComponent/CarouselComponent";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { CategoryResponse } from "@/types/apiDataTypes";
+import { CategoryResponse, Section } from "@/types/apiDataTypes";
 
-export default function Portfolio({ projectsData }: { projectsData: CategoryResponse}) {
+export default function Portfolio({
+  projectsData,
+  section,
+}: {
+  projectsData: CategoryResponse;
+  section: Section;
+}) {
   const t = useTranslations("portfolio");
   return (
     <div className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white pt-8 xl:pt-20 border-b border-white/10">
@@ -16,7 +22,7 @@ export default function Portfolio({ projectsData }: { projectsData: CategoryResp
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          {t("Our Portfolio")}
+          {section.title}
         </motion.div>
 
         <motion.h2
@@ -26,7 +32,7 @@ export default function Portfolio({ projectsData }: { projectsData: CategoryResp
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
         >
-          {t("Some of Our Works")}
+          {section.second_title}
         </motion.h2>
 
         <motion.p

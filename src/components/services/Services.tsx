@@ -6,13 +6,20 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../ui/button";
 import { Link } from "@/navigations";
-import { ServicesResponse, Service, ServiceTab } from "@/types/apiDataTypes";
+import {
+  ServicesResponse,
+  Service,
+  ServiceTab,
+  Section,
+} from "@/types/apiDataTypes";
 import Image from "next/image";
 
 export default function Services({
   servicesData,
+  section,
 }: {
   servicesData: Service[] | ServicesResponse | ServicesResponse[];
+  section: Section;
 }) {
   const locale = useLocale();
   const t = useTranslations("services");
@@ -132,7 +139,7 @@ export default function Services({
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full w-fit mx-auto text-main-primary"
           >
-            {t("Our Services")}
+            {section.title}
           </motion.div>
 
           <motion.h2
@@ -144,7 +151,7 @@ export default function Services({
               locale === "ar" && "!leading-[1.2]"
             }`}
           >
-            {t("We provide the full stack of creative services")}
+            {section.second_title}
           </motion.h2>
         </div>
 

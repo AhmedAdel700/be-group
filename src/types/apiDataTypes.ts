@@ -478,3 +478,22 @@ export interface SubService {
   meta_title: string | null;
   meta_description: string | null;
 }
+
+export interface Section {
+  key: string;
+  title: string;
+  second_title: string;
+  short_desc: string | null;
+  long_desc: string | null;
+  image: string;
+  alt_image: string | null;
+  icon: string;
+  alt_icon: string | null;
+  status: 0 | 1;
+}
+
+export interface SectionsResponse {
+  sections: Section[];
+}
+
+export type SectionsByKey = Record<string, Section>;

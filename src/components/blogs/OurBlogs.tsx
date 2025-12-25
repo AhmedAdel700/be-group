@@ -6,9 +6,15 @@ import * as React from "react";
 import Image from "next/image";
 import MultiLineUnderline from "../MultiLineUnderline";
 import { Link } from "@/navigations";
-import { BlogTypes } from "@/types/apiDataTypes";
+import { BlogTypes, Section } from "@/types/apiDataTypes";
 
-export default function OurBlogs({ blogsData }: { blogsData?: BlogTypes[] }) {
+export default function OurBlogs({
+  blogsData,
+  section,
+}: {
+  blogsData?: BlogTypes[];
+  section: Section;
+}) {
   const t = useTranslations("blogs");
   const locale = useLocale();
   const isRTL = locale === "ar";
@@ -86,7 +92,7 @@ export default function OurBlogs({ blogsData }: { blogsData?: BlogTypes[] }) {
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            {t("Our Blogs")}
+            {section.title}
           </motion.div>
 
           {/* Heading */}
@@ -97,7 +103,7 @@ export default function OurBlogs({ blogsData }: { blogsData?: BlogTypes[] }) {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
           >
-            {t("Latest News")}
+            {section.second_title}
           </motion.h2>
 
           {/* Short description */}
