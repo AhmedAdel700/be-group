@@ -263,6 +263,7 @@ export interface CategoryResponse {
         meta_title: string | null;
         meta_description: string | null;
         index: number;
+        project_link: null | string;
       }[];
     }[];
     seo: {

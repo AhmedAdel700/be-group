@@ -102,7 +102,8 @@ export default function CarouselComponent({ projectsData, className }: Props) {
                 ].join(" ")}
               >
                 {/* group enables hover effects on children */}
-                <Link href={project.slug} target="_blank">
+                {project.project_link && (
+                <Link href={project.project_link} target="_blank">
                   <Card className="group h-full rounded-[4px] border-none overflow-hidden bg-transparent cursor-pointer">
                     <CardContent className="p-0 flex flex-col">
                       {/* Image (full-width) with hover scale */}
@@ -138,6 +139,7 @@ export default function CarouselComponent({ projectsData, className }: Props) {
                     </CardContent>
                   </Card>
                 </Link>
+                )}
               </CarouselItem>
             ))}
         </CarouselContent>
