@@ -1,4 +1,4 @@
-import { Almarai, Inter } from "next/font/google";
+import { Almarai, Cairo, } from "next/font/google";
 import localFont from "next/font/local";
 import type React from "react";
 import { Toaster } from "@/components/ui/sonner";
@@ -75,13 +75,12 @@ const noeDisplay = localFont({
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+const cairo = Cairo({
+  subsets: ["latin"], // English
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--en-font-family",
   display: "swap",
 });
-
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -111,7 +110,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${locale === "ar" ? almarai.variable : inter.variable} ${
+      className={`${locale === "ar" ? almarai.variable : cairo.variable} ${
         noeDisplay.variable
       }`}
       suppressHydrationWarning
