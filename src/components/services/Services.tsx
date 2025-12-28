@@ -345,7 +345,7 @@ export default function Services({
                       activeService.sub_services &&
                       activeService.sub_services.length > 0
                         ? `/services-family/${activeService.slug}`
-                        : `/services`
+                        : `/services/${activeService.slug}`
                     }
                     className="w-full"
                   >
