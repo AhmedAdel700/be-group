@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 // import { useTranslations } from "next-intl";
 import { ClientTypes, Section } from "@/types/apiDataTypes";
+import ModernTextEffect from "@/components/ModernTextEffect";
 
 type LogoCarouselProps = {
   clients: ClientTypes[];
@@ -57,18 +58,22 @@ export default function LogoCarousel({
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          {section.title}
+          <ModernTextEffect
+            text={section.title}
+            lang={locale}
+            className="uppercase text-main-primary"
+            animationType={locale === "ar" ? "wordWave" : "particle"}
+            delay={0.1}
+          />
         </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
-        >
-          {section.second_title}
-        </motion.h2>
+        <ModernTextEffect
+          text={section.second_title}
+          lang={locale}
+          className="text-4xl md:text-7xl font-bold text-center !mt-0"
+          animationType={locale === "ar" ? "wordWave" : "particle"}
+          delay={0.1}
+          fontStyle={"capitalize"}
+        />
       </div>
 
       <Carousel

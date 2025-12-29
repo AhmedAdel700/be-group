@@ -7,6 +7,7 @@ import Image from "next/image";
 import MultiLineUnderline from "../MultiLineUnderline";
 import { Link } from "@/navigations";
 import { BlogTypes, Section } from "@/types/apiDataTypes";
+import ModernTextEffect from "../ModernTextEffect";
 
 export default function OurBlogs({
   blogsData,
@@ -92,19 +93,23 @@ export default function OurBlogs({
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            {section.title}
+            <ModernTextEffect
+              text={section.title}
+              lang={locale}
+              animationType={locale === "ar" ? "wordWave" : "particle"}
+              delay={0.1}
+              fontStyle={"uppercase"}
+            />
           </motion.div>
 
-          {/* Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
-          >
-            {section.second_title}
-          </motion.h2>
+          <ModernTextEffect
+            text={section.second_title}
+            lang={locale}
+            animationType={locale === "ar" ? "wordWave" : "particle"}
+            delay={0.1}
+            fontStyle={"capitalize"}
+            className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center"
+          />
 
           {/* Short description */}
           <motion.p

@@ -7,6 +7,7 @@ import { Link, usePathname } from "@/navigations";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { AboutType } from "@/types/apiDataTypes";
+import ModernTextEffect from "../ModernTextEffect";
 
 export default function About({
   aboutArray,
@@ -33,7 +34,13 @@ export default function About({
         transition={{ duration: 0.6 }}
         className="uppercase py-3 px-4 border rounded-full text-main-primary"
       >
-        {aboutData?.title}
+        <ModernTextEffect
+          text={aboutData?.title}
+          lang={locale}
+          animationType={locale === "ar" ? "wordWave" : "particle"}
+          delay={0.1}
+          fontStyle={"uppercase"}
+        />
       </motion.div>
 
       {/* Heading */}

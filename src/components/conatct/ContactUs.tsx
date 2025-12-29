@@ -7,6 +7,7 @@ import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { ContactDataTypes, ContactSectionTypes } from "@/types/apiDataTypes";
+import ModernTextEffect from "../ModernTextEffect";
 
 // ===== Easing / shared timing =====
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -99,26 +100,52 @@ export default function ContactUs({
             variants={leftInSpring}
           >
             <h2 className="text-7xl capitalize text-center sm:text-start">
-              {(() => {
-                const [firstWord, ...rest] = contactSection.title.split(" ");
-                return (
-                  <>
-                    <span className="text-main-primary">{firstWord}</span>{" "}
-                    {rest.join(" ")}
-                  </>
-                );
-              })()}
+              <h2 className="text-7xl capitalize text-center sm:text-start">
+                {(() => {
+                  const [firstWord, ...rest] = contactSection.title.split(" ");
+                  return (
+                    <>
+                      <ModernTextEffect
+                        text={firstWord}
+                        lang={locale}
+                        animationType={
+                          locale === "ar" ? "wordWave" : "particle"
+                        }
+                        delay={0.1}
+                        fontStyle="uppercase"
+                        className="text-main-primary inline-block"
+                      />{" "}
+                      <ModernTextEffect
+                        text={rest.join(" ")}
+                        lang={locale}
+                        animationType={
+                          locale === "ar" ? "wordWave" : "particle"
+                        }
+                        delay={0.2}
+                        fontStyle="uppercase"
+                        className="inline-block"
+                      />
+                    </>
+                  );
+                })()}
+              </h2>
             </h2>
 
             {mounted && contactSection?.long_desc && (
-              <p
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
                 className="text-lg text-white/80 text-center sm:text-start"
                 dangerouslySetInnerHTML={{ __html: contactSection.long_desc }}
               />
             )}
 
             {mounted && contactSection?.short_desc && (
-              <p
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
                 className="text-lg text-white/80 text-center sm:text-start"
                 dangerouslySetInnerHTML={{ __html: contactSection.short_desc }}
               />
@@ -135,10 +162,7 @@ export default function ContactUs({
               <motion.div variants={scaleIn}>
                 <div className="relative w-full h-[450px] rounded-[8px] overflow-hidden">
                   <Image
-                    src={
-                      contactSection?.image ||
-                      "https://newapi.be-group.com/assets/dashboard/images/noimage.png"
-                    }
+                    src={contactSection?.image}
                     alt={contactSection?.alt_image || t("Contact us image")}
                     fill
                     style={{ objectFit: "cover" }}

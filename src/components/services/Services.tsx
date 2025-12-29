@@ -13,6 +13,7 @@ import {
   Section,
 } from "@/types/apiDataTypes";
 import Image from "next/image";
+import ModernTextEffect from "../ModernTextEffect";
 
 export default function Services({
   servicesData,
@@ -139,20 +140,25 @@ export default function Services({
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full w-fit mx-auto text-main-primary"
           >
-            {section.title}
+            <ModernTextEffect
+              text={section.title}
+              lang={locale}
+              animationType={locale === "ar" ? "wordWave" : "particle"}
+              delay={0.1}
+              fontStyle={"uppercase"}
+            />
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <ModernTextEffect
+            text={section.second_title}
+            lang={locale}
+            animationType={locale === "ar" ? "wordWave" : "particle"}
+            delay={0.1}
+            fontStyle={"capitalize"}
             className={`text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize mx-auto ${
               locale === "ar" && "!leading-[1.2]"
             }`}
-          >
-            {section.second_title}
-          </motion.h2>
+          />
         </div>
 
         {/* Carousel */}

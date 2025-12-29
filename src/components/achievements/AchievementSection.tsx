@@ -1,6 +1,8 @@
 "use client";
 import { AchievementTypes, Section } from "@/types/apiDataTypes";
 import { motion } from "framer-motion";
+import ModernTextEffect from "../ModernTextEffect";
+import { useLocale } from "next-intl";
 // import { useTranslations } from "next-intl";
 
 export default function AchievementSection({
@@ -11,6 +13,7 @@ export default function AchievementSection({
   section: Section;
 }) {
   // const t = useTranslations("achievements");
+  const locale = useLocale();
 
   return (
     <section className="bg-main-black2 min-h-[45vh] w-full flex justify-center items-center border-b border-white/10 py-8">
@@ -23,19 +26,23 @@ export default function AchievementSection({
             transition={{ duration: 0.6 }}
             className="uppercase py-3 px-4 border rounded-full text-main-primary"
           >
-            {section.title}
+            <ModernTextEffect
+              text={section.title}
+              lang={locale}
+              animationType={locale === "ar" ? "wordWave" : "particle"}
+              delay={0.1}
+              fontStyle={"uppercase"}
+            />
           </motion.div>
 
-          {/* Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
-          >
-            {section.second_title}
-          </motion.h2>
+          <ModernTextEffect
+            text={section.second_title}
+            lang={locale}
+            animationType={locale === "ar" ? "wordWave" : "particle"}
+            delay={0.1}
+            fontStyle={"capitalize"}
+            className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center"
+          />
         </div>
 
         <div className="flex flex-col md:flex-row justify-evenly items-center gap-4 xl:gap-0 w-full flex-wrap">

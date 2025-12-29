@@ -1,8 +1,9 @@
 "use client";
 import CarouselComponent from "../carouselComponent/CarouselComponent";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { CategoryResponse, Section } from "@/types/apiDataTypes";
+import ModernTextEffect from "../ModernTextEffect";
 
 export default function Portfolio({
   projectsData,
@@ -11,7 +12,8 @@ export default function Portfolio({
   projectsData: CategoryResponse;
   section: Section;
 }) {
-  const t = useTranslations("portfolio");
+  // const t = useTranslations("portfolio");
+  const locale = useLocale();
   return (
     <div className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white pt-8 xl:pt-20 border-b border-white/10">
       <div className="flex flex-col gap-6 md:gap-8 xl:gap-12 justify-start items-center container mx-auto">
@@ -22,19 +24,24 @@ export default function Portfolio({
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          {section.title}
+          <ModernTextEffect
+            text={section.title}
+            lang={locale}
+            animationType={locale === "ar" ? "wordWave" : "particle"}
+            delay={0.1}
+            fontStyle={"uppercase"}
+          />
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center capitalize"
-        >
-          {section.second_title}
-        </motion.h2>
-
+        <ModernTextEffect
+          text={section.second_title}
+          lang={locale}
+          animationType={locale === "ar" ? "wordWave" : "particle"}
+          delay={0.1}
+          fontStyle={"capitalize"}
+          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center"
+        />
+{/* 
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +52,7 @@ export default function Portfolio({
           {t(
             "From high-performance web apps and e-commerce to data dashboards,here’s a quick snapshot of projects we’ve crafted with speed,scalability, and clean design"
           )}
-        </motion.p>
+        </motion.p> */}
 
         <CarouselComponent projectsData={projectsData} />
       </div>

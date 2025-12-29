@@ -7,6 +7,8 @@ import { motion } from "motion/react";
 // import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { BenefitTypes, Section } from "@/types/apiDataTypes";
+import ModernTextEffect from "../ModernTextEffect";
+import { useLocale } from "next-intl";
 
 export default function WhyChooseUs({
   benefitsData,
@@ -17,6 +19,7 @@ export default function WhyChooseUs({
 }) {
   // const t = useTranslations("whyus");
   const [isClient, setIsClient] = useState(false);
+  const locale = useLocale();
 
   // Ensure we only render after hydration
   useEffect(() => {
@@ -60,18 +63,23 @@ export default function WhyChooseUs({
           transition={{ duration: 0.6 }}
           className="uppercase py-3 px-4 border rounded-full text-main-primary"
         >
-          {section.title}
+          <ModernTextEffect
+            text={section.title}
+            lang={locale}
+            animationType={locale === "ar" ? "wordWave" : "particle"}
+            delay={0.1}
+            fontStyle={"uppercase"}
+          />
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center capitalize"
-        >
-          {section.second_title}
-        </motion.h2>
+        <ModernTextEffect
+          text={section.second_title}
+          lang={locale}
+          animationType={locale === "ar" ? "wordWave" : "particle"}
+          delay={0.1}
+          fontStyle={"capitalize"}
+          className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[50%] font-bold text-center"
+        />
       </div>
 
       <div className="px-4 sm:px-0 sm:container pt-10 flex flex-col gap-24 mx-auto xl:ps-20">
