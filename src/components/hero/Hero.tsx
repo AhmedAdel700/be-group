@@ -1,22 +1,22 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-import SplitText from "../SplitText";
-import { Button } from "../ui/button";
-import { motion } from "framer-motion";
-import { Link } from "@/navigations";
-import { Download } from "lucide-react";
+// import { useLocale, useTranslations } from "next-intl";
+// import SplitText from "../SplitText";
+// import { Button } from "../ui/button";
+// import { motion } from "framer-motion";
+// import { Link } from "@/navigations";
+// import { Download } from "lucide-react";
 import { Banner } from "@/types/apiDataTypes";
 
 export default function Hero({ banner }: { banner: Banner }) {
-  const t = useTranslations("hero");
-  const locale = useLocale();
-
+  // const t = useTranslations("hero");
+  // const locale = useLocale();
+  console.log(banner);
   return (
     <section className="relative min-h-screen text-main-primary overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <video
-          src="/hero4.mp4"
+          src="/hero5.mp4"
           autoPlay
           loop
           muted
@@ -29,7 +29,7 @@ export default function Hero({ banner }: { banner: Banner }) {
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
-      <div className="relative w-full h-[100vh] flex items-center justify-center">
+      {/* <div className="relative w-full h-[100vh] flex items-center justify-center">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
           <div className="inline-block">
             {locale === "en" ? (
@@ -106,7 +106,7 @@ export default function Hero({ banner }: { banner: Banner }) {
             </motion.div>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
