@@ -101,11 +101,11 @@ export default function LogoCarousel({
                       <Image
                         src={client.logo}
                         alt={"Logo"}
-                        width={120}
-                        height={120} // Make sure height equals width for circular effect
-                        className="h-52 w-52 max-w-auto object-cover rounded-full relative z-10 p-4" // Ensure it's a circle
+                        width={250}
+                        height={250} // Make sure height equals width for circular effect
+                        className=" h-[220px] md:h-[300px] w-[220px] md:w-[300px] object-cover rounded-full relative z-10" // Ensure it's a circle
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent rounded-full border-t-[3px] border-main-primary" />
+                      {/* <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent rounded-full border-t-[3px] border-main-primary" /> */}
                     </div>
                   </div>
                 </div>
