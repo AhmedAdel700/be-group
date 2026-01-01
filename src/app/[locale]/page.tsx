@@ -97,9 +97,9 @@ export default async function Home({ params }: { params: { locale: string } }) {
 
       <About aboutData={about} />
 
-      <ClientsSection clients={clients} section={sectionsByKey.clients} />
-
       <Services servicesData={services} section={sectionsByKey.services} />
+
+      <ClientsSection clients={clients} section={sectionsByKey.clients} />
 
       <Portfolio
         projectsData={projectsApiData}
