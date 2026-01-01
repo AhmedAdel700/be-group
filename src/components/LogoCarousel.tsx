@@ -98,7 +98,7 @@ export default function LogoCarousel({
                 <div className="flex items-center justify-center">
                   <div className="flex flex-col items-center w-full">
                     <div className="relative flex items-center justify-center w-full hover:-translate-y-3 transition-transform">
-                      <Image
+                      <img       
                         src={client.logo}
                         alt={"Logo"}
                         width={250}
