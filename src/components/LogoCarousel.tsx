@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "motion/react";
 import * as React from "react";
-import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -98,12 +97,12 @@ export default function LogoCarousel({
                 <div className="flex items-center justify-center">
                   <div className="flex flex-col items-center w-full">
                     <div className="relative flex items-center justify-center w-full hover:-translate-y-3 transition-transform">
-                      <Image
+                      <img       
                         src={client.logo}
                         alt={"Logo"}
                         width={250}
                         height={250} // Make sure height equals width for circular effect
-                        className=" h-[220px] md:h-[300px] w-[220px] md:w-[300px] object-cover rounded-full relative z-10" // Ensure it's a circle
+                        className="h-[300px] w-[300px] object-cover rounded-full relative z-10" // Ensure it's a circle
                       />
                       {/* <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent rounded-full border-t-[3px] border-main-primary" /> */}
                     </div>
