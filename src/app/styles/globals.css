@@ -35,10 +35,6 @@ html[lang="en"] * {
   background: var(--main-colors-primary);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: black !important;
 }

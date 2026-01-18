@@ -1,4 +1,4 @@
-import { Almarai, Cairo, } from "next/font/google";
+import { Almarai, Cairo } from "next/font/google";
 import localFont from "next/font/local";
 import type React from "react";
 import { Toaster } from "@/components/ui/sonner";
@@ -10,6 +10,7 @@ import Footer from "@/components/footer/Footer";
 import TargetCursor from "@/components/TargetCursor";
 import { fetchHomeData } from "@/api/homeService";
 import FloatingCTA from "@/components/FloatingCTA";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
 // const objektiv = localFont({
 //   src: [
@@ -117,15 +118,17 @@ export default async function LocaleLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <TargetCursor spinDuration={2} hideDefaultCursor={true} />
-          <Header />
-          {children}
-          <FloatingCTA />
-          <Footer
-            socialMediaData={social_media}
-            partnersData={partners}
-            contactData={contact_data}
-          />
+          <SmoothScrollProvider>
+            <TargetCursor spinDuration={2} hideDefaultCursor={true} />
+            <Header />
+            {children}
+            <FloatingCTA />
+            <Footer
+              socialMediaData={social_media}
+              partnersData={partners}
+              contactData={contact_data}
+            />
+          </SmoothScrollProvider>
           <Toaster position="top-center" />
         </NextIntlClientProvider>
       </body>

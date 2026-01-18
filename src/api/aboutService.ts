@@ -18,6 +18,8 @@ export async function fetchAboutData(lang = "en") {
       return { success: false, message: "Failed To Fetch About Data" };
     }
 
+    
+
     return data;
   } catch (err) {
     const errorMessage =

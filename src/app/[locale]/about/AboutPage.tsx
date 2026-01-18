@@ -3,7 +3,7 @@
 import About from "@/components/about/About";
 import SplitText from "@/components/SplitText";
 import { useLocale, useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion";  
 import { AboutResponse } from "@/types/aboutApiTypes";
 
 export default function AboutPage({
