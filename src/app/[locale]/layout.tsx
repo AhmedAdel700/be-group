@@ -118,8 +118,10 @@ export default async function LocaleLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
+          {/* Keep the custom cursor outside the smooth scroll wrapper
+              so it's not affected by ScrollSmoother's transforms */}
+          <TargetCursor spinDuration={2} hideDefaultCursor={true} />
           <SmoothScrollProvider>
-            <TargetCursor spinDuration={2} hideDefaultCursor={true} />
             <Header />
             {children}
             <FloatingCTA />
