@@ -50,7 +50,7 @@ export default function About({
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-main-secondary rounded-full blur-[150px]" />
         </div>
 
-        <div className="container mx-auto grid lg:grid-cols-2 gap-12 xl:gap-24 items-center">
+        <div className="container mx-auto grid lg:grid-cols-2 gap-6 items-center px-6">
           {/* Content Side */}
           <motion.div
             initial={{ opacity: 0, x: isRtl ? 50 : -50 }}
@@ -114,7 +114,7 @@ export default function About({
 
             <motion.div
               style={{ y: y2 }}
-              className="absolute bottom-10  lg:-left-2 w-[50%] h-[50%] z-20 rounded-2xl overflow-hidden border-4 border-main-black"
+              className={`absolute  ${isAboutPage ? "bottom-0" :"bottom-10"} lg:-left-2 w-[50%] h-[50%] z-20 rounded-2xl overflow-hidden border-4 border-main-black`}
             >
               <Image
                 src={aboutData?.banner ?? ""}
@@ -125,7 +125,7 @@ export default function About({
             </motion.div>
 
             <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-main-primary/30" />
-            <div className="absolute -top-6 left- lg:-left-10 w-32 h-32 border-l-2 border-t-2 border-main-primary/30" />
+            <div className="absolute -top-10 left-0 lg:-left-10 w-32 h-32 border-l-2 border-t-2 border-main-primary/30" />
           </div>
         </div>
       </div>
