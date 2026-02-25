@@ -132,7 +132,7 @@ export default function About({
 
       {/* --- REDESIGNED: Thread-Connected Achievement Section --- */}
       {achievementsData.length > 0 && (
-        <div className="w-full py-6 bg-main-black relative overflow-hidden">
+        <div className="w-full py-6 bg-main-black relative overflow-hidden px-6">
           {/* Ambient background */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-main-primary/30 to-transparent" />
@@ -140,7 +140,7 @@ export default function About({
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-main-primary/5 rounded-full blur-[100px]" />
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-6 lg:px-20 relative z-10">
             {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
