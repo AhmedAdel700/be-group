@@ -1,5 +1,6 @@
 import AboutPage from "./AboutPage";
 import { fetchAboutData } from "@/api/aboutService";
+import { fetchHomeData } from "@/api/homeService";
 import { Metadata } from "next";
 
 // 1. ✅ Generate metadata dynamically
@@ -51,9 +52,31 @@ export async function generateMetadata({
   };
 }
 
-// 2. ✅ Page Component (already correct)
+// 2. ✅ Page Component
 export default async function Page({ params }: { params: { locale: string } }) {
-  const aboutApiData = await fetchAboutData(params.locale);
+  const [aboutApiData, homeApiData] = await Promise.all([
+    fetchAboutData(params.locale),
+    fetchHomeData(params.locale),
+  ]);
 
-  return <AboutPage aboutData={aboutApiData} />;
+  // Handle different potential API response structures
+  const getHomeData = (apiResult: any) => {
+    if (apiResult?.data?.achievements) return apiResult.data;
+    if (apiResult?.achievements) return apiResult;
+    return apiResult?.data || apiResult;
+  };
+  
+  const homeDataContent = getHomeData(homeApiData);
+  
+  const achievementsSection = homeDataContent?.sections?.find(
+    (s: any) => s.key === "achievements"
+  );
+
+  return (
+    <AboutPage
+      aboutData={aboutApiData}
+      achievementsData={homeDataContent?.achievements ?? []}
+      achievementsSection={achievementsSection}
+    />
+  );
 }

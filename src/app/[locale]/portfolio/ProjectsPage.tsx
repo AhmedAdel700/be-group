@@ -17,7 +17,7 @@ export default function ProjectsPage({
   const t = useTranslations("portfolio");
   return (
     <div className="w-full min-h-screen bg-main-black text-main-white flex flex-col items-center border-b border-white/10">
-      <div className="h-[170px] sm:h-[200px] lg:h-[235px] justify-end py-6 xl:py-0 xl:h-[63vh] flex flex-col items-center xl:justify-center bg-main-black2 text-main-primary w-full">
+      <div className="w-full bg-main-black text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[50vh]">
         {locale === "en" ? (
           <SplitText
             text={t("Selected Work")}
@@ -75,7 +75,7 @@ export default function ProjectsPage({
           <div className="flex flex-col gap-8 text-start w-full xl:w-1/2">
             <p className="text-lg text-white/80 leading-relaxed">
               {t(
-                "Every project we deliver is built on the perfect balance between bold creativity and cutting-edge technology From strategy to execution, our team transforms ideas into digital experiences that inspire, engage, and perform Whether it’s redefining a brand, designing seamless user journeys, or building scalable platforms"
+                "Every project we deliver is built on the perfect balance between bold creativity and cutting-edge technology From strategy to execution, our team transforms ideas into digital experiences that inspire, engage, and perform Whether it’s redefining a brand, designing seamless user journeys, or building scalable platforms",
               )}
             </p>
 

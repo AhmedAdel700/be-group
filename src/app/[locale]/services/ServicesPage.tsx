@@ -62,7 +62,7 @@ export default function ServicesPage({
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white flex flex-col items-center">
-      <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
+      <div className="w-full bg-main-black text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[50vh]">
         {locale === "en" ? (
           <SplitText
             text={t("Our Services")}

@@ -16,7 +16,7 @@ export default function ContactUsPage({
   const t = useTranslations("contact");
   return (
     <div className="flex flex-col bg-main-black">
-      <div className="h-[170px] sm:h-[200px] lg:h-[235px] justify-end py-6 xl:py-0 xl:h-[63vh] flex flex-col items-center xl:justify-center bg-main-black2 text-main-primary">
+      <div className="w-full bg-main-black text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[50vh]">
         {locale === "en" ? (
           <SplitText
             text={t("Contact Us")}

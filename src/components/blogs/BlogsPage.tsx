@@ -101,7 +101,7 @@ export default function BlogsPage({
   return (
     <section className="w-full min-h-screen bg-main-black text-main-white flex flex-col items-center pb-12 border-b border-white/10">
       {/* Hero / Title */}
-      <div className="w-full bg-main-black2 text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[63vh]">
+      <div className="w-full bg-main-black text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[50vh]">
         {locale === "en" ? (
           <SplitText
             text={t("Latest News")}

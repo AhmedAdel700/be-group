@@ -5,11 +5,16 @@ import SplitText from "@/components/SplitText";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";  
 import { AboutResponse } from "@/types/aboutApiTypes";
+import { AchievementTypes, Section } from "@/types/apiDataTypes";
 
 export default function AboutPage({
   aboutData,
+  achievementsData = [],
+  achievementsSection,
 }: {
   aboutData?: AboutResponse;
+  achievementsData?: AchievementTypes[];
+  achievementsSection?: Section;
 }) {
   const locale = useLocale();
   const t = useTranslations("about");
@@ -33,7 +38,7 @@ export default function AboutPage({
   return (
     <div className="flex flex-col bg-main-black">
       {/* Hero Section */}
-      <div className="h-[200px] lg:h-[235px] justify-end py-6 xl:py-0 xl:h-[63vh] flex flex-col items-center xl:justify-center bg-main-black2 text-main-primary">
+      {/* <div className="w-full bg-main-black text-main-primary flex flex-col items-center justify-end xl:justify-center py-6 xl:py-0 h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[40vh]">
         {locale === "en" ? (
           <SplitText
             text={about.title || t("About Be Group")}
@@ -61,23 +66,27 @@ export default function AboutPage({
             {about.title || t("About Be Group")}
           </motion.h1>
         )}
-      </div>
+      </div> */}
 
       {/* About Section */}
-      {aboutStructs.length > 0 ? (
-        <About
-          aboutArray={aboutStructs.map((item) => ({
-            id: item.order,
-            title: item.title,
-            desc: item.text,
-            icon: item.icon,
-            alt_icon: item.alt_icon,
-          }))}
-          aboutData={about}
-        />
-      ) : (
-        <p className="text-center text-white py-10">{t("Loading...")}</p>
-      )}
+      <div className="py-20">
+        {aboutStructs.length > 0 ? (
+          <About
+            aboutArray={aboutStructs.map((item) => ({
+              id: item.order,
+              title: item.title,
+              desc: item.text,
+              icon: item.icon,
+              alt_icon: item.alt_icon,
+            }))}
+            aboutData={about}
+            achievementsData={achievementsData}
+            achievementsSection={achievementsSection}
+          />
+        ) : (
+          <p className="text-center text-white py-10">{t("Loading...")}</p>
+        )}
+      </div>
     </div>
   );
 }
