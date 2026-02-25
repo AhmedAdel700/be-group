@@ -114,7 +114,7 @@ export default function About({
 
             <motion.div
               style={{ y: y2 }}
-              className="absolute bottom-10 xl:bottom-0 lg:-left-2 w-[50%] h-[50%] z-20 rounded-2xl overflow-hidden border-4 border-main-black"
+              className="absolute bottom-10  lg:-left-2 w-[50%] h-[50%] z-20 rounded-2xl overflow-hidden border-4 border-main-black"
             >
               <Image
                 src={aboutData?.banner ?? ""}
