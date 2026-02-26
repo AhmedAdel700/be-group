@@ -40,7 +40,7 @@ export default function About({
     <section
       ref={containerRef}
       id="about"
-      className="w-full bg-main-black text-main-white overflow-hidden pb-20 xl:pb-32 border-b border-white/10"
+      className="w-full bg-main-black text-main-white overflow-hidden pb-6 border-b border-white/10"
     >
       {/* --- Modern Hero Section --- */}
       <div className="relative w-full min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-10 py-20 lg:py-32">
