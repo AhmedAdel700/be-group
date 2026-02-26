@@ -1,56 +1,21 @@
-import { fetchProjectsData } from "@/api/projectsService";
-import ProjectsPage from "./ProjectsPage";
-import { Metadata } from "next";
+'use client';
+import dynamic from "next/dynamic";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string };
-}): Promise<Metadata> {
-  const projectApiData = await fetchProjectsData(params.locale);
-  const { seo } = projectApiData.data;
+const PortfolioPDF = dynamic(() => import("./PortfolioPDF"), {
+  ssr: false,
+  loading: () => (
+    <div
+      className="min-h-screen flex items-center justify-center"
+      style={{ backgroundColor: "#141415" }}
+    >
+      <div
+        className="w-10 h-10 rounded-full border-4 animate-spin"
+        style={{ borderColor: "#F18A1D", borderTopColor: "transparent" }}
+      />
+    </div>
+  ),
+});
 
-  const metaTags = seo.meta.meta_tags;
-  const openGraph = seo.meta.open_graph;
-  const twitterCard = seo.meta.twitter_card;
-  const hreflang = seo.meta.hreflang_tags;
-
-  return {
-    title: metaTags.title,
-    description: metaTags.description,
-    openGraph: {
-      title: openGraph["og:title"],
-      description: openGraph["og:description"],
-      url: openGraph["og:url"],
-      images: [
-        {
-          url: openGraph["og:image"],
-          alt: metaTags.title,
-        },
-      ],
-      type: openGraph["og:type"],
-    },
-    twitter: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      card: twitterCard["twitter:card"] as any,
-      title: twitterCard["twitter:title"],
-      description: twitterCard["twitter:description"],
-      images: [twitterCard["twitter:image"]],
-    },
-    metadataBase: new URL(metaTags.canonical),
-    robots: metaTags.robots,
-    alternates: {
-      canonical: metaTags.canonical,
-      languages: {
-        en: hreflang.en,
-        ar: hreflang.ar,
-        "x-default": hreflang["x-default"],
-      },
-    },
-  };
-}
-
-export default async function page({ params }: { params: { locale: string } }) {
-  const projectsApiData = await fetchProjectsData(params.locale);
-  return <ProjectsPage projectsApiData={projectsApiData} />;
+export default function page() {
+  return <PortfolioPDF />;
 }

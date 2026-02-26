@@ -1,7 +1,7 @@
 import About from "@/components/about/About";
 import OurBlogs from "@/components/blogs/OurBlogs";
 import Hero from "@/components/hero/Hero";
-import Portfolio from "@/components/portfolio/Portfolio";
+import Portfolio from "@/components/our-work/OurWork";
 
 import ContactUs from "@/components/conatct/ContactUs";
 import WhyChooseUs from "@/components/whyChooseUs/WhyChooseUs";
