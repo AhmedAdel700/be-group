@@ -150,55 +150,52 @@ export default function ContactForm() {
           )}
 
           {/* ===== Fields ===== */}
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
-            variants={fadeUpVar}
-          >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <motion.div variants={fadeUpVar}>
-                    <FormLabel className="text-white/90 text-base sm:text-lg">
-                      {t("Name")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={t("Enter Your Name")}
-                        className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-400" />
-                  </motion.div>
-                </FormItem>
-              )}
-            />
+          {/* Name */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <motion.div variants={fadeUpVar}>
+                  <FormLabel className="text-white/90 text-base sm:text-lg">
+                    {t("Name")}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={t("Enter Your Name")}
+                      className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </motion.div>
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <motion.div variants={fadeUpVar}>
-                    <FormLabel className="text-white/90 text-base sm:text-lg">
-                      {t("Email")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder={t("Enter Your Email")}
-                        className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-400" />
-                  </motion.div>
-                </FormItem>
-              )}
-            />
-          </motion.div>
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <motion.div variants={fadeUpVar}>
+                  <FormLabel className="text-white/90 text-base sm:text-lg">
+                    {t("Email")}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder={t("Enter Your Email")}
+                      className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </motion.div>
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}

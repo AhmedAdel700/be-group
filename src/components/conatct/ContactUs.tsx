@@ -92,190 +92,208 @@ export default function ContactUs({
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
       >
-        {/* Top row with text + image */}
-        <div className="flex flex-col xl:flex-row gap-8 xl:gap-28 items-start w-full">
-          {/* Text column */}
-          <motion.div
-            className="w-full xl:w-[30%] flex flex-col gap-8"
-            variants={leftInSpring}
-          >
-            <h2 className="text-7xl capitalize text-center sm:text-start">
-              <h2 className="text-7xl capitalize text-center sm:text-start">
-                {(() => {
-                  const [firstWord, ...rest] = contactSection.title.split(" ");
-                  return (
-                    <>
-                      <ModernTextEffect
-                        text={firstWord}
-                        lang={locale}
-                        animationType={
-                          locale === "ar" ? "wordWave" : "particle"
-                        }
-                        delay={0.1}
-                        fontStyle="uppercase"
-                        className="text-main-primary inline-block"
-                      />{" "}
-                      <ModernTextEffect
-                        text={rest.join(" ")}
-                        lang={locale}
-                        animationType={
-                          locale === "ar" ? "wordWave" : "particle"
-                        }
-                        delay={0.2}
-                        fontStyle="uppercase"
-                        className="inline-block"
-                      />
-                    </>
-                  );
-                })()}
-              </h2>
-            </h2>
-
-            {mounted && contactSection?.long_desc && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-lg text-white/80 text-center sm:text-start"
-                dangerouslySetInnerHTML={{ __html: contactSection.long_desc }}
-              />
-            )}
-
-            {mounted && contactSection?.short_desc && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-lg text-white/80 text-center sm:text-start"
-                dangerouslySetInnerHTML={{ __html: contactSection.short_desc }}
-              />
-            )}
-          </motion.div>
-
-          {/* Image column */}
-          <motion.div
-            className="w-full xl:w-[70%] h-[450px] rounded-[8px] overflow-hidden will-change-[clip-path]"
-            variants={rightInSpring}
-            style={{ contain: "paint" }}
-          >
-            <motion.div variants={maskReveal}>
-              <motion.div variants={scaleIn}>
-                <div className="relative w-full h-[450px] rounded-[8px] overflow-hidden">
-                  <Image
-                    src={contactSection?.image}
-                    alt={contactSection?.alt_image || t("Contact us image")}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    className="rounded-[8px]"
-                    priority
-                  />
-                </div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Bottom row */}
+        {/* ── Header: centred title + description ── */}
         <motion.div
-          className="flex flex-col xl:flex-row gap-8 xl:gap-28 w-full items-stretch"
+          className="w-full flex flex-col gap-4 items-center text-center"
+          variants={leftInSpring}
+        >
+          <h2 className="text-7xl capitalize">
+            {(() => {
+              const [firstWord, ...rest] = contactSection.title.split(" ");
+              return (
+                <>
+                  <ModernTextEffect
+                    text={firstWord}
+                    lang={locale}
+                    animationType={locale === "ar" ? "wordWave" : "particle"}
+                    delay={0.1}
+                    fontStyle="uppercase"
+                    className="text-main-primary inline-block"
+                  />{" "}
+                  <ModernTextEffect
+                    text={rest.join(" ")}
+                    lang={locale}
+                    animationType={locale === "ar" ? "wordWave" : "particle"}
+                    delay={0.2}
+                    fontStyle="uppercase"
+                    className="inline-block"
+                  />
+                </>
+              );
+            })()}
+          </h2>
+
+          {mounted && contactSection?.long_desc && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-lg text-white/80 max-w-2xl"
+              dangerouslySetInnerHTML={{ __html: contactSection.long_desc }}
+            />
+          )}
+
+          {mounted && contactSection?.short_desc && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg text-white/80 max-w-2xl"
+              dangerouslySetInnerHTML={{ __html: contactSection.short_desc }}
+            />
+          )}
+        </motion.div>
+
+        {/* ── Main row: Form (start) | Info + Map (end) ── */}
+        <motion.div
+          className="flex flex-col xl:flex-row gap-8 xl:gap-16 w-full items-stretch"
           variants={containerVar}
         >
-          {/* Contact Info */}
+          {/* Contact Form */}
           <motion.div
-            className="w-full xl:w-[30%] border border-white/30 rounded-lg overflow-hidden"
-            variants={popBlurIn}
+            className="w-full xl:w-[55%]"
+            variants={leftInSpring}
             inherit={false}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.2 }}
           >
-            <div className="grid grid-rows-3 grid-cols-[30%_70%] divide-x divide-y divide-white/30 text-white relative h-full min-h-[240px]">
-              {/* Divider (LTR/RTL) */}
-              {locale === "en" ? (
-                <span className="pointer-events-none absolute top-0 bottom-0 left-[30%] w-px bg-white/30" />
-              ) : (
-                <span className="pointer-events-none absolute top-0 bottom-0 right-[30%] w-px bg-white/30" />
-              )}
-
-              {/* Address */}
-              <motion.div
-                className="flex justify-center items-center p-4"
-                variants={popBlurIn}
-              >
-                <motion.div
-                  whileInView={{ y: [0, -4, 0] }}
-                  transition={{
-                    duration: 2.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <MapPin size={28} className="text-main-primary" />
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="flex items-center p-4 text-lg"
-                variants={popBlurIn}
-              >
-                {contactData?.address ||
-                  t("25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt")}
-              </motion.div>
-
-              {/* Email */}
-              <motion.div
-                className="flex justify-center items-center p-4"
-                variants={popBlurIn}
-              >
-                <motion.div
-                  whileInView={{ y: [0, -4, 0] }}
-                  transition={{
-                    duration: 2.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.2,
-                  }}
-                >
-                  <Mail size={28} className="text-main-primary" />
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="flex items-center p-4 text-lg"
-                variants={popBlurIn}
-              >
-                {contactData?.email || "info@begroup.com"}
-              </motion.div>
-
-              {/* Phone */}
-              <motion.div
-                className="flex justify-center items-center p-4"
-                variants={popBlurIn}
-              >
-                <motion.div
-                  whileInView={{ y: [0, -4, 0] }}
-                  transition={{
-                    duration: 2.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.4,
-                  }}
-                >
-                  <Smartphone size={28} className="text-main-primary" />
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="flex items-center p-4 text-lg"
-                variants={popBlurIn}
-              >
-                <span dir="ltr">
-                  {contactData?.phone || "+20 100 995 7000"}
-                </span>
-              </motion.div>
-            </div>
+            <ContactForm />
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div className="w-full xl:w-[70%]" variants={popBlurIn}>
-            <ContactForm />
+          {/* Right column: Info cards + Map — stretches to form height */}
+          <motion.div
+            className="w-full xl:w-[45%] flex flex-col gap-4 xl:self-stretch xl:mt-[30px]"
+            variants={rightInSpring}
+            inherit={false}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {/* ── Info cards ── */}
+            {[
+              {
+                icon: <MapPin size={26} />,
+                label: t("Address"),
+                value: (
+                  <span>
+                    {contactData?.address ||
+                      t(
+                        "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt"
+                      )}
+                  </span>
+                ),
+                delay: 0,
+              },
+              {
+                icon: <Mail size={26} />,
+                label: t("Email"),
+                value: (
+                  <a
+                    href={`mailto:${contactData?.email || "info@begroup.com"}`}
+                    className="hover:text-main-primary transition-colors"
+                  >
+                    {contactData?.email || "info@begroup.com"}
+                  </a>
+                ),
+                delay: 0.1,
+              },
+              {
+                icon: <Smartphone size={26} />,
+                label: t("Phone"),
+                value: (
+                  <a
+                    href={`tel:${contactData?.phone || "+201009957000"}`}
+                    className="hover:text-main-primary transition-colors"
+                    dir="ltr"
+                  >
+                    {contactData?.phone || "+20 100 995 7000"}
+                  </a>
+                ),
+                delay: 0.2,
+              },
+            ].map(({ icon, label, value, delay }) => (
+              <motion.div
+                key={label}
+                variants={popBlurIn}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay }}
+                className="flex items-center gap-5 px-5 py-4 rounded-xl border border-white/10 border-s-2 border-s-main-primary bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300 group"
+              >
+                {/* Icon — bare with accent colour + soft glow */}
+                <motion.div
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{
+                    duration: 2.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay,
+                  }}
+                  className="shrink-0 text-main-primary"
+                  style={{
+                    filter:
+                      "drop-shadow(0 0 6px color-mix(in srgb, var(--color-main-primary, #d4af37) 55%, transparent))",
+                  }}
+                >
+                  {icon}
+                </motion.div>
+
+                {/* Text */}
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-main-primary/70">
+                    {label}
+                  </span>
+                  <span className="text-sm sm:text-base text-white/85 leading-snug break-words">
+                    {value}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* ── Google Map — fills remaining height ── */}
+            <motion.div
+              className="relative w-full flex-1 min-h-[280px] max-h-[300px] xl:max-h-none rounded-xl overflow-hidden border border-white/10 ring-1 ring-white/5"
+              variants={popBlurIn}
+            >
+              {/* subtle gradient overlay on top edge for blending */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-main-black2/60 to-transparent z-10" />
+              <iframe
+                title="BE Group Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.6!2d31.3397!3d30.0911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79468d5b5b0e0!2s25%20Asmaa%20Fahmy%2C%20Heliopolis%2C%20Cairo%20Governorate%2C%20Egypt!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+                className="absolute inset-0 w-full h-full"
+                height="280"
+                style={{ border: 0, filter: "grayscale(30%) contrast(1.05)" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* ── Full-width image – last item ── */}
+        <motion.div
+          className="w-full h-[450px] rounded-[8px] overflow-hidden will-change-[clip-path]"
+          variants={maskReveal}
+          inherit={false}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          style={{ contain: "paint" }}
+        >
+          <motion.div variants={scaleIn} className="w-full h-full">
+            <div className="relative w-full h-[450px] rounded-[8px] overflow-hidden">
+              <Image
+                src={contactSection?.image}
+                alt={contactSection?.alt_image || t("Contact us image")}
+                fill
+                style={{ objectFit: "cover" }}
+                className="rounded-[8px]"
+                priority
+              />
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>
