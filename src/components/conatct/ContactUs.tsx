@@ -274,26 +274,41 @@ export default function ContactUs({
         </motion.div>
 
         {/* ── Full-width image – last item ── */}
+        {/* Outer: glow ring — NO overflow-hidden / contain so box-shadow renders freely */}
         <motion.div
-          className="w-full h-[450px] rounded-[8px] overflow-hidden will-change-[clip-path]"
-          variants={maskReveal}
+          className="w-full rounded-[8px]"
           inherit={false}
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-60px" }}
-          style={{ contain: "paint" }}
+          animate={{
+            boxShadow: [
+              "0 0 0 1px rgba(241,138,29,0.5), 0 0 20px 4px rgba(241,138,29,0.25)",
+              "0 0 0 1px rgba(241,138,29,0.8), 0 0 40px 10px rgba(241,138,29,0.45)",
+              "0 0 0 1px rgba(241,138,29,0.5), 0 0 20px 4px rgba(241,138,29,0.25)",
+            ],
+          }}
+          transition={{
+            boxShadow: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 0.8 },
+          }}
         >
-          <motion.div variants={scaleIn} className="w-full h-full">
-            <div className="relative w-full h-[450px] rounded-[8px] overflow-hidden">
-              <Image
+          {/* Inner: clip + scale reveal */}
+          <motion.div
+            className="w-full h-[450px] rounded-[8px] overflow-hidden"
+            variants={maskReveal}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            <motion.div variants={scaleIn} className="w-full h-full">
+              <img
                 src={contactSection?.image}
                 alt={contactSection?.alt_image || t("Contact us image")}
-                fill
                 style={{ objectFit: "cover" }}
-                className="rounded-[8px]"
-                priority
+                className="w-full h-full"
               />
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </motion.div>
