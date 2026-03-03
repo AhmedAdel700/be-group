@@ -6,7 +6,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link, usePathname } from "@/navigations";
 import { useState, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import type { AboutType, AchievementTypes, Section } from "@/types/apiDataTypes";
+import type {
+  AboutType,
+  AchievementTypes,
+  Section,
+} from "@/types/apiDataTypes";
 // import ModernTextEffect from "../ModernTextEffect";
 
 export default function About({
@@ -33,8 +37,8 @@ export default function About({
     offset: ["start end", "end start"],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
   return (
     <section
@@ -44,12 +48,6 @@ export default function About({
     >
       {/* --- Modern Hero Section --- */}
       <div className="relative w-full min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-10 py-20 lg:py-32">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-main-primary rounded-full blur-[150px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-main-secondary rounded-full blur-[150px]" />
-        </div>
-
         <div className="container mx-auto grid lg:grid-cols-2 gap-6 items-center px-6">
           {/* Content Side */}
           <motion.div
@@ -90,8 +88,10 @@ export default function About({
               className="mt-4"
             >
               <Link href={isAboutPage ? "/services" : "/about"}>
-                <Button className="group relative overflow-hidden bg-main-primary cursor-target text-main-black hover:bg-white w-[80%] px-8 py-7 rounded-none font-bold uppercase tracking-tighter transition-all duration-500">
-                  <span className="relative z-10 text-lg font-meduim">{isAboutPage ? t("View Services") : t("Learn More")}</span>
+                <Button className="group relative overflow-hidden bg-main-primary cursor-target text-main-black hover:bg-white w-full sm:w-[90%] lg:w-[80%] px-8 py-7 rounded-none font-bold uppercase tracking-tighter transition-all duration-500">
+                  <span className="relative z-10 text-lg font-medium">
+                    {isAboutPage ? t("View Services") : t("Learn More")}
+                  </span>
                   {/* <div className="absolute inset-0 bg-main-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" /> */}
                 </Button>
               </Link>
@@ -99,7 +99,7 @@ export default function About({
           </motion.div>
 
           {/* Visual Side */}
-          <div className="relative h-[400px] md:h-[600px] xl:h-[700px] w-full mt-12 lg:mt-0">
+          <div className="relative h-[400px] md:h-[600px] xl:h-[700px] w-full mt-12 lg:mt-0 lg:ms-10 2xl:ms-0">
             <motion.div
               style={{ y: y1 }}
               className="absolute top-0 right-0 lg:right-10 w-full h-full z-10 rounded-2xl overflow-hidden transition-all duration-700"
@@ -114,7 +114,8 @@ export default function About({
 
             <motion.div
               style={{ y: y2 }}
-              className={`absolute  ${isAboutPage ? "bottom-0" :"bottom-10"} lg:-left-2 w-[50%] h-[50%] z-20 rounded-2xl overflow-hidden border-4 border-main-black`}
+              className={`absolute ${isAboutPage ? "-bottom-8" : "bottom-0 lg:-bottom-6 xl:bottom-8 2xl:bottom-0"} -left-10 lg:-left-16
+               xl:-left-8 w-[75%] h-[75%] sm:w-[60%] sm:h-[60%] lg:w-[70%] lg:h-[70%] xl:w-[58%] xl:h-[58%] 2xl:w-[55%] 2xl:h-[55%] z-20 overflow-hidden`}
             >
               <Image
                 src={aboutData?.banner ?? ""}
@@ -124,8 +125,12 @@ export default function About({
               />
             </motion.div>
 
-            <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-main-primary/30" />
-            <div className="absolute -top-10 left-0 lg:-left-10 w-32 h-32 border-l-2 border-t-2 border-main-primary/30" />
+            <div
+              className={`absolute ${isAboutPage ? "bottom-5 -right-4" : "bottom-10 -right-2"} bottom-10 lg:bottom-0 lg:right-0 w-32 h-32 border-r-2 border-b-2 border-main-primary/30`}
+            />
+            <div
+              className={`absolute ${isAboutPage ? "-top-6" : "-top-14"} lg:-top-10 left-0 lg:-left-10 w-32 h-32 border-l-2 border-t-2 border-main-primary/30`}
+            />
           </div>
         </div>
       </div>
@@ -159,7 +164,8 @@ export default function About({
                 {achievementsSection?.title || "Statistics"}
               </span>
               <h2 className="text-4xl md:text-6xl font-bold max-w-3xl leading-tight">
-                {achievementsSection?.second_title || "Our achievements in numbers"}
+                {achievementsSection?.second_title ||
+                  "Our achievements in numbers"}
               </h2>
             </motion.div>
 
@@ -212,9 +218,15 @@ export default function About({
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           viewport={{ once: true }}
-                          transition={{ delay: idx * 0.1 + 0.4, type: "spring", stiffness: 200 }}
+                          transition={{
+                            delay: idx * 0.1 + 0.4,
+                            type: "spring",
+                            stiffness: 200,
+                          }}
                           className={`hidden lg:block absolute top-1/2 -translate-y-1/2 ${
-                            isEven ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"
+                            isEven
+                              ? "right-0 translate-x-1/2"
+                              : "left-0 -translate-x-1/2"
                           } w-4 h-4 z-20`}
                           style={{ [isEven ? "right" : "left"]: "-2rem" }}
                         >
@@ -224,7 +236,9 @@ export default function About({
                         {/* Card Body */}
                         <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-8 xl:p-10 transition-all duration-500 group-hover:border-main-primary/40 group-hover:bg-white/[0.06]">
                           {/* Corner accent */}
-                          <div className={`absolute top-0 ${isEven ? "right-0" : "left-0"} w-20 h-20 bg-main-primary/10 blur-2xl rounded-full pointer-events-none`} />
+                          <div
+                            className={`absolute top-0 ${isEven ? "right-0" : "left-0"} w-20 h-20 bg-main-primary/10 blur-2xl rounded-full pointer-events-none`}
+                          />
 
                           {/* Ghost index number */}
                           <span className="absolute bottom-2 right-4 text-[80px] font-black text-white/[0.04] leading-none select-none pointer-events-none italic">
@@ -251,9 +265,21 @@ export default function About({
                                     strokeLinecap="round"
                                   />
                                   <defs>
-                                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                      <stop offset="0%" stopColor="var(--color-main-primary, #f0a500)" />
-                                      <stop offset="100%" stopColor="transparent" />
+                                    <linearGradient
+                                      id="grad"
+                                      x1="0%"
+                                      y1="0%"
+                                      x2="100%"
+                                      y2="100%"
+                                    >
+                                      <stop
+                                        offset="0%"
+                                        stopColor="var(--color-main-primary, #f0a500)"
+                                      />
+                                      <stop
+                                        offset="100%"
+                                        stopColor="transparent"
+                                      />
                                     </linearGradient>
                                   </defs>
                                 </svg>
@@ -392,7 +418,7 @@ export default function About({
                           dangerouslySetInnerHTML={{
                             __html: desc?.replace(
                               /style="text-align:\s*justify;?"/g,
-                              ""
+                              "",
                             ),
                           }}
                         />
