@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { MapPin, Mail, Smartphone } from "lucide-react";
 import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
@@ -83,10 +82,10 @@ export default function ContactUs({
   return (
     <section
       id="contact-us"
-      className="w-full min-h-fit xl:min-h-screen bg-main-black2 text-main-white border-b border-white/10 px-4 py-10 xl:py-24"
+      className="w-full min-h-fit bg-main-black2 text-main-white border-b border-white/10 px-4 py-12"
     >
       <motion.div
-        className="flex flex-col gap-8 xl:gap-20 justify-start items-center container mx-auto"
+        className="flex flex-col gap-8 justify-start items-center container mx-auto"
         variants={containerVar}
         initial="hidden"
         whileInView="show"
@@ -268,45 +267,6 @@ export default function ContactUs({
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-              />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* ── Full-width image – last item ── */}
-        {/* Outer: glow ring — NO overflow-hidden / contain so box-shadow renders freely */}
-        <motion.div
-          className="w-full rounded-[8px]"
-          inherit={false}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-60px" }}
-          animate={{
-            boxShadow: [
-              "0 0 0 1px rgba(241,138,29,0.5), 0 0 20px 4px rgba(241,138,29,0.25)",
-              "0 0 0 1px rgba(241,138,29,0.8), 0 0 40px 10px rgba(241,138,29,0.45)",
-              "0 0 0 1px rgba(241,138,29,0.5), 0 0 20px 4px rgba(241,138,29,0.25)",
-            ],
-          }}
-          transition={{
-            boxShadow: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
-            opacity: { duration: 0.8 },
-          }}
-        >
-          {/* Inner: clip + scale reveal */}
-          <motion.div
-            className="w-full h-[450px] rounded-[8px] overflow-hidden"
-            variants={maskReveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            <motion.div variants={scaleIn} className="w-full h-full">
-              <img
-                src={contactSection?.image}
-                alt={contactSection?.alt_image || t("Contact us image")}
-                style={{ objectFit: "cover" }}
-                className="w-full h-full"
               />
             </motion.div>
           </motion.div>
