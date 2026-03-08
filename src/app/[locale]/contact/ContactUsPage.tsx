@@ -16,14 +16,14 @@ export default function ContactUsPage({
   const t = useTranslations("contact");
   return (
     <div className="flex flex-col bg-main-black">
-      <div className="w-full relative bg-main-black text-main-primary flex items-center justify-center h-[140px] sm:h-[180px] lg:h-[220px] xl:h-[35vh]">
+      <div className="w-full relative bg-main-black text-main-primary flex items-center justify-center h-[140px] sm:h-[180px] lg:h-[260px] xl:h-[50vh]">
         <img
           src={contactSection?.image}
           alt={contactSection?.alt_image || t("Contact us image")}
           className="absolute inset-0 w-full h-full object-cover z-0"
         />
 
-        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+        {/* <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
           {locale === "en" ? (
             <SplitText
               text={t("Contact Us")}
@@ -51,7 +51,7 @@ export default function ContactUsPage({
               {t("Contact Us")}
             </motion.h1>
           )}
-        </div>
+        </div> */}
       </div>
       <ContactUs contactData={contactData} contactSection={contactSection} />;
     </div>

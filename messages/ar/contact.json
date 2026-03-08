@@ -28,5 +28,7 @@
   "Enter A Valid Email": "يرجى إدخال بريد إلكتروني صالح",
   "Please Enter Your Full Name": "يرجى إدخال اسمك الكامل",
   "Your Message Has Been Sent Successfully": "✅ تم إرسال رسالتك بنجاح!",
-  "Something Went Wrong Please Try Again Later": "⚠️ حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا."
+  "Something Went Wrong Please Try Again Later": "⚠️ حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا.",
+  "Address": "العنوان",
+  "Our Offices": "مكاتبنا"
 }

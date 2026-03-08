@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MapPin, Mail, Smartphone } from "lucide-react";
+import { MapPin, Mail, Smartphone, Phone } from "lucide-react";
 import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
@@ -38,23 +38,6 @@ const rightInSpring: Variants = {
   },
 };
 
-const maskReveal: Variants = {
-  hidden: { clipPath: "inset(0 0 100% 0 round 8px)" },
-  show: {
-    clipPath: "inset(0 0 0% 0 round 8px)",
-    transition: { duration: 0.8, ease: easeOut },
-  },
-};
-
-const scaleIn: Variants = {
-  hidden: { scale: 1.06, opacity: 0.8 },
-  show: {
-    scale: 1,
-    opacity: 1,
-    transition: { duration: 0.7, ease: easeOut },
-  },
-};
-
 const popBlurIn: Variants = {
   hidden: { opacity: 0, y: 12, filter: "blur(8px)" },
   show: {
@@ -64,6 +47,100 @@ const popBlurIn: Variants = {
     transition: { duration: 0.6, ease: easeOut },
   },
 };
+
+const cardHover: Variants = {
+  rest: { scale: 1, y: 0 },
+  hover: {
+    scale: 1.02,
+    y: -4,
+    transition: { type: "spring", stiffness: 300, damping: 20 },
+  },
+};
+
+// ===== Office locations data =====
+const officeLocations = [
+  {
+    country: "Egypt",
+    flag: "🇪🇬",
+    offices: [
+      {
+        name: "Nasr City",
+        address:
+          "25 Asmaa Fahmy St, El Nozha St. Nasr City, Cairo, Egypt",
+        phone: "01009957000",
+      },
+      {
+        name: "6 October",
+        address:
+          "West Somid, 7 Villa, Ammar Ibn Yasser Street, Beside Bank Court on Main Street – 6 October – Giza – Egypt.",
+        phone: "01090202002",
+      },
+      {
+        name: "Elharam",
+        address: "Mashaal, Al Haram, Giza, Egypt.",
+        phone: "01061797758",
+      },
+    ],
+  },
+  {
+    country: "UAE",
+    flag: "🇦🇪",
+    offices: [
+      {
+        name: "Dubai",
+        address:
+          "Office 21, Floor 3, ALMamzar Centre, Hor Al Anz East, Dubai, UAE",
+        phone: "+976502671799",
+      },
+    ],
+  },
+  {
+    country: "Saudi",
+    flag: "🇸🇦",
+    offices: [
+      {
+        name: "Riyadh",
+        address:
+          "Almalqa District, King Faisal bin Abdul Aziz Al Saud, Riyadh 13522",
+        phone: "+966563356562",
+      },
+    ],
+  },
+  {
+    country: "Canada",
+    flag: "🇨🇦",
+    offices: [
+      {
+        name: "Montreal",
+        address:
+          "4835 Boulevard Henri, Bourassa, Quest 111 Montreal, Quebec H4loa5, Canada",
+        phone: "+1 438 464 2995",
+      },
+    ],
+  },
+  {
+    country: "Germany",
+    flag: "🇩🇪",
+    offices: [
+      {
+        name: "Neu-Isenburg",
+        address: "Stieglitzstraße 21, 63263 Neu-Isenburg, Germany",
+        phone: "(+49)015906461858",
+      },
+    ],
+  },
+  {
+    country: "United Kingdom",
+    flag: "🇬🇧",
+    offices: [
+      {
+        name: "Ilford",
+        address: "H36P+F4 Ilford, United Kingdom.",
+        phone: "(+49)015906461858",
+      },
+    ],
+  },
+];
 
 export default function ContactUs({
   contactData,
@@ -143,15 +220,15 @@ export default function ContactUs({
           )}
         </motion.div>
 
-        {/* ── Main row: Form (start) | Info + Map (end) ── */}
+        {/* ── Main row: Info + Map (LEFT) | Form (RIGHT) ── */}
         <motion.div
-          className="flex flex-col xl:flex-row gap-8 xl:gap-16 w-full items-stretch"
+          className="flex flex-col xl:flex-row-reverse gap-8 xl:gap-16 w-full items-stretch"
           variants={containerVar}
         >
-          {/* Contact Form */}
+          {/* Contact Form — now on the RIGHT */}
           <motion.div
             className="w-full xl:w-[55%]"
-            variants={leftInSpring}
+            variants={rightInSpring}
             inherit={false}
             initial="hidden"
             whileInView="show"
@@ -160,10 +237,10 @@ export default function ContactUs({
             <ContactForm />
           </motion.div>
 
-          {/* Right column: Info cards + Map — stretches to form height */}
+          {/* Left column: Info cards + Map — now on the LEFT */}
           <motion.div
             className="w-full xl:w-[45%] flex flex-col gap-4 xl:self-stretch xl:mt-[30px]"
-            variants={rightInSpring}
+            variants={leftInSpring}
             inherit={false}
             initial="hidden"
             whileInView="show"
@@ -178,7 +255,7 @@ export default function ContactUs({
                   <span>
                     {contactData?.address ||
                       t(
-                        "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt"
+                        "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt",
                       )}
                   </span>
                 ),
@@ -269,6 +346,111 @@ export default function ContactUs({
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* ── Office Locations Cards ── */}
+        <motion.div
+          className="w-full mt-8"
+          variants={containerVar}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {/* Section heading */}
+          <motion.div
+            className="text-center mb-10"
+            variants={popBlurIn}
+          >
+            <h3 className="text-3xl sm:text-4xl font-bold">
+              <span className="text-main-primary">{locale === "ar" ? "مكاتبنا" : "Our"}</span>{" "}
+              <span className="text-white">{locale === "ar" ? "حول العالم" : "Offices"}</span>
+            </h3>
+            <div className="w-20 h-1 bg-gradient-to-r from-main-primary to-main-primary/30 rounded-full mx-auto mt-4" />
+          </motion.div>
+
+          {/* Cards grid */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+            variants={containerVar}
+          >
+            {officeLocations.map((location, locIdx) => (
+              <motion.div
+                key={location.country}
+                variants={popBlurIn}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: locIdx * 0.08 }}
+                className={`group relative rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden
+                           hover:border-main-primary/40 transition-all duration-500${
+                             location.offices.length > 1 ? " sm:col-span-2 lg:col-span-3" : ""
+                           }`}
+              >
+                {/* Top accent bar */}
+                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-main-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Hover glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-main-primary/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                <div className="relative p-5 flex flex-col gap-4">
+                  {/* Country header */}
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl" role="img" aria-label={location.country}>
+                      {location.flag}
+                    </span>
+                    <span className="text-lg font-bold text-white group-hover:text-main-primary transition-colors duration-300">
+                      {location.country}
+                    </span>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="w-full h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+
+                  {/* All offices for this country */}
+                  <div className={`${
+                    location.offices.length > 1
+                      ? "grid grid-cols-1 md:grid-cols-3 gap-5"
+                      : "flex flex-col gap-3"
+                  }`}>
+                    {location.offices.map((office) => (
+                      <div key={office.name} className={`flex flex-col gap-3 ${
+                        location.offices.length > 1
+                          ? "md:border-e md:border-white/10 md:pe-5 md:last:border-e-0 md:last:pe-0"
+                          : ""
+                      }`}>
+                        {/* Office sub-header (only show if multiple offices) */}
+                        {location.offices.length > 1 && (
+                          <span className="text-xs font-semibold text-main-primary/70 uppercase tracking-wider">
+                            {office.name}
+                          </span>
+                        )}
+
+                        {/* Address */}
+                        <div className="flex items-start gap-3">
+                          <MapPin size={16} className="shrink-0 mt-0.5 text-main-primary/70" />
+                          <p className="text-sm text-white/70 leading-relaxed">
+                            {office.address}
+                          </p>
+                        </div>
+
+                        {/* Phone */}
+                        <div className="flex items-center gap-3">
+                          <Phone size={16} className="shrink-0 text-main-primary/70" />
+                          <a
+                            href={`tel:${office.phone.replace(/\s/g, "")}`}
+                            dir="ltr"
+                            className="text-sm text-white/70 hover:text-main-primary transition-colors duration-300 font-mono"
+                          >
+                            {office.phone}
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </motion.div>
