@@ -27,6 +27,7 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigations";
 import { sendContactData } from "@/api/contactService";
+import { Service } from "@/types/apiDataTypes";
 
 // ===== Motion settings =====
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -44,19 +45,7 @@ const fadeUpVar: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
-const SERVICE_OPTIONS = [
-  "Animation Video",
-  "Google Adword",
-  "Media Production",
-  "Branding",
-  "Search Engine Optimization",
-  "Social Media Management",
-  "Google Maps",
-  "Web Development",
-  "Consultation",
-];
-
-export default function ContactForm() {
+export default function ContactForm({ servicesData }: { servicesData: Service[] }) {
   const t = useTranslations("contact");
   const locale = useLocale();
   const [successMsg, setSuccessMsg] = useState("");
@@ -272,13 +261,13 @@ export default function ContactForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-[#1a1a1a] border-white/20 text-white rounded-[6px]">
-                        {SERVICE_OPTIONS.map((service) => (
+                        {servicesData.map((service: Service) => (
                           <SelectItem
-                            key={service}
-                            value={service}
+                            key={service.id}
+                            value={service.slug}
                             className="cursor-target text-white/80 focus:bg-white/10 focus:text-white cursor-pointer"
                           >
-                            {service}
+                            {service.name}
                           </SelectItem>
                         ))}
                       </SelectContent>

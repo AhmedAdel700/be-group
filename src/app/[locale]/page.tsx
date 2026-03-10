@@ -121,6 +121,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
       <ContactUs
         contactData={contact_data}
         contactSection={contact_section}
+        servicesData={services}
         // section={sectionsByKey.contact_section}
       />
     </div>

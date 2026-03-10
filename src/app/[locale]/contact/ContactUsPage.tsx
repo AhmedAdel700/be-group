@@ -1,18 +1,17 @@
 "use client";
 import ContactUs from "@/components/conatct/ContactUs";
-import SplitText from "@/components/SplitText";
-import { useLocale, useTranslations } from "next-intl";
-import { motion } from "framer-motion";
-import { ContactDataTypes, ContactSectionTypes } from "@/types/apiDataTypes";
+import { useTranslations } from "next-intl";
+import { ContactDataTypes, ContactSectionTypes, Service } from "@/types/apiDataTypes";
 
 export default function ContactUsPage({
   contactData,
   contactSection,
+  servicesData
 }: {
   contactData: ContactDataTypes;
   contactSection: ContactSectionTypes;
+  servicesData: Service[];
 }) {
-  const locale = useLocale();
   const t = useTranslations("contact");
   return (
     <div className="flex flex-col bg-main-black">
@@ -53,7 +52,7 @@ export default function ContactUsPage({
           )}
         </div> */}
       </div>
-      <ContactUs contactData={contactData} contactSection={contactSection} />;
+      <ContactUs contactData={contactData} contactSection={contactSection} servicesData={servicesData} />;
     </div>
   );
 }

@@ -3,6 +3,7 @@ import ContactUsPage from "./ContactUsPage";
 import { fetchHomeData } from "@/api/homeService";
 
 import { Metadata } from "next";
+import { fetchServicesData } from "@/api/ServicesService";
 
 export async function generateMetadata({
   params,
@@ -55,10 +56,13 @@ export async function generateMetadata({
 export default async function page({ params }: { params: { locale: string } }) {
   const homeData = await fetchHomeData(params.locale);
   const { contact_section, contact_data } = homeData;
+
+    const ServicesApiData = await fetchServicesData(params.locale);
   return (
     <ContactUsPage
       contactData={contact_data}
       contactSection={contact_section}
+      servicesData={ServicesApiData.data.services}
     />
   );
 }

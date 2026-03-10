@@ -5,7 +5,7 @@ import { MapPin, Mail, Smartphone, Phone } from "lucide-react";
 import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
-import { ContactDataTypes, ContactSectionTypes } from "@/types/apiDataTypes";
+import { ContactDataTypes, ContactSectionTypes, Service } from "@/types/apiDataTypes";
 import ModernTextEffect from "../ModernTextEffect";
 import { Link } from "@/navigations";
 
@@ -146,9 +146,11 @@ const officeLocations = [
 export default function ContactUs({
   contactData,
   contactSection,
+  servicesData,
 }: {
   contactData: ContactDataTypes;
   contactSection: ContactSectionTypes;
+  servicesData: Service[];
 }) {
   const t = useTranslations("contact");
   const locale = useLocale();
@@ -235,7 +237,7 @@ export default function ContactUs({
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <ContactForm />
+            <ContactForm servicesData={servicesData} />
           </motion.div>
 
           {/* Left column: Info cards + Map — now on the LEFT */}
