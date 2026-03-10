@@ -17,6 +17,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigations";
 import { sendContactData } from "@/api/contactService";
@@ -37,6 +44,18 @@ const fadeUpVar: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
+const SERVICE_OPTIONS = [
+  "Animation Video",
+  "Google Adword",
+  "Media Production",
+  "Branding",
+  "Search Engine Optimization",
+  "Social Media Management",
+  "Google Maps",
+  "Web Development",
+  "Consultation",
+];
+
 export default function ContactForm() {
   const t = useTranslations("contact");
   const locale = useLocale();
@@ -48,6 +67,7 @@ export default function ContactForm() {
     name: z.string().min(3, t("Please Enter Your Full Name")),
     email: z.string().email(t("Enter A Valid Email")),
     phone: z.string().min(10, t("Enter A Valid Phone Number")),
+    service: z.string().min(1, t("Please Select A Service")),
     message: z.string().min(50, t("Message Should Be At Least 50 Characters")),
   });
 
@@ -55,7 +75,7 @@ export default function ContactForm() {
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(ContactSchema),
-    defaultValues: { name: "", email: "", phone: "", message: "" },
+    defaultValues: { name: "", email: "", phone: "", service: "", message: "" },
     mode: "onChange",
   });
 
@@ -82,7 +102,7 @@ export default function ContactForm() {
         const serverMsg =
           res.message ||
           Object.values(
-            (res as { errors?: Record<string, string[]> }).errors || {}
+            (res as { errors?: Record<string, string[]> }).errors || {},
           )
             ?.flat()
             ?.join(", ") ||
@@ -96,7 +116,6 @@ export default function ContactForm() {
     }
   };
 
-  // 🕐 Auto-hide messages after 10 seconds
   useEffect(() => {
     if (successMsg || errorMsg) {
       const timer = setTimeout(() => {
@@ -150,6 +169,7 @@ export default function ContactForm() {
           )}
 
           {/* ===== Fields ===== */}
+
           {/* Name */}
           <FormField
             control={form.control}
@@ -163,7 +183,7 @@ export default function ContactForm() {
                   <FormControl>
                     <Input
                       placeholder={t("Enter Your Name")}
-                      className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
+                      className="cursor-target bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
                       {...field}
                     />
                   </FormControl>
@@ -187,7 +207,7 @@ export default function ContactForm() {
                     <Input
                       type="email"
                       placeholder={t("Enter Your Email")}
-                      className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
+                      className="cursor-target bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
                       {...field}
                     />
                   </FormControl>
@@ -197,38 +217,80 @@ export default function ContactForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <motion.div variants={fadeUpVar}>
-                  <FormLabel className="text-white/90 text-base sm:text-lg">
-                    {t("Phone")}
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      dir={locale === "ar" ? "rtl" : "ltr"}
-                      type="tel"
-                      placeholder={t("Enter Your Phone")}
-                      inputMode="tel"
-                      pattern="^[0-9+]*$"
-                      onChange={(e) => {
-                        const cleaned = e.target.value.replace(/[^0-9+]/g, "");
-                        field.onChange(cleaned);
-                      }}
-                      value={field.value}
-                      name={field.name}
-                      ref={field.ref}
-                      className="bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-400" />
-                </motion.div>
-              </FormItem>
-            )}
-          />
+          {/* Phone + Service Type — same row */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Phone */}
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <motion.div variants={fadeUpVar}>
+                    <FormLabel className="text-white/90 text-base sm:text-lg">
+                      {t("Phone")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        dir={locale === "ar" ? "rtl" : "ltr"}
+                        type="tel"
+                        placeholder={t("Enter Your Phone")}
+                        inputMode="tel"
+                        pattern="^[0-9+]*$"
+                        onChange={(e) => {
+                          const cleaned = e.target.value.replace(
+                            /[^0-9+]/g,
+                            "",
+                          );
+                          field.onChange(cleaned);
+                        }}
+                        value={field.value}
+                        name={field.name}
+                        ref={field.ref}
+                        className="cursor-target bg-transparent border-white/70 text-white placeholder:text-white/40 h-14 rounded-[6px]"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-400" />
+                  </motion.div>
+                </FormItem>
+              )}
+            />
 
+            {/* Service Type */}
+            <FormField
+              control={form.control}
+              name="service"
+              render={({ field }) => (
+                <FormItem>
+                  <motion.div variants={fadeUpVar}>
+                    <FormLabel className="text-white/90 text-base sm:text-lg">
+                      {t("Service Type")}
+                    </FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="cursor-target bg-transparent border-white/70 h-14 rounded-[6px] focus:ring-0 focus:ring-offset-0 text-white [&>span:not([data-placeholder])]:text-white [&>span[data-placeholder]]:text-white/40">
+                          <SelectValue placeholder={t("Select A Service")} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-[#1a1a1a] border-white/20 text-white rounded-[6px]">
+                        {SERVICE_OPTIONS.map((service) => (
+                          <SelectItem
+                            key={service}
+                            value={service}
+                            className="cursor-target text-white/80 focus:bg-white/10 focus:text-white cursor-pointer"
+                          >
+                            {service}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage className="text-red-400" />
+                  </motion.div>
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Message */}
           <FormField
             control={form.control}
             name="message"
@@ -242,7 +304,7 @@ export default function ContactForm() {
                     <Textarea
                       rows={7}
                       placeholder={t("Enter Your Message")}
-                      className="bg-transparent border-white/70 text-white placeholder:text-white/40 resize-y rounded-[6px]"
+                      className="cursor-target bg-transparent border-white/70 text-white placeholder:text-white/40 resize-y rounded-[6px]"
                       {...field}
                     />
                   </FormControl>

@@ -30,5 +30,8 @@
   "Your Message Has Been Sent Successfully": "✅ تم إرسال رسالتك بنجاح!",
   "Something Went Wrong Please Try Again Later": "⚠️ حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا.",
   "Address": "العنوان",
-  "Our Offices": "مكاتبنا"
+  "Our Offices": "مكاتبنا",
+  "Please Select A Service": "يرجى اختيار خدمة",
+  "Service Type": "نوع الخدمة",
+  "Select A Service": "اختر خدمة"
 }

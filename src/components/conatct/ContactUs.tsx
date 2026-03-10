@@ -7,6 +7,7 @@ import { motion, type Variants } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { ContactDataTypes, ContactSectionTypes } from "@/types/apiDataTypes";
 import ModernTextEffect from "../ModernTextEffect";
+import { Link } from "@/navigations";
 
 // ===== Easing / shared timing =====
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -265,12 +266,12 @@ export default function ContactUs({
                 icon: <Mail size={26} />,
                 label: t("Email"),
                 value: (
-                  <a
+                  <Link
                     href={`mailto:${contactData?.email || "info@begroup.com"}`}
-                    className="hover:text-main-primary transition-colors"
+                    className="hover:text-main-primary transition-colors cursor-target"
                   >
                     {contactData?.email || "info@begroup.com"}
-                  </a>
+                  </Link>
                 ),
                 delay: 0.1,
               },
@@ -278,13 +279,13 @@ export default function ContactUs({
                 icon: <Smartphone size={26} />,
                 label: t("Phone"),
                 value: (
-                  <a
+                  <Link
                     href={`tel:${contactData?.phone || "+201009957000"}`}
-                    className="hover:text-main-primary transition-colors"
+                    className="hover:text-main-primary transition-colors cursor-target"
                     dir="ltr"
                   >
                     {contactData?.phone || "+20 100 995 7000"}
-                  </a>
+                  </Link>
                 ),
                 delay: 0.2,
               },
@@ -358,13 +359,14 @@ export default function ContactUs({
           viewport={{ once: true, margin: "-60px" }}
         >
           {/* Section heading */}
-          <motion.div
-            className="text-center mb-10"
-            variants={popBlurIn}
-          >
+          <motion.div className="text-center mb-10" variants={popBlurIn}>
             <h3 className="text-3xl sm:text-4xl font-bold">
-              <span className="text-main-primary">{locale === "ar" ? "مكاتبنا" : "Our"}</span>{" "}
-              <span className="text-white">{locale === "ar" ? "حول العالم" : "Offices"}</span>
+              <span className="text-main-primary">
+                {locale === "ar" ? "مكاتبنا" : "Our"}
+              </span>{" "}
+              <span className="text-white">
+                {locale === "ar" ? "حول العالم" : "Offices"}
+              </span>
             </h3>
             <div className="w-20 h-1 bg-gradient-to-r from-main-primary to-main-primary/30 rounded-full mx-auto mt-4" />
           </motion.div>
@@ -384,7 +386,9 @@ export default function ContactUs({
                 transition={{ delay: locIdx * 0.08 }}
                 className={`group relative rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden
                            hover:border-main-primary/40 transition-all duration-500${
-                             location.offices.length > 1 ? " sm:col-span-2 lg:col-span-3" : ""
+                             location.offices.length > 1
+                               ? " sm:col-span-2 lg:col-span-3"
+                               : ""
                            }`}
               >
                 {/* Top accent bar */}
@@ -396,7 +400,11 @@ export default function ContactUs({
                 <div className="relative p-5 flex flex-col gap-4">
                   {/* Country header */}
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl" role="img" aria-label={location.country}>
+                    <span
+                      className="text-2xl"
+                      role="img"
+                      aria-label={location.country}
+                    >
                       {location.flag}
                     </span>
                     <span className="text-lg font-bold text-white group-hover:text-main-primary transition-colors duration-300">
@@ -408,17 +416,22 @@ export default function ContactUs({
                   <div className="w-full h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
 
                   {/* All offices for this country */}
-                  <div className={`${
-                    location.offices.length > 1
-                      ? "grid grid-cols-1 md:grid-cols-3 gap-5"
-                      : "flex flex-col gap-3"
-                  }`}>
+                  <div
+                    className={`${
+                      location.offices.length > 1
+                        ? "grid grid-cols-1 md:grid-cols-3 gap-5"
+                        : "flex flex-col gap-3"
+                    }`}
+                  >
                     {location.offices.map((office) => (
-                      <div key={office.name} className={`flex flex-col gap-3 ${
-                        location.offices.length > 1
-                          ? "md:border-e md:border-white/10 md:pe-5 md:last:border-e-0 md:last:pe-0"
-                          : ""
-                      }`}>
+                      <div
+                        key={office.name}
+                        className={`flex flex-col gap-3 ${
+                          location.offices.length > 1
+                            ? "md:border-e md:border-white/10 md:pe-5 md:last:border-e-0 md:last:pe-0"
+                            : ""
+                        }`}
+                      >
                         {/* Office sub-header (only show if multiple offices) */}
                         {location.offices.length > 1 && (
                           <span className="text-xs font-semibold text-main-primary/70 uppercase tracking-wider">
@@ -428,7 +441,10 @@ export default function ContactUs({
 
                         {/* Address */}
                         <div className="flex items-start gap-3">
-                          <MapPin size={16} className="shrink-0 mt-0.5 text-main-primary/70" />
+                          <MapPin
+                            size={16}
+                            className="shrink-0 mt-0.5 text-main-primary/70"
+                          />
                           <p className="text-sm text-white/70 leading-relaxed">
                             {office.address}
                           </p>
@@ -436,14 +452,17 @@ export default function ContactUs({
 
                         {/* Phone */}
                         <div className="flex items-center gap-3">
-                          <Phone size={16} className="shrink-0 text-main-primary/70" />
-                          <a
+                          <Phone
+                            size={16}
+                            className="shrink-0 text-main-primary/70"
+                          />
+                          <Link
                             href={`tel:${office.phone.replace(/\s/g, "")}`}
                             dir="ltr"
-                            className="text-sm text-white/70 hover:text-main-primary transition-colors duration-300 font-mono"
+                            className="text-sm text-white/70 hover:text-main-primary transition-colors duration-300 font-mono cursor-target"
                           >
                             {office.phone}
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     ))}

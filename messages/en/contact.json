@@ -30,5 +30,8 @@
   "Your Message Has Been Sent Successfully": "✅ Your Message Has Been Sent Successfully!",
   "Something Went Wrong Please Try Again Later": "⚠️ Something Went Wrong. Please Try Again Later.",
   "Address": "Address",
-  "Our Offices": "Our Offices"
+  "Our Offices": "Our Offices",
+  "Please Select A Service": "Please Select A Service",
+  "Service Type": "Service Type",
+  "Select A Service": "Select A Service"
 }

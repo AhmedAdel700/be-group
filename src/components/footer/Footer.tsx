@@ -39,18 +39,18 @@ const SocialIcon: React.FC<{
       className={clsx(
         "group relative w-12 h-12 rounded-full flex items-center justify-center",
         "border border-white/80 text-white overflow-hidden",
-        "transition-transform hover:scale-[1.02] active:scale-[0.98]"
+        "transition-transform hover:scale-[1.02] active:scale-[0.98] cursor-target",
       )}
     >
       <span
         className={clsx(
           "absolute inset-0 rounded-full bg-white",
-          "scale-0 group-hover:scale-100 transition-transform duration-500"
+          "scale-0 group-hover:scale-100 transition-transform duration-500",
         )}
       />
       <span
         className={clsx(
-          "relative z-[1] transition-colors duration-300 group-hover:text-black"
+          "relative z-[1] transition-colors duration-300 group-hover:text-black",
         )}
       >
         {children}
