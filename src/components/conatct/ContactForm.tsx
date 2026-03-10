@@ -264,7 +264,7 @@ export default function ContactForm({ servicesData }: { servicesData: Service[] 
                         {servicesData.map((service: Service) => (
                           <SelectItem
                             key={service.id}
-                            value={service.slug}
+                            value={service.id.toString()}
                             className="cursor-target text-white/80 focus:bg-white/10 focus:text-white cursor-pointer"
                           >
                             {service.name}
