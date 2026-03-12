@@ -5,7 +5,11 @@ import { MapPin, Mail, Smartphone, Phone } from "lucide-react";
 import ContactForm from "./ContactForm";
 import { motion, type Variants } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
-import { ContactDataTypes, ContactSectionTypes, Service } from "@/types/apiDataTypes";
+import {
+  ContactDataTypes,
+  ContactSectionTypes,
+  Service,
+} from "@/types/apiDataTypes";
 import ModernTextEffect from "../ModernTextEffect";
 import { Link } from "@/navigations";
 
@@ -66,8 +70,7 @@ const officeLocations = [
     offices: [
       {
         name: "Nasr City",
-        address:
-          "25 Asmaa Fahmy St, El Nozha St. Nasr City, Cairo, Egypt",
+        address: "25 Asmaa Fahmy St, El Nozha St. Nasr City, Cairo, Egypt",
         phone: "01009957000",
       },
       {
@@ -255,12 +258,22 @@ export default function ContactUs({
                 icon: <MapPin size={26} />,
                 label: t("Address"),
                 value: (
-                  <span>
-                    {contactData?.address ||
-                      t(
+                  <Link
+                    href={`https://www.google.com/maps?q=${encodeURIComponent(
+                      contactData?.address ||
                         "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt",
-                      )}
-                  </span>
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-target"
+                  >
+                    <span>
+                      {contactData?.address ||
+                        t(
+                          "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt",
+                        )}
+                    </span>
+                  </Link>
                 ),
                 delay: 0,
               },
