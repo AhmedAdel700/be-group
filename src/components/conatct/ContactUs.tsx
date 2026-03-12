@@ -53,15 +53,6 @@ const popBlurIn: Variants = {
   },
 };
 
-const cardHover: Variants = {
-  rest: { scale: 1, y: 0 },
-  hover: {
-    scale: 1.02,
-    y: -4,
-    transition: { type: "spring", stiffness: 300, damping: 20 },
-  },
-};
-
 // ===== Office locations data =====
 const officeLocations = [
   {
@@ -146,6 +137,172 @@ const officeLocations = [
   },
 ];
 
+// ===== InfoCard Component =====
+function InfoCard({
+  icon,
+  label,
+  value,
+  delay = 0,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: React.ReactNode;
+  delay?: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative group cursor-default flex-1"
+      style={{ perspective: "800px" }}
+    >
+      {/* Outer glow */}
+      <motion.div
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+        className="absolute -inset-px rounded-2xl pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--color-main-primary, #d4af37) 30%, transparent), transparent 70%)",
+        }}
+      />
+
+      {/* Card body */}
+      <motion.div
+        animate={{ rotateX: hovered ? -2 : 0, scale: hovered ? 1.015 : 1 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="relative flex items-center gap-5 px-6 py-5 rounded-2xl overflow-hidden h-full"
+        style={{
+          background: hovered
+            ? "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%)"
+            : "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: hovered
+            ? "0 0 0 1px color-mix(in srgb, var(--color-main-primary, #d4af37) 35%, transparent), 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)"
+            : "0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)",
+          transition: "background 0.4s ease, box-shadow 0.4s ease",
+        }}
+      >
+        {/* Shimmer sweep */}
+        <motion.div
+          animate={{ x: hovered ? "200%" : "-100%" }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%)",
+            width: "60%",
+          }}
+        />
+
+        {/* Icon container — larger, with background pill */}
+        <div className="relative shrink-0">
+          {/* Ambient glow blob */}
+          <motion.div
+            animate={{
+              opacity: hovered ? 0.7 : 0.25,
+              scale: hovered ? 1.4 : 1,
+            }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 rounded-xl blur-lg"
+            style={{
+              background:
+                "color-mix(in srgb, var(--color-main-primary, #d4af37) 80%, transparent)",
+            }}
+          />
+
+          {/* Icon pill bg */}
+          <motion.div
+            animate={{
+              backgroundColor: hovered
+                ? "color-mix(in srgb, var(--color-main-primary, #d4af37) 18%, transparent)"
+                : "rgba(255,255,255,0.05)",
+              borderColor: hovered
+                ? "color-mix(in srgb, var(--color-main-primary, #d4af37) 35%, transparent)"
+                : "rgba(255,255,255,0.08)",
+            }}
+            transition={{ duration: 0.4 }}
+            className="relative z-10 w-14 h-14 rounded-xl flex items-center justify-center border"
+          >
+            <motion.div
+              animate={{ y: [0, -4, 0] }}
+              transition={{
+                duration: 2.8,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay,
+              }}
+              className="text-main-primary"
+              style={{
+                filter:
+                  "drop-shadow(0 0 10px color-mix(in srgb, var(--color-main-primary, #d4af37) 70%, transparent))",
+              }}
+            >
+              {icon}
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div
+          className="shrink-0 self-stretch w-px"
+          style={{
+            background: hovered
+              ? "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-main-primary, #d4af37) 40%, transparent), transparent)"
+              : "linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent)",
+            transition: "background 0.4s ease",
+          }}
+        />
+
+        {/* Text */}
+        <div className="flex flex-col gap-1.5 min-w-0 flex-1">
+          <motion.span
+            animate={{
+              color: hovered
+                ? "color-mix(in srgb, var(--color-main-primary, #d4af37) 90%, white)"
+                : "rgba(255,255,255,0.35)",
+            }}
+            transition={{ duration: 0.3 }}
+            className="text-base font-bold uppercase tracking-[0.22em] leading-none"
+          >
+            {label}
+          </motion.span>
+          <motion.span
+            animate={{
+              color: hovered
+                ? "rgba(255,255,255,0.97)"
+                : "rgba(255,255,255,0.75)",
+            }}
+            transition={{ duration: 0.3 }}
+            className="text-base sm:text-lg font-medium leading-snug break-words tracking-tight"
+            style={{ fontVariantNumeric: "tabular-nums" }}
+          >
+            {value}
+          </motion.span>
+        </div>
+
+        {/* Corner dot */}
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.4 }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full"
+          style={{
+            background: "var(--color-main-primary, #d4af37)",
+            boxShadow: "0 0 8px var(--color-main-primary, #d4af37)",
+          }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ===== Main Component =====
 export default function ContactUs({
   contactData,
   contactSection,
@@ -158,7 +315,6 @@ export default function ContactUs({
   const t = useTranslations("contact");
   const locale = useLocale();
 
-  // ===== Client mount check for hydration-safe HTML =====
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -174,7 +330,7 @@ export default function ContactUs({
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
       >
-        {/* ── Header: centred title + description ── */}
+        {/* ── Header ── */}
         <motion.div
           className="w-full flex flex-col gap-4 items-center text-center"
           variants={leftInSpring}
@@ -226,12 +382,12 @@ export default function ContactUs({
           )}
         </motion.div>
 
-        {/* ── Main row: Info + Map (LEFT) | Form (RIGHT) ── */}
+        {/* ── Main row ── */}
         <motion.div
           className="flex flex-col xl:flex-row-reverse gap-8 xl:gap-16 w-full items-stretch"
           variants={containerVar}
         >
-          {/* Contact Form — now on the RIGHT */}
+          {/* Contact Form — RIGHT */}
           <motion.div
             className="w-full xl:w-[55%]"
             variants={rightInSpring}
@@ -243,19 +399,18 @@ export default function ContactUs({
             <ContactForm servicesData={servicesData} />
           </motion.div>
 
-          {/* Left column: Info cards + Map — now on the LEFT */}
+          {/* Info cards — LEFT */}
           <motion.div
-            className="w-full xl:w-[45%] flex flex-col gap-4 xl:self-stretch xl:mt-[30px]"
+            className="w-full xl:w-[45%] flex flex-col gap-4 xl:self-stretch"
             variants={leftInSpring}
             inherit={false}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {/* ── Info cards ── */}
             {[
               {
-                icon: <MapPin size={26} />,
+                icon: <MapPin size={28} />,
                 label: t("Address"),
                 value: (
                   <Link
@@ -278,7 +433,7 @@ export default function ContactUs({
                 delay: 0,
               },
               {
-                icon: <Mail size={26} />,
+                icon: <Mail size={28} />,
                 label: t("Email"),
                 value: (
                   <Link
@@ -291,7 +446,7 @@ export default function ContactUs({
                 delay: 0.1,
               },
               {
-                icon: <Smartphone size={26} />,
+                icon: <Smartphone size={28} />,
                 label: t("Phone"),
                 value: (
                   <Link
@@ -305,63 +460,14 @@ export default function ContactUs({
                 delay: 0.2,
               },
             ].map(({ icon, label, value, delay }) => (
-              <motion.div
+              <InfoCard
                 key={label}
-                variants={popBlurIn}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                transition={{ delay }}
-                className="flex items-center gap-5 px-5 py-4 rounded-xl border border-white/10 border-s-2 border-s-main-primary bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300 group"
-              >
-                {/* Icon — bare with accent colour + soft glow */}
-                <motion.div
-                  animate={{ y: [0, -3, 0] }}
-                  transition={{
-                    duration: 2.4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay,
-                  }}
-                  className="shrink-0 text-main-primary"
-                  style={{
-                    filter:
-                      "drop-shadow(0 0 6px color-mix(in srgb, var(--color-main-primary, #d4af37) 55%, transparent))",
-                  }}
-                >
-                  {icon}
-                </motion.div>
-
-                {/* Text */}
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-main-primary/70">
-                    {label}
-                  </span>
-                  <span className="text-sm sm:text-base text-white/85 leading-snug break-words">
-                    {value}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* ── Google Map — fills remaining height ── */}
-            <motion.div
-              className="relative w-full flex-1 min-h-[280px] max-h-[300px] xl:max-h-none rounded-xl overflow-hidden border border-white/10 ring-1 ring-white/5"
-              variants={popBlurIn}
-            >
-              {/* subtle gradient overlay on top edge for blending */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-main-black2/60 to-transparent z-10" />
-              <iframe
-                title="BE Group Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.6!2d31.3397!3d30.0911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79468d5b5b0e0!2s25%20Asmaa%20Fahmy%2C%20Heliopolis%2C%20Cairo%20Governorate%2C%20Egypt!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
-                className="absolute inset-0 w-full h-full"
-                height="280"
-                style={{ border: 0, filter: "grayscale(30%) contrast(1.05)" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                icon={icon}
+                label={label}
+                value={value}
+                delay={delay}
               />
-            </motion.div>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -373,7 +479,6 @@ export default function ContactUs({
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
         >
-          {/* Section heading */}
           <motion.div className="text-center mb-10" variants={popBlurIn}>
             <h3 className="text-3xl sm:text-4xl font-bold">
               <span className="text-main-primary">
@@ -386,7 +491,6 @@ export default function ContactUs({
             <div className="w-20 h-1 bg-gradient-to-r from-main-primary to-main-primary/30 rounded-full mx-auto mt-4" />
           </motion.div>
 
-          {/* Cards grid */}
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
             variants={containerVar}
@@ -406,14 +510,10 @@ export default function ContactUs({
                                : ""
                            }`}
               >
-                {/* Top accent bar */}
                 <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-main-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Hover glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-main-primary/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 <div className="relative p-5 flex flex-col gap-4">
-                  {/* Country header */}
                   <div className="flex items-center gap-3">
                     <span
                       className="text-2xl"
@@ -427,10 +527,8 @@ export default function ContactUs({
                     </span>
                   </div>
 
-                  {/* Divider */}
                   <div className="w-full h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
 
-                  {/* All offices for this country */}
                   <div
                     className={`${
                       location.offices.length > 1
@@ -447,14 +545,12 @@ export default function ContactUs({
                             : ""
                         }`}
                       >
-                        {/* Office sub-header (only show if multiple offices) */}
                         {location.offices.length > 1 && (
                           <span className="text-xs font-semibold text-main-primary/70 uppercase tracking-wider">
                             {office.name}
                           </span>
                         )}
 
-                        {/* Address */}
                         <div className="flex items-start gap-3">
                           <MapPin
                             size={16}
@@ -465,7 +561,6 @@ export default function ContactUs({
                           </p>
                         </div>
 
-                        {/* Phone */}
                         <div className="flex items-center gap-3">
                           <Phone
                             size={16}
