@@ -420,7 +420,7 @@ export default function ContactUs({
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="cursor-target"
+                    className="cursor-target hover:text-main-primary transition-colors"
                   >
                     <span>
                       {contactData?.address ||
