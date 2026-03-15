@@ -160,7 +160,7 @@ export default function CareersForm() {
       <Form {...form}>
         <motion.form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6 bg-white/5 p-6 sm:p-10 rounded-2xl border border-white/10 backdrop-blur-sm"
+          className="flex flex-col gap-6 bg-white/5 p-6 sm:p-10 rounded-2xl border border-white/10"
           variants={sectionVar}
         >
           {/* ===== Feedback messages ===== */}
@@ -282,7 +282,7 @@ export default function CareersForm() {
                           <SelectValue placeholder={t("Select A Department")} />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-[#1a1a1a] border-white/10 text-white rounded-[8px] backdrop-blur-xl">
+                      <SelectContent className="bg-[#1a1a1a] border-white/10 text-white rounded-[8px]">
                         <SelectItem value="web" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Web Development")}</SelectItem>
                         <SelectItem value="social" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Social Media")}</SelectItem>
                         <SelectItem value="graphic" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Graphic Design")}</SelectItem>
@@ -405,7 +405,7 @@ export default function CareersForm() {
             <Button
               type="submit"
               disabled={loading}
-              className="cursor-target w-full sm:w-auto px-10 h-14 bg-main-primary text-main-black hover:bg-white transition-all duration-300 font-bold uppercase tracking-widest rounded-[8px] disabled:opacity-50"
+              className="cursor-target w-full sm:w-auto px-10 h-14 bg-main-primary text-main-black hover:bg-white transition-all duration-300 font-bold uppercase tracking-widest disabled:opacity-50"
             >
               {loading ? (
                 <div className="flex items-center gap-2">

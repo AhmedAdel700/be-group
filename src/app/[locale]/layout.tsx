@@ -105,7 +105,9 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   const homeData = await fetchHomeData(locale);
-  const { contact_data, social_media, partners } = homeData;
+  const contact_data = homeData?.contact_data || { email: "", phone: "", address: "" };
+  const social_media = homeData?.social_media || {};
+  const partners = homeData?.partners || [];
 
   return (
     <html
@@ -121,10 +123,10 @@ export default async function LocaleLayout({
           {/* Keep the custom cursor outside the smooth scroll wrapper
               so it's not affected by ScrollSmoother's transforms */}
           <TargetCursor spinDuration={2} hideDefaultCursor={true} />
+          <Header />
+          <FloatingCTA />
           <SmoothScrollProvider>
-            <Header />
             {children}
-            <FloatingCTA />
             <Footer
               socialMediaData={social_media}
               partnersData={partners}

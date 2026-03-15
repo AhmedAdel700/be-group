@@ -102,35 +102,35 @@ export default function Footer({
         <div className="flex items-center gap-2 cursor-target">
           <Mail size={18} className="text-main-secondary shrink-0" />
           <Link
-            href={`mailto:${contactData.email}`}
+            href={`mailto:${contactData?.email || ""}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline text-xs sm:text-sm md:text-base"
           >
-            {contactData.email}
+            {contactData?.email || ""}
           </Link>
         </div>
         <div className="flex items-center gap-2 cursor-target">
           <Phone size={18} className="text-main-secondary shrink-0" />
           <Link
-            href={`tel:${contactData.phone}`}
+            href={`tel:${contactData?.phone || ""}`}
             className="text-xs sm:text-sm md:text-base"
             dir="ltr"
           >
-            {contactData.phone}
+            {contactData?.phone || ""}
           </Link>
         </div>
         <div className="flex items-center gap-2 justify-center cursor-target">
           <MapPin size={18} className="text-main-secondary shrink-0" />
           <Link
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-              contactData.address
+              contactData?.address || ""
             )}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs sm:text-sm md:text-base whitespace-pre-line hover:underline"
           >
-            {contactData.address}
+            {contactData?.address || ""}
           </Link>
         </div>
       </motion.div>
@@ -145,22 +145,22 @@ export default function Footer({
       >
         <div className="text-white/90 font-medium">{t("Follow us")}</div>
         <div className="flex items-center gap-3">
-          {socialMediaData.youtube && (
+          {socialMediaData?.youtube && (
             <SocialIcon href={socialMediaData.youtube} label="YouTube">
               <Youtube size={22} />
             </SocialIcon>
           )}
-          {socialMediaData.facebook && (
+          {socialMediaData?.facebook && (
             <SocialIcon href={socialMediaData.facebook} label="Facebook">
               <Facebook size={22} />
             </SocialIcon>
           )}
-          {socialMediaData.linkedin && (
+          {socialMediaData?.linkedin && (
             <SocialIcon href={socialMediaData.linkedin} label="LinkedIn">
               <Linkedin size={22} />
             </SocialIcon>
           )}
-          {socialMediaData.twitter && (
+          {socialMediaData?.twitter && (
             <div
               onMouseEnter={() => setIsHoveringLogo(true)}
               onMouseLeave={() => setIsHoveringLogo(false)}
@@ -177,7 +177,7 @@ export default function Footer({
               </SocialIcon>
             </div>
           )}
-          {socialMediaData.instagram && (
+          {socialMediaData?.instagram && (
             <SocialIcon href={socialMediaData.instagram} label="Instagram">
               <Instagram size={22} />
             </SocialIcon>
@@ -194,7 +194,7 @@ export default function Footer({
       >
         <div className="text-white/90 font-medium">{t("Our Partners")}</div>
         <div className="flex items-center justify-center gap-4 lg:gap-5 flex-wrap">
-          {partnersData.map((partner, index) => (
+          {partnersData?.map((partner, index) => (
             <motion.div key={index}>
               <Image
                 src={partner.logo}

@@ -34,7 +34,7 @@ const FeatureCard = ({ icon: Icon, title, desc, delay, index }: { icon: any, tit
     className="group relative p-10 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-main-primary/50 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
   >
     {/* Background Glow */}
-    <div className="absolute -top-10 -right-10 w-32 h-32 bg-main-primary/5 blur-[50px] group-hover:bg-main-primary/10 transition-all duration-700" />
+    <div className="absolute -top-10 -right-10 w-32 h-32 bg-main-primary/5 group-hover:bg-main-primary/10 transition-all duration-700" />
     
     {/* Index Indicator */}
     <div className="absolute top-8 right-8 text-4xl font-black text-white/5 group-hover:text-main-primary/10 transition-colors duration-700 font-mono">
@@ -110,8 +110,8 @@ export default function CareersPage() {
       {/* Why Join Us */}
       <section className="relative py-11 px-4 overflow-hidden">
         {/* Background Decorations */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-main-primary/5 rounded-full blur-[120px] -z-10" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-main-primary/5 rounded-full blur-[100px] -z-10" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-main-primary/5 rounded-full -z-10" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-main-primary/5 rounded-full -z-10" />
         
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
