@@ -405,7 +405,7 @@ export default function CareersForm() {
             <Button
               type="submit"
               disabled={loading}
-              className="cursor-target w-full sm:w-auto px-10 h-14 bg-main-primary text-main-black hover:bg-white transition-all duration-300 font-bold uppercase tracking-widest disabled:opacity-50"
+              className="cursor-target w-full sm:w-auto px-10 h-14 bg-main-primary rounded-[6px] text-main-black hover:bg-white transition-all duration-300 font-bold uppercase tracking-widest disabled:opacity-50"
             >
               {loading ? (
                 <div className="flex items-center gap-2">
