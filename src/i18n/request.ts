@@ -16,6 +16,7 @@ const namespaces = [
   "achievements",
   "blogs",
   "contact",
+  "careers",
 ]; // Add more as needed
 
 export default getRequestConfig(async ({ locale }) => {
