@@ -63,6 +63,7 @@ export default function CareersForm() {
     email: z.string().email(t("Enter A Valid Email")),
     phone: z.string().min(10, t("Enter A Valid Phone Number")),
     department: z.string().min(1, t("Please Select A Department")),
+    position: z.string().min(3, t("Please Enter Your Position")),
     resume: z
       .any()
       .refine((file) => file instanceof File, t("Please Upload Your Resume"))
@@ -83,6 +84,7 @@ export default function CareersForm() {
       email: "",
       phone: "",
       department: "",
+      position: "",
       message: "",
     },
     mode: "onChange",
@@ -113,7 +115,7 @@ export default function CareersForm() {
 
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      
+
       setSuccessMsg(t("Your Application Has Been Sent Successfully"));
       form.reset();
       setFileName(null);
@@ -291,6 +293,32 @@ export default function CareersForm() {
                         <SelectItem value="marketing" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Digital Marketing")}</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage className="text-red-400 text-xs mt-1" />
+                  </motion.div>
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="grid grid-cols-1">
+            <FormField
+              control={form.control}
+              name="position"
+              render={({ field }) => (
+                <FormItem>
+                  <motion.div variants={fadeUpVar}>
+                    <FormLabel className="text-white/90 text-base">
+                      {t("Position")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        dir={locale === "ar" ? "rtl" : "ltr"}
+                        type="text"
+                        placeholder={t("Enter Your Position")}
+                        className="cursor-target bg-white/5 border-white/10 text-white placeholder:text-white/30 h-12 rounded-[8px] focus:border-main-primary/50 transition-colors"
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage className="text-red-400 text-xs mt-1" />
                   </motion.div>
                 </FormItem>

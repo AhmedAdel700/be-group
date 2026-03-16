@@ -38,5 +38,8 @@
   "Your Application Has Been Sent Successfully": "تم إرسال طلبك بنجاح",
   "Something Went Wrong Please Try Again Later": "حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا",
   "Max file size is 5MB": "الحد الأقصى لحجم الملف هو 5 ميجابايت",
-  "Only PDF and DOCX files are allowed": "يسمح فقط بملفات PDF و DOCX"
+  "Only PDF and DOCX files are allowed": "يسمح فقط بملفات PDF و DOCX",
+  "Please Enter Your Position":"يرجى إدخال منصبك",
+  "Position":"المنصب",
+  "Enter Your Position":"أدخل منصبك"
 }

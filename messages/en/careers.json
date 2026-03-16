@@ -38,5 +38,8 @@
   "Your Application Has Been Sent Successfully": "Your Application Has Been Sent Successfully",
   "Something Went Wrong Please Try Again Later": "Something Went Wrong Please Try Again Later",
   "Max file size is 5MB": "Max file size is 5MB",
-  "Only PDF and DOCX files are allowed": "Only PDF and DOCX files are allowed"
+  "Only PDF and DOCX files are allowed": "Only PDF and DOCX files are allowed",
+  "Please Enter Your Position":"Please Enter Your Position",
+  "Position":"Position",
+  "Enter Your Position":"Enter Your Position"
 }
