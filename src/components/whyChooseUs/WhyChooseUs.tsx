@@ -183,7 +183,7 @@ export default function WhyChooseUs({
                     <p
                       className="w-full leading-relaxed"
                       dangerouslySetInnerHTML={{
-                        __html: benefitsData[i]?.long_desc || "",
+                        __html: benefitsData[i]?.short_desc || "",
                       }}
                     />
                   </div>
