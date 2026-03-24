@@ -54,84 +54,88 @@ export default function CareersPage({ careerData }: { careerData: CareersRespons
   const t = useTranslations("careers");
   const locale = useLocale();
 
+  if (!careerData?.data) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-main-black text-white">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">{t("Title") || "Careers"}</h1>
+          <p>{t("Failed to load career data") || "Unable to load career opportunities at this time."}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col bg-main-black min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full h-[60vh] flex flex-col items-center justify-center overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 z-0">
-          <motion.div 
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.4 }}
-            transition={{ duration: 1.5 }}
-            className="w-full h-full"
+      {careerData.data.careers_breadcrumb && (
+        <section className="relative w-full h-[60vh] flex flex-col items-center justify-center overflow-hidden border-b border-white/10">
+          <div className="absolute inset-0 z-0">
+            <motion.div
+              initial={{ scale: 1.2, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.4 }}
+              transition={{ duration: 1.5 }}
+              className="w-full h-full"
+            >
+              <Image
+                src={careerData.data.careers_breadcrumb.image || "/career.jpg"}
+                alt={careerData.data.careers_breadcrumb.alt_image || t("Careers image")}
+                width={1920}
+                height={1080}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="relative z-20 text-center px-4 max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-             <Image
-              src={careerData.data.careers_breadcrumb.image || "/career.jpg"}
-              alt={careerData.data.careers_breadcrumb.alt_image || t("Careers image")}
-               width={1920}
-               height={1080}
-               className="w-full h-full object-cover"
-             />
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-6 tracking-tighter">
+              <ModernTextEffect
+                text={careerData.data.careers_breadcrumb.title}
+                lang={locale}
+                animationType={locale === "ar" ? "wordWave" : "particle"}
+                delay={0.1}
+                fontStyle="uppercase"
+                className="text-main-primary inline-block"
+              />
+            </h1>
+            <p className="text-lg sm:text-2xl text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
+              {careerData.data.careers_breadcrumb.short_desc}
+            </p>
           </motion.div>
-        </div>
 
-        <motion.div 
-          className="relative z-20 text-center px-4 max-w-4xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-6 tracking-tighter">
-            <ModernTextEffect
-              text={careerData.data.careers_breadcrumb.title}
-              lang={locale}
-              animationType={locale === "ar" ? "wordWave" : "particle"}
-              delay={0.1}
-              fontStyle="uppercase"
-              className="text-main-primary inline-block"
-            />
-          </h1>
-          <p className="text-lg sm:text-2xl text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
-            {careerData.data.careers_breadcrumb.short_desc}
-          </p>
-        </motion.div>
-
-        {/* Decorative elements */}
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-main-primary/50 to-transparent" />
-      </section>
+          {/* Decorative elements */}
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-main-primary/50 to-transparent" />
+        </section>
+      )}
 
       {/* Why Join Us */}
-      <section className="relative py-11 px-4 overflow-hidden">
-        {/* Background Decorations */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-main-primary/5 rounded-full -z-10" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-main-primary/5 rounded-full -z-10" />
-        
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-            <FeatureCard 
-              index="01"
-              icon={Briefcase}
-              title={careerData.data.benefits[0].title}
-              desc={careerData.data.benefits[0].short_desc}
-              delay={0.1}
-            />
-            <FeatureCard 
-              index="02"
-              icon={Users}
-              title={careerData.data.benefits[1].title}
-              desc={careerData.data.benefits[1].short_desc}
-              delay={0.2}
-            />
-            <FeatureCard 
-              index="03"
-              icon={Zap}
-              title={careerData.data.benefits[2].title}
-              desc={careerData.data.benefits[2].short_desc}
-              delay={0.3}
-            />
+      {careerData.data.benefits && careerData.data.benefits.length > 0 && (
+        <section className="relative py-11 px-4 overflow-hidden">
+          {/* Background Decorations */}
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-main-primary/5 rounded-full -z-10" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-main-primary/5 rounded-full -z-10" />
+
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+              {careerData.data.benefits.slice(0, 3).map((benefit, index) => (
+                <FeatureCard
+                  key={index}
+                  index={`0${index + 1}`}
+                  icon={index === 0 ? Briefcase : index === 1 ? Users : Zap}
+                  title={benefit.title}
+                  desc={benefit.short_desc}
+                  delay={(index + 1) * 0.1}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Application Form */}
       <section className="py-10 px-4 bg-white/[0.02] border-y border-white/5">
@@ -142,8 +146,8 @@ export default function CareersPage({ careerData }: { careerData: CareersRespons
             </h2>
             <div className="w-24 h-1.5 bg-main-primary mx-auto rounded-full" />
           </div>
-          
-          <CareersForm jobPositions={careerData.data.jobPositions} />
+
+          <CareersForm jobPositions={careerData.data.jobPositions || []} />
         </div>
       </section>
     </div>
