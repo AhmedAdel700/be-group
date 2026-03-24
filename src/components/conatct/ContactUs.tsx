@@ -347,6 +347,7 @@ export default function ContactUs({
                     delay={0.1}
                     fontStyle="uppercase"
                     className="text-main-primary inline-block"
+                    triggerStart="50%"
                   />{" "}
                   <ModernTextEffect
                     text={rest.join(" ")}
@@ -355,6 +356,7 @@ export default function ContactUs({
                     delay={0.2}
                     fontStyle="uppercase"
                     className="inline-block"
+                    triggerStart="50%"
                   />
                 </>
               );

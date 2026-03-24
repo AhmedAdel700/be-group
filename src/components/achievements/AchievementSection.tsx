@@ -32,6 +32,7 @@ export default function AchievementSection({
               animationType={locale === "ar" ? "wordWave" : "particle"}
               delay={0.1}
               fontStyle={"uppercase"}
+              triggerStart="50%"
             />
           </motion.div>
 
@@ -42,6 +43,7 @@ export default function AchievementSection({
             delay={0.1}
             fontStyle={"capitalize"}
             className="text-4xl md:text-7xl lg:max-w-[80%] xl:max-w-[65%] font-bold text-center"
+            triggerStart="50%"
           />
         </div>
 

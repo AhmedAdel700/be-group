@@ -15,6 +15,7 @@ const ModernTextEffect = ({
   fontStyle = "",
   mt = 0,
   mb = 0,
+  triggerStart = "80%",
 }) => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
@@ -31,7 +32,7 @@ const ModernTextEffect = ({
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 80%",
+              start: `top ${triggerStart}`,
               end: "bottom 20%",
               toggleActions: "play reverse play reverse",
             },
@@ -68,7 +69,7 @@ const ModernTextEffect = ({
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 80%",
+              start: `top ${triggerStart}`,
               end: "bottom 20%",
               toggleActions: "play reverse play reverse",
             },
@@ -116,7 +117,7 @@ const ModernTextEffect = ({
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 80%",
+              start: `top ${triggerStart}`,
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -154,7 +155,7 @@ const ModernTextEffect = ({
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 80%",
+              start: `top ${triggerStart}`,
               end: "bottom 20%",
               toggleActions: "play reverse play reverse",
             },
@@ -195,7 +196,7 @@ const ModernTextEffect = ({
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 80%",
+              start: `top ${triggerStart}`,
               end: "bottom 20%",
               toggleActions: "play reverse play reverse",
             },
@@ -229,7 +230,7 @@ const ModernTextEffect = ({
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 80%",
+              start: `top ${triggerStart}`,
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -298,7 +299,7 @@ const ModernTextEffect = ({
     },
     {
       scope: containerRef,
-      dependencies: [text, lang, animationType, delay, duration],
+      dependencies: [text, lang, animationType, delay, duration, triggerStart],
     }
   );
 
