@@ -1,6 +1,7 @@
 import { fetchProjectsData } from "@/api/projectsService";
 import ProjectsPage from "./ProjectsPage";
 import { Metadata } from "next";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -51,6 +52,7 @@ export async function generateMetadata({
 }
 
 export default async function page({ params }: { params: { locale: string } }) {
+  unstable_setRequestLocale(params.locale);
   const projectsApiData = await fetchProjectsData(params.locale);
   const { seo } = projectsApiData.data;
 

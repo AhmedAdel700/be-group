@@ -3,6 +3,7 @@ import ServiceDetailPage from "./ServiceDetailPage";
 import { fetchServiceDetailsData } from "@/api/ServicesService";
 
 import { Metadata } from "next";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -60,6 +61,7 @@ export default async function page({
 }: {
   params: { locale: string; id: string };
 }) {
+  unstable_setRequestLocale(params.locale);
   const serviceDetailsApiData = await fetchServiceDetailsData(
     params.locale,
     params.id

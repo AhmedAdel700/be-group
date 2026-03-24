@@ -2,6 +2,7 @@ import AboutPage from "./AboutPage";
 import { fetchAboutData } from "@/api/aboutService";
 import { fetchHomeData } from "@/api/homeService";
 import { Metadata } from "next";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 // 1. ✅ Generate metadata dynamically
 export async function generateMetadata({
@@ -54,6 +55,7 @@ export async function generateMetadata({
 
 // 2. ✅ Page Component
 export default async function Page({ params }: { params: { locale: string } }) {
+  unstable_setRequestLocale(params.locale);
   const [aboutApiData, homeApiData] = await Promise.all([
     fetchAboutData(params.locale),
     fetchHomeData(params.locale),

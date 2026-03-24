@@ -1,6 +1,7 @@
 import { fetchBlogsDetailsData } from "@/api/blogsService";
 import BlogDetails from "./BlogDetails";
 import { Metadata } from "next";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -55,6 +56,7 @@ export default async function page({
 }: {
   params: { locale: string; id: string };
 }) {
+  unstable_setRequestLocale(params.locale);
   const blogDetalisData = await fetchBlogsDetailsData(params.locale, params.id);
   const { seo } = blogDetalisData.data;
 

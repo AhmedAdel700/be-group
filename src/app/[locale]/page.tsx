@@ -12,6 +12,7 @@ import { fetchHomeData } from "@/api/homeService";
 import { fetchProjectsData } from "@/api/projectsService";
 import { Metadata } from "next";
 import { Section, SectionsByKey } from "@/types/apiDataTypes";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -62,6 +63,7 @@ export async function generateMetadata({
 }
 
 export default async function Home({ params }: { params: { locale: string } }) {
+  unstable_setRequestLocale(params.locale);
   const homeData = await fetchHomeData(params.locale);
 
   function mapSectionsByKey(sections: Section[]): SectionsByKey {

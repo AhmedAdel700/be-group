@@ -4,6 +4,7 @@ import { fetchHomeData } from "@/api/homeService";
 
 import { Metadata } from "next";
 import { fetchServicesData } from "@/api/ServicesService";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -54,6 +55,7 @@ export async function generateMetadata({
 }
 
 export default async function page({ params }: { params: { locale: string } }) {
+  unstable_setRequestLocale(params.locale);
   const [homeData, contactApiData, ServicesApiData] = await Promise.all([
     fetchHomeData(params.locale),
     fetchContactData(params.locale),

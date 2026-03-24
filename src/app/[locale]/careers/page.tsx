@@ -24,6 +24,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 export default async function Page({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
   const careerData = await fetchCareerData(locale)
   const seo = careerData?.data?.seo;
 
