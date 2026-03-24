@@ -41,5 +41,8 @@
   "Only PDF and DOCX files are allowed": "Only PDF and DOCX files are allowed",
   "Please Enter Your Position":"Please Enter Your Position",
   "Position":"Position",
-  "Enter Your Position":"Enter Your Position"
+  "Enter Your Position": "Enter Your Position",
+  "Job Position": "Job Position",
+  "Select A Job Position": "Select A Job Position",
+  "Please Select A Job Position": "Please Select A Job Position"
 }

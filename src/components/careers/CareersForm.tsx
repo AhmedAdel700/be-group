@@ -5,6 +5,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, CheckCircle2, Upload, FileText, X } from "lucide-react";
 import { motion, type Variants, useScroll, useTransform } from "framer-motion";
+import { sendCareerData } from "@/api/careerSerivce";
+import { JobPosition } from "@/types/careersApiTypes";
 
 import {
   Form,
@@ -50,7 +52,7 @@ const ACCEPTED_FILE_TYPES = [
   "application/msword",
 ];
 
-export default function CareersForm() {
+export default function CareersForm({ jobPositions }: { jobPositions?: JobPosition[] }) {
   const t = useTranslations("careers");
   const locale = useLocale();
   const [successMsg, setSuccessMsg] = useState("");
@@ -62,9 +64,9 @@ export default function CareersForm() {
     name: z.string().min(3, t("Please Enter Your Full Name")),
     email: z.string().email(t("Enter A Valid Email")),
     phone: z.string().min(10, t("Enter A Valid Phone Number")),
-    department: z.string().min(1, t("Please Select A Department")),
+    job_position_id: z.string().min(1, t("Please Select A Job Position")),
     position: z.string().min(3, t("Please Enter Your Position")),
-    resume: z
+    cv: z
       .any()
       .refine((file) => file instanceof File, t("Please Upload Your Resume"))
       .refine((file) => file?.size <= MAX_FILE_SIZE, t("Max file size is 5MB"))
@@ -72,7 +74,7 @@ export default function CareersForm() {
         (file) => ACCEPTED_FILE_TYPES.includes(file?.type),
         t("Only PDF and DOCX files are allowed")
       ),
-    message: z.string().min(50, t("Message Should Be At Least 50 Characters")),
+    cover_letter: z.string().min(50, t("Message Should Be At Least 50 Characters")),
   });
 
   type CareersFormValues = z.infer<typeof CareersSchema>;
@@ -83,9 +85,9 @@ export default function CareersForm() {
       name: "",
       email: "",
       phone: "",
-      department: "",
+      job_position_id: "",
       position: "",
-      message: "",
+      cover_letter: "",
     },
     mode: "onChange",
   });
@@ -104,21 +106,24 @@ export default function CareersForm() {
     setLoading(true);
 
     try {
-      // In a real scenario, you'd use FormData to send the file
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("email", values.email);
       formData.append("phone", values.phone);
-      formData.append("department", values.department);
-      formData.append("resume", values.resume);
-      formData.append("message", values.message);
+      formData.append("job_position_id", values.job_position_id);
+      formData.append("position", values.position);
+      formData.append("cv", values.cv);
+      formData.append("cover_letter", values.cover_letter);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await sendCareerData(formData);
 
-      setSuccessMsg(t("Your Application Has Been Sent Successfully"));
-      form.reset();
-      setFileName(null);
+      if (response.success) {
+        setSuccessMsg(t("Your Application Has Been Sent Successfully"));
+        form.reset();
+        setFileName(null);
+      } else {
+        setErrorMsg(response.message || t("Something Went Wrong Please Try Again Later"));
+      }
     } catch {
       setErrorMsg(t("Something Went Wrong Please Try Again Later"));
     } finally {
@@ -146,7 +151,7 @@ export default function CareersForm() {
 
   const removeFile = () => {
     setFileName(null);
-    form.setValue("resume", undefined as any);
+    form.setValue("cv", undefined as any);
   };
 
   return (
@@ -268,29 +273,35 @@ export default function CareersForm() {
               )}
             />
 
-            {/* Department */}
+            {/* Job Position Selector */}
             <FormField
               control={form.control}
-              name="department"
+              name="job_position_id"
               render={({ field }) => (
                 <FormItem>
                   <motion.div variants={fadeUpVar}>
                     <FormLabel className="text-white/90 text-base">
-                      {t("Department")}
+                      {t("Job Position")}
                     </FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger className="cursor-target bg-white/5 border-white/10 h-12 rounded-[8px] text-white focus:ring-0 focus:border-main-primary/50 transition-colors [&>span:not([data-placeholder])]:text-white [&>span[data-placeholder]]:text-white/30 [&>svg]:text-white [&>svg]:opacity-100">
-                          <SelectValue placeholder={t("Select A Department")} />
+                          <SelectValue placeholder={t("Select A Job Position")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-[#1a1a1a] border-white/10 text-white rounded-[8px]">
-                        <SelectItem value="web" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Web Development")}</SelectItem>
-                        <SelectItem value="social" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Social Media")}</SelectItem>
-                        <SelectItem value="graphic" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Graphic Design")}</SelectItem>
-                        <SelectItem value="uiux" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("UI/UX Design")}</SelectItem>
-                        <SelectItem value="mobile" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Mobile Development")}</SelectItem>
-                        <SelectItem value="marketing" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Digital Marketing")}</SelectItem>
+                        {jobPositions?.map((job) => (
+                          <SelectItem key={job.id} value={job.id.toString()} className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">
+                            {job.title}
+                          </SelectItem>
+                        ))}
+                        {/* Fallback items if no dynamic data */}
+                        {!jobPositions && (
+                          <>
+                            <SelectItem value="web" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Web Development")}</SelectItem>
+                            <SelectItem value="social" className="cursor-target focus:bg-main-primary focus:text-main-black cursor-pointer transition-colors">{t("Social Media")}</SelectItem>
+                          </>
+                        )}
                       </SelectContent>
                     </Select>
                     <FormMessage className="text-red-400 text-xs mt-1" />
@@ -329,7 +340,7 @@ export default function CareersForm() {
           {/* Resume Upload */}
           <FormField
             control={form.control}
-            name="resume"
+            name="cv"
             render={({ field: { onChange, value, ...field } }) => (
               <FormItem>
                 <motion.div variants={fadeUpVar}>
@@ -389,7 +400,7 @@ export default function CareersForm() {
           {/* Message */}
           <FormField
             control={form.control}
-            name="message"
+            name="cover_letter"
             render={({ field }) => (
               <FormItem>
                 <motion.div variants={fadeUpVar}>

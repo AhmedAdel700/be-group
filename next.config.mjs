@@ -15,7 +15,7 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "newapi.be-group.com",
                 port: "",
-                pathname: "/storage/**",
+                pathname: "/**",
             },
         ],
     },

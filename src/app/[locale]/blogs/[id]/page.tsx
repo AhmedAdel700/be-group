@@ -56,5 +56,17 @@ export default async function page({
   params: { locale: string; id: string };
 }) {
   const blogDetalisData = await fetchBlogsDetailsData(params.locale, params.id);
-  return <BlogDetails blogDetalisData={blogDetalisData} />;
+  const { seo } = blogDetalisData.data;
+
+  return (
+    <>
+      {seo?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <BlogDetails blogDetalisData={blogDetalisData} />
+    </>
+  );
 }

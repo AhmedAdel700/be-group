@@ -53,5 +53,17 @@ export async function generateMetadata({
 
 export default async function page({ params }: { params: { locale: string } }) {
   const ServicesApiData = await fetchServicesData(params.locale);
-  return <ServicesPage ServicesApiData={ServicesApiData} />;
+  const { seo } = ServicesApiData.data;
+
+  return (
+    <>
+      {seo.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <ServicesPage ServicesApiData={ServicesApiData} />
+    </>
+  );
 }

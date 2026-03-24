@@ -82,6 +82,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
     contact_section,
     contact_data,
     sections,
+    seo,
   } = homeData;
 
   const sectionsByKey = mapSectionsByKey(sections);
@@ -90,9 +91,15 @@ export default async function Home({ params }: { params: { locale: string } }) {
 
   return (
     <div className="relative overflow-hidden">
+      {seo.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
       <Hero
         banner={banner}
-        // section={sectionsByKey.banner}
+      // section={sectionsByKey.banner}
       />
 
       <About aboutData={about} />
@@ -122,7 +129,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
         contactData={contact_data}
         contactSection={contact_section}
         servicesData={services}
-        // section={sectionsByKey.contact_section}
+      // section={sectionsByKey.contact_section}
       />
     </div>
   );

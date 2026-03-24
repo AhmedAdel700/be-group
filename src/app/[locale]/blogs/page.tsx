@@ -53,5 +53,17 @@ export async function generateMetadata({
 
 export default async function page({ params }: { params: { locale: string } }) {
   const blogApiData = await fetchBlogsData(params.locale);
-  return <BlogsPageRoute blogApiData={blogApiData} />;
+  const { seo } = blogApiData;
+
+  return (
+    <>
+      {seo?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <BlogsPageRoute blogApiData={blogApiData} />
+    </>
+  );
 }

@@ -226,12 +226,68 @@ export interface HreflangTags {
   "x-default": string;
 }
 
-export interface Schema {
+// Base schema
+export interface BaseSchema {
   "@context": string;
   "@type": string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
 }
+
+// WebSite
+export interface WebSiteSchema extends BaseSchema {
+  "@type": "WebSite";
+  name: string;
+  url: string;
+}
+
+// Contact Point
+export interface ContactPoint {
+  "@type": "ContactPoint";
+  contactType: string;
+  telephone: string;
+  email: string;
+}
+
+// Organization
+export interface OrganizationSchema extends BaseSchema {
+  "@type": "Organization";
+  name: string;
+  url: string;
+  logo: string;
+  contactPoint: ContactPoint;
+}
+
+// WebPage
+export interface WebPageSchema extends BaseSchema {
+  "@type": "WebPage";
+  name: string;
+  description: string;
+  url: string;
+  isPartOf: {
+    "@type": "WebSite";
+    "@id": string;
+  };
+}
+
+// Breadcrumb List Item
+export interface ListItem {
+  "@type": "ListItem";
+  position: number;
+  name: string;
+  item: string;
+}
+
+// BreadcrumbList
+export interface BreadcrumbListSchema extends BaseSchema {
+  "@type": "BreadcrumbList";
+  itemListElement: ListItem[];
+}
+
+// Union type for all schemas
+export type Schema =
+  | WebSiteSchema
+  | OrganizationSchema
+  | WebPageSchema
+  | BreadcrumbListSchema;
 
 export interface CategoryResponse {
   data: {

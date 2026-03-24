@@ -41,5 +41,8 @@
   "Only PDF and DOCX files are allowed": "يسمح فقط بملفات PDF و DOCX",
   "Please Enter Your Position":"يرجى إدخال منصبك",
   "Position":"المنصب",
-  "Enter Your Position":"أدخل منصبك"
+  "Enter Your Position": "أدخل منصبك",
+  "Job Position": "المسمى الوظيفي",
+  "Select A Job Position": "اختر المسمى الوظيفي",
+  "Please Select A Job Position": "يرجى اختيار المسمى الوظيفي"
 }

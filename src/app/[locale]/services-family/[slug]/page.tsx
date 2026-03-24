@@ -57,7 +57,17 @@ export default async function page({
   params: { locale: string; slug: string };
 }) {
   const ServicesApiData = await fetchServicesData(params.locale);
+  const { seo } = ServicesApiData.data;
+
   return (
-    <ServiceFamilyPage ServicesApiData={ServicesApiData} slug={params.slug} />
+    <>
+      {seo.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <ServiceFamilyPage ServicesApiData={ServicesApiData} slug={params.slug} />
+    </>
   );
 }

@@ -6,14 +6,7 @@ import ModernTextEffect from "@/components/ModernTextEffect";
 import CareersForm from "@/components/careers/CareersForm";
 import { Briefcase, Users, Zap } from "lucide-react";
 import Image from "next/image";
-
-const containerVar: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.14, delayChildren: 0.05 },
-  },
-};
+import { CareersResponse } from "@/types/careersApiTypes";
 
 const fadeUpVar: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -37,7 +30,7 @@ const FeatureCard = ({ icon: Icon, title, desc, delay, index }: { icon: any, tit
     <div className="absolute -top-10 -right-10 w-32 h-32 bg-main-primary/5 group-hover:bg-main-primary/10 transition-all duration-700" />
     
     {/* Index Indicator */}
-    <div className="absolute top-8 right-8 text-4xl font-black text-white/5 group-hover:text-main-primary/10 transition-colors duration-700 font-mono">
+    <div className="absolute top-8 right-8 text-7xl font-black text-white/5 group-hover:text-main-primary/10 transition-colors duration-700 font-mono">
       {index}
     </div>
 
@@ -57,7 +50,7 @@ const FeatureCard = ({ icon: Icon, title, desc, delay, index }: { icon: any, tit
   </motion.div>
 );
 
-export default function CareersPage() {
+export default function CareersPage({ careerData }: { careerData: CareersResponse }) {
   const t = useTranslations("careers");
   const locale = useLocale();
 
@@ -73,8 +66,8 @@ export default function CareersPage() {
             className="w-full h-full"
           >
              <Image
-               src="/career.jpg"
-               alt={t("Careers image")}
+              src={careerData.data.careers_breadcrumb.image || "/career.jpg"}
+              alt={careerData.data.careers_breadcrumb.alt_image || t("Careers image")}
                width={1920}
                height={1080}
                className="w-full h-full object-cover"
@@ -90,7 +83,7 @@ export default function CareersPage() {
         >
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-6 tracking-tighter">
             <ModernTextEffect
-              text={t("Join Our Team")}
+              text={careerData.data.careers_breadcrumb.title}
               lang={locale}
               animationType={locale === "ar" ? "wordWave" : "particle"}
               delay={0.1}
@@ -99,7 +92,7 @@ export default function CareersPage() {
             />
           </h1>
           <p className="text-lg sm:text-2xl text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
-            {"Become part of our innovative journey and help us shape the future."}
+            {careerData.data.careers_breadcrumb.short_desc}
           </p>
         </motion.div>
 
@@ -118,22 +111,22 @@ export default function CareersPage() {
             <FeatureCard 
               index="01"
               icon={Briefcase}
-              title={locale === "ar" ? "فرص متنوعة" : "Diverse Opportunities"}
-              desc={locale === "ar" ? "نقدم مجموعة واسعة من الأدوار في مختلف التخصصات التقنية والإبداعية." : "We offer a wide range of roles across various technical and creative disciplines."}
+              title={careerData.data.benefits[0].title}
+              desc={careerData.data.benefits[0].short_desc}
               delay={0.1}
             />
             <FeatureCard 
               index="02"
               icon={Users}
-              title={locale === "ar" ? "فريق ملهم" : "Inspiring Team"}
-              desc={locale === "ar" ? "اعمل بجانب أفضل العقول في الصناعة في بيئة تعاونية وداعمة." : "Work alongside the best minds in the industry in a collaborative and supportive environment."}
+              title={careerData.data.benefits[1].title}
+              desc={careerData.data.benefits[1].short_desc}
               delay={0.2}
             />
             <FeatureCard 
               index="03"
               icon={Zap}
-              title={locale === "ar" ? "نمو سريع" : "Rapid Growth"}
-              desc={locale === "ar" ? "نحن نستثمر في تطويرك المهني ونقدم مسارات واضحة للتقدم الوظيفي." : "We invest in your professional development and provide clear paths for career advancement."}
+              title={careerData.data.benefits[2].title}
+              desc={careerData.data.benefits[2].short_desc}
               delay={0.3}
             />
           </div>
@@ -150,7 +143,7 @@ export default function CareersPage() {
             <div className="w-24 h-1.5 bg-main-primary mx-auto rounded-full" />
           </div>
           
-          <CareersForm />
+          <CareersForm jobPositions={careerData.data.jobPositions} />
         </div>
       </section>
     </div>

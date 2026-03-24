@@ -64,5 +64,17 @@ export default async function page({
     params.locale,
     params.id
   );
-  return <ServiceDetailPage serviceDetailsApiData={serviceDetailsApiData} />;
+  const { seo } = serviceDetailsApiData.data;
+
+  return (
+    <>
+      {seo.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <ServiceDetailPage serviceDetailsApiData={serviceDetailsApiData} />
+    </>
+  );
 }

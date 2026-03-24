@@ -72,11 +72,21 @@ export default async function Page({ params }: { params: { locale: string } }) {
     (s: any) => s.key === "achievements"
   );
 
+  const { seo } = aboutApiData.data;
+
   return (
-    <AboutPage
-      aboutData={aboutApiData}
-      achievementsData={homeDataContent?.achievements ?? []}
-      achievementsSection={achievementsSection}
-    />
+    <>
+      {seo.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <AboutPage
+        aboutData={aboutApiData}
+        achievementsData={homeDataContent?.achievements ?? []}
+        achievementsSection={achievementsSection}
+      />
+    </>
   );
 }

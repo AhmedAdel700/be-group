@@ -416,7 +416,7 @@ export default function ContactUs({
                   <Link
                     href={`https://www.google.com/maps?q=${encodeURIComponent(
                       contactData?.address ||
-                        "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt",
+                      "25 Asmaa Fahmy, Ard El Golf, Heliopolis, Cairo, Egypt",
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -504,11 +504,10 @@ export default function ContactUs({
                 viewport={{ once: true }}
                 transition={{ delay: locIdx * 0.08 }}
                 className={`group relative rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden
-                           hover:border-main-primary/40 transition-all duration-500${
-                             location.offices.length > 1
-                               ? " sm:col-span-2 lg:col-span-3"
-                               : ""
-                           }`}
+                           hover:border-main-primary/40 transition-all duration-500${location.offices.length > 1
+                    ? " sm:col-span-2 lg:col-span-3"
+                    : ""
+                  }`}
               >
                 <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-main-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-br from-main-primary/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -530,20 +529,18 @@ export default function ContactUs({
                   <div className="w-full h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
 
                   <div
-                    className={`${
-                      location.offices.length > 1
+                    className={`${location.offices.length > 1
                         ? "grid grid-cols-1 md:grid-cols-3 gap-5"
                         : "flex flex-col gap-3"
-                    }`}
+                      }`}
                   >
                     {location.offices.map((office) => (
                       <div
                         key={office.name}
-                        className={`flex flex-col gap-3 ${
-                          location.offices.length > 1
+                        className={`flex flex-col gap-3 ${location.offices.length > 1
                             ? "md:border-e md:border-white/10 md:pe-5 md:last:border-e-0 md:last:pe-0"
                             : ""
-                        }`}
+                          }`}
                       >
                         {location.offices.length > 1 && (
                           <span className="text-xs font-semibold text-main-primary/70 uppercase tracking-wider">

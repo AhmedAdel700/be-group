@@ -52,5 +52,17 @@ export async function generateMetadata({
 
 export default async function page({ params }: { params: { locale: string } }) {
   const projectsApiData = await fetchProjectsData(params.locale);
-  return <ProjectsPage projectsApiData={projectsApiData} />;
+  const { seo } = projectsApiData.data;
+
+  return (
+    <>
+      {seo?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <ProjectsPage projectsApiData={projectsApiData} />
+    </>
+  );
 }

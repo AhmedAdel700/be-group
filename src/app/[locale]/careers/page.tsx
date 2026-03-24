@@ -1,6 +1,7 @@
 import { locales } from "@/navigations";
 import { unstable_setRequestLocale } from "next-intl/server";
 import CareersPage from "./CareersPage";
+import { fetchCareerData } from "@/api/careerSerivce";
 
 export function generateStaticParams() {
   return locales.map((locale: string) => ({ locale }));
@@ -22,7 +23,19 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function Page({ params: { locale } }: { params: { locale: string } }) {
-  unstable_setRequestLocale(locale);
-  return <CareersPage />;
+export default async function Page({ params: { locale } }: { params: { locale: string } }) {
+  const careerData = await fetchCareerData(locale)
+  const seo = careerData?.data?.seo;
+
+  return (
+    <>
+      {seo?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <CareersPage careerData={careerData} />
+    </>
+  );
 }

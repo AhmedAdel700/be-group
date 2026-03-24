@@ -54,15 +54,28 @@ export async function generateMetadata({
 }
 
 export default async function page({ params }: { params: { locale: string } }) {
-  const homeData = await fetchHomeData(params.locale);
-  const { contact_section, contact_data } = homeData;
+  const [homeData, contactApiData, ServicesApiData] = await Promise.all([
+    fetchHomeData(params.locale),
+    fetchContactData(params.locale),
+    fetchServicesData(params.locale),
+  ]);
 
-    const ServicesApiData = await fetchServicesData(params.locale);
+  const { contact_section, contact_data } = homeData;
+  const { seo } = contactApiData.data;
+
   return (
-    <ContactUsPage
-      contactData={contact_data}
-      contactSection={contact_section}
-      servicesData={ServicesApiData.data.services}
-    />
+    <>
+      {seo?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seo.schema) }}
+        />
+      )}
+      <ContactUsPage
+        contactData={contact_data}
+        contactSection={contact_section}
+        servicesData={ServicesApiData.data.services}
+      />
+    </>
   );
 }
