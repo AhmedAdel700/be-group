@@ -13,6 +13,7 @@ import { fetchProjectsData } from "@/api/projectsService";
 import { Metadata } from "next";
 import { Section, SectionsByKey } from "@/types/apiDataTypes";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { fetchContactData } from "@/api/contactService";
 
 export async function generateMetadata({
   params,
@@ -65,6 +66,7 @@ export async function generateMetadata({
 export default async function Home({ params }: { params: { locale: string } }) {
   unstable_setRequestLocale(params.locale);
   const homeData = await fetchHomeData(params.locale);
+  const contactUsData = await fetchContactData(params.locale);
 
   function mapSectionsByKey(sections: Section[]): SectionsByKey {
     return sections.reduce((acc, section) => {
@@ -131,6 +133,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
         contactData={contact_data}
         contactSection={contact_section}
         servicesData={services}
+        branchLocations={contactUsData.data.branch_locations}
       // section={sectionsByKey.contact_section}
       />
     </div>

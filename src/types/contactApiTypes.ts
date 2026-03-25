@@ -2,6 +2,7 @@ export interface ContactPageData {
   data: {
     contact_section: ContactSection;
     contact_data: ContactData;
+    branch_locations: BranchLocation[];
     seo: Seo;
   };
 }
@@ -19,6 +20,21 @@ export interface ContactData {
   email: string;
   phone: string;
   address: string;
+}
+
+interface Office {
+  name: string;
+  address: string;
+  phone: string;
+  email: string | null;
+  map_url: string | null;
+  map_link: string | null;
+}
+
+export interface BranchLocation {
+  country: string;
+  flag: string;
+  offices: Office[];
 }
 
 export interface Seo {

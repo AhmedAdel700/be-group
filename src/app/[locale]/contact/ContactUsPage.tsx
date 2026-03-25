@@ -2,15 +2,18 @@
 import ContactUs from "@/components/conatct/ContactUs";
 import { useTranslations } from "next-intl";
 import { ContactDataTypes, ContactSectionTypes, Service } from "@/types/apiDataTypes";
+import { BranchLocation } from "@/types/contactApiTypes";
 
 export default function ContactUsPage({
   contactData,
   contactSection,
-  servicesData
+  servicesData,
+  branchLocations
 }: {
   contactData: ContactDataTypes;
   contactSection: ContactSectionTypes;
   servicesData: Service[];
+  branchLocations: BranchLocation[];
 }) {
   const t = useTranslations("contact");
   return (
@@ -52,7 +55,7 @@ export default function ContactUsPage({
           )}
         </div> */}
       </div>
-      <ContactUs contactData={contactData} contactSection={contactSection} servicesData={servicesData} />;
+      <ContactUs contactData={contactData} contactSection={contactSection} servicesData={servicesData} branchLocations={branchLocations}/>;
     </div>
   );
 }

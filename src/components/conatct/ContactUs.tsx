@@ -12,6 +12,7 @@ import {
 } from "@/types/apiDataTypes";
 import ModernTextEffect from "../ModernTextEffect";
 import { Link } from "@/navigations";
+import { BranchLocation } from "@/types/contactApiTypes";
 
 // ===== Easing / shared timing =====
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -53,89 +54,6 @@ const popBlurIn: Variants = {
   },
 };
 
-// ===== Office locations data =====
-const officeLocations = [
-  {
-    country: "Egypt",
-    flag: "🇪🇬",
-    offices: [
-      {
-        name: "Nasr City",
-        address: "25 Asmaa Fahmy St, El Nozha St. Nasr City, Cairo, Egypt",
-        phone: "01009957000",
-      },
-      {
-        name: "6 October",
-        address:
-          "West Somid, 7 Villa, Ammar Ibn Yasser Street, Beside Bank Court on Main Street – 6 October – Giza – Egypt.",
-        phone: "01090202002",
-      },
-      {
-        name: "Elharam",
-        address: "Mashaal, Al Haram, Giza, Egypt.",
-        phone: "01061797758",
-      },
-    ],
-  },
-  {
-    country: "UAE",
-    flag: "🇦🇪",
-    offices: [
-      {
-        name: "Dubai",
-        address:
-          "Office 21, Floor 3, ALMamzar Centre, Hor Al Anz East, Dubai, UAE",
-        phone: "+976502671799",
-      },
-    ],
-  },
-  {
-    country: "Saudi",
-    flag: "🇸🇦",
-    offices: [
-      {
-        name: "Riyadh",
-        address:
-          "Almalqa District, King Faisal bin Abdul Aziz Al Saud, Riyadh 13522",
-        phone: "+966563356562",
-      },
-    ],
-  },
-  {
-    country: "Canada",
-    flag: "🇨🇦",
-    offices: [
-      {
-        name: "Montreal",
-        address:
-          "4835 Boulevard Henri, Bourassa, Quest 111 Montreal, Quebec H4loa5, Canada",
-        phone: "+1 438 464 2995",
-      },
-    ],
-  },
-  {
-    country: "Germany",
-    flag: "🇩🇪",
-    offices: [
-      {
-        name: "Neu-Isenburg",
-        address: "Stieglitzstraße 21, 63263 Neu-Isenburg, Germany",
-        phone: "(+49)015906461858",
-      },
-    ],
-  },
-  {
-    country: "United Kingdom",
-    flag: "🇬🇧",
-    offices: [
-      {
-        name: "Ilford",
-        address: "H36P+F4 Ilford, United Kingdom.",
-        phone: "(+49)015906461858",
-      },
-    ],
-  },
-];
 
 // ===== InfoCard Component =====
 function InfoCard({
@@ -307,10 +225,12 @@ export default function ContactUs({
   contactData,
   contactSection,
   servicesData,
+  branchLocations
 }: {
   contactData: ContactDataTypes;
   contactSection: ContactSectionTypes;
   servicesData: Service[];
+  branchLocations: BranchLocation[];
 }) {
   const t = useTranslations("contact");
   const locale = useLocale();
@@ -497,9 +417,9 @@ export default function ContactUs({
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
             variants={containerVar}
           >
-            {officeLocations.map((location, locIdx) => (
+            {branchLocations.map((location, locIdx) => (
               <motion.div
-                key={location.country}
+                key={locIdx}
                 variants={popBlurIn}
                 initial="hidden"
                 whileInView="show"

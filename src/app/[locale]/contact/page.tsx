@@ -77,6 +77,7 @@ export default async function page({ params }: { params: { locale: string } }) {
         contactData={contact_data}
         contactSection={contact_section}
         servicesData={ServicesApiData.data.services}
+        branchLocations={contactApiData.data.branch_locations}
       />
     </>
   );
