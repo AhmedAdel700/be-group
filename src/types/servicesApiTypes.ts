@@ -106,6 +106,11 @@ export interface ServiceDetailsApiResponse {
       alt_image: string | null;
       icon: string;
       alt_icon: string | null;
+      images: {
+        id: number;
+        image: string;
+        alt_image: string | null;
+      }[];
       slug: string;
       slugs: {
         en: string;

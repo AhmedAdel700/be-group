@@ -1,5 +1,5 @@
 "use client";
-
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { CheckCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,17 @@ import { Link } from "@/navigations";
 import SplitText from "@/components/SplitText";
 import { ServiceDetailsApiResponse } from "@/types/servicesApiTypes";
 import { useLocale, useTranslations } from "next-intl";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import Image, { StaticImageData } from "next/image";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
 export default function ServiceDetailPage({
   serviceDetailsApiData,
@@ -16,6 +27,9 @@ export default function ServiceDetailPage({
   const service = serviceDetailsApiData.data.service;
   const t = useTranslations("services");
   const locale = useLocale();
+  const [selectedImage, setSelectedImage] = useState<string | null>(
+    null
+  );
 
   return (
     <section className="min-h-screen bg-main-black2 text-main-white">
@@ -126,6 +140,55 @@ export default function ServiceDetailPage({
               ))}
           </div>
 
+          {/* Image Slider Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="mb-12 lg:mb-20"
+          >
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+                direction: locale === "ar" ? "rtl" : "ltr",
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                }),
+              ]}
+              className="w-full"
+            >
+              <CarouselContent className="-ms-4">
+                {service.images.map((img) => (
+                  <CarouselItem
+                    key={img.id}
+                    className="ps-4 md:basis-1/2 lg:basis-1/3"
+                  >
+                    <div
+                      onClick={() => setSelectedImage(img.image)}
+                      className="relative aspect-[4/3] cursor-target overflow-hidden rounded-2xl border-2 border-main-secondary/30 hover:border-main-secondary transition-colors duration-300 group"
+                    >
+                      <Image
+                        src={img.image}
+                        alt={`${img.alt_image ?? ""}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-main-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center gap-4 mt-8">
+                <CarouselPrevious className="static cursor-target translate-y-0 border-main-primary text-main-primary hover:bg-main-primary/10" />
+                <CarouselNext className="static cursor-target translate-y-0 border-main-primary text-main-primary hover:bg-main-primary/10" />
+              </div>
+            </Carousel>
+          </motion.div>
+
           {/* Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -159,6 +222,31 @@ export default function ServiceDetailPage({
           </motion.div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      <DialogPrimitive.Root
+        open={!!selectedImage}
+        onOpenChange={(open) => !open && setSelectedImage(null)}
+      >
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay className="fixed inset-0 z-[100] bg-main-black/90 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-[101] w-full max-w-5xl translate-x-[-50%] translate-y-[-50%] p-4 focus:outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+            <div className="relative w-full aspect-video lg:aspect-square max-h-[85vh] overflow-hidden rounded-2xl border-2 border-main-secondary shadow-2xl bg-main-black2">
+              {selectedImage && (
+                <Image
+                  src={selectedImage}
+                  alt="Full size view"
+                  fill
+                  className="object-contain"
+                />
+              )}
+              <DialogPrimitive.Close className="absolute top-4 right-4 p-2 rounded-full bg-main-primary text-main-black hover:bg-main-secondary transition-colors duration-300 cursor-target">
+                <X className="w-6 h-6" />
+              </DialogPrimitive.Close>
+            </div>
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
     </section>
   );
 }
