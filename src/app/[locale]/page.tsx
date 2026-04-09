@@ -69,10 +69,10 @@ export default async function Home({ params }: { params: { locale: string } }) {
   const contactUsData = await fetchContactData(params.locale);
 
   function mapSectionsByKey(sections: Section[]): SectionsByKey {
-    return sections.reduce((acc, section) => {
+    return sections.reduce<SectionsByKey>((acc, section) => {
       acc[section.key] = section;
       return acc;
-    }, {} as SectionsByKey);
+    }, {});
   }
 
   const {
