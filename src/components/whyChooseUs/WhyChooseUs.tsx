@@ -92,10 +92,11 @@ export default function WhyChooseUs({
           className="w-full flex justify-center sm:justify-start sm:ps-4"
         >
           <Image
-            src={whyUsImage}
-            alt="why choose us image"
+            src={section.image || whyUsImage}
+            alt={section.alt_image || "Why Choose Us Image"}
             className="rounded-[150px] sm:max-w-[50%] max-h-[120px] lg:max-h-[180px] lg:max-w-full object-cover"
             width={525}
+            height={100}
           />
         </motion.div>
 

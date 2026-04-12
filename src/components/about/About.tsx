@@ -112,7 +112,7 @@ export default function About({
               />
             </motion.div>
 
-            <motion.div
+            {/* <motion.div
               style={{ y: y2 }}
               className={`absolute ${isAboutPage ? "-bottom-8" : "bottom-0 lg:-bottom-6 xl:bottom-8 2xl:bottom-0"} -left-10 lg:-left-16
                xl:-left-8 w-[75%] h-[75%] sm:w-[60%] sm:h-[60%] lg:w-[70%] lg:h-[70%] xl:w-[58%] xl:h-[58%] 2xl:w-[55%] 2xl:h-[55%] z-20 overflow-hidden`}
@@ -123,14 +123,14 @@ export default function About({
                 fill
                 className="object-cover"
               />
-            </motion.div>
+            </motion.div> */}
 
-            <div
+            {/* <div
               className={`absolute ${isAboutPage ? "bottom-5 -right-4" : "bottom-10 -right-2"} bottom-10 lg:bottom-0 lg:right-0 w-32 h-32 border-r-2 border-b-2 border-main-primary/30`}
             />
             <div
               className={`absolute ${isAboutPage ? "-top-6" : "-top-14"} lg:-top-10 left-0 lg:-left-10 w-32 h-32 border-l-2 border-t-2 border-main-primary/30`}
-            />
+            /> */}
           </div>
         </div>
       </div>
